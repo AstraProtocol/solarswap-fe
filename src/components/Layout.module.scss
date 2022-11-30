@@ -1,0 +1,15 @@
+.layoutContainer {
+	min-height: 100vh;
+	.layout {
+		min-height: 56vh;
+	}
+}
+
+@media (max-width: 960px) {
+	.layoutContainer {
+		min-height: 70vh;
+		.layout {
+			min-height: 50vh;
+		}
+	}
+}
