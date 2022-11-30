@@ -1,112 +1,111 @@
 /* eslint-disable no-param-reassign */
-import { FetchStatus } from "config/constants/types";
-import { useCallback, useEffect, useMemo, useRef } from "react";
-import { Contract } from "@ethersproject/contracts";
-import { FormatTypes } from "@ethersproject/abi";
+import { FetchStatus } from 'config/constants/types'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { Contract } from '@ethersproject/contracts'
+import { FormatTypes } from '@ethersproject/abi'
 import useSWR, {
 	Middleware,
 	SWRConfiguration,
 	KeyedMutator,
 	// eslint-disable-next-line camelcase
-	unstable_serialize,
-} from "swr";
-import { multicallv2, MulticallOptions, Call } from "utils/multicall";
+	unstable_serialize
+} from 'swr'
+import { multicallv2, MulticallOptions, Call } from 'utils/multicall'
 
-declare module "swr" {
+declare module 'swr' {
 	interface SWRResponse<Data = any, Error = any> {
-		data?: Data;
-		error?: Error;
-		mutate: KeyedMutator<Data>;
-		isValidating: boolean;
+		data?: Data
+		error?: Error
+		mutate: KeyedMutator<Data>
+		isValidating: boolean
 		// Add global fetchStatus to SWRResponse
-		status: FetchStatus;
+		status: FetchStatus
 	}
 }
 
-export const fetchStatusMiddleware: Middleware = (useSWRNext) => {
+export const fetchStatusMiddleware: Middleware = useSWRNext => {
 	return (key, fetcher, config) => {
-		const swr = useSWRNext(key, fetcher, config);
-		return Object.defineProperty(swr, "status", {
+		const swr = useSWRNext(key, fetcher, config)
+		return Object.defineProperty(swr, 'status', {
 			get() {
-				let status = FetchStatus.Idle;
+				let status = FetchStatus.Idle
 
 				if (!swr.isValidating && !swr.error && !swr.data) {
-					status = FetchStatus.Idle;
+					status = FetchStatus.Idle
 				} else if (swr.isValidating && !swr.error && !swr.data) {
-					status = FetchStatus.Fetching;
+					status = FetchStatus.Fetching
 				} else if (swr.data) {
-					status = FetchStatus.Fetched;
+					status = FetchStatus.Fetched
 				} else if (swr.error && !swr.data) {
-					status = FetchStatus.Failed;
+					status = FetchStatus.Failed
 				}
-				return status;
-			},
-		});
-	};
-};
+				return status
+			}
+		})
+	}
+}
 
-type MaybeContract<C extends Contract = Contract> = C | null | undefined;
-type ContractMethodName<C extends Contract = Contract> = keyof C["callStatic"] & string;
+type MaybeContract<C extends Contract = Contract> = C | null | undefined
+type ContractMethodName<C extends Contract = Contract> = keyof C['callStatic'] & string
 
 type ContractMethodParams<
 	C extends Contract = Contract,
 	N extends ContractMethodName<C> = ContractMethodName<C>
-> = Parameters<C["callStatic"][N]>;
+> = Parameters<C['callStatic'][N]>
 
 type UseSWRContractArrayKey<C extends Contract = Contract, N extends ContractMethodName<C> = any> =
 	| [MaybeContract<C>, N, ContractMethodParams<C, N>]
-	| [MaybeContract<C>, N];
+	| [MaybeContract<C>, N]
 
 export type UseSWRContractObjectKey<
 	C extends Contract = Contract,
 	N extends ContractMethodName<C> = ContractMethodName<C>
 > = {
-	contract: MaybeContract<C>;
-	methodName: N;
-	params?: ContractMethodParams<C, N>;
-};
+	contract: MaybeContract<C>
+	methodName: N
+	params?: ContractMethodParams<C, N>
+}
 
 type UseSWRContractSerializeKeys = {
-	address: string;
-	interfaceFormat: string[];
-	methodName: string;
-	callData: string;
-};
+	address: string
+	interfaceFormat: string[]
+	methodName: string
+	callData: string
+}
 
 const getContractKey = <T extends Contract = Contract, N extends ContractMethodName<T> = any>(
 	key?: UseSWRContractKey<T, N> | null
 ) => {
 	if (Array.isArray(key)) {
-		const [contract, methodName, params] = key || [];
+		const [contract, methodName, params] = key || []
 		return {
 			contract,
 			methodName,
-			params,
-		};
+			params
+		}
 	}
-	return key;
-};
+	return key
+}
 
 const serializesContractKey = <T extends Contract = Contract>(
 	key?: UseSWRContractKey<T> | null
 ): UseSWRContractSerializeKeys | null => {
-	const { contract, methodName, params } = getContractKey(key) || {};
+	const { contract, methodName, params } = getContractKey(key) || {}
 	const serializedKeys =
 		key && contract && methodName
 			? {
 					address: contract.address,
 					interfaceFormat: contract.interface.format(FormatTypes.full) as string[],
 					methodName,
-					callData: contract.interface.encodeFunctionData(methodName, params),
+					callData: contract.interface.encodeFunctionData(methodName, params)
 			  }
-			: null;
-	return serializedKeys;
-};
+			: null
+	return serializedKeys
+}
 
-export type UseSWRContractKey<
-	T extends Contract = Contract,
-	N extends ContractMethodName<T> = any
-> = UseSWRContractArrayKey<T, N> | UseSWRContractObjectKey<T, N>;
+export type UseSWRContractKey<T extends Contract = Contract, N extends ContractMethodName<T> = any> =
+	| UseSWRContractArrayKey<T, N>
+	| UseSWRContractObjectKey<T, N>
 
 /**
  * @example
@@ -118,130 +117,126 @@ export function useSWRContract<
 	Error = any,
 	T extends Contract = Contract,
 	N extends ContractMethodName<T> = ContractMethodName<T>,
-	Data = Awaited<ReturnType<T["callStatic"][N]>>
+	Data = Awaited<ReturnType<T['callStatic'][N]>>
 >(key?: UseSWRContractKey<T, N> | null, config: SWRConfiguration<Data, Error> = {}) {
-	const { contract, methodName, params } = getContractKey(key) || {};
-	const serializedKeys = useMemo(() => serializesContractKey(key), [key]);
+	const { contract, methodName, params } = getContractKey(key) || {}
+	const serializedKeys = useMemo(() => serializesContractKey(key), [key])
 
 	return useSWR<Data, Error>(
 		serializedKeys,
 		async () => {
-			if (!contract || !methodName) return null;
-			if (!params) return contract[methodName]();
-			return contract[methodName](...params);
+			if (!contract || !methodName) return null
+			if (!params) return contract[methodName]()
+			return contract[methodName](...params)
 		},
 		config
-	);
+	)
 }
 
-export const immutableMiddleware: Middleware = (useSWRNext) => (key, fetcher, config) => {
-	config.revalidateOnFocus = false;
-	config.revalidateIfStale = false;
-	config.revalidateOnReconnect = false;
-	return useSWRNext(key, fetcher, config);
-};
+export const immutableMiddleware: Middleware = useSWRNext => (key, fetcher, config) => {
+	config.revalidateOnFocus = false
+	config.revalidateIfStale = false
+	config.revalidateOnReconnect = false
+	return useSWRNext(key, fetcher, config)
+}
 
-export function useSWRMulticall<Data>(
-	abi: any[],
-	calls: Call[],
-	options?: MulticallOptions & SWRConfiguration
-) {
-	const { requireSuccess = true, ...config } = options || {};
+export function useSWRMulticall<Data>(abi: any[], calls: Call[], options?: MulticallOptions & SWRConfiguration) {
+	const { requireSuccess = true, ...config } = options || {}
 	return useSWR<Data>(calls, () => multicallv2(abi, calls, { requireSuccess }), {
 		revalidateIfStale: false,
 		revalidateOnFocus: false,
-		...config,
-	});
+		...config
+	})
 }
 
-export const localStorageMiddleware: Middleware = (useSWRNext) => (key, fetcher, config) => {
-	const swr = useSWRNext(key, fetcher, config);
-	const { data } = swr;
-	const serializedKey = useMemo(() => unstable_serialize(key), [key]);
+export const localStorageMiddleware: Middleware = useSWRNext => (key, fetcher, config) => {
+	const swr = useSWRNext(key, fetcher, config)
+	const { data } = swr
+	const serializedKey = useMemo(() => unstable_serialize(key), [key])
 
 	useEffect(() => {
 		if (data) {
 			try {
-				const stringify = JSON.stringify(data);
-				localStorage?.setItem(serializedKey, stringify);
+				const stringify = JSON.stringify(data)
+				localStorage?.setItem(serializedKey, stringify)
 			} catch (error) {
 				//
 			}
 		}
-	}, [data, serializedKey]);
+	}, [data, serializedKey])
 
-	let localStorageDataParsed;
+	let localStorageDataParsed
 
 	if (!data) {
-		const localStorageData = localStorage?.getItem(serializedKey);
+		const localStorageData = localStorage?.getItem(serializedKey)
 
 		if (localStorageData) {
 			try {
-				localStorageDataParsed = JSON.parse(localStorageData);
+				localStorageDataParsed = JSON.parse(localStorageData)
 			} catch (error) {
-				localStorage?.removeItem(serializedKey);
+				localStorage?.removeItem(serializedKey)
 			}
 		}
 	}
 
-	return Object.defineProperty(swr, "data", {
-		value: data || localStorageDataParsed,
-	});
-};
+	return Object.defineProperty(swr, 'data', {
+		value: data || localStorageDataParsed
+	})
+}
 
 // This is a SWR middleware for keeping the data even if key changes.
-export const laggyMiddleware: Middleware = (useSWRNext) => {
+export const laggyMiddleware: Middleware = useSWRNext => {
 	return (key, fetcher, config) => {
 		// Use a ref to store previous returned data.
-		const laggyDataRef = useRef<any>();
+		const laggyDataRef = useRef<any>()
 
 		// Actual SWR hook.
-		const swr = useSWRNext(key, fetcher, config);
+		const swr = useSWRNext(key, fetcher, config)
 
 		useEffect(() => {
 			// Update ref if data is not undefined.
 			if (swr.data !== undefined) {
-				laggyDataRef.current = swr.data;
+				laggyDataRef.current = swr.data
 			}
-		}, [swr.data]);
+		}, [swr.data])
 
 		// Expose a method to clear the laggy data, if any.
 		const resetLaggy = useCallback(() => {
-			laggyDataRef.current = undefined;
-		}, []);
+			laggyDataRef.current = undefined
+		}, [])
 
 		// Fallback to previous data if the current data is undefined.
-		const dataOrLaggyData = swr.data === undefined ? laggyDataRef.current : swr.data;
+		const dataOrLaggyData = swr.data === undefined ? laggyDataRef.current : swr.data
 
 		// Is it showing previous data?
-		const isLagging = swr.data === undefined && laggyDataRef.current !== undefined;
+		const isLagging = swr.data === undefined && laggyDataRef.current !== undefined
 
 		// Also add a `isLagging` field to SWR.
-		Object.defineProperty(swr, "isLagging", {
-			value: isLagging,
-		});
-		Object.defineProperty(swr, "resetLaggy", {
-			value: resetLaggy,
-		});
-		Object.defineProperty(swr, "data", {
-			value: dataOrLaggyData,
-		});
-		return swr;
-	};
-};
+		Object.defineProperty(swr, 'isLagging', {
+			value: isLagging
+		})
+		Object.defineProperty(swr, 'resetLaggy', {
+			value: resetLaggy
+		})
+		Object.defineProperty(swr, 'data', {
+			value: dataOrLaggyData
+		})
+		return swr
+	}
+}
 
 // dev only
-export const loggerMiddleware: Middleware = (useSWRNext) => {
+export const loggerMiddleware: Middleware = useSWRNext => {
 	return (key, fetcher, config) => {
 		// Add logger to the original fetcher.
 		const extendedFetcher = fetcher
 			? (...args: unknown[]) => {
-					console.debug("SWR Request:", key);
-					return fetcher(...args);
+					console.debug('SWR Request:', key)
+					return fetcher(...args)
 			  }
-			: null;
+			: null
 
 		// Execute the hook with the new fetcher.
-		return useSWRNext(key, extendedFetcher, config);
-	};
-};
+		return useSWRNext(key, extendedFetcher, config)
+	}
+}

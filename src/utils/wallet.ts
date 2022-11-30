@@ -1,73 +1,71 @@
 // Set of helper functions to facilitate wallet setup
 
-import { ExternalProvider } from "@ethersproject/providers";
-import { ChainId } from "@solarswap/sdk";
-import { BASE_URL, BASE_ASTRA_EXPLORER_URLS } from "config";
-import { nodes } from "./getRpcUrl";
+import { ExternalProvider } from '@ethersproject/providers'
+import { ChainId } from '@solarswap/sdk'
+import { BASE_URL, BASE_ASTRA_EXPLORER_URLS } from 'config'
+import { nodes } from './getRpcUrl'
 
 const NETWORK_CONFIG = {
 	[ChainId.MAINNET]: {
-		name: "BNB Smart Chain Mainnet",
-		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.MAINNET],
+		name: 'BNB Smart Chain Mainnet',
+		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.MAINNET]
 	},
 	[ChainId.TESTNET]: {
-		name: "BNB Smart Chain Testnet",
-		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.TESTNET],
-	},
-};
+		name: 'BNB Smart Chain Testnet',
+		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.TESTNET]
+	}
+}
 
 /**
  * Prompt the user to add BSC as a network on Metamask, or switch to BSC if the wallet is on a different network
  * @returns {boolean} true if the setup succeeded, false otherwise
  */
 export const setupNetwork = async (externalProvider?: ExternalProvider) => {
-	const provider = externalProvider || window.ethereum;
-	const chainId = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID, 10) as keyof typeof NETWORK_CONFIG;
+	const provider = externalProvider || window.ethereum
+	const chainId = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID, 10) as keyof typeof NETWORK_CONFIG
 	if (!NETWORK_CONFIG[chainId]) {
-		console.error("Invalid chain id");
-		return false;
+		console.error('Invalid chain id')
+		return false
 	}
 	if (provider) {
 		try {
 			await provider.request({
-				method: "wallet_switchEthereumChain",
-				params: [{ chainId: `0x${chainId.toString(16)}` }],
-			});
-			return true;
+				method: 'wallet_switchEthereumChain',
+				params: [{ chainId: `0x${chainId.toString(16)}` }]
+			})
+			return true
 		} catch (switchError) {
 			if ((switchError as any)?.code === 4902) {
 				try {
 					await provider.request({
-						method: "wallet_addEthereumChain",
+						method: 'wallet_addEthereumChain',
 						params: [
 							{
 								chainId: `0x${chainId.toString(16)}`,
 								chainName: NETWORK_CONFIG[chainId].name,
 								nativeCurrency: {
-									name: "BNB",
-									symbol: "bnb",
-									decimals: 18,
+									name: 'BNB',
+									symbol: 'bnb',
+									decimals: 18
 								},
 								rpcUrls: nodes,
-								blockExplorerUrls: [`${NETWORK_CONFIG[chainId].scanURL}/`],
-							},
-						],
-					});
-					return true;
+								blockExplorerUrls: [`${NETWORK_CONFIG[chainId].scanURL}/`]
+							}
+						]
+					})
+					return true
 				} catch (error) {
-					console.error("Failed to setup the network in Metamask:", error);
-					return false;
+					console.error('Failed to setup the network in Metamask:', error)
+					return false
 				}
 			}
-			return false;
+			return false
 		}
 	} else {
-		console.error(
-			"Can't setup the BSC network on metamask because window.ethereum is undefined"
-		);
-		return false;
+		console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")
+		return false
 	}
-};
+}
 
 /**
  * Prompt the user to add a custom token to metamask
@@ -76,42 +74,38 @@ export const setupNetwork = async (externalProvider?: ExternalProvider) => {
  * @param tokenDecimals
  * @returns {boolean} true if the token has been added, false otherwise
  */
-export const registerToken = async (
-	tokenAddress: string,
-	tokenSymbol: string,
-	tokenDecimals: number
-) => {
+export const registerToken = async (tokenAddress: string, tokenSymbol: string, tokenDecimals: number) => {
 	const tokenAdded = await window.ethereum.request({
-		method: "wallet_watchAsset",
+		method: 'wallet_watchAsset',
 		params: {
-			type: "ERC20",
+			type: 'ERC20',
 			options: {
 				address: tokenAddress,
 				symbol: tokenSymbol,
 				decimals: tokenDecimals,
-				image: `${BASE_URL}/images/tokens/${tokenAddress}.png`,
-			},
-		},
-	});
+				image: `${BASE_URL}/images/tokens/${tokenAddress}.png`
+			}
+		}
+	})
 
-	return tokenAdded;
-};
+	return tokenAdded
+}
 
 export class WalletHelper {
-	static cacheName = "connectedWallets";
+	static cacheName = 'connectedWallets'
 
 	static saveCacheConnect(connectedWallets: string[]) {
-		window.localStorage.setItem(WalletHelper.cacheName, JSON.stringify(connectedWallets));
+		window.localStorage.setItem(WalletHelper.cacheName, JSON.stringify(connectedWallets))
 	}
 
 	static removeCacheConnect() {
-		window.localStorage.setItem(WalletHelper.cacheName, "");
+		window.localStorage.setItem(WalletHelper.cacheName, '')
 	}
 	static getCacheConnect() {
-		const walletNames = window.localStorage.getItem(WalletHelper.cacheName);
+		const walletNames = window.localStorage.getItem(WalletHelper.cacheName)
 		if (walletNames) {
-			return JSON.parse(walletNames);
+			return JSON.parse(walletNames)
 		}
-		return "";
+		return ''
 	}
 }

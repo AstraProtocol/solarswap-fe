@@ -149,12 +149,7 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 }
 
 .hamburgerMenuContainer {
-	background: radial-gradient(
-			106.61% 108.18% at 0% 100%,
-			rgba(82, 120, 255, 0.2) 0%,
-			rgba(0, 0, 0, 0) 100%
-		),
-		#08080a;
+	background: radial-gradient(106.61% 108.18% at 0% 100%, rgba(82, 120, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%), #08080a;
 	max-width: 677px;
 	width: 90%;
 	height: 100%;

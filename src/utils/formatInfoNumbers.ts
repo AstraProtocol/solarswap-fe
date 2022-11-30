@@ -5,7 +5,7 @@ import numeral from 'numeral'
 // Intended to be used for tokens whose value is less than $1
 // https://stackoverflow.com/a/23887837
 export const getFirstThreeNonZeroDecimals = (value: number) => {
-  return value.toFixed(9).match(/^-?\d*\.?0*\d{0,2}/)[0]
+	return value.toFixed(9).match(/^-?\d*\.?0*\d{0,2}/)[0]
 }
 
 export type formatAmountNotation = 'compact' | 'standard'
@@ -20,46 +20,46 @@ export type formatAmountNotation = 'compact' | 'standard'
  * @returns formatted string ready to be displayed
  */
 export const formatAmount = (
-  amount: number | undefined,
-  options?: {
-    notation?: formatAmountNotation
-    displayThreshold?: number
-    tokenPrecision?: boolean
-    isInteger?: boolean
-  },
+	amount: number | undefined,
+	options?: {
+		notation?: formatAmountNotation
+		displayThreshold?: number
+		tokenPrecision?: boolean
+		isInteger?: boolean
+	}
 ) => {
-  const { notation = 'compact', displayThreshold, tokenPrecision, isInteger } = options || { notation: 'compact' }
-  if (amount === 0) {
-    if (isInteger) {
-      return '0'
-    }
-    return '0.00'
-  }
-  if (!amount) return '-'
-  if (displayThreshold && amount < displayThreshold) {
-    return `<${displayThreshold}`
-  }
-  if (amount < 1 && !tokenPrecision) {
-    return getFirstThreeNonZeroDecimals(amount)
-  }
+	const { notation = 'compact', displayThreshold, tokenPrecision, isInteger } = options || { notation: 'compact' }
+	if (amount === 0) {
+		if (isInteger) {
+			return '0'
+		}
+		return '0.00'
+	}
+	if (!amount) return '-'
+	if (displayThreshold && amount < displayThreshold) {
+		return `<${displayThreshold}`
+	}
+	if (amount < 1 && !tokenPrecision) {
+		return getFirstThreeNonZeroDecimals(amount)
+	}
 
-  let precision = 2
-  if (tokenPrecision) {
-    precision = amount < 1 ? 3 : 2
-  }
+	let precision = 2
+	if (tokenPrecision) {
+		precision = amount < 1 ? 3 : 2
+	}
 
-  let format = `0.${'0'.repeat(precision)}a`
+	let format = `0.${'0'.repeat(precision)}a`
 
-  if (notation === 'standard') {
-    format = `0,0.${'0'.repeat(precision)}`
-  }
+	if (notation === 'standard') {
+		format = `0,0.${'0'.repeat(precision)}`
+	}
 
-  if (isInteger && amount < 1000) {
-    format = '0'
-  }
+	if (isInteger && amount < 1000) {
+		format = '0'
+	}
 
-  const amountWithPrecision = parseFloat(amount.toFixed(precision))
+	const amountWithPrecision = parseFloat(amount.toFixed(precision))
 
-  // toUpperCase is needed cause numeral doesn't have support for capital K M B out of the box
-  return numeral(amountWithPrecision).format(format).toUpperCase()
+	// toUpperCase is needed cause numeral doesn't have support for capital K M B out of the box
+	return numeral(amountWithPrecision).format(format).toUpperCase()
 }

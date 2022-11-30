@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
-import { nodes } from "utils/getRpcUrl";
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
+import { nodes } from 'utils/getRpcUrl'
 
 class MyDocument extends Document {
 	render() {
 		return (
 			<Html translate="no">
 				<Head>
-					{nodes.map((node) => (
+					{nodes.map(node => (
 						<link key={node} rel="preconnect" href={node} />
 					))}
 					{process.env.NEXT_PUBLIC_NODE_PRODUCTION && (
@@ -23,7 +23,7 @@ class MyDocument extends Document {
 							src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTAG}`}
 							height="0"
 							width="0"
-							style={{ display: "none", visibility: "hidden" }}
+							style={{ display: 'none', visibility: 'hidden' }}
 						/>
 					</noscript>
 					<Main />
@@ -31,8 +31,8 @@ class MyDocument extends Document {
 					<div id="portal-root" />
 				</body>
 			</Html>
-		);
+		)
 	}
 }
 
-export default MyDocument;
+export default MyDocument

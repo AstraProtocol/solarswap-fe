@@ -1,106 +1,100 @@
-import {
-	CryptoIcon,
-	ellipseBetweenText,
-	Logo,
-	ModalWrapper,
-	useClickOutsideElement,
-} from "@astraprotocol/astra-ui";
-import { useConnectWallet } from "@web3-onboard/react";
-import clsx from "clsx";
-import { cloneDeep, isEmpty } from "lodash";
-import { useTranslation } from "contexts/Localization";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { WalletHelper } from "utils/wallet";
-import LiveIcon from "./LiveIcon";
-import MobileNavigation from "./MobileNavigation";
-import Navigation, { MenuItem, SubMenuItem } from "./Navigation";
-import styles from "./style.module.scss";
-import SwitchTheme from "./SwitchTheme";
-import ButtonConnect from "components/ButtonConnect";
+import { CryptoIcon, ellipseBetweenText, Logo, ModalWrapper, useClickOutsideElement } from '@astraprotocol/astra-ui'
+import { useConnectWallet } from '@web3-onboard/react'
+import clsx from 'clsx'
+import { cloneDeep, isEmpty } from 'lodash'
+import { useTranslation } from 'contexts/Localization'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { WalletHelper } from 'utils/wallet'
+import LiveIcon from './LiveIcon'
+import MobileNavigation from './MobileNavigation'
+import Navigation, { MenuItem, SubMenuItem } from './Navigation'
+import styles from './style.module.scss'
+import SwitchTheme from './SwitchTheme'
+import ButtonConnect from 'components/ButtonConnect'
 
 export const MENU_ITEMS: MenuItem[] = [
 	{
-		id: "1",
-		type: "static",
-		label: "Swap",
-		link: "/swap",
-		submenus: [],
+		id: '1',
+		type: 'static',
+		label: 'Swap',
+		link: '/swap',
+		submenus: []
 	},
 	{
-		id: "2",
-		type: "static",
-		label: "Farm",
-		link: "/liquidity",
-		submenus: [],
+		id: '2',
+		type: 'static',
+		label: 'Farm',
+		link: '/liquidity',
+		submenus: []
 	},
 	{
-		id: "4",
-		type: "locale",
+		id: '4',
+		type: 'locale',
 		submenus: [
 			{
-				id: "4.1",
-				label: "ENG",
-				link: "/en",
+				id: '4.1',
+				label: 'ENG',
+				link: '/en'
 			},
 			{
-				id: "4.2",
-				label: "VI",
-				link: "/vi",
-			},
-		],
-	},
-];
+				id: '4.2',
+				label: 'VI',
+				link: '/vi'
+			}
+		]
+	}
+]
 
 export default function Navbar() {
-	const [shadow, setShadow] = useState(false);
-	const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-	const [load, setLoad] = useState(false);
-	const _searchWrapperRef = useRef<HTMLDivElement>(null);
-	const [{ wallet }, _, disconnect] = useConnectWallet();
-	console.log(wallet);
-	const { t } = useTranslation();
+	const [shadow, setShadow] = useState(false)
+	const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
+	const [load, setLoad] = useState(false)
+	const _searchWrapperRef = useRef<HTMLDivElement>(null)
+	const [{ wallet }, _, disconnect] = useConnectWallet()
+	console.log(wallet)
+	const { t } = useTranslation()
 
 	const _hideMenu = () => {
-		setLoad(false);
+		setLoad(false)
 		//time for animation
-		setTimeout(() => setShowHamburgerMenu(false), 500);
-	};
+		setTimeout(() => setShowHamburgerMenu(false), 500)
+	}
 
-	useClickOutsideElement(_searchWrapperRef, _hideMenu);
+	useClickOutsideElement(_searchWrapperRef, _hideMenu)
 
 	useEffect(() => {
 		function scroll() {}
-		window.addEventListener("scroll", (_) => {
-			const pos = document.body.scrollTop || document.documentElement.scrollTop;
+		window.addEventListener('scroll', _ => {
+			const pos = document.body.scrollTop || document.documentElement.scrollTop
 			if (pos > 0) {
-				setShadow(true);
+				setShadow(true)
 			} else {
-				setShadow(false);
+				setShadow(false)
 			}
-		});
+		})
 		return () => {
-			window.removeEventListener("scroll", scroll);
-		};
-	}, [shadow]);
+			window.removeEventListener('scroll', scroll)
+		}
+	}, [shadow])
 
 	useEffect(() => {
-		setTimeout(() => setLoad(showHamburgerMenu), 100);
-	}, [showHamburgerMenu]);
+		setTimeout(() => setLoad(showHamburgerMenu), 100)
+	}, [showHamburgerMenu])
 
 	const _changeMenu = useCallback(() => {
-		const newMenus = cloneDeep(MENU_ITEMS);
+		const newMenus = cloneDeep(MENU_ITEMS)
 		if (wallet && !isEmpty(wallet?.accounts)) {
-			const account = wallet.accounts[0];
-			let optionItems: SubMenuItem[] = [];
-			optionItems.push();
+			const account = wallet.accounts[0]
+			let optionItems: SubMenuItem[] = []
+			optionItems.push()
 			newMenus.push({
-				id: "99",
+				id: '99',
 				label: ellipseBetweenText(account.address, 6, 6),
 				prefixIcon: <LiveIcon />,
 				className: styles.customSubmenu,
 				submenus: [
 					{
-						id: "99.1",
+						id: '99.1',
 						label: (
 							<div className="flex flex-column width-100">
 								<div className="flex flex-row flex-align-center">
@@ -115,45 +109,42 @@ export default function Navbar() {
 								</div>
 							</div>
 						),
-						hover: "none",
-						align: " ",
+						hover: 'none',
+						align: ' '
 					},
 					{
-						id: "99.2",
+						id: '99.2',
 						label: (
 							<div className="block-center">
 								<span className="icon-setting margin-right-sm text-xl"></span>
-								{t("Disconnect Wallet")}
+								{t('Disconnect Wallet')}
 							</div>
 						),
 						onClick: () => {
-							disconnect(wallet);
-							WalletHelper.removeCacheConnect();
+							disconnect(wallet)
+							WalletHelper.removeCacheConnect()
 						},
-						align: " ",
-					},
-				],
-			});
+						align: ' '
+					}
+				]
+			})
 		}
 
-		return newMenus;
-	}, [wallet]);
+		return newMenus
+	}, [wallet])
 
-	const menus = _changeMenu();
+	const menus = _changeMenu()
 	return (
 		<>
 			<ModalWrapper open={showHamburgerMenu}>
 				<div
-					className={clsx(styles.hamburgerMenuContainer, "padding-lg hamburger-enter", {
-						"hamburger-enter-active": load,
+					className={clsx(styles.hamburgerMenuContainer, 'padding-lg hamburger-enter', {
+						'hamburger-enter-active': load
 					})}
 					ref={_searchWrapperRef}
 				>
 					<div className={styles.close}>
-						<span
-							onClick={_hideMenu}
-							className="icon-close contrast-color-100 pointer"
-						></span>
+						<span onClick={_hideMenu} className="icon-close contrast-color-100 pointer"></span>
 					</div>
 					<div className={styles.content}>
 						<MobileNavigation items={menus} />
@@ -161,12 +152,12 @@ export default function Navbar() {
 				</div>
 			</ModalWrapper>
 			<nav
-				className={clsx(styles.navbar, "margin-bottom-sm", {
-					"shadow-xs": shadow,
-					[styles.topBackground]: shadow,
+				className={clsx(styles.navbar, 'margin-bottom-sm', {
+					'shadow-xs': shadow,
+					[styles.topBackground]: shadow
 				})}
 			>
-				<div className={clsx(styles.container, "margin-auto")}>
+				<div className={clsx(styles.container, 'margin-auto')}>
 					<div className={styles.hamburgerMenuIcon}>
 						<div className="padding-left-lg pointer">
 							<span
@@ -186,7 +177,7 @@ export default function Navbar() {
 				</div>
 			</nav>
 		</>
-	);
+	)
 }
 
-Navbar.messages = ["Navbar"];
+Navbar.messages = ['Navbar']

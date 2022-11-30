@@ -2,28 +2,28 @@ import { Interface } from '@ethersproject/abi'
 import { getMulticallContract } from 'utils/contractHelpers'
 
 export interface Call {
-  address: string // Address of the contract
-  name: string // Function name on the contract (example: balanceOf)
-  params?: any[] // Function params
+	address: string // Address of the contract
+	name: string // Function name on the contract (example: balanceOf)
+	params?: any[] // Function params
 }
 
 export interface MulticallOptions {
-  requireSuccess?: boolean
+	requireSuccess?: boolean
 }
 
 const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
-  const multi = getMulticallContract()
-  const itf = new Interface(abi)
+	const multi = getMulticallContract()
+	const itf = new Interface(abi)
 
-  const calldata = calls.map((call) => ({
-    target: call.address.toLowerCase(),
-    callData: itf.encodeFunctionData(call.name, call.params),
-  }))
-  const { returnData } = await multi.aggregate(calldata)
+	const calldata = calls.map(call => ({
+		target: call.address.toLowerCase(),
+		callData: itf.encodeFunctionData(call.name, call.params)
+	}))
+	const { returnData } = await multi.aggregate(calldata)
 
-  const res = returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call))
+	const res = returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call))
 
-  return res as any
+	return res as any
 }
 
 /**
@@ -33,28 +33,28 @@ const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
  * 2. The return includes a boolean whether the call was successful e.g. [wasSuccessful, callResult]
  */
 export const multicallv2 = async <T = any>(
-  abi: any[],
-  calls: Call[],
-  options: MulticallOptions = { requireSuccess: true },
+	abi: any[],
+	calls: Call[],
+	options: MulticallOptions = { requireSuccess: true }
 ): Promise<T> => {
-  const { requireSuccess } = options
-  const multi = getMulticallContract()
-  const itf = new Interface(abi)
+	const { requireSuccess } = options
+	const multi = getMulticallContract()
+	const itf = new Interface(abi)
 
-  const calldata = calls.map((call) => ({
-    target: call.address.toLowerCase(),
-    callData: itf.encodeFunctionData(call.name, call.params),
-  }))
+	const calldata = calls.map(call => ({
+		target: call.address.toLowerCase(),
+		callData: itf.encodeFunctionData(call.name, call.params)
+	}))
 
-  const returnData = await multi.tryAggregate(requireSuccess, calldata)
-  const res = returnData.map((call, i) => {
-    // console.log('calls :>> ', calls);
-    // console.log('options :>> ', options);
-    const [result, data] = call
-    return result ? itf.decodeFunctionResult(calls[i].name, data) : null
-  })
+	const returnData = await multi.tryAggregate(requireSuccess, calldata)
+	const res = returnData.map((call, i) => {
+		// console.log('calls :>> ', calls);
+		// console.log('options :>> ', options);
+		const [result, data] = call
+		return result ? itf.decodeFunctionResult(calls[i].name, data) : null
+	})
 
-  return res as any
+	return res as any
 }
 
 export default multicall

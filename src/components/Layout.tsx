@@ -1,16 +1,16 @@
-import clsx from "clsx";
-import React, { ReactNode, Suspense, useEffect } from "react";
-import { Footer, PageLoader, ToastWrapper } from "@astraprotocol/astra-ui";
-import styles from "./Layout.module.scss";
-import { useTheme } from "next-themes";
-import Navbar from "./Navbar";
+import clsx from 'clsx'
+import React, { ReactNode, Suspense, useEffect } from 'react'
+import { Footer, PageLoader, ToastWrapper } from '@astraprotocol/astra-ui'
+import styles from './Layout.module.scss'
+import { useTheme } from 'next-themes'
+import Navbar from './Navbar'
 
 type Props = {
-	children: ReactNode;
-};
+	children: ReactNode
+}
 
-const Layout: React.FC<Props> = (props) => {
-	const { resolvedTheme } = useTheme();
+const Layout: React.FC<Props> = props => {
+	const { resolvedTheme } = useTheme()
 
 	return (
 		<Suspense fallback={<PageLoader />}>
@@ -22,7 +22,7 @@ const Layout: React.FC<Props> = (props) => {
 				<ToastWrapper />
 			</div>
 		</Suspense>
-	);
-};
+	)
+}
 
-export default Layout;
+export default Layout

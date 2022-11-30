@@ -4,90 +4,90 @@ import { Address } from 'config/constants/types'
 import { VaultKey } from 'state/types'
 
 export const getAddress = (address: Address): string => {
-  const chainId = process.env.NEXT_PUBLIC_CHAIN_ID
-  return address[chainId] ? address[chainId] : address[ChainId.MAINNET]
+	const chainId = process.env.NEXT_PUBLIC_CHAIN_ID
+	return address[chainId] ? address[chainId] : address[ChainId.MAINNET]
 }
 
 export const getMasterChefAddress = () => {
-  return getAddress(addresses.masterChef)
+	return getAddress(addresses.masterChef)
 }
 export const getMulticallAddress = () => {
-  return getAddress(addresses.multiCall)
+	return getAddress(addresses.multiCall)
 }
 export const getLotteryV2Address = () => {
-  return getAddress(addresses.lotteryV2)
+	return getAddress(addresses.lotteryV2)
 }
 export const getPancakeProfileAddress = () => {
-  return getAddress(addresses.pancakeProfile)
+	return getAddress(addresses.pancakeProfile)
 }
 export const getPancakeRabbitsAddress = () => {
-  return getAddress(addresses.pancakeRabbits)
+	return getAddress(addresses.pancakeRabbits)
 }
 export const getBunnyFactoryAddress = () => {
-  return getAddress(addresses.bunnyFactory)
+	return getAddress(addresses.bunnyFactory)
 }
 export const getClaimRefundAddress = () => {
-  return getAddress(addresses.claimRefund)
+	return getAddress(addresses.claimRefund)
 }
 export const getPointCenterIfoAddress = () => {
-  return getAddress(addresses.pointCenterIfo)
+	return getAddress(addresses.pointCenterIfo)
 }
 export const getBunnySpecialAddress = () => {
-  return getAddress(addresses.bunnySpecial)
+	return getAddress(addresses.bunnySpecial)
 }
 export const getTradingCompetitionAddress = () => {
-  return getAddress(addresses.tradingCompetition)
+	return getAddress(addresses.tradingCompetition)
 }
 export const getTradingCompetitionAddressV2 = () => {
-  return getAddress(addresses.tradingCompetitionV2)
+	return getAddress(addresses.tradingCompetitionV2)
 }
 export const getEasterNftAddress = () => {
-  return getAddress(addresses.easterNft)
+	return getAddress(addresses.easterNft)
 }
 
 export const getVaultPoolAddress = (vaultKey: VaultKey) => {
-  if (!vaultKey) {
-    return null
-  }
-  return getAddress(addresses[vaultKey])
+	if (!vaultKey) {
+		return null
+	}
+	return getAddress(addresses[vaultKey])
 }
 
 export const getCakeVaultAddress = () => {
-  return getAddress(addresses.cakeVault)
+	return getAddress(addresses.cakeVault)
 }
 export const getIfoPoolAddress = () => {
-  return getAddress(addresses.ifoPool)
+	return getAddress(addresses.ifoPool)
 }
 export const getPredictionsAddress = () => {
-  return getAddress(addresses.predictions)
+	return getAddress(addresses.predictions)
 }
 export const getChainlinkOracleAddress = () => {
-  return getAddress(addresses.chainlinkOracle)
+	return getAddress(addresses.chainlinkOracle)
 }
 export const getBunnySpecialCakeVaultAddress = () => {
-  return getAddress(addresses.bunnySpecialCakeVault)
+	return getAddress(addresses.bunnySpecialCakeVault)
 }
 export const getBunnySpecialPredictionAddress = () => {
-  return getAddress(addresses.bunnySpecialPrediction)
+	return getAddress(addresses.bunnySpecialPrediction)
 }
 export const getBunnySpecialLotteryAddress = () => {
-  return getAddress(addresses.bunnySpecialLottery)
+	return getAddress(addresses.bunnySpecialLottery)
 }
 export const getBunnySpecialXmasAddress = () => {
-  return getAddress(addresses.bunnySpecialXmas)
+	return getAddress(addresses.bunnySpecialXmas)
 }
 export const getFarmAuctionAddress = () => {
-  return getAddress(addresses.farmAuction)
+	return getAddress(addresses.farmAuction)
 }
 export const getAnniversaryAchievement = () => {
-  return getAddress(addresses.AnniversaryAchievement)
+	return getAddress(addresses.AnniversaryAchievement)
 }
 export const getNftMarketAddress = () => {
-  return getAddress(addresses.nftMarket)
+	return getAddress(addresses.nftMarket)
 }
 export const getNftSaleAddress = () => {
-  return getAddress(addresses.nftSale)
+	return getAddress(addresses.nftSale)
 }
 export const getPancakeSquadAddress = () => {
-  return getAddress(addresses.pancakeSquad)
+	return getAddress(addresses.pancakeSquad)
 }

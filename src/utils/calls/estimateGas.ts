@@ -11,20 +11,20 @@ import { TransactionResponse } from '@ethersproject/providers'
  * @returns https://docs.ethers.io/v5/api/providers/types/#providers-TransactionReceipt
  */
 export const estimateGas = async (
-  contract: Contract,
-  methodName: string,
-  methodArgs: any[],
-  gasMarginPer10000: number,
+	contract: Contract,
+	methodName: string,
+	methodArgs: any[],
+	gasMarginPer10000: number
 ) => {
-  if (!contract[methodName]) {
-    throw new Error(`Method ${methodName} doesn't exist on ${contract.address}`)
-  }
-  const rawGasEstimation = await contract.estimateGas[methodName](...methodArgs)
-  // By convention, BigNumber values are multiplied by 1000 to avoid dealing with real numbers
-  const gasEstimation = rawGasEstimation
-    .mul(BigNumber.from(10000).add(BigNumber.from(gasMarginPer10000)))
-    .div(BigNumber.from(10000))
-  return gasEstimation
+	if (!contract[methodName]) {
+		throw new Error(`Method ${methodName} doesn't exist on ${contract.address}`)
+	}
+	const rawGasEstimation = await contract.estimateGas[methodName](...methodArgs)
+	// By convention, BigNumber values are multiplied by 1000 to avoid dealing with real numbers
+	const gasEstimation = rawGasEstimation
+		.mul(BigNumber.from(10000).add(BigNumber.from(gasMarginPer10000)))
+		.div(BigNumber.from(10000))
+	return gasEstimation
 }
 
 /**
@@ -36,16 +36,16 @@ export const estimateGas = async (
  * @returns https://docs.ethers.io/v5/api/providers/types/#providers-TransactionReceipt
  */
 export const callWithEstimateGas = async (
-  contract: Contract,
-  methodName: string,
-  methodArgs: any[] = [],
-  overrides: Overrides = {},
-  gasMarginPer10000 = 1000,
+	contract: Contract,
+	methodName: string,
+	methodArgs: any[] = [],
+	overrides: Overrides = {},
+	gasMarginPer10000 = 1000
 ): Promise<TransactionResponse> => {
-  const gasEstimation = estimateGas(contract, methodName, methodArgs, gasMarginPer10000)
-  const tx = await contract[methodName](...methodArgs, {
-    gasLimit: gasEstimation,
-    ...overrides,
-  })
-  return tx
+	const gasEstimation = estimateGas(contract, methodName, methodArgs, gasMarginPer10000)
+	const tx = await contract[methodName](...methodArgs, {
+		gasLimit: gasEstimation,
+		...overrides
+	})
+	return tx
 }

@@ -1,20 +1,18 @@
-import * as Sentry from "@sentry/react";
-import { useTranslation } from "contexts/Localization";
+import * as Sentry from '@sentry/react'
+import { useTranslation } from 'contexts/Localization'
 
 export default function ErrorBoundary({ children }) {
-	const { t } = useTranslation();
+	const { t } = useTranslation()
 	return (
 		<Sentry.ErrorBoundary
-			beforeCapture={(scope) => {
-				scope.setLevel(Sentry.Severity.Fatal);
+			beforeCapture={scope => {
+				scope.setLevel(Sentry.Severity.Fatal)
 			}}
 			fallback={({ eventId }) => {
 				return (
 					<div>
 						<h1>Co loi xay ra. {eventId}</h1>
-						<button onClick={() => window.location.reload()}>
-							{t("Click here to reset!")}
-						</button>
+						<button onClick={() => window.location.reload()}>{t('Click here to reset!')}</button>
 					</div>
 					// <Page>
 					//   <Flex flexDirection="column" justifyContent="center" alignItems="center">
@@ -34,10 +32,10 @@ export default function ErrorBoundary({ children }) {
 					//     <Button onClick={() => window.location.reload()}>{t('Click here to reset!')}</Button>
 					//   </Flex>
 					// </Page>
-				);
+				)
 			}}
 		>
 			{children}
 		</Sentry.ErrorBoundary>
-	);
+	)
 }

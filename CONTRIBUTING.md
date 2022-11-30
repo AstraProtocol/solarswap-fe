@@ -15,14 +15,14 @@ Don't forget to setup your IDE with `eslint` and `prettier`.
 
 ## Project structure
 
-- **components** contains generic components used inside the application.
-- **views** contains building blocks for each page. The entry point of a view is used as the root component of each route.
-- **config** contains all the config files and ABIs.
-- **state** contains the redux files for the global state of the app.
-- **context** contains global contexts (separated from the redux store)
-- **hooks** contains generic hooks.
-- **utils** contains generic utilities functions.
-- **pages** contains page components for next.js
+-   **components** contains generic components used inside the application.
+-   **views** contains building blocks for each page. The entry point of a view is used as the root component of each route.
+-   **config** contains all the config files and ABIs.
+-   **state** contains the redux files for the global state of the app.
+-   **context** contains global contexts (separated from the redux store)
+-   **hooks** contains generic hooks.
+-   **utils** contains generic utilities functions.
+-   **pages** contains page components for next.js
 
 ## Tests
 

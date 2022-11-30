@@ -1,0 +1,9 @@
+cypress
+cypress.json
+.github
+.husky
+.next
+doc
+node_modules
+scripts
+README.md

@@ -3,16 +3,16 @@
 import tokens from 'config/constants/tokens'
 
 const getLiquidityUrlPathParts = ({
-  quoteTokenAddress,
-  tokenAddress,
+	quoteTokenAddress,
+	tokenAddress
 }: {
-  quoteTokenAddress: string
-  tokenAddress: string
+	quoteTokenAddress: string
+	tokenAddress: string
 }): string => {
-  const wAsaAddress = tokens.wasa.address
-  const firstPart = !quoteTokenAddress || quoteTokenAddress === wAsaAddress ? 'ASA' : quoteTokenAddress
-  const secondPart = !tokenAddress || tokenAddress === wAsaAddress ? 'ASA' : tokenAddress
-  return `${firstPart}/${secondPart}`
+	const wAsaAddress = tokens.wasa.address
+	const firstPart = !quoteTokenAddress || quoteTokenAddress === wAsaAddress ? 'ASA' : quoteTokenAddress
+	const secondPart = !tokenAddress || tokenAddress === wAsaAddress ? 'ASA' : tokenAddress
+	return `${firstPart}/${secondPart}`
 }
 
 export default getLiquidityUrlPathParts

@@ -2,13 +2,13 @@ import { useContext } from 'react'
 import { LanguageContext } from './Provider'
 
 const useTranslation = () => {
-  const languageContext = useContext(LanguageContext)
+	const languageContext = useContext(LanguageContext)
 
-  if (languageContext === undefined) {
-    throw new Error('Language context is undefined')
-  }
+	if (languageContext === undefined) {
+		throw new Error('Language context is undefined')
+	}
 
-  return languageContext
+	return languageContext
 }
 
 export default useTranslation

@@ -1,10 +1,10 @@
-import { FACTORY_ADDRESS } from "@solarswap/sdk";
-import { getUnixTime, sub } from "date-fns";
-import { gql } from "graphql-request";
-import { GetStaticProps } from "next";
-import { SWRConfig } from "swr";
+import { FACTORY_ADDRESS } from '@solarswap/sdk'
+import { getUnixTime, sub } from 'date-fns'
+import { gql } from 'graphql-request'
+import { GetStaticProps } from 'next'
+import { SWRConfig } from 'swr'
 // import { DeBankTvlResponse } from 'hooks/api'
-import { bitQueryServerClient, infoServerClient } from "utils/graphql";
+import { bitQueryServerClient, infoServerClient } from 'utils/graphql'
 // import { getBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
 // import Swap from 'views/Swap'
 
@@ -15,20 +15,20 @@ const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
 				fallback: {
 					totalTx30Days,
 					addressCount30Days,
-					tvl,
-				},
+					tvl
+				}
 			}}
 		>
 			<>Hello</>
 			{/* <Swap /> */}
 		</SWRConfig>
-	);
-};
+	)
+}
 
 // Values fetched from TheGraph and BitQuery jan 24, 2022
-const txCount = 54780336;
-const addressCount = 4425459;
-const tvl = 11511781748.920916;
+const txCount = 54780336
+const addressCount = 4425459
+const tvl = 11511781748.920916
 
 export const getStaticProps: GetStaticProps = async () => {
 	const totalTxQuery = gql`
@@ -37,15 +37,15 @@ export const getStaticProps: GetStaticProps = async () => {
 				totalTransactions
 			}
 		}
-	`;
+	`
 
-	const days30Ago = sub(new Date(), { days: 30 });
+	const days30Ago = sub(new Date(), { days: 30 })
 
 	const results = {
 		totalTx30Days: txCount,
 		addressCount30Days: addressCount,
-		tvl,
-	};
+		tvl
+	}
 
 	// if (process.env.SF_HEADER) {
 	// 	try {
@@ -85,28 +85,25 @@ export const getStaticProps: GetStaticProps = async () => {
 	const usersQuery = gql`
 		query userCount($since: ISO8601DateTime, $till: ISO8601DateTime) {
 			ethereum(network: bsc) {
-				dexTrades(
-					exchangeName: { in: ["Pancake", "Pancake v2"] }
-					date: { since: $since, till: $till }
-				) {
+				dexTrades(exchangeName: { in: ["Pancake", "Pancake v2"] }, date: { since: $since, till: $till }) {
 					count(uniq: senders)
 				}
 			}
 		}
-	`;
+	`
 
 	if (process.env.BIT_QUERY_HEADER) {
 		try {
 			const result = await bitQueryServerClient.request(usersQuery, {
 				since: days30Ago.toISOString(),
-				till: new Date().toISOString(),
-			});
+				till: new Date().toISOString()
+			})
 			if (result?.ethereum?.dexTrades?.[0]?.count) {
-				results.addressCount30Days = result.ethereum.dexTrades[0].count;
+				results.addressCount30Days = result.ethereum.dexTrades[0].count
 			}
 		} catch (error) {
-			if (process.env.NODE_ENV === "production") {
-				console.error("Error when fetching address count", error);
+			if (process.env.NODE_ENV === 'production') {
+				console.error('Error when fetching address count', error)
 			}
 		}
 	}
@@ -123,8 +120,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: results,
-		revalidate: 60 * 60 * 24 * 30, // 30 days
-	};
-};
+		revalidate: 60 * 60 * 24 * 30 // 30 days
+	}
+}
 
-export default IndexPage;
+export default IndexPage

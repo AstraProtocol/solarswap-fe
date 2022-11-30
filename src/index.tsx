@@ -1,5 +1,5 @@
-import { ReactNode, useMemo } from "react";
-import { BLOCKED_ADDRESSES } from "./config/constants";
+import { ReactNode, useMemo } from 'react'
+import { BLOCKED_ADDRESSES } from './config/constants'
 // import useActiveWeb3React from './hooks/useActiveWeb3React'
 // import ListsUpdater from "./state/lists/updater";
 // import MulticallUpdater from "./state/multicall/updater";
@@ -12,7 +12,7 @@ export function Updaters() {
 			<TransactionUpdater />
 			<MulticallUpdater /> */}
 		</>
-	);
+	)
 }
 
 export function Blocklist({ children }: { children: ReactNode }) {
@@ -24,5 +24,5 @@ export function Blocklist({ children }: { children: ReactNode }) {
 	// if (blocked) {
 	// 	return <div>Blocked address</div>;
 	// }
-	return <>{children}</>;
+	return <>{children}</>
 }
