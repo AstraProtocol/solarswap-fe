@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 import numeral from 'numeral'
 
 // Returns first 2 digits after first non-zero decimal

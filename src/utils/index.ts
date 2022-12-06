@@ -6,11 +6,11 @@ import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import ZapInContract from 'config/abi/ZapIn.json'
-import ISolardexRouter02ABI from 'config/abi/IPancakeRouter02.json'
+import ISolardexRouter02ABI from 'config/abi/ISolardexRouter02.json'
 import { ISolardexRouter02 } from 'config/abi/types/ISolardexRouter02'
 import { CHAIN_ID } from 'config/constants/networks'
 import { JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@solarswap/sdk'
-import { ZAPIN_ADDRESS, ROUTER_ADDRESS } from '../config/constants'
+import { ZAP_ADDRESS, ROUTER_ADDRESS } from '../config/constants'
 import { BASE_ASTRA_EXPLORER_URLS } from '../config'
 import { TokenAddressMap } from '../state/lists/hooks'
 import { simpleRpcProvider } from './providers'
@@ -104,7 +104,7 @@ export function getRouterContract(_: number, library: Web3Provider, account?: st
 }
 
 export function getZapInContract(_: number, library: Web3Provider, account?: string) {
-	return getContract(ZAPIN_ADDRESS[CHAIN_ID], ZapInContract, getProviderOrSigner(library, account)) as ZapIn
+	return getContract(ZAP_ADDRESS[CHAIN_ID], ZapInContract, getProviderOrSigner(library, account)) as ZapIn
 }
 
 export function escapeRegExp(string: string): string {

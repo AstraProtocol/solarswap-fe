@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 import { Trade, Percent, currencyEquals } from '@solarswap/sdk'
 import { ZERO_PERCENT, ONE_HUNDRED_PERCENT } from '../config/constants/index'
 

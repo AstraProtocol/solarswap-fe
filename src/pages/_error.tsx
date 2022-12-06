@@ -1,6 +1,6 @@
 import NextErrorComponent from 'next/error'
 import * as Sentry from '@sentry/nextjs'
-// import NotFound from '../views/NotFound'
+import NotFound from './404'
 
 const MyError = ({ hasGetInitialPropsRun, err }) => {
 	if (!hasGetInitialPropsRun && err) {
@@ -11,9 +11,7 @@ const MyError = ({ hasGetInitialPropsRun, err }) => {
 		// Flushing is not required in this case as it only happens on the client
 	}
 
-	return <div>error</div>
-	// @todo
-	// return <NotFound />
+	return <NotFound />
 }
 
 MyError.getInitialProps = async context => {

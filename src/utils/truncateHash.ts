@@ -1,4 +1,7 @@
 /**
+ * @fileoverview Tien 02/12/2022
+ */
+/**
  * Truncate a transaction or address hash
  */
 const truncateHash = (address: string, startLength = 4, endLength = 4) => {

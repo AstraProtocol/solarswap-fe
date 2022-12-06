@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 import { ChainId } from '@solarswap/sdk'
 import { CHAIN_ID } from 'config/constants/networks'
 import store from 'state'

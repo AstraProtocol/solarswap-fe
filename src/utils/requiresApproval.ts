@@ -1,8 +1,11 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 import { BigNumber } from '@ethersproject/bignumber'
-import { Cake, Erc20 } from 'config/abi/types'
+import { Erc20 } from 'config/abi/types'
 
 export const requiresApproval = async (
-	contract: Erc20 | Cake,
+	contract: Erc20,
 	account: string,
 	spenderAddress: string,
 	minimumRequired: number | BigNumber = 0

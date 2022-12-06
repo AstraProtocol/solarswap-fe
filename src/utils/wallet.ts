@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 03/12/2022
+ */
 // Set of helper functions to facilitate wallet setup
 
 import { ExternalProvider } from '@ethersproject/providers'
@@ -7,11 +10,11 @@ import { nodes } from './getRpcUrl'
 
 const NETWORK_CONFIG = {
 	[ChainId.MAINNET]: {
-		name: 'BNB Smart Chain Mainnet',
+		name: 'Astra Blockchain Mainnet',
 		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.MAINNET]
 	},
 	[ChainId.TESTNET]: {
-		name: 'BNB Smart Chain Testnet',
+		name: 'Astra Blockchain Testnet',
 		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.TESTNET]
 	}
 }
@@ -44,8 +47,8 @@ export const setupNetwork = async (externalProvider?: ExternalProvider) => {
 								chainId: `0x${chainId.toString(16)}`,
 								chainName: NETWORK_CONFIG[chainId].name,
 								nativeCurrency: {
-									name: 'BNB',
-									symbol: 'bnb',
+									name: 'Astra',
+									symbol: 'asa',
 									decimals: 18
 								},
 								rpcUrls: nodes,
@@ -62,7 +65,7 @@ export const setupNetwork = async (externalProvider?: ExternalProvider) => {
 			return false
 		}
 	} else {
-		console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")
+		console.error("Can't setup the Astra network on metamask because window.ethereum is undefined")
 		return false
 	}
 }

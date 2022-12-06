@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 import BigNumber from 'bignumber.js'
 import { BLOCKS_PER_YEAR, ASA_PER_YEAR } from 'config'
 import lpAprs from 'config/constants/lpAprs.json'
@@ -45,5 +48,3 @@ export const getFarmApr = (
 	const lpRewardsApr = lpAprs[farmAddress?.toLocaleLowerCase()] ?? 0
 	return { asaRewardsApr: asaRewardsAprAsNumber, lpRewardsApr }
 }
-
-export default null

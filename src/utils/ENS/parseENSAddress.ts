@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 03/12/2022
+ */
 const ENS_NAME_REGEX = /^(([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+)eth(\/.*)?$/
 
 export function parseENSAddress(ensAddress: string): { ensName: string; ensPath: string | undefined } | undefined {

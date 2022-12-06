@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 import { testnetTokens } from 'config/constants/tokens'
 import tryParseAmount from './tryParseAmount'
 
@@ -10,6 +13,6 @@ describe('utils/tryParseAmount', () => {
 	})
 
 	it('should pared value', () => {
-		expect(tryParseAmount('100', testnetTokens.cake)).toBeTruthy()
+		expect(tryParseAmount('100', testnetTokens.wasa)).toBeTruthy()
 	})
 })

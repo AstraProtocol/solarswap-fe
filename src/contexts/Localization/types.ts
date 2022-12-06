@@ -1,10 +1,18 @@
+/**
+ * @fileoverview Tien 05/12/2022
+ */
 import { ReactText } from 'react'
-import { Language } from '@solarswap/uikit'
 
 import translations from 'config/localization/translations.json'
 
 export type ContextData = {
 	[key: string]: ReactText
+}
+
+export interface Language {
+	code: string
+	language: string
+	locale: string
 }
 
 export interface ProviderState {
@@ -23,9 +31,3 @@ type MaybeObject = Record<never, never>
 export type TranslationKey = keyof typeof translations | (string & MaybeObject)
 
 export type TranslateFunction = (key: TranslationKey, data?: ContextData) => string
-
-export interface Language {
-	code: string
-	language: string
-	locale: string
-}

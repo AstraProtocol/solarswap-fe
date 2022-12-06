@@ -1,4 +1,7 @@
 /**
+ * @fileoverview Tien 02/12/2022
+ */
+/**
  * Returns true if the string value is zero in hex
  * @param hexNumberString
  */

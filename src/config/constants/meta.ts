@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 04/12/2022
+ */
 import { ContextApi } from 'contexts/Localization/types'
 import { PageMeta } from './types'
 
@@ -105,17 +108,17 @@ export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
 		case '/info':
 			return {
 				title: `${t('Overview')} | ${t('SolarSwap Info & Analytics')}`,
-				description: 'View statistics for Pancakeswap exchanges.'
+				description: 'View statistics for Solarswap exchanges.'
 			}
 		case '/info/pools':
 			return {
 				title: `${t('Pools')} | ${t('SolarSwap Info & Analytics')}`,
-				description: 'View statistics for Pancakeswap exchanges.'
+				description: 'View statistics for Solarswap exchanges.'
 			}
 		case '/info/tokens':
 			return {
 				title: `${t('Tokens')} | ${t('SolarSwap Info & Analytics')}`,
-				description: 'View statistics for Pancakeswap exchanges.'
+				description: 'View statistics for Solarswap exchanges.'
 			}
 		case '/nfts':
 			return {

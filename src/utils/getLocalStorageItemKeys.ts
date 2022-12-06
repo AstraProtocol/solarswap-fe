@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 const getLocalStorageItemKeys = (prefix: string) => {
 	const result = []
 	for (let i = 0; i < localStorage.length; i++) {

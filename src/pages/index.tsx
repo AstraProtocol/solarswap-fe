@@ -33,7 +33,7 @@ const tvl = 11511781748.920916
 export const getStaticProps: GetStaticProps = async () => {
 	const totalTxQuery = gql`
 		query TotalTransactions($id: ID!, $block: Block_height) {
-			pancakeFactory(id: $id, block: $block) {
+			solarFactory(id: $id, block: $block) {
 				totalTransactions
 			}
 		}
@@ -66,14 +66,14 @@ export const getStaticProps: GetStaticProps = async () => {
 	// 		});
 
 	// 		if (
-	// 			totalTx?.pancakeFactory?.totalTransactions &&
-	// 			totalTx30DaysAgo?.pancakeFactory?.totalTransactions &&
-	// 			parseInt(totalTx.pancakeFactory.totalTransactions) >
-	// 				parseInt(totalTx30DaysAgo.pancakeFactory.totalTransactions)
+	// 			totalTx?.solarFactory?.totalTransactions &&
+	// 			totalTx30DaysAgo?.solarFactory?.totalTransactions &&
+	// 			parseInt(totalTx.solarFactory.totalTransactions) >
+	// 				parseInt(totalTx30DaysAgo.solarFactory.totalTransactions)
 	// 		) {
 	// 			results.totalTx30Days =
-	// 				parseInt(totalTx.pancakeFactory.totalTransactions) -
-	// 				parseInt(totalTx30DaysAgo.pancakeFactory.totalTransactions);
+	// 				parseInt(totalTx.solarFactory.totalTransactions) -
+	// 				parseInt(totalTx30DaysAgo.solarFactory.totalTransactions);
 	// 		}
 	// 	} catch (error) {
 	// 		if (process.env.NODE_ENV === "production") {

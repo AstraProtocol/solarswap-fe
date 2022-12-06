@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 02/12/2022
+ */
 import { ONE_HOUR_SECONDS } from 'config/constants/info'
 import { getUnixTime } from 'date-fns'
 

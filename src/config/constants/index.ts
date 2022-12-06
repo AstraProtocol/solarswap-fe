@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Tien 04/12/2022
+ */
 import { ChainId, JSBI, Percent, Token } from '@solarswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
 import { mainnetTokens, testnetTokens } from './tokens'
@@ -7,7 +10,7 @@ export const ROUTER_ADDRESS = {
 	[ChainId.TESTNET]: '0x1FAB8bdf244da099aC719FB4D393644D5fa4C6c4'
 }
 
-export const ZAPIN_ADDRESS = {
+export const ZAP_ADDRESS = {
 	[ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
 	[ChainId.TESTNET]: '0x76eBE3463d572ec9DB9cB3ab3fD35599C96D8dB8'
 }
@@ -68,11 +71,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 export const PINNED_PAIRS: {
 	readonly [chainId in ChainId]?: [Token, Token][]
 } = {
-	[ChainId.TESTNET]: [
-		[mainnetTokens.cake, mainnetTokens.wbnb],
-		[mainnetTokens.busd, mainnetTokens.usdt],
-		[mainnetTokens.dai, mainnetTokens.usdt]
-	]
+	[ChainId.TESTNET]: [[mainnetTokens.wasa, mainnetTokens.usdt]]
 }
 
 export const NetworkContextName = 'NETWORK'
@@ -96,8 +95,14 @@ export const PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN: Percent = new Percent(JSBI.Bi
 // for non expert mode disable swaps above this
 export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(1500), BIPS_BASE) // 15%
 
-// used to ensure the user doesn't send so much BNB so they end up with <.01
-export const MIN_BNB: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 BNB
+/**
+ * @description used to ensure the user doesn't send so much ASA so they end up with <.00000001.
+ * Make sure enough gas for the transaction.
+ * @author tiendn
+ * 02/12/2022
+ * @todo verified exact number later
+ */
+export const MIN_ASA: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(10)) // .00000001 ASA
 export const BETTER_TRADE_LESS_HOPS_THRESHOLD = new Percent(JSBI.BigInt(50), JSBI.BigInt(10000))
 
 export const ZERO_PERCENT = new Percent('0')
