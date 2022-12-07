@@ -31,6 +31,7 @@ import Layout from 'components/Layout'
 import { CHAIN_ID } from 'config/constants/networks'
 import getNodeUrl from 'utils/getRpcUrl'
 import { WalletHelper } from 'utils/wallet'
+import 'react-toastify/dist/ReactToastify.css'
 
 // const EasterEgg = dynamic(() => import('components/EasterEgg'), { ssr: false })
 

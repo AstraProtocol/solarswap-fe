@@ -29,7 +29,6 @@ types
 .env
 astraprotocol-astra-ui-*.tgz
 package-lock.json
-yarn.lock
 package
 cypress/*
 .next
