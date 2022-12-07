@@ -1,7 +1,7 @@
-// import Swap from '../views/Swap'
+import Swap from '../views/Swap'
 
-// const SwapPage = () => {
-//   return <Swap />
-// }
+const SwapPage = () => {
+	return <Swap />
+}
 
-// export default SwapPage
+export default SwapPage

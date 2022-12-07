@@ -24,7 +24,7 @@ import multicall from './multicall/reducer'
 // import poolsReducer from './pools'
 // import predictionsReducer from './predictions'
 import swap from './swap/reducer'
-// import transactions from './transactions/reducer'
+import transactions from './transactions/reducer'
 import user from './user/reducer'
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists']
@@ -64,7 +64,7 @@ const persistedReducer = persistReducer(
 		 */
 		// Exchange
 		user,
-		// transactions,
+		transactions,
 		swap,
 		mint,
 		// burn,
