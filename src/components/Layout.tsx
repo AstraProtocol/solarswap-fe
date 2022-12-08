@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import React, { ReactNode, Suspense, useEffect } from 'react'
-import { Footer, PageLoader, ToastWrapper, withToast } from '@astraprotocol/astra-ui'
+import React, { ReactNode, Suspense } from 'react'
+import { Footer, PageLoader, ToastWrapper } from '@astraprotocol/astra-ui'
 import styles from './Layout.module.scss'
 import { useTheme } from 'next-themes'
 import Navbar from './Navbar'
@@ -11,16 +11,6 @@ type Props = {
 
 const Layout: React.FC<Props> = props => {
 	const { resolvedTheme } = useTheme()
-
-	useEffect(() => {
-		withToast(
-			{
-				title: 'An error occurred, please try again later',
-				moreInfo: <span>Transaction hash: </span>
-			},
-			{ type: 'error' }
-		)
-	}, [])
 
 	return (
 		<Suspense fallback={<PageLoader />}>

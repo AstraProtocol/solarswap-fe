@@ -6,6 +6,7 @@ import { LanguageProvider } from 'contexts/Localization'
 import { fetchStatusMiddleware } from 'hooks/useSWRContract'
 import { Store } from '@reduxjs/toolkit'
 import { ThemeProvider as NextThemeProvider } from 'next-themes'
+import { ModalProvider } from 'components/Modal'
 
 const Providers: React.FC<{ store: Store }> = ({ children, store }) => {
 	return (
@@ -18,8 +19,7 @@ const Providers: React.FC<{ store: Store }> = ({ children, store }) => {
 								use: [fetchStatusMiddleware]
 							}}
 						>
-							{children}
-							{/* <ModalProvider>{children}</ModalProvider> */}
+							<ModalProvider>{children}</ModalProvider>
 						</SWRConfig>
 					</LanguageProvider>
 				</NextThemeProvider>

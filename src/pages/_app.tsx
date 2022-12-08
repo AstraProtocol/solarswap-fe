@@ -4,7 +4,6 @@ import BigNumber from 'bignumber.js'
 import { NextPage } from 'next'
 // import GlobalCheckClaimStatus from "components/GlobalCheckClaimStatus";
 // import FixedSubgraphHealthIndicator from "components/SubgraphHealthIndicator";
-// import { ToastListener } from "contexts/ToastsContext";
 // import useEagerConnect from "hooks/useEagerConnect";
 // import { useInactiveListener } from "hooks/useInactiveListener";
 // import useSentryUser from "hooks/useSentryUser";
@@ -22,7 +21,7 @@ import { useStore, persistor } from 'state'
 import astraConnectModule from 'libs/astrawallet'
 import '@astraprotocol/astra-ui/lib/shared/style.css'
 import { Blocklist, Updaters } from '..'
-// import ErrorBoundary from '../components/ErrorBoundary'
+import ErrorBoundary from '../components/ErrorBoundary'
 // import Menu from '../components/Menu'
 import Providers from '../Providers'
 // import GlobalStyle from '../style/Global'
@@ -170,9 +169,8 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 				<Component {...pageProps} />
 			</Layout>
 			{/* </Menu> */}
-			{/* <EasterEgg iterations={2} />
-			<ToastListener />
-			<FixedSubgraphHealthIndicator /> */}
+			{/* <EasterEgg iterations={2} /> */}
+			{/* <FixedSubgraphHealthIndicator /> */}
 		</ProductionErrorBoundary>
 	)
 }
