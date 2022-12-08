@@ -3,12 +3,21 @@ import React, { createContext, useState, useRef } from 'react'
 import { Handler } from './types'
 import styles from './style.module.scss'
 import Overlay from 'components/Overlay'
+import clsx from 'clsx'
+import { useTheme } from 'next-themes'
 
-// const animationMap = {
-// 	initial: 'initial',
-// 	animate: 'animate',
-// 	exit: 'exit'
-// }
+const animationMap = {
+	initial: 'initial',
+	animate: 'animate',
+	exit: 'exit'
+}
+
+const animationVariants: Variants = {
+	initial: { transform: 'translateX(0px)' },
+	animate: { transform: 'translateX(0px)' },
+	exit: { transform: 'translateX(0px)' }
+}
+
 interface ModalsContext {
 	isOpen: boolean
 	nodeId: string
@@ -35,6 +44,7 @@ const ModalProvider: React.FC = ({ children }) => {
 	const [nodeId, setNodeId] = useState('')
 	const [closeOnOverlayClick, setCloseOnOverlayClick] = useState(true)
 	const animationRef = useRef<HTMLDivElement>(null)
+	const { resolvedTheme } = useTheme()
 
 	const handlePresent = (node: React.ReactNode, newNodeId: string) => {
 		setModalNode(node)
@@ -42,7 +52,7 @@ const ModalProvider: React.FC = ({ children }) => {
 		setNodeId(newNodeId)
 	}
 
-	const handleDismiss = () => {
+	const handleDismiss = (): any => {
 		setModalNode(undefined)
 		setIsOpen(false)
 		setNodeId('')
@@ -70,9 +80,8 @@ const ModalProvider: React.FC = ({ children }) => {
 			<LazyMotion features={domAnimation}>
 				<AnimatePresence>
 					{isOpen && (
-						<div
-							id="test"
-							className={styles.modalWrapper}
+						<m.div
+							className={clsx(styles.modalWrapper, `${resolvedTheme}--mode`)}
 							ref={animationRef}
 							onAnimationStart={() => {
 								const element = animationRef.current
@@ -85,14 +94,16 @@ const ModalProvider: React.FC = ({ children }) => {
 									element.classList.add('appear')
 								}
 							}}
-							// {...animationMap}
+							{...animationMap}
+							variants={animationVariants}
+							transition={{ duration: 0.3 }}
 						>
 							<Overlay onClick={handleOverlayDismiss} />
 							{React.isValidElement(modalNode) &&
 								React.cloneElement(modalNode, {
 									onDismiss: handleDismiss
 								})}
-						</div>
+						</m.div>
 					)}
 				</AnimatePresence>
 			</LazyMotion>
