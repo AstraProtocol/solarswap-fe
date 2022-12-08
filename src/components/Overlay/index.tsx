@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { FC, useEffect } from 'react'
 import styles from './style.module.scss'
 
@@ -26,7 +27,7 @@ export const Overlay: FC<OverlayProps> = props => {
 	return (
 		<>
 			<BodyLock />
-			<div className={styles.overlay} {...props} />
+			<div className={clsx(styles.overlay, props.isUnmounting ? 'unmounting' : 'mounting')} {...props} />
 		</>
 	)
 }
