@@ -80,7 +80,7 @@ const web3Onboard = init({
 			label: 'Astra testnet',
 			rpcUrl: 'https://rpc.astranaut.dev/',
 			icon: '/images/logo/transparent_logo.svg',
-			blockExplorerUrl: 'https://explorer.astranaut.dev/blocks'
+			blockExplorerUrl: 'https://explorer.astranaut.dev/'
 		}
 	],
 	appMetadata: {
@@ -133,19 +133,19 @@ function MyApp(props: AppProps) {
 				<meta name="twitter:title" content="SolarSwap - A DEFI exchange on Astra Protocol" />
 				<title>SolarSwap</title>
 			</Head>
-			<Providers store={store}>
-				<Blocklist>
-					<GlobalHooks />
-					<Updaters />
-					{/* <GlobalStyle /> */}
-					{/* <GlobalCheckClaimStatus excludeLocations={[]} /> */}
-					<PersistGate loading={null} persistor={persistor}>
-						<Web3OnboardProvider web3Onboard={web3Onboard}>
+			<Web3OnboardProvider web3Onboard={web3Onboard}>
+				<Providers store={store}>
+					<Blocklist>
+						<GlobalHooks />
+						<Updaters />
+						{/* <GlobalStyle /> */}
+						{/* <GlobalCheckClaimStatus excludeLocations={[]} /> */}
+						<PersistGate loading={null} persistor={persistor}>
 							<App {...props} />
-						</Web3OnboardProvider>
-					</PersistGate>
-				</Blocklist>
-			</Providers>
+						</PersistGate>
+					</Blocklist>
+				</Providers>
+			</Web3OnboardProvider>
 		</>
 	)
 }

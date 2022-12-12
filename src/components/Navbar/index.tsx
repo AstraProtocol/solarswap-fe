@@ -50,7 +50,8 @@ export default function Navbar() {
 	const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
 	const [load, setLoad] = useState(false)
 	const _searchWrapperRef = useRef<HTMLDivElement>(null)
-	const [{ wallet }, _, disconnect] = useConnectWallet()
+	const [{ wallet }, connect, disconnect] = useConnectWallet()
+	console.log(wallet)
 	const { t } = useTranslation()
 
 	const _hideMenu = () => {
@@ -79,6 +80,31 @@ export default function Navbar() {
 	useEffect(() => {
 		setTimeout(() => setLoad(showHamburgerMenu), 100)
 	}, [showHamburgerMenu])
+
+	const _setWalletFromLocalStorage = useCallback(async () => {
+		try {
+			const previouslyConnectedWallets = WalletHelper.getCacheConnect()
+
+			if (previouslyConnectedWallets?.length) {
+				const walletConnected = await connect({
+					autoSelect: {
+						label: previouslyConnectedWallets[0],
+						disableModals: true
+					}
+				})
+
+				if (isEmpty(walletConnected)) {
+					WalletHelper.removeCacheConnect()
+				}
+			}
+		} catch (error) {
+			console.log('error : ', error)
+		}
+	}, [connect])
+
+	useEffect(() => {
+		_setWalletFromLocalStorage()
+	}, [wallet, _setWalletFromLocalStorage])
 
 	const _changeMenu = useCallback(() => {
 		const newMenus = cloneDeep(MENU_ITEMS)
