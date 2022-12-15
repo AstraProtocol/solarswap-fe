@@ -1,13 +1,14 @@
 import { useCallback, useMemo } from 'react'
 import { currencyEquals, Trade } from '@solarswap/sdk'
-import { InjectedModalProps } from '@solarswap/uikit'
+
 import { useTranslation } from 'contexts/Localization'
 import TransactionConfirmationModal, {
-  ConfirmationModalContent,
-  TransactionErrorContent,
+	ConfirmationModalContent,
+	TransactionErrorContent
 } from 'components/TransactionConfirmationModal'
 import SwapModalFooter from './SwapModalFooter'
 import SwapModalHeader from './SwapModalHeader'
+import { InjectedModalProps } from 'components/Modal'
 
 /**
  * Returns true if the trade requires a confirmation of details before we can submit it

@@ -19,7 +19,6 @@ import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 // import { AutoRow, RowBetween } from '../../components/Layout/Row'
 import AdvancedSwapDetailsDropdown from './components/AdvancedSwapDetailsDropdown'
 import confirmPriceImpactWithoutFee from './components/confirmPriceImpactWithoutFee'
-import { ArrowWrapper, SwapCallbackError, Wrapper } from './components/styleds'
 import TradePrice from './components/TradePrice'
 import ImportTokenWarningModal from './components/ImportTokenWarningModal'
 import ProgressSteps from './components/ProgressSteps'
@@ -55,6 +54,9 @@ import PriceChartContainer from './components/Chart/PriceChartContainer'
 import CurrencyInputHeader from './components/CurrencyInputHeader'
 import { Container, IconButton, IconEnum, useMobileLayout } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
+import { BottomDrawer } from 'components/BottomDrawer'
+import Page from 'components/Layout/Page'
+import styles from './styles.module.scss'
 
 // const Label = styled(Text)`
 // 	font-size: 12px;
@@ -234,27 +236,27 @@ export default function Swap() {
 
 	const [singleHopOnly] = useUserSingleHopOnly()
 
-	// const handleSwap = useCallback(() => {
-	// 	if (priceImpactWithoutFee && !confirmPriceImpactWithoutFee(priceImpactWithoutFee, t)) {
-	// 		return
-	// 	}
-	// 	if (!swapCallback) {
-	// 		return
-	// 	}
-	// 	setSwapState({ attemptingTxn: true, tradeToConfirm, swapErrorMessage: undefined, txHash: undefined })
-	// 	swapCallback()
-	// 		.then(hash => {
-	// 			setSwapState({ attemptingTxn: false, tradeToConfirm, swapErrorMessage: undefined, txHash: hash })
-	// 		})
-	// 		.catch(error => {
-	// 			setSwapState({
-	// 				attemptingTxn: false,
-	// 				tradeToConfirm,
-	// 				swapErrorMessage: error.message,
-	// 				txHash: undefined
-	// 			})
-	// 		})
-	// }, [priceImpactWithoutFee, swapCallback, tradeToConfirm, t])
+	const handleSwap = useCallback(() => {
+		if (priceImpactWithoutFee && !confirmPriceImpactWithoutFee(priceImpactWithoutFee, t)) {
+			return
+		}
+		if (!swapCallback) {
+			return
+		}
+		setSwapState({ attemptingTxn: true, tradeToConfirm, swapErrorMessage: undefined, txHash: undefined })
+		swapCallback()
+			.then(hash => {
+				setSwapState({ attemptingTxn: false, tradeToConfirm, swapErrorMessage: undefined, txHash: hash })
+			})
+			.catch(error => {
+				setSwapState({
+					attemptingTxn: false,
+					tradeToConfirm,
+					swapErrorMessage: error.message,
+					txHash: undefined
+				})
+			})
+	}, [priceImpactWithoutFee, swapCallback, tradeToConfirm, t])
 
 	// errors
 	const [showInverted, setShowInverted] = useState<boolean>(false)
@@ -285,7 +287,7 @@ export default function Swap() {
 
 	// swap warning state
 	const [swapWarningCurrency, setSwapWarningCurrency] = useState(null)
-	// const [onPresentSwapWarningModal] = useModal(<SwapWarningModal swapCurrency={swapWarningCurrency} />)
+	const [onPresentSwapWarningModal] = useModal(<SwapWarningModal swapCurrency={swapWarningCurrency} />)
 
 	const shouldShowSwapWarning = swapCurrency => {
 		const isWarningToken = Object.entries(SwapWarningTokens).find(warningTokenConfig => {
@@ -295,12 +297,12 @@ export default function Swap() {
 		return Boolean(isWarningToken)
 	}
 
-	// useEffect(() => {
-	// 	if (swapWarningCurrency) {
-	// 		onPresentSwapWarningModal()
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [swapWarningCurrency])
+	useEffect(() => {
+		if (swapWarningCurrency) {
+			onPresentSwapWarningModal()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [swapWarningCurrency])
 
 	const handleInputSelect = useCallback(
 		currencyInput => {
@@ -338,34 +340,34 @@ export default function Swap() {
 
 	const swapIsUnsupported = useIsTransactionUnsupported(currencies?.INPUT, currencies?.OUTPUT)
 
-	// const [onPresentImportTokenWarningModal] = useModal(
-	// 	<ImportTokenWarningModal tokens={importTokensNotInDefault} onCancel={() => router.push('/swap')} />
-	// )
+	const [onPresentImportTokenWarningModal] = useModal(
+		<ImportTokenWarningModal tokens={importTokensNotInDefault} onCancel={() => router.push('/swap')} />
+	)
 
-	// useEffect(() => {
-	// 	if (importTokensNotInDefault.length > 0) {
-	// 		onPresentImportTokenWarningModal()
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [importTokensNotInDefault.length])
+	useEffect(() => {
+		if (importTokensNotInDefault.length > 0) {
+			onPresentImportTokenWarningModal()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [importTokensNotInDefault.length])
 
-	// const [onPresentConfirmModal] = useModal(
-	// 	<ConfirmSwapModal
-	// 		trade={trade}
-	// 		originalTrade={tradeToConfirm}
-	// 		onAcceptChanges={handleAcceptChanges}
-	// 		attemptingTxn={attemptingTxn}
-	// 		txHash={txHash}
-	// 		recipient={recipient}
-	// 		allowedSlippage={allowedSlippage}
-	// 		onConfirm={handleSwap}
-	// 		swapErrorMessage={swapErrorMessage}
-	// 		customOnDismiss={handleConfirmDismiss}
-	// 	/>,
-	// 	true,
-	// 	true,
-	// 	'confirmSwapModal'
-	// )
+	const [onPresentConfirmModal] = useModal(
+		<ConfirmSwapModal
+			trade={trade}
+			originalTrade={tradeToConfirm}
+			onAcceptChanges={handleAcceptChanges}
+			attemptingTxn={attemptingTxn}
+			txHash={txHash}
+			recipient={recipient}
+			allowedSlippage={allowedSlippage}
+			onConfirm={handleSwap}
+			swapErrorMessage={swapErrorMessage}
+			customOnDismiss={handleConfirmDismiss}
+		/>,
+		true,
+		true,
+		'confirmSwapModal'
+	)
 
 	const hasAmount = Boolean(parsedAmount)
 
@@ -376,8 +378,8 @@ export default function Swap() {
 	}, [hasAmount, refreshBlockNumber])
 
 	return (
-		<Container>
-			<div>
+		<Page>
+			<div className="flex flex-justify-center">
 				{!isMobile && (
 					<PriceChartContainer
 						inputCurrencyId={inputCurrencyId}
@@ -390,7 +392,7 @@ export default function Swap() {
 						currentSwapPrice={singleTokenPrice}
 					/>
 				)}
-				{/* <BottomDrawer
+				<BottomDrawer
 					content={
 						<PriceChartContainer
 							inputCurrencyId={inputCurrencyId}
@@ -406,9 +408,9 @@ export default function Swap() {
 					}
 					isOpen={isChartDisplayed}
 					setIsOpen={setIsChartDisplayed}
-				/> */}
-				<div>
-					<div $isChartExpanded={isChartExpanded}>
+				/>
+				<div className="flex col">
+					<div className={styles.swapContainer}>
 						<div mt={isChartExpanded ? '24px' : '0'}>
 							<div>
 								<CurrencyInputHeader
@@ -684,37 +686,6 @@ export default function Swap() {
 					)} */}
 				</div>
 			</div>
-		</Container>
+		</Page>
 	)
-
-	// return (
-	// 	<Container>
-	// 		<IconButton
-	// 			icon={IconEnum.ICON_CLOSE}
-	// 			onClick={() => {
-	// 				setApprovalSubmitted(false) // reset 2 step UI for approvals
-	// 				onSwitchTokens()
-	// 			}}
-	// 			classes={clsx('link block-hor-center contrast-bg-color-10 padding-xs border radius-sm')}
-	// 		/>
-
-	// 		{/* <SwitchIconButton
-	// 			variant="light"
-	// 			scale="sm"
-	// 			onClick={() => {
-	// 				setApprovalSubmitted(false) // reset 2 step UI for approvals
-	// 				onSwitchTokens()
-	// 			}}
-	// 		>
-	// 			<ArrowDownIcon
-	// 				className="icon-down"
-	// 				color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
-	// 			/>
-	// 			<ArrowUpDownIcon
-	// 				className="icon-up-down"
-	// 				color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
-	// 			/>
-	// 		</SwitchIconButton> */}
-	// 	</Container>
-	// )
 }

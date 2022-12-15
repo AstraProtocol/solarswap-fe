@@ -1,0 +1,54 @@
+.viewBalanceMaxMini {
+    height: 22px;
+    width: 22px;
+    // background-color: ${({ theme }) => theme.colors.background};
+    border: none;
+    border-radius: 50%;
+    padding: 0.2rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    margin-left: 0.4rem;
+    cursor: pointer;
+    // color: ${({ theme }) => theme.colors.text};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: right;
+
+    :hover {
+        // background-color: ${({ theme }) => theme.colors.dropdown};
+    }
+    :focus {
+        // background-color: ${({ theme }) => theme.colors.dropdown};
+        outline: none;
+    }
+}
+
+.swapCallbackErrorInner {
+    // background-color: ${({ theme }) => `${theme.colors.failure}`};
+	border-radius: 1rem;
+	display: flex;
+	align-items: center;
+	font-size: 0.825rem;
+	width: 100%;
+	padding: 3rem 1.25rem 1rem 1rem;
+	margin-top: -2rem;
+	// color: ${({ theme }) => theme.colors.failure};
+	z-index: -1;
+	p {
+		padding: 0;
+		margin: 0;
+		font-weight: 500;
+	}
+}
+
+.swapCallbackErrorInnerAlertTriangle {
+    background-color: 'transparent';
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 12px;
+	border-radius: 12px;
+	min-width: 48px;
+	height: 48px;
+}

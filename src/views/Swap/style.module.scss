@@ -1,0 +1,9 @@
+.swapContainer {
+    flex-shrink: 0;
+    height: fit-content;
+    padding: 0 24px;
+
+    @media screen and (min-width: 968) {
+		padding: 0 40px;
+	}
+}

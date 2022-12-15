@@ -1,5 +1,6 @@
 import { Token } from '@solarswap/sdk'
-import { Modal, InjectedModalProps } from '@solarswap/uikit'
+import { InjectedModalProps, Modal } from 'components/Modal'
+
 import ImportToken from 'components/SearchModal/ImportToken'
 import { useTranslation } from 'contexts/Localization'
 

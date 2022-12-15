@@ -1,4 +1,3 @@
-import { Box, ButtonMenu, ButtonMenuItem, Flex, Text } from '@solarswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useState, memo } from 'react'
 import { useFetchPairPrices } from 'state/swap/hooks'
@@ -7,6 +6,8 @@ import { PairDataTimeWindowEnum } from 'state/swap/types'
 import NoChartAvailable from './NoChartAvailable'
 import PairPriceDisplay from '../../../../components/PairPriceDisplay'
 import { getTimeWindowChange } from './utils'
+import { Flex } from 'components/Layout/Flex'
+import { ButtonMenu, ButtonMenuItem } from '@astraprotocol/astra-ui'
 
 const SwapLineChart = dynamic(() => import('./SwapLineChart'), {
 	ssr: false
@@ -70,35 +71,37 @@ const BasicChart = ({
 	return (
 		<>
 			<Flex
-				flexDirection={['column', null, null, null, null, null, 'row']}
-				alignItems={['flex-start', null, null, null, null, null, 'center']}
-				justifyContent="space-between"
-				px="24px"
+			// flexDirection={['column', null, null, null, null, null, 'row']}
+			// alignItems={['flex-start', null, null, null, null, null, 'center']}
+			// justifyContent="space-between"
+			// px="24px"
 			>
-				<Flex flexDirection="column" pt="12px">
+				<Flex
+				// flexDirection="column" pt="12px"
+				>
 					<PairPriceDisplay
 						value={pairPrices?.length > 0 && valueToDisplay}
 						inputSymbol={inputCurrency?.symbol}
 						outputSymbol={outputCurrency?.symbol}
 					>
-						<Text color={isChangePositive ? 'success' : 'failure'} fontSize="20px" ml="4px" bold>
+						<span color={isChangePositive ? 'success' : 'failure'} fontSize="20px" ml="4px" bold>
 							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(3)} (${changePercentage}%)`}
-						</Text>
+						</span>
 					</PairPriceDisplay>
-					<Text small color="secondary">
+					<span small color="secondary">
 						{hoverDate || currentDate}
-					</Text>
+					</span>
 				</Flex>
-				<Box>
-					<ButtonMenu activeIndex={timeWindow} onItemClick={setTimeWindow} scale="sm">
+				<div>
+					<ButtonMenu activeIndex={timeWindow} onItemClick={setTimeWindow}>
 						<ButtonMenuItem>{t('24H')}</ButtonMenuItem>
 						<ButtonMenuItem>{t('1W')}</ButtonMenuItem>
 						<ButtonMenuItem>{t('1M')}</ButtonMenuItem>
 						<ButtonMenuItem>{t('1Y')}</ButtonMenuItem>
 					</ButtonMenu>
-				</Box>
+				</div>
 			</Flex>
-			<Box height={isMobile ? '100%' : chartHeight} p={isMobile ? '0px' : '16px'} width="100%">
+			<div height={isMobile ? '100%' : chartHeight} p={isMobile ? '0px' : '16px'} width="100%">
 				<SwapLineChart
 					data={pairPrices}
 					setHoverValue={setHoverValue}
@@ -106,7 +109,7 @@ const BasicChart = ({
 					isChangePositive={isChangePositive}
 					timeWindow={timeWindow}
 				/>
-			</Box>
+			</div>
 		</>
 	)
 }

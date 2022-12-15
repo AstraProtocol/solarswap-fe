@@ -31,7 +31,7 @@ export default function CurrencyLogo({
 	}, [currency, uriLocations])
 
 	if (JSON.stringify(currency) === JSON.stringify(ETHER)) {
-		return <AstraIcon width={size} style={style} />
+		return <AstraIcon height={size} width={size} style={style} />
 	}
 
 	// Fix: in case of token image not found in trustwallet cdc image

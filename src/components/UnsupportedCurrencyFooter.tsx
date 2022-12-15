@@ -9,21 +9,23 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { getAstraScanLink } from 'utils'
 import { wrappedCurrency } from 'utils/wrappedCurrency'
 import { useUnsupportedTokens } from '../hooks/Tokens'
+import { InjectedModalProps, Modal, useModal } from './Modal'
+import { NormalButton, Row, Typography } from '@astraprotocol/astra-ui'
 
 interface Props extends InjectedModalProps {
 	currencies: (Currency | undefined)[]
 }
 
-const DetailsFooter = styled.div`
-	padding: 8px 0;
-	width: 100%;
-	max-width: 400px;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	color: ${({ theme }) => theme.colors.text};
-	background-color: ${({ theme }) => theme.colors.invertedContrast};
-	text-align: center;
-`
+// const DetailsFooter = styled.div`
+// 	padding: 8px 0;
+// 	width: 100%;
+// 	max-width: 400px;
+// 	border-bottom-left-radius: 20px;
+// 	border-bottom-right-radius: 20px;
+// 	color: ${({ theme }) => theme.colors.text};
+// 	background-color: ${({ theme }) => theme.colors.invertedContrast};
+// 	text-align: center;
+// `
 
 const UnsupportedModal: React.FC<Props> = ({ currencies, onDismiss }) => {
 	const { chainId } = useActiveWeb3React()
@@ -39,39 +41,39 @@ const UnsupportedModal: React.FC<Props> = ({ currencies, onDismiss }) => {
 
 	return (
 		<Modal title={t('Unsupported Assets')} maxWidth="420px" onDismiss={onDismiss}>
-			<AutoColumn gap="lg">
+			<div gap="lg">
 				{tokens.map(token => {
 					return (
 						token &&
 						unsupportedTokens &&
 						Object.keys(unsupportedTokens).includes(token.address) && (
-							<AutoColumn key={token.address?.concat('not-supported')} gap="10px">
-								<AutoRow gap="5px" align="center">
+							<div key={token.address?.concat('not-supported')} gap="10px">
+								<Row gap="5px" align="center">
 									<CurrencyLogo currency={token} size="24px" />
-									<Text>{token.symbol}</Text>
-								</AutoRow>
+									<span>{token.symbol}</span>
+								</Row>
 								{chainId && (
-									<Link
-										external
+									<Typography.Link
+										// external
 										small
 										color="primaryDark"
 										href={getAstraScanLink(token.address, 'address', chainId)}
 									>
 										{token.address}
-									</Link>
+									</Typography.Link>
 								)}
-							</AutoColumn>
+							</div>
 						)
 					)
 				})}
-				<AutoColumn gap="lg">
-					<Text>
+				<div gap="lg">
+					<span>
 						{t(
 							'Some assets are not available through this interface because they may not work well with our smart contract or we are unable to allow trading for legal reasons.'
 						)}
-					</Text>
-				</AutoColumn>
-			</AutoColumn>
+					</span>
+				</div>
+			</div>
 		</Modal>
 	)
 }
@@ -81,10 +83,10 @@ export default function UnsupportedCurrencyFooter({ currencies }: { currencies: 
 	const [onPresentModal] = useModal(<UnsupportedModal currencies={currencies} />)
 
 	return (
-		<DetailsFooter>
-			<Button variant="text" onClick={onPresentModal}>
+		<div>
+			<NormalButton variant="text" onClick={onPresentModal}>
 				{t('Read more about unsupported assets')}
-			</Button>
-		</DetailsFooter>
+			</NormalButton>
+		</div>
 	)
 }
