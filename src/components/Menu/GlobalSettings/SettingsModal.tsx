@@ -75,7 +75,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 					</div>
 					<GasSettings />
 				</div>
-				<div pt="24px" flexDirection="column" borderTop={`1px ${theme.colors.cardBorder} solid`}>
+				<div pt="24px" flexDirection="column">
 					<span bold textTransform="uppercase" fontSize="12px" color="secondary" mb="24px">
 						{t('Swaps & Liquidity')}
 					</span>

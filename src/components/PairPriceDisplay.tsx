@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { formatAmount, formatAmountNotation } from 'utils/formatInfoNumbers'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+
 import { Flex, FlexGap } from './Layout/Flex'
 
 const formatOptions = {
@@ -18,15 +19,6 @@ interface TokenDisplayProps {
 	children: JSX.Element
 }
 
-// const TextLabel = styled(Text)`
-// 	font-size: 32px;
-// 	line-height: 1.1;
-
-// 	${({ theme }) => theme.mediaQueries.lg} {
-// 		font-size: 40px;
-// 	}
-// `
-
 const PairPriceDisplay: FC<TokenDisplayProps> = ({
 	value,
 	inputSymbol,
@@ -37,7 +29,7 @@ const PairPriceDisplay: FC<TokenDisplayProps> = ({
 }) => {
 	return value ? (
 		<FlexGap alignItems="baseline" {...props}>
-			<Flex alignItems="inherit">
+			<div className="flex flex-align-inherits">
 				<span className="text text-sm text-bold">
 					{format
 						? formatAmount(typeof value === 'string' ? parseFloat(value) : value, formatOptions)
@@ -46,11 +38,11 @@ const PairPriceDisplay: FC<TokenDisplayProps> = ({
 				{inputSymbol && outputSymbol && (
 					<span className="text text-lg text-bold">{`${inputSymbol}/${outputSymbol}`}</span>
 				)}
-			</Flex>
+			</div>
 			{children}
 		</FlexGap>
 	) : (
-		<Skeleton />
+		<Skeleton height={36} width={128} baseColor="#312e39" />
 	)
 }
 

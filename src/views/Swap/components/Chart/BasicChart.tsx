@@ -6,7 +6,6 @@ import { PairDataTimeWindowEnum } from 'state/swap/types'
 import NoChartAvailable from './NoChartAvailable'
 import PairPriceDisplay from '../../../../components/PairPriceDisplay'
 import { getTimeWindowChange } from './utils'
-import { Flex } from 'components/Layout/Flex'
 import { ButtonMenu, ButtonMenuItem } from '@astraprotocol/astra-ui'
 
 const SwapLineChart = dynamic(() => import('./SwapLineChart'), {
@@ -70,29 +69,20 @@ const BasicChart = ({
 
 	return (
 		<>
-			<Flex
-			// flexDirection={['column', null, null, null, null, null, 'row']}
-			// alignItems={['flex-start', null, null, null, null, null, 'center']}
-			// justifyContent="space-between"
-			// px="24px"
-			>
-				<Flex
-				// flexDirection="column" pt="12px"
-				>
+			<div className="flex flex-justify-space-between ">
+				<div className="flex col">
 					<PairPriceDisplay
 						value={pairPrices?.length > 0 && valueToDisplay}
 						inputSymbol={inputCurrency?.symbol}
 						outputSymbol={outputCurrency?.symbol}
 					>
-						<span color={isChangePositive ? 'success' : 'failure'} fontSize="20px" ml="4px" bold>
+						<span color={isChangePositive ? 'success' : 'failure'} className="text text-base text-bold">
 							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(3)} (${changePercentage}%)`}
 						</span>
 					</PairPriceDisplay>
-					<span small color="secondary">
-						{hoverDate || currentDate}
-					</span>
-				</Flex>
-				<div>
+					<span className="text text-sm contrast-color-70">{hoverDate || currentDate}</span>
+				</div>
+				<div className="flex col">
 					<ButtonMenu activeIndex={timeWindow} onItemClick={setTimeWindow}>
 						<ButtonMenuItem>{t('24H')}</ButtonMenuItem>
 						<ButtonMenuItem>{t('1W')}</ButtonMenuItem>
@@ -100,8 +90,8 @@ const BasicChart = ({
 						<ButtonMenuItem>{t('1Y')}</ButtonMenuItem>
 					</ButtonMenu>
 				</div>
-			</Flex>
-			<div height={isMobile ? '100%' : chartHeight} p={isMobile ? '0px' : '16px'} width="100%">
+			</div>
+			<div style={{ height: isMobile ? '100%' : chartHeight, padding: isMobile ? '0px' : '16px', width: '100%' }}>
 				<SwapLineChart
 					data={pairPrices}
 					setHoverValue={setHoverValue}

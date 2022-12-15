@@ -1,18 +1,19 @@
-import { ReactChildren } from 'react'
 import styles from './styles.module.scss'
 
 interface Props {
 	isFullWidthContainer?: boolean
 	isExpanded?: boolean
 	children: JSX.Element | JSX.Element[] | string | string[]
+	style: React.CSSProperties
 }
 
-const StyledPriceChart = ({ children, isFullWidthContainer, isExpanded }: Props) => (
+const StyledPriceChart = ({ children, isFullWidthContainer, isExpanded, style }: Props) => (
 	<div
 		className={styles.priceChart}
 		style={{
 			width: isFullWidthContainer || isExpanded ? '100%' : '50%',
-			height: isExpanded ? 'calc(100vh - 100px)' : '516px'
+			height: isExpanded ? 'calc(100vh - 100px)' : '516px',
+			...style
 		}}
 	>
 		{children}

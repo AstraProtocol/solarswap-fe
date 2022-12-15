@@ -1,4 +1,4 @@
-import { IconButton } from '@astraprotocol/astra-ui'
+import { IconButton, IconEnum } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
 import SettingsModal from './SettingsModal'
 
@@ -14,7 +14,7 @@ const GlobalSettings = ({ color, mr = '8px' }: Props) => {
 		<div className="flex">
 			<IconButton
 				onClick={onPresentSettingsModal}
-				icon=""
+				icon={IconEnum.ICON_SETTING}
 				// variant="text"
 				// scale="sm"
 				// mr={mr}

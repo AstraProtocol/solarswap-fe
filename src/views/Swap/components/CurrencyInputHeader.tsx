@@ -52,7 +52,7 @@ const CurrencyInputHeader: React.FC<Props> = ({
 					<IconButton icon="chart-icon" width="24px" />
 				)}
 				<div className="flex flex-align-end width-100">
-					<span className="text text-base">{title}</span>
+					<span className="text text-base text-bold">{title}</span>
 				</div>
 				<div>
 					<NotificationDot show={expertMode}>

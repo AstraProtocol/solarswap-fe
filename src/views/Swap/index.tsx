@@ -57,6 +57,7 @@ import { useModal } from 'components/Modal'
 import { BottomDrawer } from 'components/BottomDrawer'
 import Page from 'components/Layout/Page'
 import styles from './styles.module.scss'
+import { AppBody } from 'components/App'
 
 // const Label = styled(Text)`
 // 	font-size: 12px;
@@ -411,8 +412,8 @@ export default function Swap() {
 				/>
 				<div className="flex col">
 					<div className={styles.swapContainer}>
-						<div mt={isChartExpanded ? '24px' : '0'}>
-							<div>
+						<div className={styles.inputCurrencyWrapper}>
+							<AppBody>
 								<CurrencyInputHeader
 									title={t('Swap')}
 									subtitle={t('Trade tokens in an instant')}
@@ -671,7 +672,7 @@ export default function Swap() {
 										) : null}
 									</Box>
 								</Wrapper> */}
-							</div>
+							</AppBody>
 							{!swapIsUnsupported ? (
 								trade && <AdvancedSwapDetailsDropdown trade={trade} />
 							) : (

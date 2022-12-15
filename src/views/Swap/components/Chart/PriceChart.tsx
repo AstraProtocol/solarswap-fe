@@ -11,7 +11,6 @@
 // 	useMatchBreakpoints
 // } from '@solarswap/uikit'
 import { IconButton, IconEnum, NormalButton } from '@astraprotocol/astra-ui'
-import { Flex } from 'components/Layout/Flex'
 import { CurrencyLogo, DoubleCurrencyLogo } from 'components/Logo'
 // import { TradingViewLabel } from 'components/TradingView'
 import { useTranslation } from 'contexts/Localization'
@@ -20,6 +19,7 @@ import { ChartViewMode } from 'state/user/actions'
 import { useExchangeChartViewManager } from 'state/user/hooks'
 // import styled from 'styled-components'
 import BasicChart from './BasicChart'
+import StyledPriceChart from './StyledPriceChart'
 // import { StyledPriceChart } from './styles'
 // import TradingViewChart from './TradingViewChart'
 // import PairPriceDisplay from '../../../../components/PairPriceDisplay'
@@ -53,14 +53,16 @@ const PriceChart = ({
 	// }, [])
 
 	return (
-		<div
-		// height={'70%'}
-		// overflow={'unset'}
-		// $isExpanded={isChartExpanded}
-		// $isFullWidthContainer={isFullWidthContainer}
+		<StyledPriceChart
+			style={{
+				height: '70%',
+				overflow: 'unset'
+			}}
+			isExpanded={isChartExpanded}
+			isFullWidthContainer={isFullWidthContainer}
 		>
-			<Flex justifyContent="space-between" px="24px">
-				<Flex alignItems="center">
+			<div className="flex flex-justify-space-between">
+				<div className="flex flex-align-center">
 					{outputCurrency ? (
 						<DoubleCurrencyLogo currency0={inputCurrency} currency1={outputCurrency} size={24} margin />
 					) : (
@@ -69,36 +71,32 @@ const PriceChart = ({
 						)
 					)}
 					{inputCurrency && (
-						<span color="text" bold>
+						<span className="text text-base text-bold">
 							{outputCurrency ? `${inputCurrency.symbol}/${outputCurrency.symbol}` : inputCurrency.symbol}
 						</span>
 					)}
-					<IconButton icon={IconEnum.ICON_INFORMATION} onClick={onSwitchTokens} />
-					<Flex>
+					<IconButton classes="padding-sm" icon={IconEnum.ICON_INFORMATION} onClick={onSwitchTokens} />
+					<div>
 						<NormalButton
 							title={t('Basic')}
 							// $active={chartView === ChartViewMode.BASIC}
-							// scale="sm"
-							// variant="text"
-							// color="primary"
 							onClick={() => setChartView(ChartViewMode.BASIC)}
-							// mr="8px"
 						>
 							{/* {isDesktop ? t('Basic') : <LineGraphIcon color="primary" />} */}
 							{t('Basic')}
 						</NormalButton>
 						{/* <ChartButton
-              aria-label="TradingView"
-              title="TradingView"
-              $active={chartView === ChartViewMode.TRADING_VIEW}
-              scale="sm"
-              variant="text"
-              onClick={() => setChartView(ChartViewMode.TRADING_VIEW)}
-            >
-              {isDesktop ? 'TradingView' : <TradingViewIcon color="primary" />}
-            </ChartButton> */}
-					</Flex>
-				</Flex>
+						aria-label="TradingView"
+						title="TradingView"
+						$active={chartView === ChartViewMode.TRADING_VIEW}
+						scale="sm"
+						variant="text"
+						onClick={() => setChartView(ChartViewMode.TRADING_VIEW)}
+						>
+						{isDesktop ? 'TradingView' : <TradingViewIcon color="primary" />}
+						</ChartButton> */}
+					</div>
+				</div>
 				{/* {!isMobile && (
 					<Flex>
 						<IconButton variant="text" onClick={toggleExpanded}>
@@ -106,7 +104,7 @@ const PriceChart = ({
 						</IconButton>
 					</Flex>
 				)} */}
-			</Flex>
+			</div>
 
 			<BasicChart
 				token0Address={token0Address}
@@ -117,7 +115,7 @@ const PriceChart = ({
 				isMobile={isMobile}
 				currentSwapPrice={currentSwapPrice}
 			/>
-		</div>
+		</StyledPriceChart>
 	)
 }
 
