@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface ModalTheme {
 	background: string
 }
@@ -12,7 +14,7 @@ export interface ModalProps extends InjectedProps {
 	title: string
 	hideCloseButton?: boolean
 	onBack?: () => void
-	bodyPadding?: string
 	headerBackground?: string
 	minWidth?: string
+	style?: React.CSSProperties
 }

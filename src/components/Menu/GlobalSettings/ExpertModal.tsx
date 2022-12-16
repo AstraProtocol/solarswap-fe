@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useExpertModeManager } from 'state/user/hooks'
 import { useTranslation } from 'contexts/Localization'
 import { InjectedModalProps, Modal } from 'components/Modal'
-import { Checkbox, Message, NormalButton } from '@astraprotocol/astra-ui'
+import { Checkbox, Message, NormalButton, Row } from '@astraprotocol/astra-ui'
 
 interface ExpertModalProps extends InjectedModalProps {
 	setShowConfirmExpertModal: (boolean) => void
@@ -20,20 +20,19 @@ const ExpertModal: React.FC<ExpertModalProps> = ({ setShowConfirmExpertModal, se
 			title={t('Expert Mode')}
 			onBack={() => setShowConfirmExpertModal(false)}
 			onDismiss={() => setShowConfirmExpertModal(false)}
-			headerBackground="gradients.cardHeader"
 			style={{ maxWidth: '360px' }}
 		>
-			<Message variant="warning" mb="24px">
+			<Message variant="warning">
 				<span className="text text-base">
 					{t(
 						"Expert mode turns off the 'Confirm' transaction prompt, and allows high slippage trades that often result in bad rates and lost funds."
 					)}
 				</span>
 			</Message>
-			<span className="text text-base" mb="24px">
+			<span className="text text-base margin-top-md">
 				{t('Only use this mode if you know what you’re doing.')}
 			</span>
-			<div alignItems="center" mb="24px">
+			<Row className="margin-top-md margin-bottom-md flex-align-center">
 				<Checkbox
 					name="confirmed"
 					type="checkbox"
@@ -41,15 +40,13 @@ const ExpertModal: React.FC<ExpertModalProps> = ({ setShowConfirmExpertModal, se
 					onChange={() => setIsRememberChecked(!isRememberChecked)}
 					scale="sm"
 				/>
-				<span ml="10px" color="textSubtle" style={{ userSelect: 'none' }}>
+				<span className="text text-base margin-left-sm" style={{ userSelect: 'none' }}>
 					{t('Don’t show this again')}
 				</span>
-			</div>
+			</Row>
 			<NormalButton
-				// mb="8px"
 				id="confirm-expert-mode"
 				onClick={() => {
-					// eslint-disable-next-line no-alert
 					if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
 						toggleExpertMode()
 						setShowConfirmExpertModal(false)
@@ -58,16 +55,17 @@ const ExpertModal: React.FC<ExpertModalProps> = ({ setShowConfirmExpertModal, se
 						}
 					}
 				}}
+				classes={{ other: 'margin-bottom-sm' }}
 			>
-				{t('Turn On Expert Mode')}
+				<span className="text text-base text-bold"> {t('Turn On Expert Mode')}</span>
 			</NormalButton>
 			<NormalButton
-				// variant="secondary"
+				variant="default"
 				onClick={() => {
 					setShowConfirmExpertModal(false)
 				}}
 			>
-				{t('Cancel')}
+				<span className="text text-base text-bold">{t('Cancel')}</span>
 			</NormalButton>
 		</Modal>
 	)

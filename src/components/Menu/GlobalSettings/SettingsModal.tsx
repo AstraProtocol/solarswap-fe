@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {
-	useAudioModeManager,
+	// useAudioModeManager,
 	useExpertModeManager,
 	useSubgraphHealthIndicatorManager,
 	useUserExpertModeAcknowledgementShow,
@@ -14,6 +14,7 @@ import ExpertModal from './ExpertModal'
 import GasSettings from './GasSettings'
 import { InjectedModalProps, Modal } from 'components/Modal'
 import { Toggle } from '@astraprotocol/astra-ui'
+import ThemeSwitcher from 'components/ThemeSwitcher'
 
 // const ScrollableContainer = styled(div)`
 //   flex-direction: column;
@@ -28,7 +29,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 	const [showExpertModeAcknowledgement, setShowExpertModeAcknowledgement] = useUserExpertModeAcknowledgementShow()
 	const [expertMode, toggleExpertMode] = useExpertModeManager()
 	const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
-	const [audioPlay, toggleSetAudioMode] = useAudioModeManager()
+	// const [audioPlay, toggleSetAudioMode] = useAudioModeManager()
 	const [subgraphHealth, setSubgraphHealth] = useSubgraphHealthIndicatorManager()
 	const { onChangeRecipient } = useSwapActionHandlers()
 
@@ -62,28 +63,26 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 			title={t('Settings')}
 			headerBackground="gradients.cardHeader"
 			onDismiss={onDismiss}
-			style={{ maxWidth: '420px' }}
+			style={{ width: 380, maxWidth: 420, maxHeight: '100vh' }}
 		>
-			<div style={{ maxHeight: 400 }}>
-				<div pb="24px" flexDirection="column">
-					<span bold textTransform="uppercase" fontSize="12px" color="secondary" mb="24px">
-						{t('Global')}
-					</span>
-					<div justifyContent="space-between">
-						<span mb="24px">{t('Dark mode')}</span>
-						{/* <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? 'light' : 'dark')} /> */}
+			<div style={{ height: 600 }}>
+				<div className="flex col border border-bottom-base padding-bottom-md">
+					<span className="text text-lg text-bold text-uppercase secondary-color-normal">{t('Global')}</span>
+					<div className="flex flex-justify-space-between flex-align-center margin-bottom-sm">
+						<span className="text text-base text-bold">{t('Dark mode')}</span>
+						<ThemeSwitcher />
 					</div>
 					<GasSettings />
 				</div>
-				<div pt="24px" flexDirection="column">
-					<span bold textTransform="uppercase" fontSize="12px" color="secondary" mb="24px">
+				<div className="flex col border-bottom-base padding-bottom-md">
+					<span className="text text-lg text-bold text-uppercase secondary-color-normal margin-top-md margin-bottom-md">
 						{t('Swaps & Liquidity')}
 					</span>
 					<TransactionSettings />
 				</div>
-				<div justifyContent="space-between" alignItems="center" mb="24px">
-					<div alignItems="center">
-						<span>{t('Expert Mode')}</span>
+				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
+					<div className="flex flex-align-center">
+						<span className="text text-base text-bold">{t('Expert Mode')}</span>
 						<QuestionHelper
 							text={t(
 								'Bypasses confirmation modals and allows high slippage trades. Use at your own risk.'
@@ -99,9 +98,9 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						onChange={handleExpertModeToggle}
 					/>
 				</div>
-				<div justifyContent="space-between" alignItems="center" mb="24px">
-					<div alignItems="center">
-						<span>{t('Disable Multihops')}</span>
+				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
+					<div className="flex flex-align-center">
+						<span className="text text-base text-bold">{t('Disable Multihops')}</span>
 						<QuestionHelper
 							text={t('Restricts swaps to direct pairs only.')}
 							placement="top-start"
@@ -117,9 +116,9 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						}}
 					/>
 				</div>
-				<div justifyContent="space-between" alignItems="center" mb="24px">
-					<div alignItems="center">
-						<span>{t('Subgraph Health Indicator')}</span>
+				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
+					<div className="flex flex-align-center">
+						<span className="text text-base text-bold">{t('Subgraph Health Indicator')}</span>
 						<QuestionHelper
 							text={t(
 								'Turn on NFT market subgraph health indicator all the time. Default is to show the indicator only when the network is delayed'
@@ -137,8 +136,8 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						}}
 					/>
 				</div>
-				<div justifyContent="space-between" alignItems="center">
-					<div alignItems="center">
+				{/* <div className="flex flex-justify-space-between flex-align-center">
+					<div className="flex flex-align-center">
 						<span>{t('Flippy sounds')}</span>
 						<QuestionHelper
 							text={t('Fun sounds to make a truly immersive solar-flipping trading experience')}
@@ -146,8 +145,8 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 							ml="4px"
 						/>
 					</div>
-					{/* <SolarToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" /> */}
-				</div>
+					<SolarToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" />
+				</div> */}
 			</div>
 		</Modal>
 	)

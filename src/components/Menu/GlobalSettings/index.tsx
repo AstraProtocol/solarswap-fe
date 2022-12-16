@@ -15,11 +15,7 @@ const GlobalSettings = ({ color, mr = '8px' }: Props) => {
 			<IconButton
 				onClick={onPresentSettingsModal}
 				icon={IconEnum.ICON_SETTING}
-				// variant="text"
-				// scale="sm"
-				// mr={mr}
-				// id="open-settings-dialog-button"
-				// <CogIcon height={24} width={24} color={color || 'textSubtle'} />
+				classes="text-2xl alert-color-error"
 			/>
 		</div>
 	)

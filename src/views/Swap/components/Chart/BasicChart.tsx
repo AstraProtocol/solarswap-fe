@@ -6,7 +6,8 @@ import { PairDataTimeWindowEnum } from 'state/swap/types'
 import NoChartAvailable from './NoChartAvailable'
 import PairPriceDisplay from '../../../../components/PairPriceDisplay'
 import { getTimeWindowChange } from './utils'
-import { ButtonMenu, ButtonMenuItem } from '@astraprotocol/astra-ui'
+import { ButtonMenu, ButtonMenuItem, useMobileLayout } from '@astraprotocol/astra-ui'
+import clsx from 'clsx'
 
 const SwapLineChart = dynamic(() => import('./SwapLineChart'), {
 	ssr: false
@@ -69,7 +70,7 @@ const BasicChart = ({
 
 	return (
 		<>
-			<div className="flex flex-justify-space-between ">
+			<div className={clsx('flex flex-justify-space-between', isMobile ? 'col' : 'row')}>
 				<div className="flex col">
 					<PairPriceDisplay
 						value={pairPrices?.length > 0 && valueToDisplay}

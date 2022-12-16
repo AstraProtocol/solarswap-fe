@@ -1,8 +1,8 @@
+import { NormalButton } from '@astraprotocol/astra-ui'
 import QuestionHelper from 'components/QuestionHelper'
 import { useTranslation } from 'contexts/Localization'
 import { GAS_PRICE_GWEI, GAS_PRICE } from 'state/user/hooks/helpers'
 import { useGasPriceManager } from 'state/user/hooks'
-import { NormalButton } from '@astraprotocol/astra-ui'
 
 const GasSettings = () => {
 	const { t } = useTranslation()
@@ -10,8 +10,8 @@ const GasSettings = () => {
 
 	return (
 		<div className="flex col">
-			<div className="flex flex-align-center">
-				<span className="text text-base">{t('Default Transaction Speed (GWEI)')}</span>
+			<div className="flex flex-align-center margin-bottom-sm">
+				<span className="text text-base text-bold">{t('Default Transaction Speed (GWEI)')}</span>
 				<QuestionHelper
 					text={t(
 						'Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees'
@@ -25,25 +25,28 @@ const GasSettings = () => {
 					onClick={() => {
 						setGasPrice(GAS_PRICE_GWEI.default)
 					}}
-					// variant={gasPrice === GAS_PRICE_GWEI.default ? 'primary' : 'tertiary'}
+					classes={{ other: 'margin-top-xs', }}
+					variant={gasPrice === GAS_PRICE_GWEI.default ? 'primary' : 'default'}
 				>
-					{t('Standard (%gasPrice%)', { gasPrice: GAS_PRICE.default })}
+					<span className="text text-sm">{t('Standard (%gasPrice%)', { gasPrice: GAS_PRICE.default })}</span>
 				</NormalButton>
 				<NormalButton
 					onClick={() => {
 						setGasPrice(GAS_PRICE_GWEI.fast)
 					}}
-					// variant={gasPrice === GAS_PRICE_GWEI.fast ? 'primary' : 'tertiary'}
+					classes={{ other: 'margin-left-xs margin-top-xs', }}
+					variant={gasPrice === GAS_PRICE_GWEI.fast ? 'primary' : 'default'}
 				>
-					{t('Fast (%gasPrice%)', { gasPrice: GAS_PRICE.fast })}
+					<span className="text text-sm">{t('Fast (%gasPrice%)', { gasPrice: GAS_PRICE.fast })}</span>
 				</NormalButton>
 				<NormalButton
 					onClick={() => {
 						setGasPrice(GAS_PRICE_GWEI.instant)
 					}}
-					// variant={gasPrice === GAS_PRICE_GWEI.instant ? 'primary' : 'tertiary'}
+					classes={{ other: 'margin-left-xs margin-top-xs' }}
+					variant={gasPrice === GAS_PRICE_GWEI.instant ? 'primary' : 'default'}
 				>
-					{t('Instant (%gasPrice%)', { gasPrice: GAS_PRICE.instant })}
+					<span className="text text-sm">{t('Instant (%gasPrice%)', { gasPrice: GAS_PRICE.instant })}</span>
 				</NormalButton>
 			</div>
 		</div>

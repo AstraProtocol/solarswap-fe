@@ -81,9 +81,9 @@ const SlippageTabs = () => {
 
 	return (
 		<div className="flex col">
-			<div className="flex col">
-				<div mb="12px">
-					<span>{t('Slippage Tolerance')}</span>
+			<div className="flex col margin-bottom-sm">
+				<div className="flex flex-wrap">
+					<span className="text text-base text-bold margin-bottom-sm">{t('Slippage Tolerance')}</span>
 					<QuestionHelper
 						text={t(
 							'Setting a high slippage tolerance can help transactions succeed, but you may not get such a good price. Use with caution.'
@@ -92,74 +92,62 @@ const SlippageTabs = () => {
 						ml="4px"
 					/>
 				</div>
-				<div flexWrap="wrap">
+				<div className="flex flex-wrap flex-align-center">
 					<NormalButton
-						mt="4px"
-						mr="4px"
-						scale="sm"
 						onClick={() => {
 							setSlippageInput('')
 							setUserSlippageTolerance(10)
 						}}
-						variant={userSlippageTolerance === 10 ? 'primary' : 'tertiary'}
+						variant={userSlippageTolerance === 10 ? 'primary' : 'default'}
 					>
-						0.1%
+						<span className="text text-sm">0.1%</span>
 					</NormalButton>
 					<NormalButton
-						mt="4px"
-						mr="4px"
-						scale="sm"
 						onClick={() => {
 							setSlippageInput('')
 							setUserSlippageTolerance(50)
 						}}
-						variant={userSlippageTolerance === 50 ? 'primary' : 'tertiary'}
+						classes={{ other: 'margin-left-xs' }}
+						variant={userSlippageTolerance === 50 ? 'primary' : 'default'}
 					>
-						0.5%
+						<span className="text text-sm">0.5%</span>
 					</NormalButton>
 					<NormalButton
-						mr="4px"
-						mt="4px"
-						scale="sm"
 						onClick={() => {
 							setSlippageInput('')
 							setUserSlippageTolerance(100)
 						}}
-						variant={userSlippageTolerance === 100 ? 'primary' : 'tertiary'}
+						classes={{ other: 'margin-left-xs' }}
+						variant={userSlippageTolerance === 100 ? 'primary' : 'default'}
 					>
-						1.0%
+						<span className="text text-sm">1.0%</span>
 					</NormalButton>
-					<div alignItems="center">
-						<div width="76px" mt="4px">
-							<Form.Input
-								scale="sm"
-								inputMode="decimal"
-								pattern="^[0-9]*[.,]?[0-9]{0,2}$"
-								placeholder={(userSlippageTolerance / 100).toFixed(2)}
-								value={slippageInput}
-								onBlur={() => {
-									parseCustomSlippage((userSlippageTolerance / 100).toFixed(2))
-								}}
-								onChange={event => {
-									if (event.currentTarget.validity.valid) {
-										parseCustomSlippage(event.target.value.replace(/,/g, '.'))
-									}
-								}}
-								isWarning={!slippageInputIsValid}
-								isSuccess={![10, 50, 100].includes(userSlippageTolerance)}
-							/>
-						</div>
-						<span color="primary" bold ml="2px">
-							%
-						</span>
-					</div>
+					<Form.Input
+						classes={{
+							wapper: 'margin-left-xs',
+							option: 'x',
+							inputWrapperPadding: 'padding-sm'
+						}}
+						inputMode="decimal"
+						pattern="^[0-9]*[.,]?[0-9]{0,2}$"
+						placeholder={(userSlippageTolerance / 100).toFixed(2)}
+						value={slippageInput}
+						onBlur={() => {
+							parseCustomSlippage((userSlippageTolerance / 100).toFixed(2))
+						}}
+						onChange={event => {
+							if (event.currentTarget.validity.valid) {
+								parseCustomSlippage(event.target.value.replace(/,/g, '.'))
+							}
+						}}
+						style={{ width: '40px' }}
+						suffixElement="%"
+						statusType={slippageInputIsValid ? 'normal' : 'error'}
+						// isSuccess={![10, 50, 100].includes(userSlippageTolerance)}
+					/>
 				</div>
 				{!!slippageError && (
-					<span
-						fontSize="14px"
-						color={slippageError === SlippageError.InvalidInput ? 'red' : '#F3841E'}
-						mt="8px"
-					>
+					<span className="text text-sm alert-color-error margin-top-xs">
 						{slippageError === SlippageError.InvalidInput
 							? t('Enter a valid slippage percentage')
 							: slippageError === SlippageError.RiskyLow
@@ -168,9 +156,9 @@ const SlippageTabs = () => {
 					</span>
 				)}
 			</div>
-			<div justifyContent="space-between" alignItems="center" mb="24px">
-				<div alignItems="center">
-					<span>{t('Tx deadline (mins)')}</span>
+			<div className="flex flex-justify-space-between flex-align-center">
+				<div className="flex flex-align-center">
+					<span className="text text-base text-bold">{t('Tx deadline (mins)')}</span>
 					<QuestionHelper
 						text={t('Your transaction will revert if it is left confirming for longer than this time.')}
 						placement="top-start"
@@ -178,25 +166,27 @@ const SlippageTabs = () => {
 					/>
 				</div>
 				<div>
-					<div width="52px" mt="4px">
-						<Form.Input
-							scale="sm"
-							inputMode="numeric"
-							pattern="^[0-9]+$"
-							// color={deadlineError ? 'red' : undefined}
-							isWarning={!!deadlineError}
-							onBlur={() => {
-								parseCustomDeadline((ttl / 60).toString())
-							}}
-							placeholder={(ttl / 60).toString()}
-							value={deadlineInput}
-							onChange={event => {
-								if (event.currentTarget.validity.valid) {
-									parseCustomDeadline(event.target.value)
-								}
-							}}
-						/>
-					</div>
+					<Form.Input
+						inputMode="numeric"
+						pattern="^[0-9]+$"
+						classes={{
+							inputWrapperPadding: 'padding-top-xs padding-bottom-xs padding-left-md padding-right-md',
+							option: '.'
+						}}
+						// color={deadlineError ? 'red' : undefined}
+						// isWarning={!!deadlineError}
+						onBlur={() => {
+							parseCustomDeadline((ttl / 60).toString())
+						}}
+						placeholder={(ttl / 60).toString()}
+						value={deadlineInput}
+						onChange={event => {
+							if (event.currentTarget.validity.valid) {
+								parseCustomDeadline(event.target.value)
+							}
+						}}
+						style={{ width: 22 }}
+					/>
 				</div>
 			</div>
 		</div>

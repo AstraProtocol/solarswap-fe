@@ -44,7 +44,7 @@ const CurrencyInputHeader: React.FC<Props> = ({
 	const [onPresentTransactionsModal] = useModal(<TransactionsModal />)
 
 	return (
-		<div className="flex flex-align-center padding-lg width-100 border border-bottom-base">
+		<div className="flex col flex-align-center padding-lg width-100 border border-bottom-base">
 			<div className="flex width-100 flex-align-center flex-justify-space-between">
 				{setIsChartDisplayed && isChartDisplayed ? (
 					<IconButton icon="chart-disabled-icon" onClick={toggleChartDisplayed} />

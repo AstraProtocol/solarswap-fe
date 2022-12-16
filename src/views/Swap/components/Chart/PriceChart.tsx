@@ -105,7 +105,6 @@ const PriceChart = ({
 					</Flex>
 				)} */}
 			</div>
-
 			<BasicChart
 				token0Address={token0Address}
 				token1Address={token1Address}
