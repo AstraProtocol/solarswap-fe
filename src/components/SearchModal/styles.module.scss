@@ -1,0 +1,72 @@
+.currencySearchModalBody {
+    padding: var(--offset-lg);
+	overflow-y: auto;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.tokenSection {
+	padding: 4px 20px;
+	height: 56px;
+	display: grid;
+	grid-template-columns: auto minmax(auto, 1fr) auto;
+	grid-gap: 10px;
+	align-items: center;
+	grid-gap: 16px;
+	// opacity: ${({ dim }) => (dim ? '0.4' : '1')};
+
+// 	${({ theme }) => theme.mediaQueries.md} {
+// 		grid-gap: 16px;
+// 	}
+}
+
+.nameOverflow {
+	white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  max-width: 140px;
+	  font-size: 12px;
+}
+
+.fixedContentRow {
+	padding: 4px 20px;
+	height: 56px;
+	display: grid;
+	grid-gap: 16px;
+	align-items: center;
+}
+
+.menuItem {
+	padding: 4px 20px;
+	height: 56px;
+	display: grid;
+	grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
+	grid-gap: 8px;
+	cursor: 'pointer';
+	// pointer-events: ${({ disabled }) => disabled && 'none'};
+	:hover {
+		background-color: var(--contrast-bg-color-70);
+	}
+	opacity: 1;
+	// opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
+}
+
+.menuItemDisabled {
+	cursor: 'disabled';
+	pointer-events: none;
+	:hover {
+		background-color: transparent;
+	}
+	opacity: 0.5;
+}
+
+.styledBalanceText {
+	padding: 4px 20px;
+		height: 56px;
+		display: grid;
+		grid-gap: 16px;
+		align-items: center;
+}

@@ -22,18 +22,22 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({ content, isOpen, setIsOpen 
 	const { isMobile } = useMatchBreakpoints()
 
 	useOnClickOutside(ref, () => setIsOpen(false))
-
-	if (!shouldRender || !isMobile) {
-		return null
-	}
+	console.log(shouldRender, isMobile, isOpen)
+	// if (!shouldRender || !isMobile) {
+	// 	return null
+	// }
 
 	const portal = getPortalRoot()
 
 	if (portal)
 		return createPortal(
 			<>
-				<Overlay isUnmounting={!isOpen} />
-				<div className={clsx(styles.drawContainer, isOpen ? styles.mounting : styles.unmounting)} ref={ref}>
+				<Overlay isunmounting={`${!isOpen}`} />
+				<div
+					role="presentation"
+					className={clsx(styles.drawContainer, isOpen ? styles.mounting : styles.unmounting)}
+					ref={ref}
+				>
 					<div style={{ position: 'absolute', right: 16, top: 0 }}>
 						<IconButton icon={IconEnum.ICON_CLOSE} onClick={() => setIsOpen(false)} />
 					</div>

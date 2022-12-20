@@ -1,56 +1,64 @@
 import { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { Currency, CurrencyAmount, currencyEquals, ETHER, Token } from '@solarswap/sdk'
+import { Row, Spinner } from '@astraprotocol/astra-ui'
 import { FixedSizeList } from 'react-window'
 import { wrappedCurrency } from 'utils/wrappedCurrency'
-import { LightGreyCard } from 'components/Card'
+// import { LightGreyCard } from 'components/Card'
 // import QuestionHelper from 'components/QuestionHelper'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useCombinedActiveList } from '../../state/lists/hooks'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import { useIsUserAddedToken } from '../../hooks/Tokens'
-import { RowFixed, RowBetween } from '../Layout/Row'
+// import { RowFixed, RowBetween } from '../Layout/Row'
 import { CurrencyLogo } from '../Logo'
-import CircleLoader from '../Loader/CircleLoader'
+// import CircleLoader from '../Loader/CircleLoader'
 import { isTokenOnList } from '../../utils'
 import ImportRow from './ImportRow'
+import styles from './styles.module.scss'
+import QuestionHelper from 'components/QuestionHelper'
+import clsx from 'clsx'
 
 function currencyKey(currency: Currency): string {
 	return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : ''
 }
 
-const StyledBalanceText = styled(Text)`
-	white-space: nowrap;
-	overflow: hidden;
-	max-width: 5rem;
-	text-overflow: ellipsis;
-`
+// const StyledBalanceText = styled(Text)`
+// 	white-space: nowrap;
+// 	overflow: hidden;
+// 	max-width: 5rem;
+// 	text-overflow: ellipsis;
+// `
 
-const FixedContentRow = styled.div`
-	padding: 4px 20px;
-	height: 56px;
-	display: grid;
-	grid-gap: 16px;
-	align-items: center;
-`
+// const FixedContentRow = styled.div`
+// 	padding: 4px 20px;
+// 	height: 56px;
+// 	display: grid;
+// 	grid-gap: 16px;
+// 	align-items: center;
+// `
 
 function Balance({ balance }: { balance: CurrencyAmount }) {
-	return <StyledBalanceText title={balance.toExact()}>{balance.toSignificant(4)}</StyledBalanceText>
+	return (
+		<span className={styles.styledBalanceText} title={balance.toExact()}>
+			{balance.toSignificant(4)}
+		</span>
+	)
 }
 
-const MenuItem = styled(RowBetween)<{ disabled: boolean; selected: boolean }>`
-	padding: 4px 20px;
-	height: 56px;
-	display: grid;
-	grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
-	grid-gap: 8px;
-	cursor: ${({ disabled }) => !disabled && 'pointer'};
-	pointer-events: ${({ disabled }) => disabled && 'none'};
-	:hover {
-		background-color: ${({ theme, disabled }) => !disabled && theme.colors.background};
-	}
-	opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
-`
+// const MenuItem = styled(RowBetween)<{ disabled: boolean; selected: boolean }>`
+// 	padding: 4px 20px;
+// 	height: 56px;
+// 	display: grid;
+// 	grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
+// 	grid-gap: 8px;
+// 	cursor: ${({ disabled }) => !disabled && 'pointer'};
+// 	pointer-events: ${({ disabled }) => disabled && 'none'};
+// 	:hover {
+// 		background-color: ${({ theme, disabled }) => !disabled && theme.colors.background};
+// 	}
+// 	opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
+// `
 
 function CurrencyRow({
 	currency,
@@ -74,24 +82,28 @@ function CurrencyRow({
 
 	// only show add or remove buttons if not on selected list
 	return (
-		<MenuItem
+		<div
 			style={style}
-			className={`token-item-${key}`}
+			className={clsx(
+				`token-item-${key}`,
+				styles.menuItem,
+				isSelected && otherSelected && styles.menuItemDisabled
+			)}
 			onClick={() => (isSelected ? null : onSelect())}
-			disabled={isSelected}
-			selected={otherSelected}
+			// disabled={isSelected}
+			// selected={otherSelected}
 		>
 			<CurrencyLogo currency={currency} size="24px" />
-			<Column>
-				<Text bold>{currency.symbol}</Text>
-				<Text color="textSubtle" small ellipsis maxWidth="200px">
+			<div className="flex col">
+				<span className="text text-base text-bold">{currency.symbol}</span>
+				<span className="text text-sm text-ellipsis" style={{ maxWidth: 200 }}>
 					{!isOnSelectedList && customAdded && 'Added by user •'} {currency.name}
-				</Text>
-			</Column>
-			<RowFixed style={{ justifySelf: 'flex-end' }}>
-				{balance ? <Balance balance={balance} /> : account ? <CircleLoader /> : null}
-			</RowFixed>
-		</MenuItem>
+				</span>
+			</div>
+			<Row style={{ justifySelf: 'flex-end' }}>
+				{balance ? <Balance balance={balance} /> : account ? <Spinner /> : null}
+			</Row>
+		</div>
 	)
 }
 
@@ -147,21 +159,22 @@ export default function CurrencyList({
 
 			if (index === breakIndex || !data) {
 				return (
-					<FixedContentRow style={style}>
-						<LightGreyCard padding="8px 12px" borderRadius="8px">
-							<RowBetween>
+					<div className={styles.fixedContentRow} style={style}>
+						<div className="border radius-sm padding-top-xs padding-bottom-xs padding-left-sm padding-right-sm">
+							{/** LightGreyCard */}
+							<Row style={{ justifyContent: 'space-between' }}>
 								<span className="text text-xs contrast-color-100">
 									{t('Expanded results from inactive Token Lists')}
 								</span>
-								{/* <QuestionHelper
+								<QuestionHelper
 									text={t(
 										"Tokens from inactive lists. Import specific tokens below or click 'Manage' to activate more lists."
 									)}
 									ml="4px"
-								/> */}
-							</RowBetween>
-						</LightGreyCard>
-					</FixedContentRow>
+								/>
+							</Row>
+						</div>
+					</div>
 				)
 			}
 

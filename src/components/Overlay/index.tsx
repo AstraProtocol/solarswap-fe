@@ -5,14 +5,14 @@ import styles from './style.module.scss'
 const BodyLock = () => {
 	useEffect(() => {
 		document.body.style.cssText = `
-      overflow: hidden;
-    `
+			overflow: hidden;
+		`
 		document.body.style.overflow = 'hidden'
 		return () => {
 			document.body.style.cssText = `
-        overflow: visible;
-        overflow: overlay;
-      `
+				overflow: visible;
+				overflow: overlay;
+			`
 		}
 	}, [])
 
@@ -20,14 +20,17 @@ const BodyLock = () => {
 }
 
 interface OverlayProps {
-	isUnmounting?: boolean
+	isunmounting?: string
 }
 
 export const Overlay: FC<OverlayProps> = props => {
 	return (
 		<>
 			<BodyLock />
-			<div className={clsx(styles.overlay, props.isUnmounting ? 'unmounting' : 'mounting')} {...props} />
+			<div
+				className={clsx(styles.overlay, props.isunmounting ? styles.unmounting : styles.mounting)}
+				{...props}
+			/>
 		</>
 	)
 }

@@ -422,9 +422,9 @@ export default function Swap() {
 									hasAmount={hasAmount}
 									onRefreshPrice={onRefreshPrice}
 								/>
-								{/* <Wrapper id="swap-page" style={{ minHeight: '412px' }}>
-									<AutoColumn gap="sm">
-										<CurrencyInputPanel
+								<div id="swap-page" style={{ minHeight: '412px' }}>
+									<div className="flex col">
+										{/* <CurrencyInputPanel
 											label={
 												independentField === Field.OUTPUT && !showWrap && trade
 													? t('From (estimated)')
@@ -438,9 +438,9 @@ export default function Swap() {
 											onCurrencySelect={handleInputSelect}
 											otherCurrency={currencies[Field.OUTPUT]}
 											id="swap-currency-input"
-										/>
+										/> */}
 
-										<AutoColumn justify="space-between">
+										{/* <AutoColumn justify="space-between">
 											<AutoRow
 												justify={isExpertMode ? 'space-between' : 'center'}
 												style={{ padding: '0 1rem' }}
@@ -543,9 +543,9 @@ export default function Swap() {
 													</Text>
 												</RowBetween>
 											</AutoColumn>
-										)}
-									</AutoColumn>
-									<Box mt="0.25rem">
+										)} */}
+									</div>
+									{/* <Box mt="0.25rem">
 										{swapIsUnsupported ? (
 											<Button width="100%" disabled>
 												{t('Unsupported Asset')}
@@ -670,8 +670,8 @@ export default function Swap() {
 										{isExpertMode && swapErrorMessage ? (
 											<SwapCallbackError error={swapErrorMessage} />
 										) : null}
-									</Box>
-								</Wrapper> */}
+									</Box> */}
+								</div>
 							</AppBody>
 							{!swapIsUnsupported ? (
 								trade && <AdvancedSwapDetailsDropdown trade={trade} />

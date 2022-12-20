@@ -11,7 +11,7 @@ import ImportList from './ImportList'
 import { CurrencyModalView } from './types'
 import { NormalButton } from '@astraprotocol/astra-ui'
 import { Modal } from 'components/Modal'
-import styles from './style.module.scss'
+import styles from './styles.module.scss'
 
 export type Handler = () => void
 interface InjectedModalProps {

@@ -11,7 +11,8 @@ import { useCombinedInactiveList } from 'state/lists/hooks'
 import { useIsUserAddedToken, useIsTokenActive } from 'hooks/Tokens'
 import { useTranslation } from 'contexts/Localization'
 import { Icon, IconEnum, NormalButton, Row } from '@astraprotocol/astra-ui'
-import styles from './style.module.scss';
+import styles from './styles.module.scss';
+import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 
 // const TokenSection = styled.div<{ dim?: boolean }>`
 // 	padding: 4px 20px;
@@ -72,7 +73,7 @@ export default function ImportRow({
 
 	return (
 		<div className={styles.tokenSection} style={style}>
-			<CurrencyLogo currency={token} size={isMobile ? '20px' : '24px'} style={{ opacity: dim ? '0.6' : '1' }} />
+			<CurrencyLogo  currency={token} size={isMobile ? '20px' : '24px'} style={{ opacity: dim ? '0.6' : '1' }} />
 			<div style={{ opacity: dim ? '0.6' : '1' }}>
 				<Row>
 					<span mr="8px">{token.symbol}</span>
