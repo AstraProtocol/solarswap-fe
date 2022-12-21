@@ -16,7 +16,7 @@ import Head from 'next/head'
 import { Fragment } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 import { useStore, persistor } from 'state'
-// import { usePollBlockNumber } from "state/block/hooks";
+import { usePollBlockNumber } from 'state/block/hooks'
 // import { usePollCoreFarmData } from "state/farms/hooks";
 import astraConnectModule from 'libs/astrawallet'
 import '@astraprotocol/astra-ui/lib/shared/style.css'
@@ -40,12 +40,12 @@ BigNumber.config({
 })
 
 function GlobalHooks() {
-	// usePollBlockNumber();
-	// usePollCoreFarmData();
-	// useEagerConnect();
-	// useUserAgent();
-	// useInactiveListener();
-	// useSentryUser();
+	usePollBlockNumber()
+	// usePollCoreFarmData()
+	// useEagerConnect()
+	// useUserAgent()
+	// useInactiveListener()
+	// useSentryUser()
 	return null
 }
 

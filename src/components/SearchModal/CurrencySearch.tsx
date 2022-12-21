@@ -125,8 +125,8 @@ function CurrencySearch({
 	const inputRef = useRef<HTMLInputElement>()
 
 	useEffect(() => {
-		inputRef.current.focus()
-	}, [])
+		inputRef.current?.focus()
+	}, [inputRef])
 
 	const handleInput = useCallback(event => {
 		const input = event.target.value
@@ -166,7 +166,7 @@ function CurrencySearch({
 						placeholder={t('Search name or paste address')}
 						autoComplete="off"
 						value={searchQuery}
-						ref={inputRef as RefObject<HTMLInputElement>}
+						ref={inputRef}
 						onChange={handleInput}
 						onKeyDown={handleEnter}
 					/>
@@ -188,7 +188,7 @@ function CurrencySearch({
 						/>
 					</div>
 				) : Boolean(filteredSortedTokens?.length) || Boolean(filteredInactiveTokens?.length) ? (
-					<div className="margin-lg">
+					<div>
 						<CurrencyList
 							height={390}
 							showETH={showETH}

@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "இப்பட்டியலில் இருந்து ஒரு டோக்கனை வாங்கினால், அதை உங்களால் திரும்ப விற்க முடியாமல் போகலாம்.",
 	"Import": "இறக்கு",
 	"via": "வழி",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "நடப்பு டோக்கன்களின் மற்றும் டோக்கன் இல்லாத செயல்திட்டங்களைப் பிரநிதித்துவப்படுத்தக் கோருகின்ற டோக்கன்களின் போலி பதிப்புகளை உருவாக்குவது உட்பட, ஏதேனும் பெயருடன் BSCல் ARC20 டோக்கனை எவரும் உருவாக்கலாம்.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "நடப்பு டோக்கன்களின் மற்றும் டோக்கன் இல்லாத செயல்திட்டங்களைப் பிரநிதித்துவப்படுத்தக் கோருகின்ற டோக்கன்களின் போலி பதிப்புகளை உருவாக்குவது உட்பட, ஏதேனும் பெயருடன் BSCல் ERC20 டோக்கனை எவரும் உருவாக்கலாம்.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "நீங்கள் ஆர்பிட்ரரி டோக்கனை வாங்கினால், அதை உங்களால் திரும்ப விற்க முடியாமல் போகலாம்.",
 	"Unknown Source": "அறியாத மூலம்",
 	"Lists": "பட்டியல்",

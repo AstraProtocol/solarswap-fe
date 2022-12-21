@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 06/12/2022
- */
 /* eslint-disable no-param-reassign */
 import { arrayify } from '@ethersproject/bytes'
 import { parseBytes32String } from '@ethersproject/strings'

@@ -40,7 +40,7 @@ function currencyKey(currency: Currency): string {
 
 function Balance({ balance }: { balance: CurrencyAmount }) {
 	return (
-		<span className={styles.styledBalanceText} title={balance.toExact()}>
+		<span className={styles.balanceText} title={balance.toExact()}>
 			{balance.toSignificant(4)}
 		</span>
 	)
@@ -86,14 +86,12 @@ function CurrencyRow({
 			style={style}
 			className={clsx(
 				`token-item-${key}`,
-				styles.menuItem,
-				isSelected && otherSelected && styles.menuItemDisabled
+				styles.currencyMenuItem,
+				(isSelected || otherSelected) && styles.currencyMenuItemDisabled
 			)}
 			onClick={() => (isSelected ? null : onSelect())}
-			// disabled={isSelected}
-			// selected={otherSelected}
 		>
-			<CurrencyLogo currency={currency} size="24px" />
+			<CurrencyLogo currency={currency} size="48px" />
 			<div className="flex col">
 				<span className="text text-base text-bold">{currency.symbol}</span>
 				<span className="text text-sm text-ellipsis" style={{ maxWidth: 200 }}>

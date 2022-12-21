@@ -22,10 +22,10 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({ content, isOpen, setIsOpen 
 	const { isMobile } = useMatchBreakpoints()
 
 	useOnClickOutside(ref, () => setIsOpen(false))
-	console.log(shouldRender, isMobile, isOpen)
-	// if (!shouldRender || !isMobile) {
-	// 	return null
-	// }
+
+	if (!shouldRender || !isMobile) {
+		return null
+	}
 
 	const portal = getPortalRoot()
 

@@ -1,8 +1,6 @@
 import { useRef, RefObject, useCallback, useState, useMemo } from 'react'
 import { Token } from '@solarswap/sdk'
-// import { Text, Button, CloseIcon, IconButton, LinkExternal, Input, Link } from '@solarswap/uikit'
 
-// import Row, { RowBetween, RowFixed } from 'components/Layout/Row'
 import { useToken } from 'hooks/Tokens'
 import { useRemoveUserAddedToken } from 'state/user/hooks'
 import useUserAddedTokens from 'state/user/hooks/useUserAddedTokens'
@@ -13,23 +11,7 @@ import { useTranslation } from 'contexts/Localization'
 // import Column, { AutoColumn } from '../Layout/Column'
 import ImportRow from './ImportRow'
 import { CurrencyModalView } from './types'
-import { Form, IconButton, IconEnum, NormalButton, Row, Typography } from '@astraprotocol/astra-ui'
-
-// const Wrapper = styled.div`
-//   width: 100%;
-//   height: calc(100% - 60px);
-//   position: relative;
-//   padding-bottom: 60px;
-// `
-
-// const Footer = styled.div`
-//   position: absolute;
-//   bottom: 0;
-//   width: 100%;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// `
+import { Form, Icon, IconButton, IconEnum, NormalButton, Row, Typography } from '@astraprotocol/astra-ui'
 
 export default function ManageTokens({
 	setModalView,
@@ -45,7 +27,7 @@ export default function ManageTokens({
 	const [searchQuery, setSearchQuery] = useState<string>('')
 
 	// manage focus on modal show
-	const inputRef = useRef<HTMLInputElement>()
+	// const inputRef = useRef<HTMLInputElement>()
 	const handleInput = useCallback(event => {
 		const input = event.target.value
 		const checksummedInput = isAddress(input)
@@ -72,15 +54,23 @@ export default function ManageTokens({
 			chainId &&
 			userAddedTokens.map(token => (
 				<Row key={token.address} style={{ justifyContent: 'space-between' }}>
-					<Row>
+					<Row style={{ alignItems: 'center' }}>
 						<CurrencyLogo currency={token} size="20px" />
-						<Typography.Link href={getAstraScanLink(token.address, 'address', chainId)}>
+						<Typography.Link
+							href={getAstraScanLink(token.address, 'address', chainId)}
+							classes="margin-left-xs"
+						>
 							{token.symbol}
 						</Typography.Link>
 					</Row>
-					<Row>
+					<Row style={{ alignItems: 'center', justifyContent: 'flex-end' }}>
 						<IconButton icon={IconEnum.ICON_CLOSE} onClick={() => removeToken(chainId, token.address)} />
-						{/* <Typography.Link href={getAstraScanLink(token.address, 'address', chainId)} /> */}
+						<Typography.Link
+							href={getAstraScanLink(token.address, 'address', chainId)}
+							classes="margin-left-md"
+						>
+							<Icon icon={IconEnum.ICON_SEARCH} />
+						</Typography.Link>
 					</Row>
 				</Row>
 			))
@@ -93,19 +83,20 @@ export default function ManageTokens({
 		<div>
 			<div style={{ width: '100%', flex: '1 1' }}>
 				<div>
-					<Row>
-						<Form.Input
-							id="token-search-input"
-							// scale="lg"
-							placeholder="0x0000"
-							value={searchQuery}
-							autoComplete="off"
-							ref={inputRef as RefObject<HTMLInputElement>}
-							onChange={handleInput}
-							// isWarning={!isAddressValid}
-						/>
-					</Row>
-					{!isAddressValid && <span color="failure">{t('Enter valid token address')}</span>}
+					<Form.Input
+						id="token-search-input"
+						classes={{ wapper: 'margin-top-md' }}
+						placeholder="0x0000"
+						value={searchQuery}
+						autoComplete="off"
+						// ref={inputRef as RefObject<HTMLInputElement>}
+						onChange={handleInput}
+						// isWarning={!isAddressValid}
+					/>
+
+					{!isAddressValid && (
+						<span className="text text-sm alert-color-error">{t('Enter valid token address')}</span>
+					)}
 					{searchToken && (
 						<ImportRow
 							token={searchToken}
@@ -116,8 +107,8 @@ export default function ManageTokens({
 					)}
 				</div>
 				{tokenList}
-				<div>
-					<span color="textSubtle">
+				<div className="margin-top-md flex row flex-justify-space-between flex-align-center">
+					<span className="text text-sm">
 						{userAddedTokens?.length}{' '}
 						{userAddedTokens.length === 1 ? t('Custom Token') : t('Custom Tokens')}
 					</span>

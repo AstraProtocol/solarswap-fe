@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "এই তালিকা থেকে কোনো টোকেন ক্রয় করলে আপনি সেটি আবার বিক্রি করতে পারবেন না। ",
 	"Import": "আমদানি করুন",
 	"via": "মাধ্যমে",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "যে কেউ যেকোনো নামে বিদ্যমান টোকেন এবং টোকেনহীন প্রোজেক্টের প্রতিনিধিত্বকারী টোকেনের দাবিদার টোকেনের জাল সংস্করণসহ BSC-এ ARC20 টোকেন তৈরি করতে পারেন।",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "যে কেউ যেকোনো নামে বিদ্যমান টোকেন এবং টোকেনহীন প্রোজেক্টের প্রতিনিধিত্বকারী টোকেনের দাবিদার টোকেনের জাল সংস্করণসহ BSC-এ ERC20 টোকেন তৈরি করতে পারেন।",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "কোনো আর্বিট্রারি টোকেন কিনলে আপনি সেটিকে বিক্রয় করতে পারবেন না।",
 	"Unknown Source": "অজানা উৎস",
 	"Lists": "তালিকা",

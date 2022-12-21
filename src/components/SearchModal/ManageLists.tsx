@@ -1,9 +1,8 @@
 import { memo, useCallback, useMemo, useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-
+import ReactTooltip from 'react-tooltip'
 import { TokenList, Version } from '@uniswap/token-lists'
-import Card from 'components/Card'
 import { UNSUPPORTED_LIST_URLS } from 'config/constants/lists'
 import { parseENSAddress } from 'utils/ENS/parseENSAddress'
 import { useTranslation } from 'contexts/Localization'
@@ -16,9 +15,10 @@ import uriToHttp from '../../utils/uriToHttp'
 
 import Column, { AutoColumn } from '../Layout/Column'
 import { ListLogo } from '../Logo'
-import Row, { RowFixed, RowBetween } from '../Layout/Row'
+// import Row, { Row, RowBetween } from '../Layout/Row'
 import { CurrencyModalView } from './types'
-import { NormalButton, Toggle } from '@astraprotocol/astra-ui'
+import { Form, NormalButton, Row, Toggle, Typography } from '@astraprotocol/astra-ui'
+import styles from './styles.module.scss'
 
 function listVersionLabel(version: Version): string {
 	return `v${version.major}.${version.minor}.${version.patch}`
@@ -72,34 +72,41 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 		dispatch(disableList(listUrl))
 	}, [dispatch, listUrl])
 
-	const { targetRef, tooltip, tooltipVisible } = useTooltip(
-		<div>
-			<span>{list && listVersionLabel(list.version)}</span>
-			<LinkExternal external href={`https://tokenlists.org/token-list?url=${listUrl}`}>
-				{t('See')}
-			</LinkExternal>
-			<Button
-				variant="danger"
-				scale="xs"
-				onClick={handleRemoveList}
-				disabled={Object.keys(listsByUrl).length === 1}
-			>
-				{t('Remove')}
-			</Button>
-			{pending && (
-				<Button variant="text" onClick={handleAcceptListUpdate} style={{ fontSize: '12px' }}>
-					{t('Update list')}
-				</Button>
-			)}
-		</div>,
-		{ placement: 'right-end', trigger: 'click' }
-	)
+	// const { targetRef, tooltip, tooltipVisible } = useTooltip(
+	// 	<div>
+	// 		<span>{list && listVersionLabel(list.version)}</span>
+	// 		<Typography.Link href={`https://tokenlists.org/token-list?url=${listUrl}`}>{t('See')}</Typography.Link>
+	// 		<NormalButton
+	// 			// variant="danger"
+	// 			// scale="xs"
+	// 			onClick={handleRemoveList}
+	// 			disabled={Object.keys(listsByUrl).length === 1}
+	// 		>
+	// 			{t('Remove')}
+	// 		</NormalButton>
+	// 		{pending && (
+	// 			<NormalButton variant="text" onClick={handleAcceptListUpdate} style={{ fontSize: '12px' }}>
+	// 				{t('Update list')}
+	// 			</NormalButton>
+	// 		)}
+	// 	</div>,
+	// 	{ placement: 'right-end', trigger: 'click' }
+	// )
 
 	if (!list) return null
 
 	return (
-		<RowWrapper active={isActive} key={listUrl} id={listUrlRowHTMLId(listUrl)}>
-			{tooltipVisible && tooltip}
+		<div className={styles.rowWrapper} active={isActive} key={listUrl} id={listUrlRowHTMLId(listUrl)}>
+			{/* {tooltipVisible && tooltip} */}
+			{/* <ReactTooltip
+				id={data?.id}
+				arrowColor="#3B4B89"
+				multiline
+				className={styles.tooltip}
+				effect="solid"
+				place="right"
+				offset={{ right: 20 }}
+			/> */}
 			{list.logoURI ? (
 				<ListLogo
 					size="40px"
@@ -114,12 +121,12 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 				<Row>
 					<span className="text text-bold">{list.name}</span>
 				</Row>
-				<RowFixed mt="4px">
+				<Row mt="4px">
 					<span className="text text-sm text-lowercase">
 						{list.tokens.length} {t('Tokens')}
 					</span>
-					<span ref={targetRef}>{/* <CogIcon color="text" width="12px" /> */}</span>
-				</RowFixed>
+					{/* <span ref={targetRef}><CogIcon color="text" width="12px" /></span> */}
+				</Row>
 			</Column>
 			<Toggle
 				checked={isActive}
@@ -131,7 +138,7 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 					}
 				}}
 			/>
-		</RowWrapper>
+		</div>
 	)
 })
 
@@ -177,7 +184,6 @@ function ManageLists({
 
 	const sortedLists = useMemo(() => {
 		const listUrls = Object.keys(lists)
-		console.log(listUrls)
 		return listUrls
 			.filter(listUrl => {
 				// only show loaded lists, hide unsupported lists
@@ -252,56 +258,57 @@ function ManageLists({
 	}, [listUrlInput, setImportList, setListUrl, setModalView, tempList])
 
 	return (
-		<Wrapper>
-			<AutoColumn gap="14px">
-				<Row>
-					<Input
-						id="list-add-input"
-						scale="lg"
-						placeholder={t('https:// or ipfs:// or ENS name')}
-						value={listUrlInput}
-						onChange={handleInput}
-					/>
-				</Row>
-				{addError ? (
-					<span className="text alert-color-error" style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>
-						{addError}
-					</span>
-				) : null}
-			</AutoColumn>
+		// Wrapper
+		<div>
+			{/* <AutoColumn gap="14px"> */}
+			<Form.Input
+				id="list-add-input"
+				classes={{ wapper: 'margin-top-md' }}
+				// scale="lg"
+				placeholder={t('https:// or ipfs:// or ENS name')}
+				value={listUrlInput}
+				onChange={handleInput}
+			/>
+			{addError ? (
+				<span className="text alert-color-error" style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>
+					{addError}
+				</span>
+			) : null}
+			{/* </AutoColumn> */}
 			{tempList && (
-				<AutoColumn style={{ paddingTop: 0 }}>
-					<Card padding="12px 20px">
-						<RowBetween>
-							<RowFixed>
+				<div className="flex col">
+					<div className="flex col padding-top-sm padding-bottom-sm padding-left-lg padding-right-lg">
+						{/** Card */}
+						<Row style={{ justifyContent: 'space-between' }}>
+							<Row>
 								{tempList.logoURI && <ListLogo logoURI={tempList.logoURI} size="40px" />}
-								<AutoColumn gap="4px" style={{ marginLeft: '20px' }}>
+								<div className="flex col">
 									<span className="text text-bold">{tempList.name}</span>
 									<span className="text text-lowercase">
 										{tempList.tokens.length} {t('Tokens')}
 									</span>
-								</AutoColumn>
-							</RowFixed>
+								</div>
+							</Row>
 							{isImported ? (
-								<RowFixed>
-									<CheckmarkIcon width="16px" mr="10px" />
+								<Row>
+									{/* <CheckmarkIcon width="16px" mr="10px" /> */}
 									<span className="text">{t('Loaded')}</span>
-								</RowFixed>
+								</Row>
 							) : (
 								<NormalButton onClick={handleImport}>{t('Import')}</NormalButton>
 							)}
-						</RowBetween>
-					</Card>
-				</AutoColumn>
+						</Row>
+					</div>
+				</div>
 			)}
-			<ListContainer>
-				<AutoColumn gap="md">
+			<div>
+				<div className="flex col">
 					{sortedLists.map(listUrl => (
 						<ListRow key={listUrl} listUrl={listUrl} />
 					))}
-				</AutoColumn>
-			</ListContainer>
-		</Wrapper>
+				</div>
+			</div>
+		</div>
 	)
 }
 

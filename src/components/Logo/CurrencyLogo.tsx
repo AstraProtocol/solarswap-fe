@@ -36,7 +36,8 @@ export default function CurrencyLogo({
 
 	// Fix: in case of token image not found in trustwallet cdc image
 	if (currency instanceof Token && currency.address) {
-		srcs.push(`${process.env.NEXT_PUBLIC_HOST}/images/tokens/${currency.address}.png`)
+		const image = `${process.env.NEXT_PUBLIC_HOST}/images/tokens/${currency.address}.png`
+		if (!srcs.includes(image)) srcs.push()
 	}
 
 	return (

@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "Se você comprar um token desta lista, talvez não consiga vendê-lo de volta.",
 	"Import": "Importar",
 	"via": "via",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Qualquer pessoa pode criar um token ARC20 no BSC com qualquer nome, incluindo criar versões falsas de tokens existentes e tokens que afirmam representar projetos que não possuem um token.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Qualquer pessoa pode criar um token ERC20 no BSC com qualquer nome, incluindo criar versões falsas de tokens existentes e tokens que afirmam representar projetos que não possuem um token.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "Se comprar um token arbitrário, pode ser que você não consiga vendê-lo de volta.",
 	"Unknown Source": "Fonte desconhecida",
 	"Lists": "Listas",

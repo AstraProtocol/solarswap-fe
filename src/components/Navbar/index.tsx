@@ -51,7 +51,7 @@ export default function Navbar() {
 	const [load, setLoad] = useState(false)
 	const _searchWrapperRef = useRef<HTMLDivElement>(null)
 	const [{ wallet }, connect, disconnect] = useConnectWallet()
-	console.log(wallet)
+
 	const { t } = useTranslation()
 
 	const _hideMenu = () => {

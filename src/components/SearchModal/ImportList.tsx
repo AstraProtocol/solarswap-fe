@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import { AutoColumn } from 'components/Layout/Column'
+import { Checkbox, Message, NormalButton, Row, Typography } from '@astraprotocol/astra-ui'
 import { ListLogo } from 'components/Logo'
 import { TokenList } from '@uniswap/token-lists'
 import { useDispatch } from 'react-redux'
@@ -8,7 +9,7 @@ import useFetchListCallback from 'hooks/useFetchListCallback'
 import { removeList, enableList } from 'state/lists/actions'
 import { useAllLists } from 'state/lists/hooks'
 import { useTranslation } from 'contexts/Localization'
-import { Checkbox, Message, NormalButton, Row, Typography } from '@astraprotocol/astra-ui'
+import styles from './styles.module.scss'
 
 interface ImportProps {
 	listURL: string
@@ -16,20 +17,7 @@ interface ImportProps {
 	onImport: () => void
 }
 
-const Wrapper = styled.div`
-	position: relative;
-	width: 100%;
-`
-
-const TextDot = styled.div`
-	height: 3px;
-	width: 3px;
-	background-color: ${({ theme }) => theme.colors.text};
-	border-radius: 50%;
-`
-
 function ImportList({ listURL, list, onImport }: ImportProps) {
-	const { theme } = useTheme()
 	const dispatch = useDispatch<AppDispatch>()
 
 	const { t } = useTranslation()
@@ -62,14 +50,15 @@ function ImportList({ listURL, list, onImport }: ImportProps) {
 		<div className="width-100">
 			<div className="flex col">
 				<div className="flex col">
-					<Card padding="12px 20px">
+					<div className="padding-top-sm padding-bottom-sm padding-left-lg padding-right-lg">
+						{/** Card */}
 						<Row style={{ justifyContent: 'space-between' }}>
 							<Row>
 								{list.logoURI && <ListLogo logoURI={list.logoURI} size="40px" />}
 								<div className="flex col" style={{ marginLeft: '20px' }}>
 									<Row>
 										<span className="text text-base text-bold">{list.name}</span>
-										<TextDot />
+										<div className={styles.textDot} />
 										<span className="text text-sm">{list.tokens.length} tokens</span>
 									</Row>
 									<Typography.Link
@@ -84,7 +73,7 @@ function ImportList({ listURL, list, onImport }: ImportProps) {
 								</div>
 							</Row>
 						</Row>
-					</Card>
+					</div>
 
 					<Message variant="warning">
 						<div className="flex col">

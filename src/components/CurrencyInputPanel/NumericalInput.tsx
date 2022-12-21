@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { useTranslation } from 'contexts/Localization'
 import { escapeRegExp } from '../../utils'
-import { NumberInput } from '@astraprotocol/astra-ui'
-import styles from './style.module.scss'
+import { Form } from '@astraprotocol/astra-ui'
+import styles from './styles.module.scss'
 
 const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`) // match escaped "." characters via in a non-capturing group
 
@@ -27,7 +27,7 @@ export const Input = memo(function InnerInput({
 	const { t } = useTranslation()
 
 	return (
-		<NumberInput
+		<Form.NumberInput
 			{...rest}
 			value={value}
 			onChange={event => {
@@ -46,7 +46,7 @@ export const Input = memo(function InnerInput({
 			minLength={1}
 			maxLength={79}
 			spellCheck="false"
-			classes={styles.input}
+			className={styles.input}
 		/>
 	)
 })

@@ -1,0 +1,61 @@
+.input {
+	color: var(--contrast-color-theme-100);
+	width: 0;
+	position: relative;
+	font-weight: 500;
+	outline: none;
+	border: none;
+	flex: 1 1 auto;
+	background-color: transparent;
+	font-size: 16px;
+	text-align: 'right';
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0px;
+	-webkit-appearance: textfield;
+
+	::-webkit-search-decoration {
+		-webkit-appearance: none;
+	}
+
+	[type='number'] {
+		-moz-appearance: textfield;
+	}
+
+	::-webkit-outer-spin-button,
+	::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+	}
+
+	::placeholder {
+		color: var(--contrast-color-theme-70);
+	}
+}
+
+.inputRow {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: flex-end;
+	// padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
+}
+
+.labelRow {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	// color: ${({ theme }) => theme.colors.text};
+	font-size: 0.75rem;
+	line-height: 1rem;
+	padding: 0.75rem 1rem 0 1rem;
+}
+
+.inputPanel {
+	display: flex;
+	flex-flow: column nowrap;
+	position: relative;
+	border-radius: 20px;
+	// background-color: ${({ theme }) => theme.colors.backgroundAlt};
+	z-index: 1;
+}

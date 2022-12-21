@@ -42,6 +42,11 @@ const config = {
 				protocol: 'https',
 				hostname: '*',
 				pathname: '/**'
+			},
+			{
+				protocol: 'http',
+				hostname: 'localhost',
+				pathname: '/**'
 			}
 		]
 	},

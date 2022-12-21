@@ -1,5 +1,5 @@
 .currencySearchModalBody {
-    padding: var(--offset-lg);
+	// padding: var(--offset-lg);
 	overflow-y: auto;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
@@ -25,10 +25,9 @@
 
 .nameOverflow {
 	white-space: nowrap;
-	  overflow: hidden;
-	  text-overflow: ellipsis;
-	  max-width: 140px;
-	  font-size: 12px;
+	overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 140px;
 }
 
 .fixedContentRow {
@@ -39,23 +38,22 @@
 	align-items: center;
 }
 
-.menuItem {
+.currencyMenuItem {
 	padding: 4px 20px;
 	height: 56px;
 	display: grid;
 	grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
 	grid-gap: 8px;
-	cursor: 'pointer';
-	// pointer-events: ${({ disabled }) => disabled && 'none'};
+	cursor: pointer;
 	:hover {
 		background-color: var(--contrast-bg-color-70);
 	}
 	opacity: 1;
-	// opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
+	
 }
 
-.menuItemDisabled {
-	cursor: 'disabled';
+.currencyMenuItemDisabled {
+	cursor: disabled;
 	pointer-events: none;
 	:hover {
 		background-color: transparent;
@@ -63,10 +61,26 @@
 	opacity: 0.5;
 }
 
-.styledBalanceText {
+.balanceText {
 	padding: 4px 20px;
 		height: 56px;
 		display: grid;
 		grid-gap: 16px;
 		align-items: center;
+}
+.rowWrapper {
+	// background-color: ${({ active, theme }) => (active ? `${theme.colors.success}` : 'transparent')};
+	border: solid 1px;
+	//   border-color: ${({ active, theme }) => (active ? theme.colors.success : theme.colors.tertiary)};
+	transition: 200ms;
+	align-items: center;
+	padding: 1rem;
+	border-radius: 20px;
+}
+
+.textDot {
+	height: 3px;
+	width: 3px;
+	background-color: 'transparent';
+	border-radius: 50%;
 }

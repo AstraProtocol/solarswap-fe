@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "Nếu bạn mua một token từ danh sách này, bạn có thể sẽ không thể bán chúng được.",
 	"Import": "Nhập",
 	"via": "qua",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Bất cứ ai cũng có thể tạo một token ARC20 trên Astra Chain với bất kỳ tên nào, bao gồm việc tạo ra những phiên bản giả mạo của những token sẵn có và những token giả vờ đại diện cho những dự án vốn không có token.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Bất cứ ai cũng có thể tạo một token ERC20 trên Astra Chain với bất kỳ tên nào, bao gồm việc tạo ra những phiên bản giả mạo của những token sẵn có và những token giả vờ đại diện cho những dự án vốn không có token.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "Nếu bạn mua một token giả, bạn có thể sẽ không thể bán nó được.",
 	"Unknown Source": "Nguồn không xác định",
 	"Lists": "Danh sách",

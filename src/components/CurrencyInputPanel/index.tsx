@@ -1,5 +1,5 @@
 import { Currency, Pair, Token } from '@solarswap/sdk'
-// import { Button, ChevronDownIcon, Text, useModal, Flex, Box, MetamaskIcon } from '@solarswap/uikit'
+// import { Button, ChevronDownIcon, span, useModal, Flex, div, MetamaskIcon } from '@solarswap/uikit'
 import { registerToken } from 'utils/wallet'
 import { isAddress } from 'utils'
 import { useTranslation } from 'contexts/Localization'
@@ -9,42 +9,43 @@ import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo'
 
 import { Input as NumericalInput } from './NumericalInput'
-import { CopyButton } from '@astraprotocol/astra-ui'
+import { CopyButton, NormalButton } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
+import styles from './styles.module.scss'
 
-const InputRow = styled.div<{ selected: boolean }>`
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-	justify-content: flex-end;
-	padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
-`
+// const InputRow = styled.div<{ selected: boolean }>`
+// 	display: flex;
+// 	flex-flow: row nowrap;
+// 	align-items: center;
+// 	justify-content: flex-end;
+// 	padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
+// `
 
-const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })`
-	padding: 0 0.5rem;
-`
-const LabelRow = styled.div`
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-	color: ${({ theme }) => theme.colors.text};
-	font-size: 0.75rem;
-	line-height: 1rem;
-	padding: 0.75rem 1rem 0 1rem;
-`
-const InputPanel = styled.div`
-	display: flex;
-	flex-flow: column nowrap;
-	position: relative;
-	border-radius: 20px;
-	background-color: ${({ theme }) => theme.colors.backgroundAlt};
-	z-index: 1;
-`
-const Container = styled.div`
-	border-radius: 16px;
-	background-color: ${({ theme }) => theme.colors.input};
-	box-shadow: ${({ theme }) => theme.shadows.inset};
-`
+// const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })`
+// 	padding: 0 0.5rem;
+// `
+// const LabelRow = styled.div`
+// 	display: flex;
+// 	flex-flow: row nowrap;
+// 	align-items: center;
+// 	color: ${({ theme }) => theme.colors.text};
+// 	font-size: 0.75rem;
+// 	line-height: 1rem;
+// 	padding: 0.75rem 1rem 0 1rem;
+// `
+// const InputPanel = styled.div`
+// 	display: flex;
+// 	flex-flow: column nowrap;
+// 	position: relative;
+// 	border-radius: 20px;
+// 	background-color: ${({ theme }) => theme.colors.backgroundAlt};
+// 	z-index: 1;
+// `
+// const Container = styled.div`
+// 	border-radius: 16px;
+// 	background-color: ${({ theme }) => theme.colors.input};
+// 	box-shadow: ${({ theme }) => theme.shadows.inset};
+// `
 interface CurrencyInputPanelProps {
 	value: string
 	onUserInput: (value: string) => void
@@ -94,10 +95,10 @@ export default function CurrencyInputPanel({
 		/>
 	)
 	return (
-		<Box position="relative" id={id}>
-			<Flex mb="6px" alignItems="center" justifyContent="space-between">
-				<Flex>
-					<CurrencySelectButton
+		<div id={id}>
+			<div className="flex flex-justify-space-between flex-align-center">
+				<div className="flex">
+					<NormalButton
 						className="open-currency-select-button"
 						selected={!!currency}
 						onClick={() => {
@@ -106,31 +107,31 @@ export default function CurrencyInputPanel({
 							}
 						}}
 					>
-						<Flex alignItems="center" justifyContent="space-between">
+						<div className="flex flex-align-center flex-justify-space-between">
 							{pair ? (
 								<DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin />
 							) : currency ? (
 								<CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
 							) : null}
 							{pair ? (
-								<Text id="pair" bold>
+								<span id="pair" className="text text-bold">
 									{pair?.token0.symbol}:{pair?.token1.symbol}
-								</Text>
+								</span>
 							) : (
-								<Text id="pair" bold>
+								<span id="pair" className="text text-bold">
 									{(currency && currency.symbol && currency.symbol.length > 20
 										? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
 												currency.symbol.length - 5,
 												currency.symbol.length
 										  )}`
 										: currency?.symbol) || t('Select a currency')}
-								</Text>
+								</span>
 							)}
-							{!disableCurrencySelect && <ChevronDownIcon />}
-						</Flex>
-					</CurrencySelectButton>
+							{/* {!disableCurrencySelect && <ChevronDownIcon />} */}
+						</div>
+					</NormalButton>
 					{token && tokenAddress ? (
-						<Flex style={{ gap: '4px' }} alignItems="center">
+						<div className="flex flex-align-center" style={{ gap: '4px' }}>
 							<CopyButton textCopy={tokenAddress} />
 							{library?.provider?.isMetaMask && (
 								<MetamaskIcon
@@ -139,11 +140,11 @@ export default function CurrencyInputPanel({
 									onClick={() => registerToken(tokenAddress, token.symbol, token.decimals)}
 								/>
 							)}
-						</Flex>
+						</div>
 					) : null}
-				</Flex>
+				</div>
 				{account && (
-					<Text
+					<span
 						onClick={onMax}
 						color="textSubtle"
 						fontSize="14px"
@@ -154,12 +155,12 @@ export default function CurrencyInputPanel({
 									balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading')
 							  })
 							: ' -'}
-					</Text>
+					</span>
 				)}
-			</Flex>
-			<InputPanel>
-				<Container as="label">
-					<LabelRow>
+			</div>
+			<div className={styles.inputPanel}>
+				<div className="border radius-lg">
+					<div className={styles.labelRow}>
 						<NumericalInput
 							className="token-amount-input"
 							value={value}
@@ -167,16 +168,19 @@ export default function CurrencyInputPanel({
 								onUserInput(val)
 							}}
 						/>
-					</LabelRow>
-					<InputRow selected={disableCurrencySelect}>
+					</div>
+					<div
+						className={styles.inputRow}
+						// selected={disableCurrencySelect}
+					>
 						{account && currency && showMaxButton && label !== 'To' && (
-							<Button onClick={onMax} scale="xs" variant="secondary">
+							<NormalButton onClick={onMax} scale="xs" variant="secondary">
 								{t('Max').toLocaleUpperCase(locale)}
-							</Button>
+							</NormalButton>
 						)}
-					</InputRow>
-				</Container>
-			</InputPanel>
-		</Box>
+					</div>
+				</div>
+			</div>
+		</div>
 	)
 }

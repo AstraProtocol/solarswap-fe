@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { CurrencyAmount, JSBI, Token, Trade } from '@solarswap/sdk'
 
@@ -52,12 +52,13 @@ import SwapWarningModal from './components/SwapWarningModal'
 import PriceChartContainer from './components/Chart/PriceChartContainer'
 // import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
 import CurrencyInputHeader from './components/CurrencyInputHeader'
-import { Container, IconButton, IconEnum, useMobileLayout } from '@astraprotocol/astra-ui'
+import { Container, Icon, IconButton, IconEnum, Tag, useMobileLayout } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
 import { BottomDrawer } from 'components/BottomDrawer'
 import Page from 'components/Layout/Page'
-import styles from './styles.module.scss'
+import styles from '../../views/Swap/styles.module.scss'
 import { AppBody } from 'components/App'
+import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 
 // const Label = styled(Text)`
 // 	font-size: 12px;
@@ -87,7 +88,7 @@ export default function Swap() {
 	const router = useRouter()
 	const loadedUrlParams = useDefaultsFromURLSearch()
 	const { t } = useTranslation()
-	const { isMobile } = useMobileLayout()
+	const { isMobile } = useMatchBreakpoints()
 	const [isChartExpanded, setIsChartExpanded] = useState(false)
 	const [userChartPreference, setUserChartPreference] = useExchangeChartManager(isMobile)
 	const [isChartDisplayed, setIsChartDisplayed] = useState(userChartPreference)
@@ -424,7 +425,7 @@ export default function Swap() {
 								/>
 								<div id="swap-page" style={{ minHeight: '412px' }}>
 									<div className="flex col">
-										{/* <CurrencyInputPanel
+										<CurrencyInputPanel
 											label={
 												independentField === Field.OUTPUT && !showWrap && trade
 													? t('From (estimated)')
@@ -438,7 +439,7 @@ export default function Swap() {
 											onCurrencySelect={handleInputSelect}
 											otherCurrency={currencies[Field.OUTPUT]}
 											id="swap-currency-input"
-										/> */}
+										/>
 
 										{/* <AutoColumn justify="space-between">
 											<AutoRow

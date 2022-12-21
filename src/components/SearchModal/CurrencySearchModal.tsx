@@ -71,7 +71,12 @@ export default function CurrencySearchModal({
 	}
 
 	return (
-		<Modal minWidth="320px" title={config[modalView].title} onBack={config[modalView].onBack} onDismiss={onDismiss}>
+		<Modal
+			style={{ minWidth: '400px', maxWidth: 600 }}
+			title={config[modalView].title}
+			onBack={config[modalView].onBack}
+			onDismiss={onDismiss}
+		>
 			<div className={styles.currencySearchModalBody}>
 				{modalView === CurrencyModalView.search ? (
 					<CurrencySearch
@@ -101,8 +106,12 @@ export default function CurrencySearchModal({
 					''
 				)}
 				{modalView === CurrencyModalView.search && (
-					<div>
-						<NormalButton variant="text" onClick={() => setModalView(CurrencyModalView.manage)}>
+					<div className="flex flex-justify-center">
+						<NormalButton
+							classes={{ color: 'secondary-color-normal', other: 'text-bold text-base' }}
+							variant="text"
+							onClick={() => setModalView(CurrencyModalView.manage)}
+						>
 							{t('Manage Tokens')}
 						</NormalButton>
 					</div>

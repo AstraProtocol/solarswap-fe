@@ -13,7 +13,6 @@ export interface LogoProps extends Omit<ImageProps, 'src'> {
  */
 const Logo: React.FC<LogoProps> = ({ srcs, alt, ...rest }) => {
 	const [, refresh] = useState<number>(0)
-
 	const src: string | undefined = srcs.find(s => !BAD_SRCS[s])
 
 	if (src) {
@@ -30,7 +29,7 @@ const Logo: React.FC<LogoProps> = ({ srcs, alt, ...rest }) => {
 		)
 	}
 
-	return <Icon icon={IconEnum.Warning} {...rest} />
+	return <Icon icon={IconEnum.ICON_WARNING} style={{ fontSize: rest.height }} />
 }
 
 export default Logo

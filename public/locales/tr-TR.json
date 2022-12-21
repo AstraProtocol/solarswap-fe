@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "Bu listeden bir token alırsan geri satamayabilirsin.",
 	"Import": "İçe Aktar",
 	"via": "aracılığıyla",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Herhangi bir isimle BSC üzerinde bir ARC20 token'ı oluşturabilir; buna bir token'ı olmayan projeleri temsil ettiğini iddia eden token'ların ve mevcut token'ların sahte sürümlerinin oluşturulması da dâhildir.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Herhangi bir isimle BSC üzerinde bir ERC20 token'ı oluşturabilir; buna bir token'ı olmayan projeleri temsil ettiğini iddia eden token'ların ve mevcut token'ların sahte sürümlerinin oluşturulması da dâhildir.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "Rastgele bir token satın alırsan geri satamayabilirsin.",
 	"Unknown Source": "Bilinmeyen Kaynak",
 	"Lists": "Listeler",
