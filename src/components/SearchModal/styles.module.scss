@@ -45,8 +45,8 @@
 	grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
 	grid-gap: 8px;
 	cursor: pointer;
-	:hover {
-		background-color: var(--contrast-bg-color-70);
+	&:hover {
+			background-color: var(--same-color-theme-10);
 	}
 	opacity: 1;
 	
@@ -55,7 +55,7 @@
 .currencyMenuItemDisabled {
 	cursor: disabled;
 	pointer-events: none;
-	:hover {
+	&:hover {
 		background-color: transparent;
 	}
 	opacity: 0.5;

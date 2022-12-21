@@ -1,26 +1,10 @@
 import { ChainId, Currency, currencyEquals, ETHER, Token } from '@solarswap/sdk'
+import QuestionHelper from 'components/QuestionHelper'
 import { useTranslation } from 'contexts/Localization'
 
 import { SUGGESTED_BASES } from '../../config/constants'
-// import QuestionHelper from '../QuestionHelper'
-// import { AutoRow } from '../Layout/Row'
+
 import { CurrencyLogo } from '../Logo'
-
-// const BaseWrapper = styled.div<{ disable?: boolean }>`
-// 	border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.colors.dropdown)};
-// 	border-radius: 10px;
-// 	display: flex;
-// 	padding: 6px;
-
-// 	align-items: center;
-// 	:hover {
-// 		cursor: ${({ disable }) => !disable && 'pointer'};
-// 		background-color: ${({ theme, disable }) => !disable && theme.colors.background};
-// 	}
-
-// 	background-color: ${({ theme, disable }) => disable && theme.colors.dropdown};
-// 	opacity: ${({ disable }) => disable && '0.4'};
-// `
 
 export default function CommonBases({
 	chainId,
@@ -36,7 +20,7 @@ export default function CommonBases({
 		<div className="margin-lg">
 			<div>
 				<span className="text text-sm contrast-color-100">{t('Common bases')}</span>
-				{/* <QuestionHelper text={t('These tokens are commonly paired with other tokens.')} ml="4px" /> */}
+				<QuestionHelper text={t('These tokens are commonly paired with other tokens.')} ml="4px" />
 			</div>
 			<div>
 				<div
