@@ -31,6 +31,7 @@ import { CHAIN_ID } from 'config/constants/networks'
 import getNodeUrl from 'utils/getRpcUrl'
 import { WalletHelper } from 'utils/wallet'
 import 'react-toastify/dist/ReactToastify.css'
+import useEagerConnect from 'hooks/useEagerConnect'
 // const EasterEgg = dynamic(() => import('components/EasterEgg'), { ssr: false })
 
 // This config is required for number formatting
@@ -42,7 +43,7 @@ BigNumber.config({
 function GlobalHooks() {
 	usePollBlockNumber()
 	// usePollCoreFarmData()
-	// useEagerConnect()
+	useEagerConnect()
 	// useUserAgent()
 	// useInactiveListener()
 	// useSentryUser()
