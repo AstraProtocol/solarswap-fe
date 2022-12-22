@@ -52,13 +52,15 @@ import SwapWarningModal from './components/SwapWarningModal'
 import PriceChartContainer from './components/Chart/PriceChartContainer'
 // import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
 import CurrencyInputHeader from './components/CurrencyInputHeader'
-import { Container, Icon, IconButton, IconEnum, Tag, useMobileLayout } from '@astraprotocol/astra-ui'
+import { Container, Icon, IconButton, IconEnum, NormalButton, Row, Tag, useMobileLayout } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
 import { BottomDrawer } from 'components/BottomDrawer'
 import Page from 'components/Layout/Page'
 import styles from '../../views/Swap/styles.module.scss'
 import { AppBody } from 'components/App'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 // const Label = styled(Text)`
 // 	font-size: 12px;
@@ -441,47 +443,36 @@ export default function Swap() {
 											id="swap-currency-input"
 										/>
 
-										{/* <AutoColumn justify="space-between">
-											<AutoRow
-												justify={isExpertMode ? 'space-between' : 'center'}
+										<div className="flex col flex-justify-space-between">
+											<div
+												className={clsx('flex col flex-align-center')}
 												style={{ padding: '0 1rem' }}
 											>
-												<SwitchIconButton
-													variant="light"
-													scale="sm"
+												<div
 													onClick={() => {
 														setApprovalSubmitted(false) // reset 2 step UI for approvals
 														onSwitchTokens()
 													}}
+													className={clsx(
+														styles.switchIconButton,
+														'link block-hor-center contrast-bg-color-10 padding-xs border radius-sm'
+													)}
 												>
-													<ArrowDownIcon
-														className="icon-down"
-														color={
-															currencies[Field.INPUT] && currencies[Field.OUTPUT]
-																? 'primary'
-																: 'text'
-														}
-													/>
-													<ArrowUpDownIcon
-														className="icon-up-down"
-														color={
-															currencies[Field.INPUT] && currencies[Field.OUTPUT]
-																? 'primary'
-																: 'text'
-														}
-													/>
-												</SwitchIconButton>
+													<Icon icon={IconEnum.ICON_ARROW_UP} classes={styles.iconDown} />
+													<Icon icon={IconEnum.ICON_ARROW_DOWN} classes={styles.iconUpDown} />
+												</div>
+
 												{recipient === null && !showWrap && isExpertMode ? (
-													<Button
+													<NormalButton
 														variant="text"
 														id="add-recipient-button"
 														onClick={() => onChangeRecipient('')}
 													>
 														{t('+ Add a send (optional)')}
-													</Button>
+													</NormalButton>
 												) : null}
-											</AutoRow>
-										</AutoColumn>
+											</div>
+										</div>
 										<CurrencyInputPanel
 											value={formattedAmounts[Field.OUTPUT]}
 											onUserInput={handleTypeOutput}
@@ -499,52 +490,50 @@ export default function Swap() {
 
 										{isExpertMode && recipient !== null && !showWrap ? (
 											<>
-												<AutoRow justify="space-between" style={{ padding: '0 1rem' }}>
-													<ArrowWrapper clickable={false}>
-														<ArrowDownIcon width="16px" />
-													</ArrowWrapper>
-													<Button
+												<Row style={{ padding: '0 1rem', justifyContent: 'space-between' }}>
+													<div clickable={false}>{/* <ArrowDownIcon width="16px" /> */}</div>
+													<NormalButton
 														variant="text"
 														id="remove-recipient-button"
 														onClick={() => onChangeRecipient(null)}
 													>
 														{t('- Remove send')}
-													</Button>
-												</AutoRow>
-												<AddressInputPanel
+													</NormalButton>
+												</Row>
+												{/* <AddressInputPanel
 													id="recipient"
 													value={recipient}
 													onChange={onChangeRecipient}
-												/>
+												/> */}
 											</>
 										) : null}
 
 										{showWrap ? null : (
-											<AutoColumn gap="7px" style={{ padding: '0 16px' }}>
-												<RowBetween align="center">
+											<div className="flex col" style={{ padding: '0 16px' }}>
+												<Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
 													{Boolean(trade) && (
 														<>
-															<Label>{t('Price')}</Label>
-															{isLoading ? (
-																<Skeleton width="100%" ml="8px" height="24px" />
+															<span className="text text-base">{t('Price')}</span>
+															{/* {isLoading ? (
+																<Skeleton height={36} width={128} baseColor="#312e39" />
 															) : (
 																<TradePrice
 																	price={trade?.executionPrice}
 																	showInverted={showInverted}
 																	setShowInverted={setShowInverted}
 																/>
-															)}
+															)} */}
 														</>
 													)}
-												</RowBetween>
-												<RowBetween align="center">
-													<Label>{t('Slippage Tolerance')}</Label>
-													<Text bold color="primary">
+												</Row>
+												<Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+													<span className="text text-sm">{t('Slippage Tolerance')}</span>
+													<span className="text text-sm text-bold">
 														{allowedSlippage / 100}%
-													</Text>
-												</RowBetween>
-											</AutoColumn>
-										)} */}
+													</span>
+												</Row>
+											</div>
+										)}
 									</div>
 									{/* <Box mt="0.25rem">
 										{swapIsUnsupported ? (

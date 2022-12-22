@@ -94,7 +94,7 @@ function CurrencyRow({
 			<CurrencyLogo currency={currency} size="48px" />
 			<div className="flex col">
 				<span className="text text-base text-bold">{currency.symbol}</span>
-				<span className="text text-sm text-ellipsis" style={{ maxWidth: 200 }}>
+				<span className="text text-sm text-ellipsis">
 					{!isOnSelectedList && customAdded && 'Added by user •'} {currency.name}
 				</span>
 			</div>

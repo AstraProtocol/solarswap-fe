@@ -15,6 +15,13 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@astra-sdk/connector@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@astra-sdk/connector/-/connector-1.1.5.tgz#173ceb4e244ffaf7eaf15dded27d448dc9b95538"
+  integrity sha512-CchqTQroImXTVY7BMiMZogH/GJmumBO0zxr66eqh0uRWAsL+H1ZbCetHzsTMWKyUPbZJEYObT9vi7m6e+0fp0Q==
+  dependencies:
+    "@web3-react/abstract-connector" "^6.0.7"
+
 "@astra-sdk/wallet-connect@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@astra-sdk/wallet-connect/-/wallet-connect-1.0.4.tgz#bf842d2991b712334483cc092fcda4b6d29437d4"
@@ -30,7 +37,7 @@
   integrity sha512-Azq0Yqged21YVt9gznIhNURsSy0uws3o50x/adBn45eUwrVyNZwcNBZ9kEoXL3y3dRN5jYGiECL1XM+oAEB1Kw==
 
 "@astraprotocol/astra-ui@file:../../Github/astra-ui":
-  version "1.0.26"
+  version "1.0.28"
   dependencies:
     "@types/numeral" "^2.0.2"
     "@types/react-copy-to-clipboard" "^5.0.4"

@@ -1,5 +1,6 @@
 import { Currency, Pair, Token } from '@solarswap/sdk'
-// import { Button, ChevronDownIcon, span, useModal, Flex, div, MetamaskIcon } from '@solarswap/uikit'
+import { CopyButton, Icon, IconEnum, NormalButton } from '@astraprotocol/astra-ui'
+import Image from 'next/image'
 import { registerToken } from 'utils/wallet'
 import { isAddress } from 'utils'
 import { useTranslation } from 'contexts/Localization'
@@ -9,43 +10,9 @@ import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo'
 
 import { Input as NumericalInput } from './NumericalInput'
-import { CopyButton, NormalButton } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
 import styles from './styles.module.scss'
 
-// const InputRow = styled.div<{ selected: boolean }>`
-// 	display: flex;
-// 	flex-flow: row nowrap;
-// 	align-items: center;
-// 	justify-content: flex-end;
-// 	padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
-// `
-
-// const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })`
-// 	padding: 0 0.5rem;
-// `
-// const LabelRow = styled.div`
-// 	display: flex;
-// 	flex-flow: row nowrap;
-// 	align-items: center;
-// 	color: ${({ theme }) => theme.colors.text};
-// 	font-size: 0.75rem;
-// 	line-height: 1rem;
-// 	padding: 0.75rem 1rem 0 1rem;
-// `
-// const InputPanel = styled.div`
-// 	display: flex;
-// 	flex-flow: column nowrap;
-// 	position: relative;
-// 	border-radius: 20px;
-// 	background-color: ${({ theme }) => theme.colors.backgroundAlt};
-// 	z-index: 1;
-// `
-// const Container = styled.div`
-// 	border-radius: 16px;
-// 	background-color: ${({ theme }) => theme.colors.input};
-// 	box-shadow: ${({ theme }) => theme.shadows.inset};
-// `
 interface CurrencyInputPanelProps {
 	value: string
 	onUserInput: (value: string) => void
@@ -100,7 +67,6 @@ export default function CurrencyInputPanel({
 				<div className="flex">
 					<NormalButton
 						className="open-currency-select-button"
-						selected={!!currency}
 						onClick={() => {
 							if (!disableCurrencySelect) {
 								onPresentCurrencyModal()
@@ -114,11 +80,11 @@ export default function CurrencyInputPanel({
 								<CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
 							) : null}
 							{pair ? (
-								<span id="pair" className="text text-bold">
+								<span id="pair" className="text text-bold margin-left-xs">
 									{pair?.token0.symbol}:{pair?.token1.symbol}
 								</span>
 							) : (
-								<span id="pair" className="text text-bold">
+								<span id="pair" className="text text-bold margin-left-xs">
 									{(currency && currency.symbol && currency.symbol.length > 20
 										? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
 												currency.symbol.length - 5,
@@ -127,16 +93,19 @@ export default function CurrencyInputPanel({
 										: currency?.symbol) || t('Select a currency')}
 								</span>
 							)}
-							{/* {!disableCurrencySelect && <ChevronDownIcon />} */}
+							{!disableCurrencySelect && <Icon icon={IconEnum.ICON_ARROW_DOWN} />}
 						</div>
 					</NormalButton>
 					{token && tokenAddress ? (
 						<div className="flex flex-align-center" style={{ gap: '4px' }}>
 							<CopyButton textCopy={tokenAddress} />
 							{library?.provider?.isMetaMask && (
-								<MetamaskIcon
+								<Image
+									alt="metamask"
+									src={'/images/logo/metamask.svg'}
 									style={{ cursor: 'pointer' }}
-									width="16px"
+									width={16}
+									height={16}
 									onClick={() => registerToken(tokenAddress, token.symbol, token.decimals)}
 								/>
 							)}
@@ -144,12 +113,7 @@ export default function CurrencyInputPanel({
 					) : null}
 				</div>
 				{account && (
-					<span
-						onClick={onMax}
-						color="textSubtle"
-						fontSize="14px"
-						style={{ display: 'inline', cursor: 'pointer' }}
-					>
+					<span onClick={onMax} className="text text-sm" style={{ display: 'inline', cursor: 'pointer' }}>
 						{!hideBalance && !!currency
 							? t('Balance: %balance%', {
 									balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading')
@@ -169,14 +133,9 @@ export default function CurrencyInputPanel({
 							}}
 						/>
 					</div>
-					<div
-						className={styles.inputRow}
-						// selected={disableCurrencySelect}
-					>
+					<div className={styles.inputRow}>
 						{account && currency && showMaxButton && label !== 'To' && (
-							<NormalButton onClick={onMax} scale="xs" variant="secondary">
-								{t('Max').toLocaleUpperCase(locale)}
-							</NormalButton>
+							<NormalButton onClick={onMax}>{t('Max').toLocaleUpperCase(locale)}</NormalButton>
 						)}
 					</div>
 				</div>
