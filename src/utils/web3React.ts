@@ -6,6 +6,7 @@ import { hexlify } from '@ethersproject/bytes'
 import { toUtf8Bytes } from '@ethersproject/strings'
 import { Web3Provider } from '@ethersproject/providers'
 import { CHAIN_ID } from 'config/constants/networks'
+import { AstraWalletConnector } from '@astra-sdk/connector'
 import { WalletConnectConnector } from '@astra-sdk/walletconnect-connector'
 import { WALLET_CONNECT_RELAY } from 'config'
 import getNodeUrl from './getRpcUrl'
@@ -37,23 +38,23 @@ export const connectorsByName = {
 		})
 		return walletconnector
 	},
+	[ConnectorNames.AstraWallet]: () => {
+		return AstraWalletConnector.create({ chainId, url: rpcUrl })
+	}
 	// [ConnectorNames.BSC]: bscConnector,
 	// [ConnectorNames.Blocto]: async () => {
 	// 	const { BloctoConnector } = await import("@blocto/blocto-connector");
 	// 	return new BloctoConnector({ chainId, rpc: rpcUrl });
 	// },
-	[ConnectorNames.WalletLink]: async () => {
-		const { WalletLinkConnector } = await import('@web3-react/walletlink-connector')
-		return new WalletLinkConnector({
-			url: rpcUrl,
-			appName: 'SolarSwap',
-			appLogoUrl: 'https://salt.tikicdn.com/ts/ta/8e/80/26/80c694f8ce25376dd97aa55d251a459f.png',
-			supportedChainIds: [ChainId.MAINNET, ChainId.TESTNET]
-		})
-	}
-	// [ConnectorNames.AstraWallet]: () => {
-	// 	return AstraWalletConnector.create({ chainId, url: rpcUrl })
-	// }
+	// [ConnectorNames.WalletLink]: async () => {
+	// 	const { WalletLinkConnector } = await import('@web3-react/walletlink-connector')
+	// 	return new WalletLinkConnector({
+	// 		url: rpcUrl,
+	// 		appName: 'SolarSwap',
+	// 		appLogoUrl: 'https://salt.tikicdn.com/ts/ta/8e/80/26/80c694f8ce25376dd97aa55d251a459f.png',
+	// 		supportedChainIds: [ChainId.MAINNET, ChainId.TESTNET]
+	// 	})
+	// },
 } as const
 
 export const getLibrary = (provider): Web3Provider => {
