@@ -472,6 +472,7 @@ export default function Swap() {
 													<NormalButton
 														variant="text"
 														id="add-recipient-button"
+														classes={{ color: 'contrast-color-70' }}
 														onClick={() => onChangeRecipient('')}
 													>
 														{t('+ Add a send (optional)')}
@@ -525,7 +526,7 @@ export default function Swap() {
 																{t('Price')}
 															</span>
 															{isLoading ? (
-																<Skeleton height={36} width={128} baseColor="#312e39" />
+																<Skeleton height={24} width={128} baseColor="#312e39" />
 															) : (
 																<TradePrice
 																	price={trade?.executionPrice}

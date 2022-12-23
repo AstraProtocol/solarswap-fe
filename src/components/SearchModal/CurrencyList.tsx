@@ -91,7 +91,7 @@ function CurrencyRow({
 			)}
 			onClick={() => (isSelected ? null : onSelect())}
 		>
-			<CurrencyLogo currency={currency} size="48px" />
+			<CurrencyLogo currency={currency} size={32} />
 			<div className="flex col">
 				<span className="text text-base text-bold">{currency.symbol}</span>
 				<span className="text text-sm text-ellipsis">

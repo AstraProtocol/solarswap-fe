@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 03/12/2022
- */
 export interface Block {
 	number: number
 	timestamp: string

@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 import { Token } from '@solarswap/sdk'
 import tokens from 'config/constants/tokens'
 

@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { Token, Pair, ChainId } from '@solarswap/sdk'
 import { isAddress } from 'utils'
 import memoize from 'lodash/memoize'

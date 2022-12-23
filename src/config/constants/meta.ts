@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 import { ContextApi } from 'contexts/Localization/types'
 import { PageMeta } from './types'
 

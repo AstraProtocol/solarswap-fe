@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 import { serializeTokens } from './tokens'
 import { SerializedFarmConfig } from './types'
 import { CHAIN_ID } from './networks'

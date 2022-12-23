@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { ChainId } from '@solarswap/sdk'
 import addresses from 'config/constants/contracts'
 import { CHAIN_ID } from 'config/constants/networks'

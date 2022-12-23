@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { Currency, ETHER, Token } from '@solarswap/sdk'
 
 export function currencyId(currency: Currency): string {

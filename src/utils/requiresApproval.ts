@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { BigNumber } from '@ethersproject/bignumber'
 import { Erc20 } from 'config/abi/types'
 

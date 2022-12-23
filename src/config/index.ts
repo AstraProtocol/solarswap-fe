@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 import { ChainId } from '@solarswap/sdk'
 import BigNumber from 'bignumber.js'
 import { BIG_TEN } from 'utils/bigNumber'

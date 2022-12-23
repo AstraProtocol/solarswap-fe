@@ -9,11 +9,11 @@ import Logo from './Logo'
 
 export default function CurrencyLogo({
 	currency,
-	size = '24px',
+	size = 24,
 	style
 }: {
 	currency?: Currency | Token
-	size?: string
+	size?: number
 	style?: React.CSSProperties
 }) {
 	const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)

@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import * as Sentry from '@sentry/react'
 
 const assignError = (maybeError: any) => {

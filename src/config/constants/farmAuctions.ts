@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 import { ChainId } from '@solarswap/sdk'
 import getLpAddress from 'utils/getLpAddress'
 import { CHAIN_ID } from './networks'

@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { GraphQLClient } from 'graphql-request'
 
 const requestWithTimeout = <T>(

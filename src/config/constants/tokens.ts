@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 05/12/2022
- */
 import { ChainId, Token } from '@solarswap/sdk'
 import { serializeToken } from 'state/user/hooks/helpers'
 import { CHAIN_ID } from './networks'
