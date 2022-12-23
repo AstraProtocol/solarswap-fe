@@ -1,11 +1,13 @@
 import { useCallback } from 'react'
+import { Form, Row, Typography } from '@astraprotocol/astra-ui'
 
 import { useTranslation } from 'contexts/Localization'
 import useENS from '../../../hooks/ENS/useENS'
 import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
 import { AutoColumn } from '../../../components/Layout/Column'
 import { getAstraScanLink } from '../../../utils'
-import { Typography } from '@astraprotocol/astra-ui'
+import styles from './styles.module.scss'
+import clsx from 'clsx'
 
 // const InputPanel = styled.div`
 // 	display: flex;
@@ -94,19 +96,19 @@ export default function AddressInputPanel({
 	const error = Boolean(value.length > 0 && !loading && !address)
 
 	return (
-		<InputPanel id={id}>
-			<ContainerRow error={error}>
-				<InputContainer>
+		<div className={styles.addressInputPanel} id={id}>
+			<div className={clsx(styles.containerRow, error && styles.containerRowError)}>
+				<div className="flex">
 					<AutoColumn gap="md">
-						<RowBetween>
+						<Row style={{ justifyContent: 'space-between' }}>
 							<span className="text text-base">{t('Recipient')}</span>
 							{address && chainId && (
 								<Typography.Link href={getAstraScanLink(name ?? address, 'address', chainId)}>
 									{t('View on AstraExplorer')}
 								</Typography.Link>
 							)}
-						</RowBetween>
-						<Input
+						</Row>
+						<Form.Input
 							className="recipient-address-input"
 							type="text"
 							autoComplete="off"
@@ -114,14 +116,14 @@ export default function AddressInputPanel({
 							autoCapitalize="off"
 							spellCheck="false"
 							placeholder={t('Wallet Address or ENS name')}
-							error={error}
+							// error={error}
 							pattern="^(0x[a-fA-F0-9]{40})$"
 							onChange={handleInput}
 							value={value}
 						/>
 					</AutoColumn>
-				</InputContainer>
-			</ContainerRow>
-		</InputPanel>
+				</div>
+			</div>
+		</div>
 	)
 }

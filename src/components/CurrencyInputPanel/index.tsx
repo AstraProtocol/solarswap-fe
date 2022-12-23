@@ -66,6 +66,7 @@ export default function CurrencyInputPanel({
 			<div className="flex flex-justify-space-between flex-align-center">
 				<div className="flex">
 					<NormalButton
+						variant="text"
 						className="open-currency-select-button"
 						onClick={() => {
 							if (!disableCurrencySelect) {

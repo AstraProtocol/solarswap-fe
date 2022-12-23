@@ -75,7 +75,7 @@ const PriceChart = ({
 							{outputCurrency ? `${inputCurrency.symbol}/${outputCurrency.symbol}` : inputCurrency.symbol}
 						</span>
 					)}
-					<IconButton classes="padding-sm" icon={IconEnum.ICON_INFORMATION} onClick={onSwitchTokens} />
+					<IconButton classes="padding-sm" icon={IconEnum.ICON_SWAP_LEFT_RIGHT} onClick={onSwitchTokens} />
 					<div>
 						<NormalButton
 							title={t('Basic')}

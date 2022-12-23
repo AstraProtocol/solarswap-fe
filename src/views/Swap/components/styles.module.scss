@@ -24,26 +24,27 @@
     }
 }
 
+
 .swapCallbackErrorInner {
     // background-color: ${({ theme }) => `${theme.colors.failure}`};
-	border-radius: 1rem;
+	// border-radius: 1rem;
 	display: flex;
 	align-items: center;
-	font-size: 0.825rem;
+	// font-size: 0.825rem;
 	width: 100%;
 	padding: 3rem 1.25rem 1rem 1rem;
 	margin-top: -2rem;
 	// color: ${({ theme }) => theme.colors.failure};
 	z-index: -1;
-	p {
-		padding: 0;
-		margin: 0;
-		font-weight: 500;
-	}
+	// p {
+	// 	padding: 0;
+	// 	margin: 0;
+	// 	font-weight: 500;
+	// }
 }
 
 .swapCallbackErrorInnerAlertTriangle {
-    background-color: 'transparent';
+    background-color: var(--contrast-color-theme-10);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -52,3 +53,95 @@
 	min-width: 48px;
 	height: 48px;
 }
+// ------------ AdvancedSwapDetailsDropdown.tsx ---------------------
+.advancedDetailsFooter {
+    margin-top: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    background-color: var(--same-color-theme-10);
+
+    transform: translateY(-100%);
+    transition: transform 300ms ease-in-out;
+}
+
+.advancedDetailsFooterShow {
+    margin-top: 16px;
+    transform: translateY(0%);
+}
+
+// ------------ AdvancedSwapDetailsDropdown.tsx ---------------------
+
+// ------------ AddressInputPanel.tsx ---------------------
+.addressInputPanel {
+    display: flex;
+    flex-flow: column nowrap;
+    position: relative;
+    border-radius: 1.25rem;
+    z-index: 1;
+    width: 100%;
+}
+
+.containerRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.25rem;
+    transition: border-color 300ms 'step-start',
+        color 500ms 'step-start';
+}
+
+.containerRowError {
+    transition: border-color 300ms 'step-end',
+        color 500ms 'step-end';
+}
+
+
+// ------------ AddressInputPanel.tsx ---------------------
+
+// ------------ ProgressSteps.tsx ---------------------
+.circle {
+    min-width: 20px;
+	min-height: 20px;
+	// background-color: ${({ theme, confirmed, disabled }) =>
+	// 	disabled ? theme.colors.backgroundDisabled : confirmed ? theme.colors.success : theme.colors.primary};
+	border-radius: 50%;
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 8px;
+	font-size: 12px;
+}
+
+.circleRow {
+    width: calc(100% - 20px);
+	display: flex;
+	align-items: center;
+} 
+
+.connector {
+    width: 100%;
+	height: 2px;
+	// background: linear-gradient(
+	// 	90deg,
+	// 	${({ theme, prevConfirmed, disabled }) =>
+	// 			disabled
+	// 				? theme.colors.backgroundDisabled
+	// 				: prevConfirmed
+	// 				? theme.colors.success
+	// 				: theme.colors.primary}
+	// 		0%,
+	// 	${({ theme, prevConfirmed, disabled }) =>
+	// 			disabled
+	// 				? theme.colors.backgroundDisabled
+	// 				: prevConfirmed
+	// 				? theme.colors.primary
+	// 				: theme.colors.backgroundDisabled}
+	// 		80%
+	// );
+	opacity: 0.6;
+}
+// ------------ ProgressSteps.tsx ---------------------

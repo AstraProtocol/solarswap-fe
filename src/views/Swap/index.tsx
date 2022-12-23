@@ -61,6 +61,9 @@ import { AppBody } from 'components/App'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import ButtonConnect from 'components/ButtonConnect'
+import CircleLoader from 'components/Loader/CircleLoader'
+import { SwapCallbackError } from './components/SwapCallbackError'
 
 // const Label = styled(Text)`
 // 	font-size: 12px;
@@ -458,8 +461,11 @@ export default function Swap() {
 														'link block-hor-center contrast-bg-color-10 padding-xs border radius-sm'
 													)}
 												>
-													<Icon icon={IconEnum.ICON_ARROW_UP} classes={styles.iconDown} />
-													<Icon icon={IconEnum.ICON_ARROW_DOWN} classes={styles.iconUpDown} />
+													<Icon icon={IconEnum.ICON_DOWN} classes={styles.iconDown} />
+													<Icon
+														icon={IconEnum.ICON_SWAP_TOP_DOWN}
+														classes={styles.iconUpDown}
+													/>
 												</div>
 
 												{recipient === null && !showWrap && isExpertMode ? (
@@ -491,7 +497,9 @@ export default function Swap() {
 										{isExpertMode && recipient !== null && !showWrap ? (
 											<>
 												<Row style={{ padding: '0 1rem', justifyContent: 'space-between' }}>
-													<div clickable={false}>{/* <ArrowDownIcon width="16px" /> */}</div>
+													<div style={{ padding: 2 }}>
+														<Icon icon={IconEnum.ICON_ARROW_DOWN} />
+													</div>
 													<NormalButton
 														variant="text"
 														id="remove-recipient-button"
@@ -500,11 +508,11 @@ export default function Swap() {
 														{t('- Remove send')}
 													</NormalButton>
 												</Row>
-												{/* <AddressInputPanel
+												<AddressInputPanel
 													id="recipient"
 													value={recipient}
 													onChange={onChangeRecipient}
-												/> */}
+												/>
 											</>
 										) : null}
 
@@ -513,8 +521,10 @@ export default function Swap() {
 												<Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
 													{Boolean(trade) && (
 														<>
-															<span className="text text-base">{t('Price')}</span>
-															{/* {isLoading ? (
+															<span className="text text-sm contrast-color-70">
+																{t('Price')}
+															</span>
+															{isLoading ? (
 																<Skeleton height={36} width={128} baseColor="#312e39" />
 															) : (
 																<TradePrice
@@ -522,12 +532,14 @@ export default function Swap() {
 																	showInverted={showInverted}
 																	setShowInverted={setShowInverted}
 																/>
-															)} */}
+															)}
 														</>
 													)}
 												</Row>
 												<Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-													<span className="text text-sm">{t('Slippage Tolerance')}</span>
+													<span className="text text-sm contrast-color-70">
+														{t('Slippage Tolerance')}
+													</span>
 													<span className="text text-sm text-bold">
 														{allowedSlippage / 100}%
 													</span>
@@ -535,49 +547,56 @@ export default function Swap() {
 											</div>
 										)}
 									</div>
-									{/* <Box mt="0.25rem">
+									<div className="margin-top-md">
 										{swapIsUnsupported ? (
-											<Button width="100%" disabled>
+											<NormalButton classes={{ other: 'width-100 text-base' }} disabled>
 												{t('Unsupported Asset')}
-											</Button>
+											</NormalButton>
 										) : !account ? (
-											<ConnectWalletButton width="100%" />
+											<ButtonConnect />
 										) : showWrap ? (
-											<Button width="100%" disabled={Boolean(wrapInputError)} onClick={onWrap}>
+											<NormalButton
+												classes={{ other: 'width-100 text-base' }}
+												disabled={Boolean(wrapInputError)}
+												onClick={onWrap}
+											>
 												{wrapInputError ??
 													(wrapType === WrapType.WRAP
 														? 'Wrap'
 														: wrapType === WrapType.UNWRAP
 														? 'Unwrap'
 														: null)}
-											</Button>
+											</NormalButton>
 										) : noRoute && userHasSpecifiedInputOutput ? (
-											<GreyCard style={{ textAlign: 'center', padding: '0.75rem' }}>
-												<Text color="textSubtle">
+											// <GreyCard style={{ textAlign: 'center', padding: '0.75rem' }}>
+											<div>
+												<span className="text text-base">
 													{t('Insufficient liquidity for this trade.')}
-												</Text>
+												</span>
 												{singleHopOnly && (
-													<Text color="textSubtle">
+													<span className="text text-base">
 														{t('Try enabling multi-hop trades.')}
-													</Text>
+													</span>
 												)}
-											</GreyCard>
-										) : showApproveFlow ? (
-											<RowBetween>
-												<Button
+											</div>
+										) : //  </GreyCard>
+										showApproveFlow ? (
+											<Row style={{ justifyContent: 'space-between' }}>
+												<NormalButton
 													variant={
-														approval === ApprovalState.APPROVED ? 'success' : 'primary'
+														approval === ApprovalState.APPROVED ? 'primary' : 'default'
 													}
 													onClick={approveCallback}
 													disabled={
 														approval !== ApprovalState.NOT_APPROVED || approvalSubmitted
 													}
-													width="48%"
+													classes={{ other: 'width-100 text-base' }}
+													// width="48%"
 												>
 													{approval === ApprovalState.PENDING ? (
-														<AutoRow gap="6px" justify="center">
+														<Row style={{ justifyContent: 'center' }}>
 															{t('Enabling')} <CircleLoader stroke="white" />
-														</AutoRow>
+														</Row>
 													) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
 														t('Enabled')
 													) : (
@@ -585,9 +604,9 @@ export default function Swap() {
 															asset: currencies[Field.INPUT]?.symbol ?? ''
 														})
 													)}
-												</Button>
-												<Button
-													variant={isValid && priceImpactSeverity > 2 ? 'danger' : 'primary'}
+												</NormalButton>
+												<NormalButton
+													// variant={isValid && priceImpactSeverity > 2 ? 'danger' : 'primary'}
 													onClick={() => {
 														if (isExpertMode) {
 															handleSwap()
@@ -601,7 +620,8 @@ export default function Swap() {
 															onPresentConfirmModal()
 														}
 													}}
-													width="48%"
+													// width="48%"
+													classes={{ other: 'width-100 text-base' }}
 													id="swap-button"
 													disabled={
 														!isValid ||
@@ -614,15 +634,15 @@ export default function Swap() {
 														: priceImpactSeverity > 2
 														? t('Swap Anyway')
 														: t('Swap')}
-												</Button>
-											</RowBetween>
+												</NormalButton>
+											</Row>
 										) : (
-											<Button
-												variant={
-													isValid && priceImpactSeverity > 2 && !swapCallbackError
-														? 'danger'
-														: 'primary'
-												}
+											<NormalButton
+												// variant={
+												// 	isValid && priceImpactSeverity > 2 && !swapCallbackError
+												// 		? 'danger'
+												// 		: 'primary'
+												// }
 												onClick={() => {
 													if (isExpertMode) {
 														handleSwap()
@@ -636,8 +656,9 @@ export default function Swap() {
 														onPresentConfirmModal()
 													}
 												}}
+												classes={{ other: 'width-100 text-base' }}
 												id="swap-button"
-												width="100%"
+												// width="100%"
 												disabled={
 													!isValid ||
 													(priceImpactSeverity > 3 && !isExpertMode) ||
@@ -650,17 +671,17 @@ export default function Swap() {
 														: priceImpactSeverity > 2
 														? t('Swap Anyway')
 														: t('Swap'))}
-											</Button>
+											</NormalButton>
 										)}
 										{showApproveFlow && (
-											<Column style={{ marginTop: '1rem' }}>
+											<div className="flex col" style={{ marginTop: '1rem' }}>
 												<ProgressSteps steps={[approval === ApprovalState.APPROVED]} />
-											</Column>
+											</div>
 										)}
 										{isExpertMode && swapErrorMessage ? (
 											<SwapCallbackError error={swapErrorMessage} />
 										) : null}
-									</Box> */}
+									</div>
 								</div>
 							</AppBody>
 							{!swapIsUnsupported ? (

@@ -1,0 +1,55 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes ellipsis {
+    0% {
+        content: '.';
+    }
+    33% {
+        content: '..';
+    }
+    66% {
+        content: '...';
+    }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+};
+
+.svg { 
+    animation: 2s rotate linear infinite;
+	path {
+		stroke: var(--secondary-color-normal);
+	}
+}
+
+.dot {
+    &::after {
+		display: inline-block;
+		animation: ellipsis 1.25s infinite;
+		content: '.';
+		width: 1em;
+		text-align: left;
+	}
+}
+
+.astraSpinner {
+    position: absolute;
+	top: 0;
+	left: 0;
+	animation: rotate 2s linear infinite;
+	transform: translate3d(0, 0, 0);
+}

@@ -1,5 +1,7 @@
+import clsx from 'clsx'
 import useLastTruthy from 'hooks/useLast'
 import { AdvancedSwapDetails, AdvancedSwapDetailsProps } from './AdvancedSwapDetails'
+import styles from './styles.module.scss'
 
 // const AdvancedDetailsFooter = styled.div<{ show: boolean }>`
 // 	margin-top: ${({ show }) => (show ? '16px' : 0)};
@@ -18,7 +20,7 @@ export default function AdvancedSwapDetailsDropdown({ trade, ...rest }: Advanced
 	const lastTrade = useLastTruthy(trade)
 
 	return (
-		<div show={Boolean(trade)}>
+		<div className={clsx(styles.advancedDetailsFooter, Boolean(trade) && styles.advancedDetailsFooterShow)}>
 			<AdvancedSwapDetails {...rest} trade={trade ?? lastTrade ?? undefined} />
 		</div>
 	)
