@@ -3,6 +3,7 @@ import { useTranslation } from 'contexts/Localization'
 import { escapeRegExp } from '../../utils'
 import { Form } from '@astraprotocol/astra-ui'
 import styles from './styles.module.scss'
+import clsx from 'clsx'
 
 const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`) // match escaped "." characters via in a non-capturing group
 
@@ -27,7 +28,7 @@ export const Input = memo(function InnerInput({
 	const { t } = useTranslation()
 
 	return (
-		<Form.NumberInput
+		<input
 			{...rest}
 			value={value}
 			onChange={event => {
@@ -46,7 +47,10 @@ export const Input = memo(function InnerInput({
 			minLength={1}
 			maxLength={79}
 			spellCheck="false"
-			className={styles.input}
+			className={clsx(
+				styles.input,
+				'padding-left-sm padding-right-sm padding-top-md padding-bottom-md same-bg-color-20 border radius-lg'
+			)}
 		/>
 	)
 })

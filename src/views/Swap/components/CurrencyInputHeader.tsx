@@ -44,26 +44,31 @@ const CurrencyInputHeader: React.FC<Props> = ({
 	const [onPresentTransactionsModal] = useModal(<TransactionsModal />)
 
 	return (
-		<div className="flex col flex-align-center padding-lg width-100 border border-bottom-base">
+		<div className="flex col flex-align-center padding-md width-100 border border-bottom-base">
 			<div className="flex width-100 flex-align-center flex-justify-space-between">
 				{setIsChartDisplayed && isChartDisplayed ? (
-					<IconButton icon={IconEnum.ICON_CHART_BAR_OFF} onClick={toggleChartDisplayed} />
+					<IconButton size="lg" icon={IconEnum.ICON_CHART_BAR_OFF} onClick={toggleChartDisplayed} />
 				) : (
-					<IconButton icon={IconEnum.ICON_CHART_BAR_ON} onClick={toggleChartDisplayed} />
+					<IconButton size="lg" icon={IconEnum.ICON_CHART_BAR_ON} onClick={toggleChartDisplayed} />
 				)}
-				<div className="flex flex-align-end width-100">
-					<span className="text text-base text-bold">{title}</span>
+				<div className="flex flex-align-end flex-justify-center width-100">
+					<span className="text text-lg text-bold">{title}</span>
 				</div>
 				<Row>
 					<NotificationDot show={expertMode}>
 						<GlobalSettings color="textSubtle" mr="0" />
 					</NotificationDot>
-					<IconButton icon={IconEnum.ICON_RECENT} onClick={onPresentTransactionsModal} />
-					<IconButton icon={IconEnum.ICON_RELOAD} onClick={() => onRefreshPrice()} />
+					<IconButton
+						classes="padding-right-xs"
+						size="lg"
+						icon={IconEnum.ICON_RECENT}
+						onClick={onPresentTransactionsModal}
+					/>
+					<IconButton size="lg" icon={IconEnum.ICON_RELOAD} onClick={() => onRefreshPrice()} />
 				</Row>
 			</div>
 			<div className="flex flex-align-center">
-				<span className="text text-sm">{subtitle}</span>
+				<span className="text text-sm contrast-color-70">{subtitle}</span>
 			</div>
 		</div>
 	)

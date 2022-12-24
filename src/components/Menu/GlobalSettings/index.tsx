@@ -12,7 +12,12 @@ const GlobalSettings = ({ color, mr = '8px' }: Props) => {
 
 	return (
 		<div className="flex">
-			<IconButton onClick={onPresentSettingsModal} icon={IconEnum.ICON_SETTING} classes="alert-color-error" />
+			<IconButton
+				size="lg"
+				onClick={onPresentSettingsModal}
+				icon={IconEnum.ICON_SETTING}
+				classes="alert-color-error padding-right-xs"
+			/>
 		</div>
 	)
 }

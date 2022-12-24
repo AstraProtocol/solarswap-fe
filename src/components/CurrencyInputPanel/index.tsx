@@ -114,7 +114,11 @@ export default function CurrencyInputPanel({
 					) : null}
 				</div>
 				{account && (
-					<span onClick={onMax} className="text text-sm" style={{ display: 'inline', cursor: 'pointer' }}>
+					<span
+						onClick={onMax}
+						className="text text-sm contrast-color-70"
+						style={{ display: 'inline', cursor: 'pointer' }}
+					>
 						{!hideBalance && !!currency
 							? t('Balance: %balance%', {
 									balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading')
@@ -123,22 +127,22 @@ export default function CurrencyInputPanel({
 					</span>
 				)}
 			</div>
-			<div className={styles.inputPanel}>
-				<div className="border radius-lg">
-					<div className={styles.labelRow}>
-						<NumericalInput
-							className="token-amount-input"
-							value={value}
-							onUserInput={val => {
-								onUserInput(val)
-							}}
-						/>
-					</div>
-					<div className={styles.inputRow}>
-						{account && currency && showMaxButton && label !== 'To' && (
-							<NormalButton onClick={onMax}>{t('Max').toLocaleUpperCase(locale)}</NormalButton>
-						)}
-					</div>
+			<div className="border radius-lg same-bg-color-50 margin-bottom-md margin-left-sm">
+				<div className={styles.labelRow}>
+					<NumericalInput
+						className="token-amount-input"
+						value={value}
+						onUserInput={val => {
+							onUserInput(val)
+						}}
+					/>
+				</div>
+				<div className={styles.inputRow}>
+					{account && currency && showMaxButton && label !== 'To' && (
+						<NormalButton variant="text" classes={{ color: 'secondary-color-normal' }} onClick={onMax}>
+							{t('Max').toLocaleUpperCase(locale)}
+						</NormalButton>
+					)}
 				</div>
 			</div>
 		</div>

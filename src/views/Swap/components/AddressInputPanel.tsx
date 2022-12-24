@@ -97,32 +97,35 @@ export default function AddressInputPanel({
 
 	return (
 		<div className={styles.addressInputPanel} id={id}>
-			<div className={clsx(styles.containerRow, error && styles.containerRowError)}>
-				<div className="flex">
-					<AutoColumn gap="md">
-						<Row style={{ justifyContent: 'space-between' }}>
-							<span className="text text-base">{t('Recipient')}</span>
-							{address && chainId && (
-								<Typography.Link href={getAstraScanLink(name ?? address, 'address', chainId)}>
-									{t('View on AstraExplorer')}
-								</Typography.Link>
-							)}
-						</Row>
-						<Form.Input
-							className="recipient-address-input"
-							type="text"
-							autoComplete="off"
-							autoCorrect="off"
-							autoCapitalize="off"
-							spellCheck="false"
-							placeholder={t('Wallet Address or ENS name')}
-							// error={error}
-							pattern="^(0x[a-fA-F0-9]{40})$"
-							onChange={handleInput}
-							value={value}
-						/>
-					</AutoColumn>
-				</div>
+			<div
+				className={clsx(
+					styles.containerRow,
+					'flex col border border-base radius-lg padding-md',
+					error && styles.containerRowError
+				)}
+			>
+				<Row style={{ justifyContent: 'space-between' }}>
+					<span className="text text-base">{t('Recipient')}</span>
+					{address && chainId && (
+						<Typography.Link href={getAstraScanLink(name ?? address, 'address', chainId)}>
+							{t('View on AstraExplorer')}
+						</Typography.Link>
+					)}
+				</Row>
+				<Form.Input
+					className=" recipient-address-input"
+					type="text"
+					autoComplete="off"
+					autoCorrect="off"
+					autoCapitalize="off"
+					spellCheck="false"
+					placeholder={t('Wallet Address or ENS name')}
+					// error={error}
+					pattern="^(0x[a-fA-F0-9]{40})$"
+					onChange={handleInput}
+					value={value}
+					classes={{ option: ' ', wapper: 'margin-top-md' }}
+				/>
 			</div>
 		</div>
 	)

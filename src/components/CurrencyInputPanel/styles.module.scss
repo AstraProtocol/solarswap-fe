@@ -6,13 +6,12 @@
 	outline: none;
 	border: none;
 	flex: 1 1 auto;
-	background-color: transparent;
 	font-size: 16px;
-	text-align: 'right';
+	text-align: right;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding: 0px;
+	
 	-webkit-appearance: textfield;
 
 	::-webkit-search-decoration {
@@ -48,14 +47,14 @@
 	// color: ${({ theme }) => theme.colors.text};
 	font-size: 0.75rem;
 	line-height: 1rem;
-	padding: 0.75rem 1rem 0 1rem;
+	// padding: 0.75rem 1rem 0 1rem;
 }
 
 .inputPanel {
-	display: flex;
-	flex-flow: column nowrap;
-	position: relative;
-	border-radius: 20px;
+	// display: flex;
+	// flex-flow: column nowrap;
+	// position: relative;
+	// border-radius: 20px;
 	// background-color: ${({ theme }) => theme.colors.backgroundAlt};
-	z-index: 1;
+	// z-index: 1;
 }

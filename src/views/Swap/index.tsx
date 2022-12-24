@@ -419,7 +419,7 @@ export default function Swap() {
 				<div className="flex col">
 					<div className={styles.swapContainer}>
 						<div className={styles.inputCurrencyWrapper}>
-							<AppBody>
+							<AppBody className="border border-base radius-lg">
 								<CurrencyInputHeader
 									title={t('Swap')}
 									subtitle={t('Trade tokens in an instant')}
@@ -428,7 +428,7 @@ export default function Swap() {
 									hasAmount={hasAmount}
 									onRefreshPrice={onRefreshPrice}
 								/>
-								<div id="swap-page" style={{ minHeight: '412px' }}>
+								<div id="swap-page" className=" padding-right-sm" style={{ minHeight: '412px' }}>
 									<div className="flex col">
 										<CurrencyInputPanel
 											label={
@@ -472,7 +472,10 @@ export default function Swap() {
 													<NormalButton
 														variant="text"
 														id="add-recipient-button"
-														classes={{ color: 'contrast-color-70' }}
+														classes={{
+															color: 'secondary-color-normal',
+															other: 'text text-sm'
+														}}
 														onClick={() => onChangeRecipient('')}
 													>
 														{t('+ Add a send (optional)')}
@@ -496,12 +499,19 @@ export default function Swap() {
 										/>
 
 										{isExpertMode && recipient !== null && !showWrap ? (
-											<>
-												<Row style={{ padding: '0 1rem', justifyContent: 'space-between' }}>
-													<div style={{ padding: 2 }}>
-														<Icon icon={IconEnum.ICON_ARROW_DOWN} />
-													</div>
+											<div className="margin-bottom-md">
+												<Row
+													style={{
+														padding: '0 2rem',
+														alignItems: 'center'
+													}}
+												>
+													<Icon icon={IconEnum.ICON_DOWN} />
 													<NormalButton
+														classes={{
+															color: 'secondary-color-normal',
+															other: 'text text-sm'
+														}}
 														variant="text"
 														id="remove-recipient-button"
 														onClick={() => onChangeRecipient(null)}
@@ -514,11 +524,11 @@ export default function Swap() {
 													value={recipient}
 													onChange={onChangeRecipient}
 												/>
-											</>
+											</div>
 										) : null}
 
 										{showWrap ? null : (
-											<div className="flex col" style={{ padding: '0 16px' }}>
+											<div className="flex col margin-left-xl">
 												<Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
 													{Boolean(trade) && (
 														<>
@@ -541,14 +551,12 @@ export default function Swap() {
 													<span className="text text-sm contrast-color-70">
 														{t('Slippage Tolerance')}
 													</span>
-													<span className="text text-sm text-bold">
-														{allowedSlippage / 100}%
-													</span>
+													<span className="text text-base">{allowedSlippage / 100}%</span>
 												</Row>
 											</div>
 										)}
 									</div>
-									<div className="margin-top-md">
+									<div className="margin-top-md margin-bottom-md margin-left-sm">
 										{swapIsUnsupported ? (
 											<NormalButton classes={{ other: 'width-100 text-base' }} disabled>
 												{t('Unsupported Asset')}

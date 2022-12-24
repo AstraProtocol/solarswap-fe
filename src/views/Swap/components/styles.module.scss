@@ -79,16 +79,12 @@
     display: flex;
     flex-flow: column nowrap;
     position: relative;
-    border-radius: 1.25rem;
     z-index: 1;
     width: 100%;
+    margin: 0 1rem;
 }
 
 .containerRow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1.25rem;
     transition: border-color 300ms 'step-start',
         color 500ms 'step-start';
 }

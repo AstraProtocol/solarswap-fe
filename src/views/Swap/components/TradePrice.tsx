@@ -1,4 +1,4 @@
-import { Icon } from '@astraprotocol/astra-ui'
+import { Icon, IconEnum } from '@astraprotocol/astra-ui'
 import { Price } from '@solarswap/sdk'
 import { useTranslation } from 'contexts/Localization'
 import styles from './styles.module.scss'
@@ -24,7 +24,7 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
 				<>
 					{formattedPrice ?? '-'} {label}
 					<div className={styles.viewBalanceMaxMini} onClick={() => setShowInverted(!showInverted)}>
-						<Icon icon={'renew'} width="14px" />
+						<Icon classes="secondary-color-normal" icon={IconEnum.ICON_SWAP_LEFT_RIGHT} />
 					</div>
 				</>
 			) : (
