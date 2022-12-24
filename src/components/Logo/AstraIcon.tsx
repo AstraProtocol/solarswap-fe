@@ -6,7 +6,7 @@ export interface LogoProps extends Omit<ImageProps, 'src'> {}
  * Render Astra Icon
  */
 const AstraIcon: React.FC<LogoProps> = ({ alt, ...rest }) => {
-	return <Image {...rest} alt={alt} src={'/images/logo/asa.svg'} />
+	return <Image {...rest} alt={alt} objectFit="contain" src={'/images/logo/asa.svg'} />
 }
 
 export default AstraIcon

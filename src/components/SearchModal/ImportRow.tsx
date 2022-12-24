@@ -44,7 +44,7 @@ export default function ImportRow({
 
 	return (
 		<div className={styles.tokenSection} style={style}>
-			<CurrencyLogo currency={token} size={isMobile ? '20px' : '24px'} style={{ opacity: dim ? '0.6' : '1' }} />
+			<CurrencyLogo currency={token} size={isMobile ? 20 : 24} style={{ opacity: dim ? '0.6' : '1' }} />
 			<div style={{ opacity: dim ? '0.6' : '1' }}>
 				<Row style={{ alignItems: 'center' }}>
 					<span className="text text-base">{token.symbol}</span>

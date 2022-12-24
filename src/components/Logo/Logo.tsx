@@ -29,7 +29,7 @@ const Logo: React.FC<LogoProps> = ({ srcs, alt, ...rest }) => {
 		)
 	}
 
-	return <Icon icon={IconEnum.ICON_WARNING} style={{ fontSize: rest.height }} />
+	return <Icon icon={IconEnum.ICON_HELP} style={{ fontSize: rest.height }} />
 }
 
 export default Logo

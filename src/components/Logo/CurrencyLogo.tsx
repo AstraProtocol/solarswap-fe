@@ -46,6 +46,7 @@ export default function CurrencyLogo({
 			width={size}
 			height={size}
 			srcs={srcs}
+			objectFit="contain"
 			alt={`${currency?.symbol ?? 'token'} logo`}
 			style={style}
 		/>
