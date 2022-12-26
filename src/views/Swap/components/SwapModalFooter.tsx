@@ -10,13 +10,16 @@ import {
 	formatExecutionPrice,
 	warningSeverity
 } from 'utils/prices'
-import { AutoColumn } from 'components/Layout/Column'
+// import { AutoColumn } from 'components/Layout/Column'
 // import QuestionHelper from 'components/QuestionHelper'
 
 import FormattedPriceImpact from './FormattedPriceImpact'
 // import { StyledBalanceMaxMini, SwapCallbackError } from './styleds'
-import { NormalButton, Row } from '@astraprotocol/astra-ui'
+import { Icon, IconEnum, NormalButton, Row } from '@astraprotocol/astra-ui'
 import styles from './styles.module.scss'
+import QuestionHelper from 'components/QuestionHelper'
+import { SwapCallbackError } from './SwapCallbackError'
+import { TOTAL_FEE } from 'config/constants/info'
 // const SwapModalFooterContainer = styled(AutoColumn)`
 //   margin-top: 24px;
 //   padding: 16px;
@@ -49,7 +52,7 @@ export default function SwapModalFooter({
 
 	return (
 		<>
-			<div className="margin-top-lg padding-md">
+			<div className="margin-top-lg padding-md border border-base radius-lg margin-bottom-md same-bg-color-50">
 				<Row className="flex-justify-space-between flex-align-center">
 					<span className="text text-sm">{t('Price')}</span>
 					<span
@@ -64,30 +67,30 @@ export default function SwapModalFooter({
 					>
 						{formatExecutionPrice(trade, showInverted)}
 						<div className={styles.viewBalanceMaxMini} onClick={() => setShowInverted(!showInverted)}>
-							{/* <AutoRenewIcon width="14px" /> */}
+							<Icon icon={IconEnum.ICON_SWAP_LEFT_RIGHT} classes="secondary-color-normal" />
 						</div>
 					</span>
 				</Row>
 
 				<Row>
-					<Row>
-						<span className="text text-sm">
+					<Row className="flex-align-center">
+						<span className="text text-sm margin-right-2xs">
 							{trade.tradeType === TradeType.EXACT_INPUT ? t('Minimum received') : t('Maximum sold')}
 						</span>
 						{/* <QuestionHelper
 							text={t(
 								'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.'
 							)}
-							ml="4px"
+							id="tooltip-footer-amount"
 						/> */}
 					</Row>
-					<Row>
-						<span className="text text-sm">
+					<Row className="flex-align-center flex-justify-end">
+						<span className="text text-sm margin-right-2xs">
 							{trade.tradeType === TradeType.EXACT_INPUT
 								? slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4) ?? '-'
 								: slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4) ?? '-'}
 						</span>
-						<span className="text text-sm" marginLeft="4px">
+						<span className="text text-sm">
 							{trade.tradeType === TradeType.EXACT_INPUT
 								? trade.outputAmount.currency.symbol
 								: trade.inputAmount.currency.symbol}
@@ -95,28 +98,24 @@ export default function SwapModalFooter({
 					</Row>
 				</Row>
 				<Row>
-					<Row>
-						<span className="text text-sm">{t('Price Impact')}</span>
+					<Row className="flex-align-center">
+						<span className="text text-sm margin-right-2xs">{t('Price Impact')}</span>
 						{/* <QuestionHelper
 							text={t('The difference between the market price and your price due to trade size.')}
-							ml="4px"
+							id="tooltip-footer-price-impact"
 						/> */}
 					</Row>
 					<FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
 				</Row>
 				<Row>
-					<Row>
-						<span className="text text-sm">{t('Liquidity Provider Fee')}</span>
+					<Row className="flex-align-center" style={{ position: 'relative' }}>
+						<span className="text text-sm margin-right-2xs">{t('Liquidity Provider Fee')}</span>
 						{/* <QuestionHelper
-							text={
-								<>
-									<span mb="12px">
-										{t('For each trade a %amount% fee is paid', { amount: '0.25%' })}
-									</span>
-									<span>- {t('%amount% to LP token holders', { amount: '0.2%' })}</span>
-								</>
-							}
-							ml="4px"
+							text={`
+									${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })}
+									`}
+							// ${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
+							id="tooltip-footer-liquid-fee"
 						/> */}
 					</Row>
 					<span className="text text-sm">
@@ -128,7 +127,12 @@ export default function SwapModalFooter({
 			</div>
 
 			<Row>
-				<NormalButton onClick={onConfirm} disabled={disabledConfirm} id="confirm-swap-or-send">
+				<NormalButton
+					classes={{ other: 'text text-base width-100' }}
+					onClick={onConfirm}
+					disabled={disabledConfirm}
+					id="confirm-swap-or-send"
+				>
 					{severity > 2 ? t('Swap Anyway') : t('Confirm Swap')}
 				</NormalButton>
 

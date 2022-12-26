@@ -8,7 +8,7 @@ import { CurrencyLogo } from 'components/Logo'
 // import { Row, Row } from 'components/Layout/Row'
 import truncateHash from 'utils/truncateHash'
 // import { TruncatedText, SwapShowAcceptChanges } from './styleds'
-import { NormalButton, Row } from '@astraprotocol/astra-ui'
+import { Icon, IconEnum, NormalButton, Row } from '@astraprotocol/astra-ui'
 
 export default function SwapModalHeader({
 	trade,
@@ -63,28 +63,26 @@ export default function SwapModalHeader({
 
 	return (
 		<AutoColumn gap="md">
-			<Row align="flex-end">
-				<Row gap="0px">
-					<CurrencyLogo currency={trade.inputAmount.currency} size="24px" style={{ marginRight: '12px' }} />
+			<Row>
+				<Row>
+					<CurrencyLogo currency={trade.inputAmount.currency} size={24} />
 					<span
-						fontSize="24px"
+						className="text text-lg margin-left-sm"
 						color={showAcceptChanges && trade.tradeType === TradeType.EXACT_OUTPUT ? 'primary' : 'text'}
 					>
 						{trade.inputAmount.toSignificant(6)}
 					</span>
 				</Row>
-				<Row gap="0px">
-					<span fontSize="24px" ml="10px">
-						{trade.inputAmount.currency.symbol}
-					</span>
-				</Row>
+				<span className="text text-lg margin-left-sm">{trade.inputAmount.currency.symbol}</span>
 			</Row>
-			<Row>{/* <ArrowDownIcon width="16px" ml="4px" /> */}</Row>
-			<Row align="flex-end">
-				<Row gap="0px">
-					<CurrencyLogo currency={trade.outputAmount.currency} size="24px" style={{ marginRight: '12px' }} />
+			<div className="flex flex-justify-center">
+				<Icon icon={IconEnum.ICON_DOWN} className="text-lg" />
+			</div>
+			<Row>
+				<Row>
+					<CurrencyLogo currency={trade.outputAmount.currency} size={24} />
 					<div
-						fontSize="24px"
+						className="text text-lg margin-left-sm"
 						color={
 							priceImpactSeverity > 2
 								? 'failure'
@@ -96,40 +94,36 @@ export default function SwapModalHeader({
 						{trade.outputAmount.toSignificant(6)}
 					</div>
 				</Row>
-				<Row gap="0px">
-					<span fontSize="24px" ml="10px">
-						{trade.outputAmount.currency.symbol}
-					</span>
-				</Row>
+				<span className="text text-lg margin-left-sm">{trade.outputAmount.currency.symbol}</span>
 			</Row>
 			{showAcceptChanges ? (
-				<div justify="flex-start" gap="0px">
+				<div className="flex-justify-start">
 					<Row>
 						<Row>
-							{/* <ErrorIcon mr="8px" /> */}
-							<span bold> {t('Price Updated')}</span>
+							<Icon icon={IconEnum.ICON_WARNING} classes="margin-right-sm" />
+							<span className="text text-base text-bold"> {t('Price Updated')}</span>
 						</Row>
 						<NormalButton onClick={onAcceptChanges}>{t('Accept')}</NormalButton>
 					</Row>
 				</div>
 			) : null}
-			<AutoColumn justify="flex-start" gap="sm" style={{ padding: '24px 0 0 0px' }}>
-				<span small color="textSubtle" textAlign="left" style={{ width: '100%' }}>
+			<div className="flex col flex-justify-start padding-left-md">
+				<span className="text text-sm width-100">
 					{estimatedText}
 					<b>
 						{amount} {symbol}
 					</b>
 					{transactionRevertText}
 				</span>
-			</AutoColumn>
+			</div>
 			{recipient !== null ? (
-				<AutoColumn justify="flex-start" gap="sm" style={{ padding: '12px 0 0 0px' }}>
+				<div className="flex col flex-justify-start padding-left-sm">
 					<span color="textSubtle">
 						{recipientSentToText}
 						<b title={recipient}>{truncatedRecipient}</b>
 						{postSentToText}
 					</span>
-				</AutoColumn>
+				</div>
 			) : null}
 		</AutoColumn>
 	)

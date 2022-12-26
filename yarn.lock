@@ -37,7 +37,7 @@
   integrity sha512-Azq0Yqged21YVt9gznIhNURsSy0uws3o50x/adBn45eUwrVyNZwcNBZ9kEoXL3y3dRN5jYGiECL1XM+oAEB1Kw==
 
 "@astraprotocol/astra-ui@file:../../Github/astra-ui":
-  version "1.0.28"
+  version "1.0.26"
   dependencies:
     "@types/numeral" "^2.0.2"
     "@types/react-copy-to-clipboard" "^5.0.4"
@@ -1453,24 +1453,12 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.0.2.tgz#d06a66d3ad8214186eda2432ac8b8d81868a571f"
   integrity sha512-Skfy0YS3NJ5nV9us0uuPN0HDk1Q4edljaOhRBJGDWs9EBa7ZVMYBHRFlhLvvmwEoaIM9BlH6QJFn9/uZg0bACg==
 
-"@floating-ui/core@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.0.4.tgz#03066eaea8e9b2a2cd3f5aaa60f1e0f580ebe88e"
-  integrity sha512-FPFLbg2b06MIw1dqk2SOEMAMX3xlrreGjcui5OTxfBDtaKTmh0kioOVjT8gcfl58juawL/yF+S+gnq8aUYQx/Q==
-
 "@floating-ui/dom@^1.0.1":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.0.7.tgz#9e8e6615ce03e5ebc6a4ae879640a199a366f86d"
   integrity sha512-6RsqvCYe0AYWtsGvuWqCm7mZytnXAZCjWtsWu1Kg8dI3INvj/DbKlDsZO+mKSaQdPT12uxIW9W2dAWJkPx4Y5g==
   dependencies:
     "@floating-ui/core" "^1.0.2"
-
-"@floating-ui/dom@^1.0.4":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.0.12.tgz#07c870a05d9b825a6d7657524f48fe6761722800"
-  integrity sha512-HeG/wHoa2laUHlDX3xkzqlUqliAfa+zqV04LaKIwNCmCNaW2p0fQi4/Kd0LB4GdFoJ2UllLFq5gWnXAd67lg7w==
-  dependencies:
-    "@floating-ui/core" "^1.0.4"
 
 "@formatjs/ecma402-abstract@1.11.4":
   version "1.11.4"
@@ -4330,7 +4318,7 @@ cjs-module-lexer@^1.0.0:
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
 
-classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.2:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
@@ -9696,13 +9684,13 @@ react-toastify@^9.1.1:
   dependencies:
     clsx "^1.1.1"
 
-react-tooltip@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-5.2.0.tgz#e10e7de2385e8fe6bf3438739c574558b455de3b"
-  integrity sha512-EH6XIg2MDbMTEElSAZQVXMVeFoOhTgQuea2or0iwyzsr9v8rJf3ImMhOtq7Xe/BPlougxC+PmOibazodLdaRoA==
+react-tooltip@^4.5.0:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-4.5.1.tgz#77eccccdf16adec804132e558ec20ca5783b866a"
+  integrity sha512-Zo+CSFUGXar1uV+bgXFFDe7VeS2iByeIp5rTgTcc2HqtuOS5D76QapejNNfx320MCY91TlhTQat36KGFTqgcvw==
   dependencies:
-    "@floating-ui/dom" "^1.0.4"
-    classnames "^2.3.2"
+    prop-types "^15.8.1"
+    uuid "^7.0.3"
 
 react-transition-group@^2.5.0:
   version "2.9.0"
@@ -11443,6 +11431,11 @@ util@^0.12.3, util@^0.12.4:
     is-generator-function "^1.0.7"
     is-typed-array "^1.1.3"
     which-typed-array "^1.1.2"
+
+uuid@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
+  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
 
 uuid@^8.3.2:
   version "8.3.2"

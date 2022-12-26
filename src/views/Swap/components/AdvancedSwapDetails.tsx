@@ -11,6 +11,7 @@ import FormattedPriceImpact from './FormattedPriceImpact'
 import SwapRoute from './SwapRoute'
 import { Row } from '@astraprotocol/astra-ui'
 import QuestionHelper from 'components/QuestionHelper'
+import { TOTAL_FEE } from 'config/constants/info'
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
 	const { t } = useTranslation()
@@ -21,16 +22,15 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 	return (
 		<div style={{ padding: '0 16px' }}>
 			<Row style={{ justifyContent: 'space-between' }}>
-				<Row>
-					<span className="text text-base contrast-color-70">
+				<Row className="flex flex-align-center">
+					<span className="text text-sm contrast-color-70 margin-right-2xs">
 						{isExactIn ? t('Minimum received') : t('Maximum sold')}
 					</span>
 					<QuestionHelper
 						text={t(
 							'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.'
 						)}
-						ml="4px"
-						placement="top-start"
+						id="tooltip-amount"
 					/>
 				</Row>
 				<span className="text text-base">
@@ -44,40 +44,32 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 				</span>
 			</Row>
 			<Row>
-				<Row>
-					<span className="text text-base contrast-color-70">{t('Price Impact')}</span>
+				<Row className="flex flex-align-center">
+					<span className="text text-sm contrast-color-70 margin-right-2xs">{t('Price Impact')}</span>
 					<QuestionHelper
 						text={t('The difference between the market price and estimated price due to trade size.')}
-						ml="4px"
-						placement="top-start"
+						id="tooltip-price-impact"
 					/>
 				</Row>
 				<FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
 			</Row>
 
 			<Row>
-				<Row>
-					<span className="text text-base contrast-color-70">{t('Liquidity Provider Fee')}</span>
-					<QuestionHelper
-						text={
-							<>
-								<span className="text text-sm">
-									{t('For each trade a %amount% fee is paid', { amount: '0.25%' })}
-								</span>
-								<span className="text text-sm">
-									- {t('%amount% to LP token holders', { amount: '0.2%' })}
-								</span>
-								<span className="text text-sm">
-									- {t('%amount% to the Treasury', { amount: '0.03%' })}
-								</span>
-								<span className="text text-sm">
-									- {t('%amount% towards ASTRA buyback', { amount: '0.05%' })}
-								</span>
-							</>
-						}
-						ml="4px"
-						placement="top-start"
-					/>
+				<Row className="flex flex-align-center">
+					<span className="text text-sm contrast-color-70 margin-right-2xs">
+						{t('Liquidity Provider Fee')}
+						<QuestionHelper
+							id="tooltip-provider-fee"
+							text={`
+							${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })}
+							`}
+							placement="right"
+							// - ${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
+							// - ${t('%amount% to the Treasury', { amount: '0.03%' })}
+							// - ${t('%amount% towards ASTRA buyback', { amount: '0.05%' })}
+							// placement="top-start"
+						/>
+					</span>
 				</Row>
 				<span className="text text-base">
 					{realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
@@ -111,8 +103,7 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
 										text={t(
 											'Routing through these tokens resulted in the best price for your trade.'
 										)}
-										ml="4px"
-										placement="top-start"
+										id="tooltip-route"
 									/>
 								</span>
 								<SwapRoute trade={trade} />

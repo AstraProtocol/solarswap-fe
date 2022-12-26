@@ -67,7 +67,7 @@ const PriceChart = ({
 						<DoubleCurrencyLogo currency0={inputCurrency} currency1={outputCurrency} size={24} margin />
 					) : (
 						inputCurrency && (
-							<CurrencyLogo currency={inputCurrency} size="24px" style={{ marginRight: '8px' }} />
+							<CurrencyLogo currency={inputCurrency} size={24} style={{ marginRight: '8px' }} />
 						)
 					)}
 					{inputCurrency && (
@@ -75,7 +75,7 @@ const PriceChart = ({
 							{outputCurrency ? `${inputCurrency.symbol}/${outputCurrency.symbol}` : inputCurrency.symbol}
 						</span>
 					)}
-					<IconButton classes="padding-sm" icon={IconEnum.ICON_SWAP_LEFT_RIGHT} onClick={onSwitchTokens} />
+					<IconButton classes="padding-sm " icon={IconEnum.ICON_SWAP_LEFT_RIGHT} onClick={onSwitchTokens} />
 					<div>
 						<NormalButton
 							title={t('Basic')}

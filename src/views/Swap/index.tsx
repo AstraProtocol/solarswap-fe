@@ -578,12 +578,12 @@ export default function Swap() {
 											</NormalButton>
 										) : noRoute && userHasSpecifiedInputOutput ? (
 											// <GreyCard style={{ textAlign: 'center', padding: '0.75rem' }}>
-											<div>
-												<span className="text text-base">
+											<div className="text-center">
+												<span className="text text-sm alert-color-error">
 													{t('Insufficient liquidity for this trade.')}
 												</span>
 												{singleHopOnly && (
-													<span className="text text-base">
+													<span className="text text-sm alert-color-error">
 														{t('Try enabling multi-hop trades.')}
 													</span>
 												)}

@@ -1,27 +1,26 @@
-// import { HelpIcon, useTooltip, Box, BoxProps, Placement } from '@solarswap/uikit'
-// import styled from 'styled-components'
+import { Icon, IconEnum } from '@astraprotocol/astra-ui'
+import Tooltip from 'react-tooltip'
+import ReactDOMServer from 'react-dom/server'
+import styles from './styles.module.scss'
+import { useEffect } from 'react'
 
-// interface Props extends BoxProps {
-// 	text: string | React.ReactNode
-// 	placement?: Placement
-// 	size?: string
-// }
+type Place = 'top' | 'right' | 'bottom' | 'left'
+interface Props {
+	text: any
+	id: string
+	placement?: Place
+	[key: string]: string
+}
 
-// const QuestionWrapper = styled.div`
-// 	:hover,
-// 	:focus {
-// 		opacity: 0.7;
-// 	}
-// `
-
-const QuestionHelper = ({ text, placement = 'right-end', size = '16px', ...props }) => {
-	// const { targetRef, tooltip, tooltipVisible } = useTooltip(text, { placement, trigger: 'hover' })
+const QuestionHelper = ({ text, id, placement = 'top', ...props }: Props) => {
+	useEffect(() => {
+		Tooltip.rebuild()
+	}, [])
 
 	return (
-		<div {...props}>
-			{/* <QuestionWrapper ref={targetRef}> */}
-			{/* <HelpIcon color="textSubtle" width={size} /> */}
-			{/* </QuestionWrapper> */}
+		<div {...props} style={{ position: 'relative' }}>
+			<Icon icon={IconEnum.ICON_HELP} data-tip={ReactDOMServer.renderToString(text)} data-for={id} />
+			<Tooltip id={id} arrowColor="#6535e9" className={styles.tooltip} effect="solid" place={placement} />
 		</div>
 	)
 }
