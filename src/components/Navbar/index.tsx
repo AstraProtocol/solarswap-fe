@@ -1,4 +1,12 @@
-import { CryptoIcon, ellipseBetweenText, Logo, ModalWrapper, useClickOutsideElement } from '@astraprotocol/astra-ui'
+import {
+	CryptoIcon,
+	ellipseBetweenText,
+	Icon,
+	IconEnum,
+	Logo,
+	ModalWrapper,
+	useClickOutsideElement
+} from '@astraprotocol/astra-ui'
 import { useConnectWallet } from '@web3-onboard/react'
 import clsx from 'clsx'
 import { cloneDeep, isEmpty } from 'lodash'
@@ -11,39 +19,7 @@ import Navigation, { MenuItem, SubMenuItem } from './Navigation'
 import styles from './style.module.scss'
 import SwitchTheme from './SwitchTheme'
 import ButtonConnect from 'components/ButtonConnect'
-
-export const MENU_ITEMS: MenuItem[] = [
-	{
-		id: '1',
-		type: 'static',
-		label: 'Swap',
-		link: '/swap',
-		submenus: []
-	},
-	{
-		id: '2',
-		type: 'static',
-		label: 'Farm',
-		link: '/liquidity',
-		submenus: []
-	},
-	{
-		id: '4',
-		type: 'locale',
-		submenus: [
-			{
-				id: '4.1',
-				label: 'ENG',
-				link: '/en'
-			},
-			{
-				id: '4.2',
-				label: 'VI',
-				link: '/vi'
-			}
-		]
-	}
-]
+import { VI, EN } from '../../config/localization/languages'
 
 export default function Navbar() {
 	const [shadow, setShadow] = useState(false)
@@ -52,7 +28,7 @@ export default function Navbar() {
 	const _searchWrapperRef = useRef<HTMLDivElement>(null)
 	const [{ wallet }, connect, disconnect] = useConnectWallet()
 
-	const { t } = useTranslation()
+	const { t, setLanguage } = useTranslation()
 
 	const _hideMenu = () => {
 		setLoad(false)
@@ -107,6 +83,53 @@ export default function Navbar() {
 	}, [wallet, _setWalletFromLocalStorage])
 
 	const _changeMenu = useCallback(() => {
+		const MENU_ITEMS: MenuItem[] = [
+			{
+				id: '1',
+				type: 'static',
+				label: t('Trade'),
+				link: '/swap',
+				submenus: [
+					{
+						id: '1.1',
+						label: t('Swap'),
+						link: '/swap'
+					},
+
+					{
+						id: '1.2',
+						label: t('Liquidity'),
+						link: '/liquidity'
+					}
+				]
+			},
+			{
+				id: '2',
+				type: 'static',
+				label: t('Farm'),
+				link: '/farms',
+				submenus: []
+			},
+			{
+				id: '4',
+				type: 'locale',
+				submenus: [
+					{
+						id: '4.1',
+						label: EN.language,
+						link: EN.code,
+						onClick: () => setLanguage(EN)
+					},
+					{
+						id: '4.2',
+						label: VI.language,
+						link: VI.code,
+						onClick: () => setLanguage(VI)
+					}
+				]
+			}
+		]
+
 		const newMenus = cloneDeep(MENU_ITEMS)
 		if (wallet && !isEmpty(wallet?.accounts)) {
 			const account = wallet.accounts[0]
@@ -141,7 +164,7 @@ export default function Navbar() {
 						id: '99.2',
 						label: (
 							<div className="block-center">
-								<span className="icon-setting margin-right-sm text-xl"></span>
+								<Icon icon={IconEnum.ICON_SETTING} className="icon-setting margin-right-sm text-xl" />
 								{t('Disconnect Wallet')}
 							</div>
 						),
@@ -197,7 +220,6 @@ export default function Navbar() {
 					<div className={styles.right}>
 						<Navigation items={menus} />
 						<ButtonConnect />
-						{/* <SwitchTheme /> */}
 					</div>
 				</div>
 			</nav>

@@ -4,8 +4,8 @@ import { MouseEventHandler, useEffect, useRef, useState } from 'react'
 
 import { useClickOutsideElement } from '@astraprotocol/astra-ui'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import styles from './style.module.scss'
+import { useTranslation } from 'contexts/Localization'
 export type MenuType = 'static' | 'locale'
 
 export type SubMenuItem = {
@@ -37,7 +37,7 @@ export type NavigationProps = {
 }
 
 export default function Navigation({ items }: NavigationProps) {
-	const router = useRouter()
+	const { currentLanguage, setLanguage, t } = useTranslation()
 	const [_menuItems, setMenuItems] = useState(items)
 	const wrapperRef = useRef(null)
 	const hideMenu = function () {
@@ -59,11 +59,6 @@ export default function Navigation({ items }: NavigationProps) {
 		align = '',
 		hover = 'hover'
 	) => {
-		if (locale) {
-			onClick = () => {
-				// @todo set locale to state
-			}
-		}
 		const span = () => (
 			<span
 				className={clsx(
@@ -79,7 +74,7 @@ export default function Navigation({ items }: NavigationProps) {
 			>
 				{locale ? (
 					<>
-						<Image alt={link} src={`/images/flag${link}.svg`} width={30} height={19} />
+						<Image alt={link} src={`/images/flag/${link}.svg`} width={30} height={19} />
 						<span className="padding-left-xs">{content}</span>
 					</>
 				) : (
@@ -106,16 +101,16 @@ export default function Navigation({ items }: NavigationProps) {
 		setMenuItems([...items])
 	}
 
-	const _renderLocale = (subitems: SubMenuItem[]) => {
-		// const { locale } = router;
-		// const localeItem = subitems.find((item) => item.link === `/${locale}`);
-		// @todo parse from state
-		const localeItem = { label: 'VI' }
-		const locale = 'vi'
+	const _renderLocale = () => {
 		return (
 			<span className="text-base text-center text-bold contrast-color-70 padding-sm block-center pointer">
-				<Image alt={locale} src={`/images/flag/${locale}.svg`} width={30} height={19} />
-				<span className="padding-left-xs">{localeItem?.label}</span>
+				<Image
+					alt={currentLanguage.code}
+					src={`/images/flag/${currentLanguage.code}.svg`}
+					width={30}
+					height={19}
+				/>
+				<span className="padding-left-xs">{currentLanguage?.language}</span>
 			</span>
 		)
 	}
@@ -131,7 +126,7 @@ export default function Navigation({ items }: NavigationProps) {
 					onClick={event => _showSubMenu(event, id)}
 				>
 					{type === 'locale' ? (
-						_renderLocale(sub1!)
+						_renderLocale()
 					) : (
 						<>
 							{prefixIcon && prefixIcon}
@@ -166,31 +161,26 @@ export default function Navigation({ items }: NavigationProps) {
 											menu.align,
 											menu.hover
 										)}
-										{/* {menu.submenus && (
-												<ul
-													className={clsx(
-														styles.submenu2,
-														'contrast-bg-color-50',
-														'radius-xs',
-														{
-															[styles.show]: menu.show
-														}
-													)}
-												>
-													{menu.submenus.map(sub2 => (
-														<li key={sub2.id}>
-															{_renderLink(
-																sub2.link,
-																sub2.label,
-																index,
-																sub1.length,
-																menu.onClick,
-																true
-															)}
-														</li>
-													))}
-												</ul>
-											)} */}
+										{menu.submenus && (
+											<ul
+												className={clsx(styles.submenu2, 'contrast-bg-color-50', 'radius-xs', {
+													[styles.show]: menu.show
+												})}
+											>
+												{menu.submenus.map(sub2 => (
+													<li key={sub2.id}>
+														{_renderLink(
+															sub2.link,
+															sub2.label,
+															index,
+															sub1.length,
+															menu.onClick,
+															true
+														)}
+													</li>
+												))}
+											</ul>
+										)}
 									</li>
 								))}
 							</ul>
