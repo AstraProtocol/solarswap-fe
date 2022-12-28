@@ -50,9 +50,13 @@ const TransactionsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 				<div>
 					{!!pending.length || !!confirmed.length ? (
 						<>
-							<Row style={{ justifyContent: 'space-between' }}>
-								<span>{t('Recent Transactions')}</span>
-								<NormalButton variant="tertiary" scale="xs" onClick={clearAllTransactionsCallback}>
+							<Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+								<span className="text text-base">{t('Recent Transactions')}</span>
+								<NormalButton
+									variant="text"
+									classes={{ color: 'secondary-color-normal', other: 'text-base' }}
+									onClick={clearAllTransactionsCallback}
+								>
 									{t('clear all')}
 								</NormalButton>
 							</Row>

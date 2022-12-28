@@ -20,11 +20,13 @@ import styles from './style.module.scss'
 import SwitchTheme from './SwitchTheme'
 import ButtonConnect from 'components/ButtonConnect'
 import { VI, EN } from '../../config/localization/languages'
+import useAuth from 'hooks/useAuth'
 
 export default function Navbar() {
 	const [shadow, setShadow] = useState(false)
 	const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
 	const [load, setLoad] = useState(false)
+	const { logout } = useAuth()
 	const _searchWrapperRef = useRef<HTMLDivElement>(null)
 	const [{ wallet }, connect, disconnect] = useConnectWallet()
 
@@ -170,6 +172,7 @@ export default function Navbar() {
 						),
 						onClick: () => {
 							disconnect(wallet)
+							logout()
 							WalletHelper.removeCacheConnect()
 						},
 						align: ' '
@@ -214,7 +217,7 @@ export default function Navbar() {
 							></span>
 						</div>
 					</div>
-					<div className={styles.left}>
+					<div className={clsx(styles.left, 'link')}>
 						<Logo type="transparent" text={process.env.NEXT_PUBLIC_TITLE} />
 					</div>
 					<div className={styles.right}>

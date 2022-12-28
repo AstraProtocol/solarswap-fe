@@ -562,7 +562,7 @@ export default function Swap() {
 												{t('Unsupported Asset')}
 											</NormalButton>
 										) : !account ? (
-											<ButtonConnect />
+											<ButtonConnect classes="width-100" />
 										) : showWrap ? (
 											<NormalButton
 												classes={{ other: 'width-100 text-base' }}

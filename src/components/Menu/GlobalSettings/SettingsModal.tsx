@@ -61,11 +61,10 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 	return (
 		<Modal
 			title={t('Settings')}
-			headerBackground="gradients.cardHeader"
 			onDismiss={onDismiss}
-			style={{ width: 380, maxWidth: 420, maxHeight: '100vh' }}
+			style={{ width: 380, maxWidth: 420, maxHeight: '100vh', position: 'relative' }}
 		>
-			<div style={{ height: 600 }}>
+			<div style={{ height: 600, position: 'relative' }}>
 				<div className="flex col border border-bottom-base padding-bottom-md">
 					<span className="text text-lg text-bold text-uppercase secondary-color-normal">{t('Global')}</span>
 					<div className="flex flex-justify-space-between flex-align-center margin-bottom-sm">
@@ -82,13 +81,13 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 				</div>
 				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
 					<div className="flex flex-align-center">
-						<span className="text text-base text-bold">{t('Expert Mode')}</span>
+						<span className="text text-base text-bold margin-right-xs">{t('Expert Mode')}</span>
 						<QuestionHelper
 							text={t(
 								'Bypasses confirmation modals and allows high slippage trades. Use at your own risk.'
 							)}
-							placement="top-start"
-							ml="4px"
+							id="tooltip-expert-mode"
+							placement="right"
 						/>
 					</div>
 					<Toggle
@@ -100,11 +99,11 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 				</div>
 				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
 					<div className="flex flex-align-center">
-						<span className="text text-base text-bold">{t('Disable Multihops')}</span>
+						<span className="text text-base text-bold margin-right-xs">{t('Disable Multihops')}</span>
 						<QuestionHelper
 							text={t('Restricts swaps to direct pairs only.')}
-							placement="top-start"
-							ml="4px"
+							id="tooltip-multihops"
+							placement="right"
 						/>
 					</div>
 					<Toggle
@@ -118,13 +117,15 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 				</div>
 				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
 					<div className="flex flex-align-center">
-						<span className="text text-base text-bold">{t('Subgraph Health Indicator')}</span>
+						<span className="text text-base text-bold margin-right-xs">
+							{t('Subgraph Health Indicator')}
+						</span>
 						<QuestionHelper
 							text={t(
 								'Turn on NFT market subgraph health indicator all the time. Default is to show the indicator only when the network is delayed'
 							)}
-							placement="top-start"
-							ml="4px"
+							id="tooltip-subgraph-indicator"
+							placement="right"
 						/>
 					</div>
 					<Toggle

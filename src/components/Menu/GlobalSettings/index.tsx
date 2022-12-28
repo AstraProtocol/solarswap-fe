@@ -2,12 +2,9 @@ import { IconButton, IconEnum } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
 import SettingsModal from './SettingsModal'
 
-type Props = {
-	color?: string
-	mr?: string
-}
 
-const GlobalSettings = ({ color, mr = '8px' }: Props) => {
+
+const GlobalSettings = () => {
 	const [onPresentSettingsModal] = useModal(<SettingsModal />)
 
 	return (

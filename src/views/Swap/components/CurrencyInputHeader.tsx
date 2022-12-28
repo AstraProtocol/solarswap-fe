@@ -1,11 +1,11 @@
 import TransactionsModal from 'components/App/Transactions/TransactionsModal'
-// import GlobalSettings from 'components/Menu/GlobalSettings'
 import { useExpertModeManager } from 'state/user/hooks'
-// import RefreshIcon from 'components/Svg/RefreshIcon'
 import { useModal } from 'components/Modal'
 import NotificationDot from 'components/NotificationDot'
 import { IconButton, IconEnum, Row } from '@astraprotocol/astra-ui'
 import GlobalSettings from 'components/Menu/GlobalSettings'
+import RefreshIcon from 'components/Svg/RefreshIcon'
+import { useTheme } from 'next-themes'
 
 interface Props {
 	title: string
@@ -17,18 +17,6 @@ interface Props {
 	onRefreshPrice: () => void
 }
 
-// const CurrencyInputContainer = styled(Flex)`
-// 	flex-direction: column;
-// 	align-items: center;
-// 	padding: 24px;
-// 	width: 100%;
-// 	border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
-// `
-
-// const ColoredIconButton = styled(IconButton)`
-// 	color: ${({ theme }) => theme.colors.textSubtle};
-// `
-
 const CurrencyInputHeader: React.FC<Props> = ({
 	title,
 	subtitle,
@@ -37,6 +25,7 @@ const CurrencyInputHeader: React.FC<Props> = ({
 	hasAmount,
 	onRefreshPrice
 }) => {
+	const { resolvedTheme } = useTheme()
 	const [expertMode] = useExpertModeManager()
 	const toggleChartDisplayed = () => {
 		setIsChartDisplayed(currentIsChartDisplayed => !currentIsChartDisplayed)
@@ -56,7 +45,7 @@ const CurrencyInputHeader: React.FC<Props> = ({
 				</div>
 				<Row>
 					<NotificationDot show={expertMode}>
-						<GlobalSettings color="textSubtle" mr="0" />
+						<GlobalSettings />
 					</NotificationDot>
 					<IconButton
 						classes="padding-right-xs"
@@ -64,7 +53,13 @@ const CurrencyInputHeader: React.FC<Props> = ({
 						icon={IconEnum.ICON_RECENT}
 						onClick={onPresentTransactionsModal}
 					/>
-					<IconButton size="lg" icon={IconEnum.ICON_RELOAD} onClick={() => onRefreshPrice()} />
+					<a className="link" onClick={() => onRefreshPrice()}>
+						<RefreshIcon
+							disabled={!hasAmount}
+							color={resolvedTheme === 'dark' ? 'white' : 'black'}
+							width="23px"
+						/>
+					</a>
 				</Row>
 			</div>
 			<div className="flex flex-align-center">
