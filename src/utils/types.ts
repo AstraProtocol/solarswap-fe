@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 03/12/2022
- */
 import { ContractFunction } from '@ethersproject/contracts'
 import { BigNumber } from '@ethersproject/bignumber'
 

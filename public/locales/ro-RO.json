@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "Dacă cumperi un jeton din această listă, este posibil să nu îl poți vinde înapoi.",
 	"Import": "Importă",
 	"via": "prin",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Oricine poate crea un jeton ARC20 pe BSC cu orice nume, inclusiv creând versiuni false ale jetoanelor existente care susțin că reprezintă proiecte care nu au un jeton.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Oricine poate crea un jeton ERC20 pe BSC cu orice nume, inclusiv creând versiuni false ale jetoanelor existente care susțin că reprezintă proiecte care nu au un jeton.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "Dacă cumperi un jeton arbitrar, este posibil să nu-l poți vinde înapoi.",
 	"Unknown Source": "Sursă necunoscută",
 	"Lists": "Liste",

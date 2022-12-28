@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { withSentryConfig } = require('@sentry/nextjs')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true'
@@ -38,7 +37,18 @@ const config = {
 	},
 	reactStrictMode: true,
 	images: {
-		domains: ['static-nft.solarswap.io']
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: '*',
+				pathname: '/**'
+			},
+			{
+				protocol: 'http',
+				hostname: 'localhost',
+				pathname: '/**'
+			}
+		]
 	},
 	async rewrites() {
 		return [

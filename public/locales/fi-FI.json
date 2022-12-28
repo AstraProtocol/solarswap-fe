@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "Jos ostat poletin tästä luettelosta, et voi välttämättä myydä sitä takaisin.",
 	"Import": "Tuo",
 	"via": "välityksellä",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Kuka tahansa voi luoda ARC20-poletin BSC:ssä millä tahansa nimellä, mukaan lukien väärennetyt versiot olemassa olevista poleteista ja poletit, jotka väittävät edustavansa projekteja, joilla ei ole polettia.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Kuka tahansa voi luoda ERC20-poletin BSC:ssä millä tahansa nimellä, mukaan lukien väärennetyt versiot olemassa olevista poleteista ja poletit, jotka väittävät edustavansa projekteja, joilla ei ole polettia.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "Jos ostat satunnaisen poletin, et välttämättä voi myydä sitä takaisin.",
 	"Unknown Source": "Tuntematon lähde",
 	"Lists": "Luettelot",

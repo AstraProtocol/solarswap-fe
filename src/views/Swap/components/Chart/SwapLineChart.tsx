@@ -1,6 +1,6 @@
 import { useEffect, Dispatch, SetStateAction } from 'react'
 import { ResponsiveContainer, XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts'
-import useTheme from 'hooks/useTheme'
+
 import { LineChartLoader } from 'views/Info/components/ChartLoaders'
 import { PairDataTimeWindowEnum } from 'state/swap/types'
 import { useTranslation } from 'contexts/Localization'
@@ -64,7 +64,6 @@ const LineChart = ({ data, setHoverValue, setHoverDate, isChangePositive, timeWi
 	const {
 		currentLanguage: { locale }
 	} = useTranslation()
-	const { theme } = useTheme()
 	const colors = getChartColors({ isChangePositive })
 	const dateFormatting = dateFormattingByTimewindow[timeWindow]
 
@@ -101,7 +100,7 @@ const LineChart = ({ data, setHoverValue, setHoverDate, isChangePositive, timeWi
 				/>
 				<YAxis dataKey="value" axisLine={false} tickLine={false} domain={['auto', 'auto']} hide />
 				<Tooltip
-					cursor={{ stroke: theme.colors.textDisabled }}
+					// cursor={{ stroke: theme.colors.textDisabled }}
 					contentStyle={{ display: 'none' }}
 					formatter={(tooltipValue, name, props) => (
 						<HoverUpdater

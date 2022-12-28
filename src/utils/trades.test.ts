@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { Trade, Route, Token, ChainId, Pair, TokenAmount, JSBI, TradeType } from '@solarswap/sdk'
 import { BETTER_TRADE_LESS_HOPS_THRESHOLD } from 'config/constants'
 import { isTradeBetter } from './trades'

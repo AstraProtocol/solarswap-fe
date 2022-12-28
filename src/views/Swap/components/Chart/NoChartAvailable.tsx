@@ -1,4 +1,4 @@
-import { Flex, Text } from '@solarswap/uikit'
+import { Flex } from 'components/Layout/Flex'
 import { useTranslation } from 'contexts/Localization'
 
 interface NoChartAvailableProps {
@@ -13,8 +13,8 @@ const NoChartAvailable: React.FC<NoChartAvailableProps> = ({ token0Address, toke
 	return (
 		<>
 			<Flex justifyContent="center" alignItems="center" height="100%" flexDirection="column">
-				<Text mb={['8px', '8px', '0px']}>{t('Failed to load price chart for this pair')}</Text>
-				<Text
+				<span mb={['8px', '8px', '0px']}>{t('Failed to load price chart for this pair')}</span>
+				<span
 					textAlign={isMobile ? 'center' : 'left'}
 					mb={['8px', '8px', '0px']}
 					color="textSubtle"
@@ -22,8 +22,8 @@ const NoChartAvailable: React.FC<NoChartAvailableProps> = ({ token0Address, toke
 					style={isMobile && { wordSpacing: '100vw' }}
 				>
 					Token0: {token0Address ?? 'null'}
-				</Text>
-				<Text
+				</span>
+				<span
 					textAlign={isMobile ? 'center' : 'left'}
 					mb={['8px', '8px', '0px']}
 					color="textSubtle"
@@ -31,8 +31,8 @@ const NoChartAvailable: React.FC<NoChartAvailableProps> = ({ token0Address, toke
 					style={isMobile && { wordSpacing: '100vw' }}
 				>
 					Token1: {token1Address ?? 'null'}
-				</Text>
-				<Text
+				</span>
+				<span
 					textAlign={isMobile ? 'center' : 'left'}
 					mb={['8px', '8px', '0px']}
 					color="textSubtle"
@@ -40,7 +40,7 @@ const NoChartAvailable: React.FC<NoChartAvailableProps> = ({ token0Address, toke
 					style={isMobile && { wordSpacing: '100vw' }}
 				>
 					Pair: {pairAddress ?? 'null'}
-				</Text>
+				</span>
 			</Flex>
 		</>
 	)

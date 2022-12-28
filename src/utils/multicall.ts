@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { Interface } from '@ethersproject/abi'
 import { getMulticallContract } from 'utils/contractHelpers'
 

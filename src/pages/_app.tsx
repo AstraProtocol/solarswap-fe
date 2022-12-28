@@ -16,7 +16,7 @@ import Head from 'next/head'
 import { Fragment } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 import { useStore, persistor } from 'state'
-// import { usePollBlockNumber } from "state/block/hooks";
+import { usePollBlockNumber } from 'state/block/hooks'
 // import { usePollCoreFarmData } from "state/farms/hooks";
 import astraConnectModule from 'libs/astrawallet'
 import '@astraprotocol/astra-ui/lib/shared/style.css'
@@ -31,7 +31,7 @@ import { CHAIN_ID } from 'config/constants/networks'
 import getNodeUrl from 'utils/getRpcUrl'
 import { WalletHelper } from 'utils/wallet'
 import 'react-toastify/dist/ReactToastify.css'
-
+import useEagerConnect from 'hooks/useEagerConnect'
 // const EasterEgg = dynamic(() => import('components/EasterEgg'), { ssr: false })
 
 // This config is required for number formatting
@@ -41,12 +41,12 @@ BigNumber.config({
 })
 
 function GlobalHooks() {
-	// usePollBlockNumber();
-	// usePollCoreFarmData();
-	// useEagerConnect();
-	// useUserAgent();
-	// useInactiveListener();
-	// useSentryUser();
+	usePollBlockNumber()
+	// usePollCoreFarmData()
+	useEagerConnect()
+	// useUserAgent()
+	// useInactiveListener()
+	// useSentryUser()
 	return null
 }
 

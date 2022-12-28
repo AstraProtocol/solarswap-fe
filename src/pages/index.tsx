@@ -5,8 +5,8 @@ import { GetStaticProps } from 'next'
 import { SWRConfig } from 'swr'
 // import { DeBankTvlResponse } from 'hooks/api'
 import { bitQueryServerClient, infoServerClient } from 'utils/graphql'
+import Swap from 'views/Swap'
 // import { getBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
-// import Swap from 'views/Swap'
 
 const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
 	return (
@@ -19,8 +19,7 @@ const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
 				}
 			}}
 		>
-			<>Hello</>
-			{/* <Swap /> */}
+			<Swap />
 		</SWRConfig>
 	)
 }

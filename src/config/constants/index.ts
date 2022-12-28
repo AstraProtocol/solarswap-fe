@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 import { ChainId, JSBI, Percent, Token } from '@solarswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
 import { mainnetTokens, testnetTokens } from './tokens'
@@ -93,7 +90,7 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
  * 02/12/2022
  * @todo verified exact number later
  */
-export const MIN_ASA: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(10)) // .00000001 ASA
+export const MIN_ASA: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .00000001 ASA
 export const BETTER_TRADE_LESS_HOPS_THRESHOLD = new Percent(JSBI.BigInt(50), JSBI.BigInt(10000))
 
 export const ZERO_PERCENT = new Percent('0')

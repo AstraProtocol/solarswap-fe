@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 03/12/2022
- */
 /* eslint-disable import/prefer-default-export */
 import BigNumber from 'bignumber.js'
 import poolsDeployedBlockNumber from 'config/constants/poolsDeployedBlockNumber'

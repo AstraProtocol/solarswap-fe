@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 05/12/2022
- */
 import { useEffect, useState } from 'react'
 
 function isWindowVisible() {

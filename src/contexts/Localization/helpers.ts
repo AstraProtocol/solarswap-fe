@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 05/12/2022
- */
 import { VI } from 'config/localization/languages'
 
 const publicUrl = process.env.PUBLIC_URL || ''

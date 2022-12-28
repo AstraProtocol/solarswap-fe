@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 import { PoolDeployedBlockNumber } from './types'
 
 /**

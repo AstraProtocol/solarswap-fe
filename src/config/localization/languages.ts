@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
-
 import { Language } from 'contexts/Localization/types'
 
 export const AR: Language = {

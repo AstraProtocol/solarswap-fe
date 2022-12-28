@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 export type PairDataNormalized = {
 	time: number
 	token0Id: string

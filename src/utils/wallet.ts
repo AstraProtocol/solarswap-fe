@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 03/12/2022
- */
 // Set of helper functions to facilitate wallet setup
 
 import { ExternalProvider } from '@ethersproject/providers'
@@ -112,3 +109,6 @@ export class WalletHelper {
 		return ''
 	}
 }
+
+export const connectorLocalStorageKey = 'connectorIdv2'
+export const walletLocalStorageKey = 'wallet'

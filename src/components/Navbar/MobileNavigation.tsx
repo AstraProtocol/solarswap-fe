@@ -1,8 +1,10 @@
-import { Collapse, Typography } from '@astraprotocol/astra-ui'
+import { Collapse, Icon, IconEnum, Typography } from '@astraprotocol/astra-ui'
 import { CollapseProps } from '@astraprotocol/astra-ui/lib/es/components/Collapse'
 import clsx from 'clsx'
+import { useTranslation } from 'contexts/Localization'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 import { MenuItem } from './Navigation'
 import styles from './style.module.scss'
 
@@ -32,7 +34,7 @@ const LinkMenuItem = ({
 	>
 		<span className="block-center">
 			{!!prefix && prefix}
-			<Typography.Link href={link || ''} classes={clsx('text text-lg', styles.link, classes)}>
+			<Typography.Link href={link || ''} classes={clsx('text text-base', styles.link, classes)}>
 				{label}
 			</Typography.Link>
 		</span>
@@ -42,30 +44,30 @@ const LinkMenuItem = ({
 
 export default function MoibleNavigation({ items }: MobileNavigationProps) {
 	const router = useRouter()
+	const { currentLanguage } = useTranslation()
 	const { pathname, locale } = router
 
-	const _renderMenu = () => {
+	const _renderMenu = useMemo(() => {
 		const menus: React.ReactNode[] = []
 		let titleElement = null
 		for (let item of items) {
-			if (item.submenus) {
+			if (item.submenus && item.submenus.length > 0) {
 				let subCollapse = []
 				if (item.type == 'locale') {
-					const localeItem = item.submenus.find(item => item.link === `/${locale}`)
 					titleElement = (
-						<>
-							<span
-								className={clsx(
-									'text-base text-center text-bold',
-									'contrast-color-70',
-									'block-center pointer padding-top-xs'
-								)}
-								key={`title-${localeItem?.label}`}
-							>
-								<Image alt={locale} src={`/images/flag/${locale}.svg`} width={30} height={19} />
-								<span className="padding-left-xs">{localeItem?.label}</span>
-							</span>
-						</>
+						<div
+							className={clsx('text-base text-center text-bold', 'block-center pointer')}
+							key={`title-${currentLanguage?.locale}`}
+						>
+							<Image
+								alt={locale}
+								src={`/images/flag/${currentLanguage.code}.svg`}
+								width={30}
+								height={19}
+							/>
+							<span className="padding-left-xs">{currentLanguage?.language}</span>
+							<Icon icon={IconEnum.ICON_DROPDOWN} classes="margin-left-xs" />
+						</div>
 					)
 					subCollapse = item.submenus.map(item => (
 						<LinkMenuItem
@@ -85,6 +87,7 @@ export default function MoibleNavigation({ items }: MobileNavigationProps) {
 					titleElement = (
 						<span>
 							{item.label} {item.prefixIcon}
+							<Icon icon={IconEnum.ICON_DROPDOWN} classes="margin-left-xs" />
 						</span>
 					)
 					subCollapse = item.submenus.map(item => (
@@ -114,6 +117,7 @@ export default function MoibleNavigation({ items }: MobileNavigationProps) {
 			}
 		}
 		return menus
-	}
-	return <>{_renderMenu()}</>
+	}, [currentLanguage.code, currentLanguage?.language, currentLanguage?.locale, items, locale, pathname])
+
+	return <>{_renderMenu}</>
 }

@@ -1,12 +1,9 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 export const MINIMUM_SEARCH_CHARACTERS = 2
 
 export const WEEKS_IN_YEAR = 52.1429
 
-export const TOTAL_FEE = 0.0025
-export const LP_HOLDERS_FEE = 0.0017
+export const TOTAL_FEE = 0.002
+export const LP_HOLDERS_FEE = 0.0017 // @todo update number here
 export const TREASURY_FEE = 0.0003
 export const BUYBACK_FEE = 0.0005
 

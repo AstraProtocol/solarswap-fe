@@ -1,6 +1,4 @@
-/**
- * @fileoverview Tien 03/12/2022
- */ /* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign */
 
 import { createReducer } from '@reduxjs/toolkit'
 import { InfoState } from './types'

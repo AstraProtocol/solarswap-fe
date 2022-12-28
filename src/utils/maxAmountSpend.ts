@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { CurrencyAmount, ETHER, JSBI } from '@solarswap/sdk'
 import { MIN_ASA } from '../config/constants'
 

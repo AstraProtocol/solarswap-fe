@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 03/12/2022
- */
 import { createAction } from '@reduxjs/toolkit'
 import { ChainId } from '@solarswap/sdk'
 

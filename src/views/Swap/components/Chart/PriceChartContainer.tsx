@@ -1,5 +1,4 @@
 import { Currency } from '@solarswap/sdk'
-import useTheme from 'hooks/useTheme'
 import { useCallback, useState } from 'react'
 import AsaWasaNotice from './AsaWasaNotice'
 import { WASA_ADDRESS } from './constants'
@@ -37,9 +36,6 @@ const PriceChartContainer: React.FC<PriceChartContainerProps> = ({
 	const token1Address = getTokenAddress(outputCurrencyId)
 	const [isPairReversed, setIsPairReversed] = useState(false)
 	const togglePairReversed = useCallback(() => setIsPairReversed(prePairReversed => !prePairReversed), [])
-
-	const { isDark } = useTheme()
-
 	if (!isChartDisplayed) {
 		return null
 	}
@@ -47,7 +43,7 @@ const PriceChartContainer: React.FC<PriceChartContainerProps> = ({
 	const isAsaWasa = token0Address === WASA_ADDRESS && token1Address === WASA_ADDRESS
 
 	if (isAsaWasa) {
-		return <AsaWasaNotice isDark={isDark} isChartExpanded={isChartExpanded} />
+		return <AsaWasaNotice isChartExpanded={isChartExpanded} />
 	}
 
 	return (
@@ -57,7 +53,6 @@ const PriceChartContainer: React.FC<PriceChartContainerProps> = ({
 			inputCurrency={isPairReversed ? outputCurrency : inputCurrency}
 			outputCurrency={isPairReversed ? inputCurrency : outputCurrency}
 			onSwitchTokens={togglePairReversed}
-			isDark={isDark}
 			isChartExpanded={isChartExpanded}
 			setIsChartExpanded={setIsChartExpanded}
 			isMobile={isMobile}

@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 05/12/2022
- */
 import { ReactText } from 'react'
 
 import translations from 'config/localization/translations.json'

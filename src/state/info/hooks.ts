@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 03/12/2022
- */
 import { useCallback, useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUnixTime, startOfHour, Duration, sub } from 'date-fns'

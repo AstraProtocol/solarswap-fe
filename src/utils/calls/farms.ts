@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 03/12/2022
- */
 import BigNumber from 'bignumber.js'
 import { DEFAULT_GAS_LIMIT, DEFAULT_TOKEN_DECIMAL } from 'config'
 import { Masterchef } from 'config/abi/types'

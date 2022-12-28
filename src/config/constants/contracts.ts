@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 04/12/2022
- */
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	masterChef: {

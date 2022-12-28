@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "Kung bibili ka ng isang token mula sa listahang ito, maaaring hindi mo ito maibenta muli.",
 	"Import": "I-import",
 	"via": "sa pamamagitan ng",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Kahit sino ay maaaring lumikha ng isang ARC20 na token sa BSC na may anumang pangalan, kabilang ang paglikha ng mga huwad na bersyon ng mga umiiral na mga token at mga token na nag-claim na kumakatawan sa mga proyekto na walang anumang token.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Kahit sino ay maaaring lumikha ng isang ERC20 na token sa BSC na may anumang pangalan, kabilang ang paglikha ng mga huwad na bersyon ng mga umiiral na mga token at mga token na nag-claim na kumakatawan sa mga proyekto na walang anumang token.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "Kung bumili ka ng isang arbitrary token, maaaring hindi mo ito maibenta muli.",
 	"Unknown Source": "Hindi alam na Source",
 	"Lists": "Mga Listahan",

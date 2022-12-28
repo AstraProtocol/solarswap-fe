@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "If you purchase a token from this list, you may not be able to sell it back.",
 	"Import": "Import",
 	"via": "via",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "If you purchase an arbitrary token, you may be unable to sell it back.",
 	"Unknown Source": "Unknown Source",
 	"Lists": "Lists",
@@ -1555,5 +1555,15 @@
 	"Remove Single Liquidity": "Remove Single Liquidity",
 	"Remove Anyway": "Remove Anyway",
 	"Supply Anyway": "Supply Anyway",
-	"Price Impact Without Fee": "Price Impact Without Fee"
+	"Price Impact Without Fee": "Price Impact Without Fee",
+	"About us": "About Us",
+	"Explorer": "Explorer",
+	"Bridge": "Bridge",
+	"DEX": "DEX",
+	"Documents": "Documents",
+	"Whitepaper": "Whitepaper",
+	"Privacy and Policy": "Privacy and Policy",
+	"Term and Services": "Term and Services",
+	"Live Support": "Live Support",
+	"Connect with us": "Connect with us"
 }

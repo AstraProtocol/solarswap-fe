@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 interface FetchTimeoutOptions extends RequestInit {
 	timeout?: number
 }

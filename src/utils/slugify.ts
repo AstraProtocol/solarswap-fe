@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 const slugify = (str: string) => {
 	return str
 		.toLowerCase()

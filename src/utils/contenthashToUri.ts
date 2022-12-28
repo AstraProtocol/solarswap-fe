@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import CID from 'cids'
 import { getCodec, rmPrefix } from 'multicodec'
 import { decode, toB58String } from 'multihashes'

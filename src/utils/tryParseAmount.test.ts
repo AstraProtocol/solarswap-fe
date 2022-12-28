@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 import { testnetTokens } from 'config/constants/tokens'
 import tryParseAmount from './tryParseAmount'
 

@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 02/12/2022
- */
 export const copyText = (text: string, cb?: () => void) => {
 	if (navigator.clipboard && navigator.permissions) {
 		navigator.clipboard.writeText(text).then(cb)

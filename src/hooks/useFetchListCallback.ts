@@ -1,6 +1,3 @@
-/**
- * @fileoverview Tien 05/12/2022
- */
 import { nanoid } from '@reduxjs/toolkit'
 import { ChainId } from '@solarswap/sdk'
 import { TokenList } from '@uniswap/token-lists'

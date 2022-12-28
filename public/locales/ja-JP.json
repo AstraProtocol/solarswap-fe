@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "このリストからトークンを購入する場合、売り戻せない可能性があります。",
 	"Import": "インポート",
 	"via": "経由",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "誰でも、任意の名前でBSCにBEPトークンを作成できます。既存のトークンやトークンを持たないプロジェクトを表すとして主張しているトークンの偽バージョンでも作成可能です。",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "誰でも、任意の名前でBSCにBEPトークンを作成できます。既存のトークンやトークンを持たないプロジェクトを表すとして主張しているトークンの偽バージョンでも作成可能です。",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "任意のトークンを購入すると、売り戻せないことがあります。",
 	"Unknown Source": "不明なソース",
 	"Lists": "リスト",

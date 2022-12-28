@@ -826,7 +826,7 @@
 	"If you purchase a token from this list, you may not be able to sell it back.": "이 목록에서 토큰을 구입하는 경우 이 토큰을 되팔지 못할 수도 있습니다.",
 	"Import": "가져오기",
 	"via": "-",
-	"Anyone can create a ARC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "누구나 어떤 이름으로든 BSC에서 ARC20 토큰을 만들 수 있습니다. 페이크 버전의 기존 토큰 및 토큰이 없는 프로젝트를 나타낸다고 주장하는 토큰도 만들 수 있습니다.",
+	"Anyone can create a ERC20 token on Astra Chain with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.": "누구나 어떤 이름으로든 BSC에서 ERC20 토큰을 만들 수 있습니다. 페이크 버전의 기존 토큰 및 토큰이 없는 프로젝트를 나타낸다고 주장하는 토큰도 만들 수 있습니다.",
 	"If you purchase an arbitrary token, you may be unable to sell it back.": "임의의 토큰을 구입하는 경우 이 토큰을 되팔지 못할 수도 있습니다.",
 	"Unknown Source": "알 수 없는 출처",
 	"Lists": "목록",
