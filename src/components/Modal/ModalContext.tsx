@@ -86,12 +86,12 @@ const ModalProvider: React.FC = ({ children }) => {
 							onAnimationStart={() => {
 								const element = animationRef.current
 								if (!element) return
-								if (element.classList.contains('appear')) {
-									element.classList.remove('appear')
-									element.classList.add('disappear')
+								if (element.classList.contains(styles.appear)) {
+									element.classList.remove(styles.appear)
+									element.classList.add(styles.disappear)
 								} else {
-									element.classList.remove('disappear')
-									element.classList.add('appear')
+									element.classList.remove(styles.disappear)
+									element.classList.add(styles.appear)
 								}
 							}}
 							{...animationMap}

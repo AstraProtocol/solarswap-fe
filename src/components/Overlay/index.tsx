@@ -19,11 +19,8 @@ const BodyLock = () => {
 	return null
 }
 
-interface OverlayProps {
-	isunmounting?: string
-}
 
-export const Overlay: FC<OverlayProps> = props => {
+export const Overlay = props => {
 	return (
 		<>
 			<BodyLock />

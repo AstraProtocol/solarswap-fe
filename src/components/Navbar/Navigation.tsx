@@ -37,7 +37,7 @@ export type NavigationProps = {
 }
 
 export default function Navigation({ items }: NavigationProps) {
-	const { currentLanguage, setLanguage, t } = useTranslation()
+	const { currentLanguage } = useTranslation()
 	const [_menuItems, setMenuItems] = useState(items)
 	const wrapperRef = useRef(null)
 	const hideMenu = function () {

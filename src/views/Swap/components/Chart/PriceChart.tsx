@@ -55,7 +55,7 @@ const PriceChart = ({
 	return (
 		<StyledPriceChart
 			style={{
-				height: '70%',
+				height: isMobile ? '100%' : '70%',
 				overflow: 'unset'
 			}}
 			isExpanded={isChartExpanded}
@@ -77,14 +77,9 @@ const PriceChart = ({
 					)}
 					<IconButton classes="padding-sm " icon={IconEnum.ICON_SWAP_LEFT_RIGHT} onClick={onSwitchTokens} />
 					<div>
-						<NormalButton
-							title={t('Basic')}
-							// $active={chartView === ChartViewMode.BASIC}
-							onClick={() => setChartView(ChartViewMode.BASIC)}
-						>
-							{/* {isDesktop ? t('Basic') : <LineGraphIcon color="primary" />} */}
+						{/* <NormalButton title={t('Basic')} onClick={() => setChartView(ChartViewMode.BASIC)}>
 							{t('Basic')}
-						</NormalButton>
+						</NormalButton> */}
 						{/* <ChartButton
 						aria-label="TradingView"
 						title="TradingView"
@@ -98,11 +93,11 @@ const PriceChart = ({
 					</div>
 				</div>
 				{/* {!isMobile && (
-					<Flex>
-						<IconButton variant="text" onClick={toggleExpanded}>
+					<div className='flex'>
+						<IconButton  onClick={toggleExpanded}>
 							{isChartExpanded ? <ShrinkIcon color="text" /> : <ExpandIcon color="text" />}
 						</IconButton>
-					</Flex>
+					</div>
 				)} */}
 			</div>
 			<BasicChart

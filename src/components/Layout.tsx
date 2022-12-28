@@ -47,7 +47,6 @@ const Layout: React.FC<Props> = props => {
 
 	useEffect(() => {
 		if (_needToChangeNetwork()) {
-			console.log('Change network')
 			onPresentWalletWrongNetworkModal()
 		}
 	}, [connectedChain])

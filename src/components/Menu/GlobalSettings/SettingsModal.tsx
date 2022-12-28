@@ -15,6 +15,7 @@ import GasSettings from './GasSettings'
 import { InjectedModalProps, Modal } from 'components/Modal'
 import { Toggle } from '@astraprotocol/astra-ui'
 import ThemeSwitcher from 'components/ThemeSwitcher'
+import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 
 // const ScrollableContainer = styled(div)`
 //   flex-direction: column;
@@ -32,6 +33,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 	// const [audioPlay, toggleSetAudioMode] = useAudioModeManager()
 	const [subgraphHealth, setSubgraphHealth] = useSubgraphHealthIndicatorManager()
 	const { onChangeRecipient } = useSwapActionHandlers()
+	const { isMobile } = useMatchBreakpoints()
 
 	const { t } = useTranslation()
 	// const { theme, isDark, setTheme } = useTheme()
@@ -64,7 +66,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 			onDismiss={onDismiss}
 			style={{ width: 380, maxWidth: 420, maxHeight: '100vh', position: 'relative' }}
 		>
-			<div style={{ height: 600, position: 'relative' }}>
+			<div style={{ height: isMobile ? 400 : 600, position: 'relative' }}>
 				<div className="flex col border border-bottom-base padding-bottom-md">
 					<span className="text text-lg text-bold text-uppercase secondary-color-normal">{t('Global')}</span>
 					<div className="flex flex-justify-space-between flex-align-center margin-bottom-sm">

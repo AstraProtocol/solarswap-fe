@@ -65,29 +65,6 @@ import ButtonConnect from 'components/ButtonConnect'
 import CircleLoader from 'components/Loader/CircleLoader'
 import { SwapCallbackError } from './components/SwapCallbackError'
 
-// const Label = styled(Text)`
-// 	font-size: 12px;
-// 	font-weight: bold;
-// 	color: ${({ theme }) => theme.colors.secondary};
-// `
-
-// const SwitchIconButton = styled(IconButton)`
-// 	box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.1);
-// 	.icon-up-down {
-// 		display: none;
-// 	}
-// 	&:hover {
-// 		background-color: ${({ theme }) => theme.colors.primary};
-// 		.icon-down {
-// 			display: none;
-// 			fill: white;
-// 		}
-// 		.icon-up-down {
-// 			display: block;
-// 			fill: white;
-// 		}
-// 	}
-// `
 
 export default function Swap() {
 	const router = useRouter()

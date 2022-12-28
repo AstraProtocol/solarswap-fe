@@ -1,5 +1,24 @@
 @use 'sass:color';
 
+@keyframes mountAnimation {
+    0% {
+      transform: translateX(-20%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  };
+
+@keyframes unmountAnimation {
+    0% {
+      transform: translateX(-10%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+};
+
+
 $maxMobileSize: 960px;
 $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 .navbar {
@@ -151,29 +170,31 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 .hamburgerMenuContainer {
 	background: radial-gradient(106.61% 108.18% at 0% 100%, rgba(82, 120, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%), #08080a;
 	max-width: 677px;
+	// padding-left: 15%;
 	width: 90%;
 	height: 100%;
-	.close {
-		text-align: right;
-	}
-	.content {
-	}
+	z-index: 100;
+	
+	
 
-	.subActive {
+}
+.hamburgerMenuContent {
+	margin-left: 15%;
+}
+.subActive {
+	background-color: $backgroundHover;
+}
+.subItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	&:hover {
 		background-color: $backgroundHover;
-	}
-	.subItem {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		&:hover {
-			background-color: $backgroundHover;
-		}
 	}
 }
 .link {
 	display: block;
-	color: var(--contrast-color-theme-100);
+	// color: var(--contrast-color-theme-100);
 	font-weight: bold;
 }
 
@@ -197,4 +218,15 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 		border-radius: 16px !important;
 		margin-top: 4px !important;
 	}
+}
+
+
+
+.hamburgerActive {
+	transform: translateX(-50%);
+	transition: transform 0.3s ease-out;
+}
+.hamburgerDeactive {
+	transform: translateX(-20%);
+	transition: transform 0.3s ease-in;
 }

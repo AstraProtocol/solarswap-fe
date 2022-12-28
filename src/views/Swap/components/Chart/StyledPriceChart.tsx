@@ -11,7 +11,7 @@ const StyledPriceChart = ({ children, isFullWidthContainer, isExpanded, style }:
 	<div
 		className={styles.priceChart}
 		style={{
-			width: isFullWidthContainer || isExpanded ? '100%' : '70%',
+			width: '100%',
 			height: isExpanded ? 'calc(100vh - 100px)' : '516px',
 			...style
 		}}

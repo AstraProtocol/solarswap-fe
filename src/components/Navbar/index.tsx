@@ -21,6 +21,7 @@ import SwitchTheme from './SwitchTheme'
 import ButtonConnect from 'components/ButtonConnect'
 import { VI, EN } from '../../config/localization/languages'
 import useAuth from 'hooks/useAuth'
+import { Modal, useModal } from 'components/Modal'
 
 export default function Navbar() {
 	const [shadow, setShadow] = useState(false)
@@ -185,23 +186,32 @@ export default function Navbar() {
 	}, [wallet])
 
 	const menus = _changeMenu()
+
+	const ModalMobileNav = () => (
+		<div
+			className={clsx(styles.hamburgerMenuContainer, 'padding-lg ', {
+				[styles.hamburgerActive]: showHamburgerMenu,
+				[styles.hamburgerDeactive]: !showHamburgerMenu
+			})}
+			ref={_searchWrapperRef}
+		>
+			<div style={{ position: 'absolute', right: 20, top: 20 }}>
+				<span
+					onClick={() => dismisMobileNav()}
+					className="text text-lg icon-close contrast-color-100 pointer"
+				></span>
+			</div>
+			<div className={styles.hamburgerMenuContent}>
+				<MobileNavigation items={menus} />
+			</div>
+		</div>
+	)
+
+	const [showMobileNav, dismisMobileNav] = useModal(<ModalMobileNav />)
+
 	return (
 		<>
-			<ModalWrapper open={showHamburgerMenu}>
-				<div
-					className={clsx(styles.hamburgerMenuContainer, 'padding-lg hamburger-enter', {
-						'hamburger-enter-active': load
-					})}
-					ref={_searchWrapperRef}
-				>
-					<div className={styles.close}>
-						<span onClick={_hideMenu} className="icon-close contrast-color-100 pointer"></span>
-					</div>
-					<div className={styles.content}>
-						<MobileNavigation items={menus} />
-					</div>
-				</div>
-			</ModalWrapper>
+			{/* <ModalWrapper open={showHamburgerMenu}></ModalWrapper> */}
 			<nav
 				className={clsx(styles.navbar, 'margin-bottom-sm', {
 					'shadow-xs': shadow,
@@ -212,7 +222,7 @@ export default function Navbar() {
 					<div className={styles.hamburgerMenuIcon}>
 						<div className="padding-left-lg pointer">
 							<span
-								onClick={() => setShowHamburgerMenu(true)}
+								onClick={() => showMobileNav()}
 								className="icon-menu-hamburger contrast-color-100 text-xl"
 							></span>
 						</div>
