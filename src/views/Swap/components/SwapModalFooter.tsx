@@ -77,12 +77,13 @@ export default function SwapModalFooter({
 						<span className="text text-sm margin-right-2xs">
 							{trade.tradeType === TradeType.EXACT_INPUT ? t('Minimum received') : t('Maximum sold')}
 						</span>
-						{/* <QuestionHelper
+						<QuestionHelper
 							text={t(
 								'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.'
 							)}
 							id="tooltip-footer-amount"
-						/> */}
+							hasInsideModal
+						/>
 					</Row>
 					<Row className="flex-align-center flex-justify-end">
 						<span className="text text-sm margin-right-2xs">
@@ -100,23 +101,25 @@ export default function SwapModalFooter({
 				<Row>
 					<Row className="flex-align-center">
 						<span className="text text-sm margin-right-2xs">{t('Price Impact')}</span>
-						{/* <QuestionHelper
+						<QuestionHelper
 							text={t('The difference between the market price and your price due to trade size.')}
 							id="tooltip-footer-price-impact"
-						/> */}
+							hasInsideModal
+						/>
 					</Row>
 					<FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
 				</Row>
 				<Row>
 					<Row className="flex-align-center" style={{ position: 'relative' }}>
 						<span className="text text-sm margin-right-2xs">{t('Liquidity Provider Fee')}</span>
-						{/* <QuestionHelper
+						<QuestionHelper
 							text={`
 									${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })}
 									`}
 							// ${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
 							id="tooltip-footer-liquid-fee"
-						/> */}
+							hasInsideModal
+						/>
 					</Row>
 					<span className="text text-sm">
 						{realizedLPFee

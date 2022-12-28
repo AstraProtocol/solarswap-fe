@@ -211,7 +211,6 @@ export default function Navbar() {
 
 	return (
 		<>
-			{/* <ModalWrapper open={showHamburgerMenu}></ModalWrapper> */}
 			<nav
 				className={clsx(styles.navbar, 'margin-bottom-sm', {
 					'shadow-xs': shadow,

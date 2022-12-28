@@ -394,7 +394,7 @@ export default function Swap() {
 					setIsOpen={setIsChartDisplayed}
 				/>
 				<div className="flex col">
-					<div className={styles.swapContainer}>
+					<div className={styles.swapContainer} style={{ alignSelf: isChartDisplayed ? 'auto' : 'center' }}>
 						<div className={styles.inputCurrencyWrapper}>
 							<AppBody className="border border-base radius-lg">
 								<CurrencyInputHeader

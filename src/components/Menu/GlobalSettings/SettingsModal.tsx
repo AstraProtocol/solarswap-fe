@@ -61,12 +61,8 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 	}
 
 	return (
-		<Modal
-			title={t('Settings')}
-			onDismiss={onDismiss}
-			style={{ width: 380, maxWidth: 420, maxHeight: '100vh', position: 'relative' }}
-		>
-			<div style={{ height: isMobile ? 400 : 600, position: 'relative' }}>
+		<Modal title={t('Settings')} onDismiss={onDismiss} style={{ width: 380, maxWidth: 420, maxHeight: '100vh' }}>
+			<div style={{ height: isMobile ? 400 : 600 }}>
 				<div className="flex col border border-bottom-base padding-bottom-md">
 					<span className="text text-lg text-bold text-uppercase secondary-color-normal">{t('Global')}</span>
 					<div className="flex flex-justify-space-between flex-align-center margin-bottom-sm">
@@ -89,7 +85,8 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 								'Bypasses confirmation modals and allows high slippage trades. Use at your own risk.'
 							)}
 							id="tooltip-expert-mode"
-							placement="right"
+							placement="top"
+							hasInsideModal
 						/>
 					</div>
 					<Toggle
@@ -105,7 +102,8 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						<QuestionHelper
 							text={t('Restricts swaps to direct pairs only.')}
 							id="tooltip-multihops"
-							placement="right"
+							placement="top"
+							hasInsideModal
 						/>
 					</div>
 					<Toggle
@@ -127,7 +125,8 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 								'Turn on NFT market subgraph health indicator all the time. Default is to show the indicator only when the network is delayed'
 							)}
 							id="tooltip-subgraph-indicator"
-							placement="right"
+							placement="top"
+							hasInsideModal
 						/>
 					</div>
 					<Toggle

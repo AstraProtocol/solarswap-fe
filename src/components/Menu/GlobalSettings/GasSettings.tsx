@@ -16,8 +16,8 @@ const GasSettings = () => {
 					text={t(
 						'Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees'
 					)}
-					placement="top-start"
-					ml="4px"
+					hasInsideModal
+					id="tooltip-transaction-speed"
 				/>
 			</div>
 			<div className="flex flex-wrap">
@@ -25,7 +25,7 @@ const GasSettings = () => {
 					onClick={() => {
 						setGasPrice(GAS_PRICE_GWEI.default)
 					}}
-					classes={{ other: 'margin-top-xs', }}
+					classes={{ other: 'margin-top-xs' }}
 					variant={gasPrice === GAS_PRICE_GWEI.default ? 'primary' : 'default'}
 				>
 					<span className="text text-sm">{t('Standard (%gasPrice%)', { gasPrice: GAS_PRICE.default })}</span>
@@ -34,7 +34,7 @@ const GasSettings = () => {
 					onClick={() => {
 						setGasPrice(GAS_PRICE_GWEI.fast)
 					}}
-					classes={{ other: 'margin-left-xs margin-top-xs', }}
+					classes={{ other: 'margin-left-xs margin-top-xs' }}
 					variant={gasPrice === GAS_PRICE_GWEI.fast ? 'primary' : 'default'}
 				>
 					<span className="text text-sm">{t('Fast (%gasPrice%)', { gasPrice: GAS_PRICE.fast })}</span>

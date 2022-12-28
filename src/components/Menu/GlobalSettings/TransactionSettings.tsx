@@ -90,6 +90,7 @@ const SlippageTabs = () => {
 						)}
 						id="tooltip-slippage-tolerance"
 						placement="right"
+						hasInsideModal
 					/>
 				</div>
 				<div className="flex flex-wrap flex-align-center">
@@ -163,6 +164,7 @@ const SlippageTabs = () => {
 						text={t('Your transaction will revert if it is left confirming for longer than this time.')}
 						id="tooltip-tx-deadline"
 						placement="right"
+						hasInsideModal
 					/>
 				</div>
 				<div>
