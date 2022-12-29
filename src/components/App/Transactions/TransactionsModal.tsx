@@ -45,7 +45,7 @@ const TransactionsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 	}, [dispatch, chainId])
 
 	return (
-		<Modal title={t('Recent Transactions')} headerBackground="gradients.cardHeader" onDismiss={onDismiss}>
+		<Modal title={t('Recent Transactions')} onDismiss={onDismiss}>
 			{account ? (
 				<div>
 					{!!pending.length || !!confirmed.length ? (
@@ -64,7 +64,7 @@ const TransactionsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 							{renderTransactions(confirmed)}
 						</>
 					) : (
-						<span>{t('No recent transactions')}</span>
+						<span className="text text-base">{t('No recent transactions')}</span>
 					)}
 				</div>
 			) : (

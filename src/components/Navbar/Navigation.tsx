@@ -107,10 +107,10 @@ export default function Navigation({ items }: NavigationProps) {
 				<Image
 					alt={currentLanguage.code}
 					src={`/images/flag/${currentLanguage.code}.svg`}
-					width={30}
-					height={19}
+					width={20}
+					height={15}
 				/>
-				<span className="padding-left-xs">{currentLanguage?.language}</span>
+				<span className="padding-left-sm">{currentLanguage?.language}</span>
 			</span>
 		)
 	}
@@ -124,6 +124,8 @@ export default function Navigation({ items }: NavigationProps) {
 						'padding-right-md padding-left-xs': !prefixIcon
 					})}
 					onClick={event => _showSubMenu(event, id)}
+					onMouseEnter={event => _showSubMenu(event, id)}
+					onMouseLeave={event => _showSubMenu(event, null)}
 				>
 					{type === 'locale' ? (
 						_renderLocale()

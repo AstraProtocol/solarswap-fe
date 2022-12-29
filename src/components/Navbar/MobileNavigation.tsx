@@ -1,6 +1,7 @@
 import { Collapse, Icon, IconEnum, Typography } from '@astraprotocol/astra-ui'
 import { CollapseProps } from '@astraprotocol/astra-ui/lib/es/components/Collapse'
 import clsx from 'clsx'
+import NavigationConnect from 'components/ButtonConnect/NavigationConnect'
 import { useTranslation } from 'contexts/Localization'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -42,6 +43,12 @@ const LinkMenuItem = ({
 	</div>
 )
 
+const LinkMenuConnect = () => (
+	<div className={clsx('radius-base padding-sm', styles.subItem)}>
+		<NavigationConnect classes="width-100 " />
+	</div>
+)
+
 export default function MoibleNavigation({ items }: MobileNavigationProps) {
 	const router = useRouter()
 	const { currentLanguage } = useTranslation()
@@ -62,10 +69,10 @@ export default function MoibleNavigation({ items }: MobileNavigationProps) {
 							<Image
 								alt={locale}
 								src={`/images/flag/${currentLanguage.code}.svg`}
-								width={30}
-								height={19}
+								width={20}
+								height={15}
 							/>
-							<span className="padding-left-xs">{currentLanguage?.language}</span>
+							<span className="margin-left-sm">{currentLanguage?.language}</span>
 							<Icon icon={IconEnum.ICON_DROPDOWN} classes="margin-left-xs" />
 						</div>
 					)
@@ -116,6 +123,9 @@ export default function MoibleNavigation({ items }: MobileNavigationProps) {
 				menus.push(<LinkMenuItem key={item.label} link={item.link} label={item.label} pathname={pathname} />)
 			}
 		}
+
+		menus.push(<LinkMenuConnect key="button-connect" />)
+
 		return menus
 	}, [currentLanguage.code, currentLanguage?.language, currentLanguage?.locale, items, locale, pathname])
 

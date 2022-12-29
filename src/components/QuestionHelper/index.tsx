@@ -16,6 +16,8 @@ interface Props {
 
 const QuestionHelper = ({ text = '', hasInsideModal = false, id, placement = 'top', ...props }: Props) => {
 	const [offset, setOffset] = useState({ left: 0, top: 0 })
+
+	// tooltip error inside modal: wrong position offset
 	useEffect(() => {
 		const element: any = document.querySelector(`[data-for='${id}']`)
 		const tooltip: any = document.getElementById(id)
