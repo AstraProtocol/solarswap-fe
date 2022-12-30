@@ -30,7 +30,7 @@ export default function Navbar() {
 	const [load, setLoad] = useState(false)
 	const { logout } = useAuth()
 	const _searchWrapperRef = useRef<HTMLDivElement>(null)
-	const [{ wallet }, connect, disconnect] = useConnectWallet()
+	const [{ wallet }, connect] = useConnectWallet()
 
 	const { t, setLanguage, currentLanguage } = useTranslation()
 

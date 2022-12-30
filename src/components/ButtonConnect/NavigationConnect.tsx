@@ -21,7 +21,7 @@ export default function NavigationConnect({ classes = '' }) {
 		disconnect(wallet)
 		logout()
 		WalletHelper.removeCacheConnect()
-	}, [])
+	}, [wallet])
 
 	if (wallet) {
 		const account = wallet.accounts[0]
