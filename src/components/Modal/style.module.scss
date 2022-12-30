@@ -36,7 +36,7 @@
 
 .appear {
 	opacity: 1;
-	animation: appearAnimation 0.3s ease-in-out forwards;
+	// animation: appearAnimation 0.3s ease-in-out forwards; // It makes modal lagging, appear and disappear then appear
 }
 
 .disappear {

@@ -11,7 +11,7 @@ import { useConnectWallet } from '@web3-onboard/react'
 import clsx from 'clsx'
 import { cloneDeep, isEmpty } from 'lodash'
 import { useTranslation } from 'contexts/Localization'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { WalletHelper } from 'utils/wallet'
 import LiveIcon from './LiveIcon'
 import MobileNavigation from './MobileNavigation'
@@ -22,6 +22,7 @@ import ButtonConnect from 'components/ButtonConnect'
 import { VI, EN } from '../../config/localization/languages'
 import useAuth from 'hooks/useAuth'
 import { Modal, useModal } from 'components/Modal'
+import NavigationConnect from 'components/ButtonConnect/NavigationConnect'
 
 export default function Navbar() {
 	const [shadow, setShadow] = useState(false)
@@ -29,9 +30,9 @@ export default function Navbar() {
 	const [load, setLoad] = useState(false)
 	const { logout } = useAuth()
 	const _searchWrapperRef = useRef<HTMLDivElement>(null)
-	const [{ wallet }, connect, disconnect] = useConnectWallet()
+	const [{ wallet }, connect] = useConnectWallet()
 
-	const { t, setLanguage } = useTranslation()
+	const { t, setLanguage, currentLanguage } = useTranslation()
 
 	const _hideMenu = () => {
 		setLoad(false)
@@ -133,57 +134,8 @@ export default function Navbar() {
 			}
 		]
 
-		const newMenus = cloneDeep(MENU_ITEMS)
-		if (wallet && !isEmpty(wallet?.accounts)) {
-			const account = wallet.accounts[0]
-			let optionItems: SubMenuItem[] = []
-			optionItems.push()
-			newMenus.push({
-				id: '99',
-				label: ellipseBetweenText(account.address, 6, 6),
-				prefixIcon: <LiveIcon />,
-				className: styles.customSubmenu,
-				submenus: [
-					{
-						id: '99.1',
-						label: (
-							<div className="flex flex-column width-100">
-								<div className="flex flex-row flex-align-center">
-									<div className="margin-right-sm flex-justify-center">
-										<CryptoIcon name="asa" />
-									</div>
-									<div className="flex flex-column flex-justify-start">
-										<span className="text text-base">
-											{ellipseBetweenText(account.address, 6, 6)}
-										</span>
-									</div>
-								</div>
-							</div>
-						),
-						hover: 'none',
-						align: ' '
-					},
-					{
-						id: '99.2',
-						label: (
-							<div className="block-center">
-								<Icon icon={IconEnum.ICON_SETTING} className="icon-setting margin-right-sm text-xl" />
-								{t('Disconnect Wallet')}
-							</div>
-						),
-						onClick: () => {
-							disconnect(wallet)
-							logout()
-							WalletHelper.removeCacheConnect()
-						},
-						align: ' '
-					}
-				]
-			})
-		}
-
-		return newMenus
-	}, [wallet])
+		return MENU_ITEMS
+	}, [currentLanguage])
 
 	const menus = _changeMenu()
 
@@ -231,7 +183,7 @@ export default function Navbar() {
 					</div>
 					<div className={styles.right}>
 						<Navigation items={menus} />
-						<ButtonConnect />
+						<NavigationConnect />
 					</div>
 				</div>
 			</nav>
