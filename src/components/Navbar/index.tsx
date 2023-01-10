@@ -83,8 +83,10 @@ export default function Navbar() {
 	}, [connect])
 
 	useEffect(() => {
-		_setWalletFromLocalStorage()
-	}, [wallet, _setWalletFromLocalStorage])
+		if (!wallet) {
+			_setWalletFromLocalStorage()
+		}
+	}, [wallet])
 
 	const _changeMenu = useCallback(() => {
 		const MENU_ITEMS: MenuItem[] = [

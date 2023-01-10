@@ -13,7 +13,7 @@ import {
 	createMigrate
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-// import burn from './burn/reducer'
+import burn from './burn/reducer'
 // import farmsReducer from './farms'
 import { updateVersion } from './global/actions'
 import infoReducer from './info'
@@ -67,7 +67,7 @@ const persistedReducer = persistReducer(
 		transactions,
 		swap,
 		mint,
-		// burn,
+		burn,
 		multicall,
 		lists
 	})

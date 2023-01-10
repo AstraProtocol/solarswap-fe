@@ -40,6 +40,8 @@ BigNumber.config({
 	DECIMAL_PLACES: 80
 })
 
+const chainId = parseInt(CHAIN_ID)
+
 function GlobalHooks() {
 	usePollBlockNumber()
 	// usePollCoreFarmData()
@@ -75,7 +77,7 @@ const web3Onboard = init({
 	wallets,
 	chains: [
 		{
-			id: '0x2b6b',
+			id: `0x${chainId.toString(16)}`,
 			token: 'ASA',
 			label: 'Astra testnet',
 			rpcUrl: 'https://rpc.astranaut.dev/',

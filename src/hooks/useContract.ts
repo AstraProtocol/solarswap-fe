@@ -264,7 +264,7 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
 	return useContract<Erc20>(tokenAddress, ERC20_ABI, withSignerIfPossible)
 }
 
-export function useZapInContract(address?: string, withSignerIfPossible?: boolean) {
+export function useZapContract(address?: string, withSignerIfPossible?: boolean) {
 	return useContract<ZapIn>(address, ZAPIN_ABI, withSignerIfPossible)
 }
 

@@ -775,6 +775,7 @@
 	"%assetA%/%assetB% Burned": "%assetA%/%assetB% Burned",
 	"Price": "Price",
 	"Prices": "Prices",
+	"Remove liquidity": "Remove liquidity",
 	"Remove %assetA%-%assetB% liquidity": "Remove %assetA%-%assetB% liquidity",
 	"Amount": "Amount",
 	"Simple": "Simple",

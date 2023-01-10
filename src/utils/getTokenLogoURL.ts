@@ -1,5 +1,5 @@
 // @todo will failed in some token not listed such as Astra
 const getTokenLogoURL = (address: string) =>
-	`https://assets.trustwalletapp.com/blockchains/smartchain/assets/${address}/logo.png`
+	`${process.env.NEXT_PUBLIC_HOST}/images/tokens/${address}.png`
 
 export default getTokenLogoURL
