@@ -2,6 +2,6 @@
 /**
  * @todo move all address constant to outside, in one place
  */
-const WASA_ADDRESS = '0xEfd086F56311a6DD26DF0951Cdd215F538689B3a'
+const WASA_ADDRESS = '0xC60F8AF409Eac14d4926e641170382f313749Fdc'
 
 export { WASA_ADDRESS }

@@ -30,7 +30,7 @@ export default function CurrencyLogo({
 		return []
 	}, [currency, uriLocations])
 
-	if (JSON.stringify(currency) === JSON.stringify(ETHER) || currency.symbol === "WASA") {
+	if (JSON.stringify(currency) === JSON.stringify(ETHER) || currency?.symbol === "WASA") {
 		return <AstraIcon height={size} width={size} style={style} />
 	}
 

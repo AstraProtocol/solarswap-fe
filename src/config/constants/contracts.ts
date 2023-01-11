@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	masterChef: {
-		11115: '0x47862AD34a6DC10d0dB988E56Ae8fE36818540Dc',
+		11115: '0xf2285cf5ac5Ea661407629C879fA03E2ACfB1E50',
 		56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E'
 	},
 	sousChef: {
@@ -14,7 +14,7 @@ export default {
 	},
 	multiCall: {
 		56: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
-		11115: '0x464EaBfB56a542231dCf641106333f7C7FD707Bd'
+		11115: '0x4DB58C5f14AC8F59A456D101cB2f4A03d608CE2f'
 	},
 
 	claimRefund: {

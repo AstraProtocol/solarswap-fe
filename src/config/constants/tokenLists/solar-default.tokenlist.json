@@ -125,7 +125,7 @@
 		{
 			"name": "Tether USD",
 			"symbol": "USDT",
-			"address": "0x41591484aEB5FA3d1759f1cbA369dC8dc1281298",
+			"address": "0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2",
 			"chainId": 11115,
 			"decimals": 18,
 			"logoURI": "https://defi.astranaut.dev/images/tokens/0x41591484aEB5FA3d1759f1cbA369dC8dc1281298.png"
