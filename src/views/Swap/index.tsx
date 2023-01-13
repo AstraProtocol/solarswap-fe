@@ -592,7 +592,7 @@ export default function Swap() {
 													)}
 												</NormalButton>
 												<NormalButton
-													// variant={isValid && priceImpactSeverity > 2 ? 'danger' : 'primary'}
+													variant={isValid && priceImpactSeverity > 2 ? 'default' : 'primary'}
 													onClick={() => {
 														if (isExpertMode) {
 															handleSwap()
@@ -624,11 +624,11 @@ export default function Swap() {
 											</Row>
 										) : (
 											<NormalButton
-												// variant={
-												// 	isValid && priceImpactSeverity > 2 && !swapCallbackError
-												// 		? 'danger'
-												// 		: 'primary'
-												// }
+												variant={
+													isValid && priceImpactSeverity > 2 && !swapCallbackError
+														? 'default'
+														: 'primary'
+												}
 												onClick={() => {
 													if (isExpertMode) {
 														handleSwap()

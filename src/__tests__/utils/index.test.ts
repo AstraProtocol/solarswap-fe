@@ -1,22 +1,34 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { AddressZero } from '@ethersproject/constants'
 import { TokenAmount, Token, ChainId, Percent, JSBI } from '@solarswap/sdk'
-import { getAstraScanLink, calculateSlippageAmount, isAddress, calculateGasMargin, basisPointsToPercent } from 'utils'
+import {
+	getAstraExplorerLink,
+	calculateSlippageAmount,
+	isAddress,
+	calculateGasMargin,
+	basisPointsToPercent
+} from 'utils'
 
 describe('utils', () => {
-	describe('#getAstraScanLink', () => {
+	describe('#getAstraExplorerLink', () => {
 		it('correct for tx', () => {
-			expect(getAstraScanLink('abc', 'transaction', ChainId.MAINNET)).toEqual('https://bscscan.com/tx/abc')
+			expect(getAstraExplorerLink('abc', 'transaction', ChainId.MAINNET)).toEqual(
+				'https://explorer.astranaut.io/tx/abc'
+			)
 		})
 		it('correct for token', () => {
-			expect(getAstraScanLink('abc', 'token', ChainId.MAINNET)).toEqual('https://bscscan.com/token/abc')
+			expect(getAstraExplorerLink('abc', 'token', ChainId.MAINNET)).toEqual(
+				'https://explorer.astranaut.io/token/abc'
+			)
 		})
 		it('correct for address', () => {
-			expect(getAstraScanLink('abc', 'address', ChainId.MAINNET)).toEqual('https://bscscan.com/address/abc')
+			expect(getAstraExplorerLink('abc', 'address', ChainId.MAINNET)).toEqual(
+				'https://explorer.astranaut.io/address/abc'
+			)
 		})
 		it('enum', () => {
-			expect(getAstraScanLink('abc', 'address', ChainId.TESTNET)).toEqual(
-				'https://testnet.bscscan.com/address/abc'
+			expect(getAstraExplorerLink('abc', 'address', ChainId.TESTNET)).toEqual(
+				'https://explorer.astranaut.dev/address/abc'
 			)
 		})
 	})

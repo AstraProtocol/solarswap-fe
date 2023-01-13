@@ -89,7 +89,7 @@ function ConfirmAddModalBottom({
 				</Row>
 			</div>
 			<Row>
-				<NormalButton classes={{ other: 'text text-base width-100' }} onClick={onAdd} mt="20px">
+				<NormalButton classes={{ other: 'text text-base width-100 margin-top-lg' }} onClick={onAdd}>
 					{noLiquidity ? t('Create Pool & Supply') : t('Confirm Supply')}
 				</NormalButton>
 			</Row>

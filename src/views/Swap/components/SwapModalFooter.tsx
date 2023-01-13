@@ -81,8 +81,6 @@ export default function SwapModalFooter({
 							text={t(
 								'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.'
 							)}
-							id="tooltip-footer-amount"
-							hasInsideModal
 						/>
 					</Row>
 					<Row className="flex-align-center flex-justify-end">
@@ -103,8 +101,6 @@ export default function SwapModalFooter({
 						<span className="text text-sm margin-right-2xs">{t('Price Impact')}</span>
 						<QuestionHelper
 							text={t('The difference between the market price and your price due to trade size.')}
-							id="tooltip-footer-price-impact"
-							hasInsideModal
 						/>
 					</Row>
 					<FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
@@ -115,10 +111,8 @@ export default function SwapModalFooter({
 						<QuestionHelper
 							text={`
 									${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })}
+									${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
 									`}
-							// ${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
-							id="tooltip-footer-liquid-fee"
-							hasInsideModal
 						/>
 					</Row>
 					<span className="text text-sm">

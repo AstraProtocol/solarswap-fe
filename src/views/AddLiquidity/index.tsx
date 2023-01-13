@@ -4,7 +4,7 @@ import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@solarswap/sdk'
 // import { useModal } from '@solarswap/uikit'
 import useModal from 'components/Modal/useModal'
-import { NormalButton, Icon, Row, Message } from '@astraprotocol/astra-ui'
+import { NormalButton, Icon, Row, Message, IconEnum } from '@astraprotocol/astra-ui'
 import { logError } from 'utils/sentry'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import { useTranslation } from 'contexts/Localization'
@@ -329,7 +329,7 @@ export default function AddLiquidity() {
 								showCommonBases
 							/>
 							<ColumnCenter>
-								<Icon icon="icon-plus" />
+								<Icon icon={IconEnum.ICON_PLUS} />
 							</ColumnCenter>
 							<CurrencyInputPanel
 								value={formattedAmounts[Field.CURRENCY_B]}
@@ -370,9 +370,8 @@ export default function AddLiquidity() {
 
 							{addIsUnsupported ? (
 								<NormalButton
-									classes={{ other: 'width-100 text-base padding-left-sm' }}
+									classes={{ other: 'width-100 text-base padding-left-sm margin-bottom-2xs' }}
 									disabled
-									mb="4px"
 								>
 									{t('Unsupported Asset')}
 								</NormalButton>
@@ -391,7 +390,9 @@ export default function AddLiquidity() {
 														classes={{ other: 'width-100 text-base' }}
 														onClick={approveACallback}
 														disabled={approvalA === ApprovalState.PENDING}
-														width={approvalB !== ApprovalState.APPROVED ? '48%' : '100%'}
+														style={{
+															width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%'
+														}}
 													>
 														{approvalA === ApprovalState.PENDING ? (
 															<Dots>
@@ -411,7 +412,9 @@ export default function AddLiquidity() {
 														classes={{ other: 'width-100 text-base' }}
 														onClick={approveBCallback}
 														disabled={approvalB === ApprovalState.PENDING}
-														width={approvalA !== ApprovalState.APPROVED ? '48%' : '100%'}
+														style={{
+															width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%'
+														}}
 													>
 														{approvalB === ApprovalState.PENDING ? (
 															<Dots>
@@ -434,7 +437,7 @@ export default function AddLiquidity() {
 											!isValid &&
 											!!parsedAmounts[Field.CURRENCY_A] &&
 											!!parsedAmounts[Field.CURRENCY_B]
-												? 'danger'
+												? 'default'
 												: 'primary'
 										}
 										onClick={() => {

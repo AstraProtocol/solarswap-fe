@@ -78,7 +78,7 @@ export default function CurrencyInputPanel({
 							{pair ? (
 								<DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin />
 							) : currency ? (
-								<CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
+								<CurrencyLogo currency={currency} size={24} style={{ marginRight: '8px' }} />
 							) : null}
 							{pair ? (
 								<span id="pair" className="text text-bold margin-left-xs">
@@ -130,7 +130,7 @@ export default function CurrencyInputPanel({
 			<div className="border radius-lg same-bg-color-50 margin-bottom-md margin-left-sm">
 				<div className={styles.labelRow}>
 					<NumericalInput
-						className="token-amount-input"
+						className={`token-amount-${id.replace('swap-currency-', '')}`}
 						value={value}
 						onUserInput={val => {
 							onUserInput(val)

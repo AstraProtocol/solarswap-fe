@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.iconArrow {
+	height: 20px;
+	animation: toggled 200ms ease forwards;
+	
+
+	&.toggled {
+		animation: untoggled 200ms ease forwards;
+	}
+}

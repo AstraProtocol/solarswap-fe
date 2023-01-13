@@ -5,7 +5,7 @@ import { useTranslation } from 'contexts/Localization'
 import useENS from '../../../hooks/ENS/useENS'
 import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
 import { AutoColumn } from '../../../components/Layout/Column'
-import { getAstraScanLink } from '../../../utils'
+import { getAstraExplorerLink } from '../../../utils'
 import styles from './styles.module.scss'
 import clsx from 'clsx'
 
@@ -107,7 +107,7 @@ export default function AddressInputPanel({
 				<Row style={{ justifyContent: 'space-between' }}>
 					<span className="text text-base">{t('Recipient')}</span>
 					{address && chainId && (
-						<Typography.Link href={getAstraScanLink(name ?? address, 'address', chainId)}>
+						<Typography.Link href={getAstraExplorerLink(name ?? address, 'address', chainId)}>
 							{t('View on AstraExplorer')}
 						</Typography.Link>
 					)}

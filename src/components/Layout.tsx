@@ -9,12 +9,14 @@ import useModal from './Modal/useModal'
 import WalletWrongNetworkModal from './Wallet/WalletWrongNetworkModal'
 import { useSetChain } from '@web3-onboard/react'
 import { useTranslation } from 'contexts/Localization'
+import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 
 type Props = {
 	children: ReactNode
 }
 
 const Layout: React.FC<Props> = props => {
+	const { isMobile } = useMatchBreakpoints()
 	const [onPresentWalletWrongNetworkModal] = useModal(<WalletWrongNetworkModal />)
 	const [{ connectedChain }, setChain] = useSetChain()
 	const _needToChangeNetwork = () =>
@@ -56,11 +58,13 @@ const Layout: React.FC<Props> = props => {
 			<div className={clsx(`${resolvedTheme}--mode`, styles.layoutContainer)}>
 				<Navbar />
 				<div className={styles.layout}>{props.children}</div>
-				<Footer
-					footerSocialTitle={t('Connect with us')}
-					footerLinks={footerLinks}
-					logoTitle={process.env.NEXT_PUBLIC_TITLE}
-				/>
+				{!isMobile && (
+					<Footer
+						footerSocialTitle={t('Connect with us')}
+						footerLinks={footerLinks}
+						logoTitle={process.env.NEXT_PUBLIC_TITLE}
+					/>
+				)}
 				<div id="modal-root"></div>
 				<ToastWrapper />
 			</div>

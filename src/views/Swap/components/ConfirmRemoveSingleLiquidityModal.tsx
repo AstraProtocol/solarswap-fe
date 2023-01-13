@@ -9,30 +9,32 @@ import { AutoColumn } from 'components/Layout/Column'
 import { Field } from 'state/burn/actions'
 import { CurrencyLogo, DoubleCurrencyLogo } from 'components/Logo'
 import { ApprovalState } from 'hooks/useApproveCallback'
+import { Currency, CurrencyAmount, Pair, Percent, Token, TokenAmount } from '@solarswap/sdk'
 
-// interface ConfirmRemoveSingleLiquidityModalProps {
-//   title: string
-//   customOnDismiss: () => void
-//   attemptingTxn: boolean
-//   pair?: Pair
-//   hash: string
-//   pendingText: string
-//   parsedAmounts: {
-//     [Field.LIQUIDITY_PERCENT]: Percent
-//     [Field.LIQUIDITY]?: TokenAmount
-//     [Field.CURRENCY_A]?: CurrencyAmount
-//     [Field.CURRENCY_B]?: CurrencyAmount
-//   }
-//   allowedSlippage: number
-//   onRemove: () => void
-//   liquidityErrorMessage: string
-//   approval: ApprovalState
-//   signatureData?: any
-//   tokenA: Token
-//   tokenB: Token
-//   currencyA: Currency | null | undefined
-//   currencyB: Currency | null | undefined
-// }
+interface ConfirmRemoveSingleLiquidityModalProps {
+	onDismiss?: () => void
+	title: string
+	customOnDismiss: () => void
+	attemptingTxn: boolean
+	pair?: Pair
+	hash: string
+	pendingText: string
+	parsedAmounts: {
+		[Field.LIQUIDITY_PERCENT]: Percent
+		[Field.LIQUIDITY]?: TokenAmount
+		[Field.CURRENCY_A]?: CurrencyAmount
+		[Field.CURRENCY_B]?: CurrencyAmount
+	}
+	allowedSlippage: number
+	onRemove: () => void
+	liquidityErrorMessage: string
+	approval: ApprovalState
+	signatureData?: any
+	tokenA: Token
+	tokenB: Token
+	currencyA: Currency | null | undefined
+	currencyB: Currency | null | undefined
+}
 
 const ConfirmRemoveSingleLiquidityModal = ({
 	title,
@@ -52,7 +54,7 @@ const ConfirmRemoveSingleLiquidityModal = ({
 	tokenB,
 	currencyA,
 	currencyB
-}) => {
+}: ConfirmRemoveSingleLiquidityModalProps) => {
 	const { t } = useTranslation()
 
 	const slippage = allowedSlippage / 100
@@ -67,15 +69,11 @@ const ConfirmRemoveSingleLiquidityModal = ({
 	const modalHeader = useCallback(() => {
 		return (
 			<AutoColumn gap="md">
-				<Row className="flex-justify-space-between" align="flex-end">
-					<span className="text text-xl" fontSize="24px">
-						{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}
-					</span>
-					<div className="flex padding-2xs" gap="4px">
-						<CurrencyLogo currency={currencyA} size="24px" />
-						<span className="text text-xl margin-left-sm" fontSize="24px" ml="10px">
-							{currencyA?.symbol}
-						</span>
+				<Row className="flex-justify-space-between flex-align-end">
+					<span className="text text-xl">{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}</span>
+					<div className="flex padding-2xs">
+						<CurrencyLogo currency={currencyA} size={24} />
+						<span className="text text-xl margin-left-sm">{currencyA?.symbol}</span>
 					</div>
 				</Row>
 				{/* <Row>
@@ -139,9 +137,7 @@ const ConfirmRemoveSingleLiquidityModal = ({
 					)}
 				</div>
 				<NormalButton
-					classes={{ other: 'text text-base width-100' }}
-					width="100%"
-					mt="20px"
+					classes={{ other: 'text text-base width-100 margin-top-md' }}
 					disabled={!(approval === ApprovalState.APPROVED || signatureData !== null)}
 					onClick={onRemove}
 				>

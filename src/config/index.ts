@@ -8,7 +8,7 @@ BigNumber.config({
 	DECIMAL_PLACES: 80
 })
 
-export const BSC_BLOCK_TIME = 2.5
+export const ASA_BLOCK_TIME = 3
 
 export const BASE_ASTRA_EXPLORER_URLS = {
 	[ChainId.MAINNET]: process.env.NEXT_PUBLIC_EXPLORER,
@@ -23,7 +23,7 @@ export const BASE_ASTRA_EXPLORER_URLS = {
 // ASA_PER_BLOCK in config/index.ts = 40 as we only change the amount sent to the burn pool which is effectively a farm.
 // @todo ASA_PER_BLOCK chua chot
 export const ASA_PER_BLOCK = 2
-export const BLOCKS_PER_YEAR = (60 / BSC_BLOCK_TIME) * 60 * 24 * 365 // 10512000
+export const BLOCKS_PER_YEAR = (60 / ASA_BLOCK_TIME) * 60 * 24 * 365 // 10512000
 export const ASA_PER_YEAR = ASA_PER_BLOCK * BLOCKS_PER_YEAR
 export const BASE_URL = process.env.NEXT_PUBLIC_HOST
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_URL}/add`
@@ -35,4 +35,4 @@ export const RECLAIM_AUCTIONS_TO_FETCH = 500
 export const AUCTION_WHITELISTED_BIDDERS_TO_FETCH = 500
 export const IPFS_GATEWAY = 'https://ipfs.io/ipfs'
 
-export const WALLET_CONNECT_RELAY = 'wc-relay.astranaut.dev'
+export const WALLET_CONNECT_RELAY = process.env.WALLET_CONNECT_RELAY

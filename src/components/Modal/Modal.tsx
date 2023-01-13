@@ -1,7 +1,7 @@
 import { IconButton, IconEnum, Row } from '@astraprotocol/astra-ui'
 import clsx from 'clsx'
 import React from 'react'
-import styles from './style.module.scss'
+import styles from './styles.module.scss'
 import { ModalProps } from './types'
 
 const Modal: React.FC<ModalProps> = ({
@@ -11,11 +11,16 @@ const Modal: React.FC<ModalProps> = ({
 	children,
 	hideCloseButton = false,
 	headerBackground = 'transparent',
+	className,
 	style,
 	...props
 }) => {
 	return (
-		<div style={{ minWidth: '320px', ...style }} {...props} className={clsx(styles.modal, 'border radius-lg')}>
+		<div
+			style={{ minWidth: '320px', ...style }}
+			{...props}
+			className={clsx(styles.modal, 'border radius-lg', className)}
+		>
 			<Row
 				style={{ justifyContent: 'space-between', flex: 0, background: headerBackground }}
 				classes={clsx(

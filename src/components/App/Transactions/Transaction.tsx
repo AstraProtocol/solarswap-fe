@@ -1,25 +1,8 @@
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getAstraScanLink } from 'utils'
+import { getAstraExplorerLink } from 'utils'
 import { TransactionDetails } from 'state/transactions/reducer'
-// import CircleLoader from '../../Loader/CircleLoader'
-import { Typography } from '@astraprotocol/astra-ui'
-
-// const TransactionState = styled.div<{ pending: boolean; success?: boolean }>`
-// 	display: flex;
-// 	justify-content: space-between;
-// 	align-items: center;
-// 	text-decoration: none !important;
-// 	border-radius: 0.5rem;
-// 	padding: 0.25rem 0rem;
-// 	font-weight: 500;
-// 	font-size: 0.825rem;
-// 	color: ${({ theme }) => theme.colors.primary};
-// `
-
-// const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
-//   color: ${({ pending, success, theme }) =>
-//     pending ? theme.colors.primary : success ? theme.colors.success : theme.colors.failure};
-// `
+import { Icon, IconEnum, Typography } from '@astraprotocol/astra-ui'
+import CircleLoader from 'components/Loader/CircleLoader'
 
 export default function Transaction({ tx }: { tx: TransactionDetails }) {
 	const { chainId } = useActiveWeb3React()
@@ -31,12 +14,18 @@ export default function Transaction({ tx }: { tx: TransactionDetails }) {
 	if (!chainId) return null
 
 	return (
-		<div pending={pending} success={success}>
-			<Typography.Link href={getAstraScanLink(tx.hash, 'transaction', chainId)}>
+		<div>
+			<Typography.Link href={getAstraExplorerLink(tx.hash, 'transaction', chainId)}>
 				{summary ?? tx.hash}
 			</Typography.Link>
 
-			{/* {pending ? <CircleLoader /> : success ? <CheckmarkIcon color="success" /> : <CloseIcon color="failure" />} */}
+			{pending ? (
+				<CircleLoader />
+			) : success ? (
+				<Icon icon={IconEnum.ICON_CHECKED} color="success" />
+			) : (
+				<Icon icon={IconEnum.ICON_CLOSE} color="failure" />
+			)}
 		</div>
 	)
 }

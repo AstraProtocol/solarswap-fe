@@ -16,6 +16,7 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 /**
  * temporary solution for migrating React Router to Next.js Link
  */
+// eslint-disable-next-line react/display-name
 export const NextLinkFromReactRouter = forwardRef<any, LinkProps>(
 	({ to, replace, children, prefetch, ...props }, ref) => (
 		<NextLink href={to as string} replace={replace} passHref prefetch={prefetch}>

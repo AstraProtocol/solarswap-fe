@@ -4,7 +4,7 @@ interface Props {
 	isFullWidthContainer?: boolean
 	isExpanded?: boolean
 	children: JSX.Element | JSX.Element[] | string | string[]
-	style: React.CSSProperties
+	style?: React.CSSProperties
 }
 
 const StyledPriceChart = ({ children, isFullWidthContainer, isExpanded, style }: Props) => (

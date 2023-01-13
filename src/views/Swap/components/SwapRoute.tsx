@@ -1,6 +1,7 @@
 import { Fragment, memo } from 'react'
 import { Trade } from '@solarswap/sdk'
 import { unwrappedToken } from 'utils/wrappedCurrency'
+import { Icon, IconEnum } from '@astraprotocol/astra-ui'
 
 export default memo(function SwapRoute({ trade }: { trade: Trade }) {
 	return (
@@ -14,7 +15,7 @@ export default memo(function SwapRoute({ trade }: { trade: Trade }) {
 						<div className="flex flex-align-end">
 							<span className="text text-base">{currency.symbol}</span>
 						</div>
-						{!isLastItem && <ChevronRightIcon width="12px" />}
+						{!isLastItem && <Icon icon={IconEnum.ICON_ARROW_RIGHT} />}
 					</Fragment>
 				)
 			})}

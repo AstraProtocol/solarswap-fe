@@ -173,7 +173,7 @@ export default function Navbar() {
 			>
 				<div className={clsx(styles.container, 'margin-auto')}>
 					<div className={styles.hamburgerMenuIcon}>
-						<div className="padding-left-lg pointer">
+						<div className="pointer">
 							<span
 								onClick={() => showMobileNav()}
 								className="icon-menu-hamburger contrast-color-100 text-xl"

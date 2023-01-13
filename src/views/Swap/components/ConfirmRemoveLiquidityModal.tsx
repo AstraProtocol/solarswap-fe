@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { Currency, CurrencyAmount, Pair, Percent, Token, TokenAmount } from '@solarswap/sdk'
 // import { InjectedModalProps } from '@solarswap/uikit'
-import { withToast, Row, Icon, NormalButton } from '@astraprotocol/astra-ui'
+import { withToast, Row, Icon, NormalButton, IconEnum } from '@astraprotocol/astra-ui'
 import { useTranslation } from 'contexts/Localization'
 import TransactionConfirmationModal, {
 	ConfirmationModalContent,
@@ -69,29 +69,21 @@ const ConfirmRemoveLiquidityModal = ({
 	const modalHeader = useCallback(() => {
 		return (
 			<AutoColumn gap="md">
-				<Row className="flex-justify-space-between" align="flex-end">
-					<span className="text text-xl" fontSize="24px">
-						{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}
-					</span>
-					<div className="flex padding-2xs" gap="4px">
-						<CurrencyLogo currency={currencyA} size="24px" />
-						<span className="text text-xl margin-left-sm" fontSize="24px" ml="10px">
-							{currencyA?.symbol}
-						</span>
+				<Row className="flex-justify-space-between">
+					<span className="text text-xl">{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}</span>
+					<div className="flex padding-2xs">
+						<CurrencyLogo currency={currencyA} />
+						<span className="text text-xl margin-left-sm">{currencyA?.symbol}</span>
 					</div>
 				</Row>
 				<div className="flex flex-justify-center">
-					<Icon icon="icon-plus" className="text-lg" />
+					<Icon icon={IconEnum.ICON_PLUS} className="text-lg" />
 				</div>
-				<Row className="flex-justify-space-between" align="flex-end">
-					<span className="text text-xl" fontSize="24px">
-						{parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}
-					</span>
-					<div className="flex padding-2xs" gap="4px">
-						<CurrencyLogo currency={currencyB} size="24px" />
-						<span className="text text-xl margin-left-sm" fontSize="24px" ml="10px">
-							{currencyB?.symbol}
-						</span>
+				<Row className="flex-justify-space-between">
+					<span className="text text-xl">{parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}</span>
+					<div className="flex padding-2xs">
+						<CurrencyLogo currency={currencyB} />
+						<span className="text text-xl margin-left-sm">{currencyB?.symbol}</span>
 					</div>
 				</Row>
 
@@ -143,7 +135,6 @@ const ConfirmRemoveLiquidityModal = ({
 				</div>
 				<NormalButton
 					classes={{ other: 'text text-base width-100' }}
-					mt="20px"
 					disabled={!(approval === ApprovalState.APPROVED || signatureData !== null)}
 					onClick={onRemove}
 				>

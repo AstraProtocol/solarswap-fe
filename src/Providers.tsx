@@ -4,11 +4,17 @@ import { SWRConfig } from 'swr'
 import { getLibrary } from 'utils/web3React'
 import { LanguageProvider } from 'contexts/Localization'
 import { fetchStatusMiddleware } from 'hooks/useSWRContract'
-import { Store } from '@reduxjs/toolkit'
 import { ThemeProvider as NextThemeProvider } from 'next-themes'
 import { ModalProvider } from 'components/Modal'
+import { AppState } from 'state'
+import { Store } from 'redux'
 
-const Providers: React.FC<{ store: Store }> = ({ children, store }) => {
+interface Props {
+	children?: JSX.Element | JSX.Element[] | string | string[]
+	store: Store<AppState>
+}
+
+const Providers: React.FC<Props> = ({ children, store }: Props) => {
 	return (
 		<Web3ReactProvider getLibrary={getLibrary}>
 			<Provider store={store}>

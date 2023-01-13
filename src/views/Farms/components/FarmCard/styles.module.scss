@@ -1,0 +1,14 @@
+.apyLabelContainer {
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.iconButtonWrapper {
+    display: flex;
+	svg {
+		width: 20px;
+	}
+}

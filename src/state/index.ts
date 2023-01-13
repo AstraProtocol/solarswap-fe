@@ -13,6 +13,8 @@ import {
 	createMigrate
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+// import burn from './burn/reducer'
+import farmsReducer from './farms'
 import burn from './burn/reducer'
 // import farmsReducer from './farms'
 import { updateVersion } from './global/actions'
@@ -54,7 +56,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(
 	persistConfig,
 	combineReducers({
-		// farms: farmsReducer,
+		farms: farmsReducer,
 		// pools: poolsReducer,
 		// predictions: predictionsReducer,
 		// lottery: lotteryReducer,

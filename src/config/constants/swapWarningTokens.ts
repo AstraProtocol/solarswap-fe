@@ -1,7 +1,7 @@
 import { Token } from '@solarswap/sdk'
-import tokens from 'config/constants/tokens'
+// import tokens from 'config/constants/tokens'
 
-const { bondly, safemoon, itam, ccar, bttold } = tokens
+// const { bondly, safemoon, itam, ccar, bttold } = tokens
 
 interface WarningTokenList {
 	[key: string]: Token
@@ -11,7 +11,7 @@ interface WarningTokenList {
  * @example safemoon token
  */
 const SwapWarningTokens = <WarningTokenList>{
-	// safemoon,
+	// bondly, safemoon, itam, ccar, bttold,
 }
 
 export default SwapWarningTokens

@@ -30,5 +30,4 @@ types
 astraprotocol-astra-ui-*.tgz
 package-lock.json
 package
-cypress/*
 .next

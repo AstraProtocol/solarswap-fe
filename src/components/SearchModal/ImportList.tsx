@@ -96,7 +96,7 @@ function ImportList({ listURL, list, onImport }: ImportProps) {
 									onChange={() => setConfirmed(!confirmed)}
 									scale="sm"
 								/>
-								<span ml="10px" style={{ userSelect: 'none' }}>
+								<span className="margin-left-xs" style={{ userSelect: 'none' }}>
 									{t('I understand')}
 								</span>
 							</div>

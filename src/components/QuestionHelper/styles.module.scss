@@ -1,4 +1,6 @@
 .tooltip {
-	background-color: var(--secondary-color-normal) !important;
-	color: var(--contrast-color-theme-100) !important;
+	&:hover,
+	&:focus {
+		opacity: 0.7;
+	}
 }

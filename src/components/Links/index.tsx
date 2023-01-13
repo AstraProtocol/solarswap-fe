@@ -1,14 +1,15 @@
 import Link, { LinkProps } from 'next/link'
 import styles from './Link.module.scss'
 
-import clsx from 'clsx'
 
-const StyledInternalLink = ({ children }) => <a className={styles.link}>{children}</a>
+interface Props extends LinkProps {
+	children?: JSX.Element | JSX.Element[] | string | string[]
+}
 
-const InternalLink: React.FC<LinkProps> = ({ children, ...props }) => {
+const InternalLink: React.FC<LinkProps> = ({ children, ...props }: Props) => {
 	return (
 		<Link {...props}>
-			<StyledInternalLink>{children}</StyledInternalLink>
+			<a className={styles.link}>{children}</a>
 		</Link>
 	)
 }

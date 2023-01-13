@@ -8,7 +8,7 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks'
 import { usePairs, PairState } from '../../hooks/usePairs'
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks'
-import { NormalButton, Icon } from '@astraprotocol/astra-ui'
+import { NormalButton, Icon, IconEnum } from '@astraprotocol/astra-ui'
 // import Dots from '../../components/Loader/Dots'
 import { AppHeader, AppBody } from '../../components/App'
 import styles from './styles.module.scss'
@@ -93,7 +93,7 @@ export default function Pool() {
 								</span>
 								<div className="text-center padding-md">
 									<Link href="/find" passHref>
-										<NormalButton id="import-pool-link" variant="default" scale="sm" as="a">
+										<NormalButton id="import-pool-link" variant="default">
 											<span className="text-bold">{t('Find other LP tokens')}</span>
 										</NormalButton>
 									</Link>
@@ -103,13 +103,9 @@ export default function Pool() {
 					</div>
 					<div className="text-center padding-md">
 						<Link href="/add" passHref>
-							<NormalButton
-								classes={{ other: 'width-100 text-base' }}
-								id="join-pool-button"
-								startIcon={<Icon icon="icon-plus" />}
-							>
+							<NormalButton classes={{ other: 'width-100 text-base' }} id="join-pool-button">
 								<div>
-									<Icon className="padding-xs" icon="icon-plus" />
+									<Icon className="padding-xs" icon={IconEnum.ICON_PLUS} />
 									{t('Add Liquidity')}
 								</div>
 							</NormalButton>
@@ -117,13 +113,9 @@ export default function Pool() {
 					</div>
 					<div className="text-center padding-md">
 						<Link href="/add-single" passHref>
-							<NormalButton
-								classes={{ other: 'width-100 text-base' }}
-								id="join-pool-button"
-								startIcon={<Icon icon="icon-plus" />}
-							>
+							<NormalButton classes={{ other: 'width-100 text-base' }} id="join-pool-button">
 								<div>
-									<Icon className="padding-xs" icon="icon-plus" />
+									<Icon className="padding-xs" icon={IconEnum.ICON_PLUS} />
 									{t('Add Single Liquidity')}
 								</div>
 							</NormalButton>

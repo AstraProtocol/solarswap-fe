@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { Currency, currencyEquals, ETHER, Percent, WETH } from '@solarswap/sdk'
 // import { Slider } from '@solarswap/uikit'
 import useModal from 'components/Modal/useModal'
-import { withToast, Row, Icon, NormalButton, Slider } from '@astraprotocol/astra-ui'
+import { withToast, Row, Icon, NormalButton, Slider, IconEnum } from '@astraprotocol/astra-ui'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useTranslation } from 'contexts/Localization'
 import { CHAIN_ID } from 'config/constants/networks'
@@ -172,26 +172,30 @@ export default function RemoveLiquidity() {
 		const { [Field.CURRENCY_A]: currencyAmountA, [Field.CURRENCY_B]: currencyAmountB } = parsedAmounts
 
 		if (!currencyAmountA || !currencyAmountB) {
-			withToast(t('Error'), t('Missing currency amounts'))
+			withToast({ title: t('Error'), moreInfo: t('Missing currency amount') }, { type: 'error' })
+
 			throw new Error('missing currency amounts')
 		}
 
 		const zapInContract = getZapInContract(chainId, library, account)
 
 		if (!currencyA || !currencyB) {
-			withToast(t('Error'), t('Missing tokens'))
+			withToast({ title: t('Error'), moreInfo: t('Missing tokens') }, { type: 'error' })
+
 			throw new Error('missing tokens')
 		}
 		const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
 		if (!liquidityAmount) {
-			withToast(t('Error'), t('Missing liquidity amount'))
+			withToast({ title: t('Error'), moreInfo: t('Missing liquidity amount') }, { type: 'error' })
+
 			throw new Error('missing liquidity amount')
 		}
 
 		const currencyAIsETH = currencyA === ETHER
 
 		if (!tokenA || !tokenB) {
-			withToast(t('Error'), t('Could not wrap'))
+			withToast({ title: t('Error'), moreInfo: t('Could not wrap') }, { type: 'error' })
+
 			throw new Error('could not wrap')
 		}
 
@@ -239,7 +243,10 @@ export default function RemoveLiquidity() {
 
 		// all estimations failed...
 		if (indexOfSuccessfulEstimation === false) {
-			withToast(t('Error'), estimateGasError || t('This transaction would fail'))
+			withToast(
+				{ title: t('Error'), moreInfo: estimateGasError || t('This transaction would fail') },
+				{ type: 'error' }
+			)
 		} else {
 			const safeGasEstimate = safeGasEstimates[0]
 
@@ -361,13 +368,12 @@ export default function RemoveLiquidity() {
 					/>
 
 					<div className="padding-md">
-						<div className="flex col padding-xs" gap="20px">
+						<div className="flex col padding-xs">
 							<Row className="flex-justify-space-between margin-bottom-lg">
 								<div className="text margin-top-xl">{t('Amount')}</div>
 								<NormalButton
 									classes={{ other: 'text-bold text-base' }}
 									variant="default"
-									scale="sm"
 									onClick={() => setShowDetailed(!showDetailed)}
 								>
 									{showDetailed ? t('Simple') : t('Detailed')}
@@ -384,33 +390,28 @@ export default function RemoveLiquidity() {
 										max={100}
 										value={innerLiquidityPercentage}
 										onValueChanged={value => setInnerLiquidityPercentage(Math.ceil(value))}
-										mb="16px"
 									/>
 									<div className="flex margin-top-lg flex-justify-space-between">
 										<NormalButton
 											variant="default"
-											scale="sm"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '25')}
 										>
 											25%
 										</NormalButton>
 										<NormalButton
 											variant="default"
-											scale="sm"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '50')}
 										>
 											50%
 										</NormalButton>
 										<NormalButton
 											variant="default"
-											scale="sm"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '75')}
 										>
 											75%
 										</NormalButton>
 										<NormalButton
 											variant="default"
-											scale="sm"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '100')}
 										>
 											Max
@@ -422,9 +423,9 @@ export default function RemoveLiquidity() {
 						{!showDetailed && (
 							<>
 								<ColumnCenter>
-									<Icon icon="icon-down" className="padding-md" />
+									<Icon icon={IconEnum.ICON_DOWN} className="padding-md" />
 								</ColumnCenter>
-								<div className="flex col padding-xs" gap="10px">
+								<div className="flex col padding-xs">
 									<span
 										className="text text-sm text-bold text-uppercase margin-bottom-xs"
 										color="secondary"
@@ -496,7 +497,7 @@ export default function RemoveLiquidity() {
 						)}
 
 						{showDetailed && (
-							<div my="16px">
+							<div>
 								<CurrencyInputPanel
 									value={formattedAmounts[Field.LIQUIDITY]}
 									onUserInput={onLiquidityInput}
@@ -511,7 +512,7 @@ export default function RemoveLiquidity() {
 									onCurrencySelect={() => null}
 								/>
 								<ColumnCenter>
-									<Icon icon="icon-down" className="padding-md" />
+									<Icon icon={IconEnum.ICON_DOWN} className="padding-md" />
 								</ColumnCenter>
 								<CurrencyInputPanel
 									hideBalance
@@ -527,7 +528,7 @@ export default function RemoveLiquidity() {
 							</div>
 						)}
 						{pair && (
-							<div className="flex col padding-xs margin-top-md" gap="10px" style={{ marginTop: '16px' }}>
+							<div className="flex col padding-xs margin-top-md" style={{ marginTop: '16px' }}>
 								<span
 									className="text text-sm text-bold text-uppercase margin-bottom-xs"
 									color="secondary"
@@ -555,13 +556,11 @@ export default function RemoveLiquidity() {
 							</div>
 						)}
 						{priceImpactWithoutFee && (
-							<Row padding="1rem">
-								<span className="text text-sm" fontSize="14px" style={{ marginRight: 5 }}>
+							<Row>
+								<span className="text text-sm" style={{ marginRight: 5 }}>
 									{t('Price Impact Without Fee')}:{' '}
 								</span>
-								<span className="text text-sm text-bold" fontSize="14px" fontWeight="bold">
-									{priceImpactWithoutFee.toFixed(3)}%
-								</span>
+								<span className="text text-sm text-bold">{priceImpactWithoutFee.toFixed(3)}%</span>
 							</Row>
 						)}
 						<div className="position-relative margin-top-xl">
@@ -573,13 +572,11 @@ export default function RemoveLiquidity() {
 										classes={{ other: 'width-100 text-base margin-right-sm' }}
 										variant={
 											approval === ApprovalState.APPROVED || signatureData !== null
-												? 'success'
-												: 'primary'
+												? 'primary'
+												: 'default'
 										}
 										onClick={approveCallback}
 										disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
-										width="100%"
-										mr="0.5rem"
 									>
 										{approval === ApprovalState.PENDING ? (
 											<Row style={{ justifyContent: 'center' }}>
@@ -597,7 +594,7 @@ export default function RemoveLiquidity() {
 											!isValid &&
 											!!parsedAmounts[Field.CURRENCY_A] &&
 											!!parsedAmounts[Field.CURRENCY_B]
-												? 'danger'
+												? 'default'
 												: 'primary'
 										}
 										onClick={() => {
@@ -612,7 +609,6 @@ export default function RemoveLiquidity() {
 												onPresentRemoveLiquidity()
 											}
 										}}
-										width="100%"
 										disabled={
 											!isValid ||
 											approval !== ApprovalState.APPROVED ||
@@ -634,7 +630,7 @@ export default function RemoveLiquidity() {
 										!isValid &&
 										!!parsedAmounts[Field.CURRENCY_A] &&
 										!!parsedAmounts[Field.CURRENCY_B]
-											? 'danger'
+											? 'default'
 											: 'primary'
 									}
 									onClick={() => {
@@ -649,7 +645,6 @@ export default function RemoveLiquidity() {
 											onPresentRemoveLiquidity()
 										}
 									}}
-									width="100%"
 									disabled={
 										!isValid ||
 										approval !== ApprovalState.APPROVED ||

@@ -26,8 +26,8 @@
 .nameOverflow {
 	white-space: nowrap;
 	overflow: hidden;
-		text-overflow: ellipsis;
-		max-width: 140px;
+	text-overflow: ellipsis;
+	max-width: 140px;
 }
 
 .fixedContentRow {
@@ -63,10 +63,10 @@
 
 .balanceText {
 	padding: 4px 20px;
-		height: 56px;
-		display: grid;
-		grid-gap: 16px;
-		align-items: center;
+	height: 56px;
+	display: grid;
+	grid-gap: 16px;
+	align-items: center;
 }
 .rowWrapper {
 	// background-color: ${({ active, theme }) => (active ? `${theme.colors.success}` : 'transparent')};
@@ -83,4 +83,16 @@
 	width: 3px;
 	background-color: 'transparent';
 	border-radius: 50%;
+}
+
+.baseWrapper {
+	// border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.colors.dropdown)};
+  border-radius: 10px;
+  display: flex;
+  padding: 6px 10px;
+
+  align-items: center;
+  :hover {
+    cursor: pointer;
+  }
 }

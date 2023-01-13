@@ -1,32 +1,40 @@
 import { Logo } from '@astraprotocol/astra-ui'
-import * as Sentry from '@sentry/react'
+import { ErrorBoundary as SentryErrorBoundary, Severity } from '@sentry/nextjs'
+import Page from 'components/Layout/Page'
 import { useTranslation } from 'contexts/Localization'
+import { useTheme } from 'next-themes'
+import { useCallback } from 'react'
 
 export default function ErrorBoundary({ children }) {
 	const { t } = useTranslation()
+	const { resolvedTheme } = useTheme()
+	const handleOnClick = useCallback(() => window.location.reload(), [])
+
 	return (
-		<Sentry.ErrorBoundary
+		<SentryErrorBoundary
 			beforeCapture={scope => {
-				scope.setLevel(Sentry.Severity.Fatal)
+				scope.setLevel(Severity.Fatal)
 			}}
 			fallback={({ eventId }) => {
 				return (
-					<div>
-						<Logo type="transparent" hasText={false} />
-						<span className="text text-lg">{t('Oops, something wrong.')}</span>
-						{eventId && (
+					<div className={`${resolvedTheme}--mode`}>
+						<Page>
+							<Logo type="transparent" hasText={false} />
+							<span className="text text-lg">{t('Oops, something wrong.')}</span>
+							{/* {eventId && (
 							<div>
 								<span>{t('Error Tracking Id')}</span>
 							</div>
-						)}
-						<button className="text text-base" onClick={() => window.location.reload()}>
-							{t('Click here to reset!')}
-						</button>
+						)} */}
+							<button className="text text-base" onClick={handleOnClick}>
+								{t('Click here to reset!')}
+							</button>
+						</Page>
 					</div>
 				)
 			}}
 		>
 			{children}
-		</Sentry.ErrorBoundary>
+		</SentryErrorBoundary>
 	)
 }

@@ -1,7 +1,7 @@
 import { AnimatePresence, m, Variants, LazyMotion, domAnimation } from 'framer-motion'
 import React, { createContext, useState, useRef } from 'react'
 import { Handler } from './types'
-import styles from './style.module.scss'
+import styles from './styles.module.scss'
 import Overlay from 'components/Overlay'
 import clsx from 'clsx'
 import { useTheme } from 'next-themes'
@@ -38,7 +38,11 @@ export const Context = createContext<ModalsContext>({
 	setCloseOnOverlayClick: () => true
 })
 
-const ModalProvider: React.FC = ({ children }) => {
+interface Props {
+	children?: JSX.Element | JSX.Element[] | string | string[]
+}
+
+const ModalProvider: React.FC<any> = ({ children }: Props) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [modalNode, setModalNode] = useState<React.ReactNode>()
 	const [nodeId, setNodeId] = useState('')
@@ -65,6 +69,9 @@ const ModalProvider: React.FC = ({ children }) => {
 		}
 	}
 
+	const partial = {}
+	partial['onDismiss'] = handleDismiss
+
 	return (
 		<Context.Provider
 			value={{
@@ -78,34 +85,31 @@ const ModalProvider: React.FC = ({ children }) => {
 			}}
 		>
 			<LazyMotion features={domAnimation}>
-				<AnimatePresence>
-					{isOpen && (
-						<m.div
-							className={clsx(styles.modalWrapper, `${resolvedTheme}--mode`)}
-							ref={animationRef}
-							onAnimationStart={() => {
-								const element = animationRef.current
-								if (!element) return
-								if (element.classList.contains(styles.appear)) {
-									element.classList.remove(styles.appear)
-									element.classList.add(styles.disappear)
-								} else {
-									element.classList.remove(styles.disappear)
-									element.classList.add(styles.appear)
-								}
-							}}
-							{...animationMap}
-							variants={animationVariants}
-							transition={{ duration: 0.3 }}
-						>
-							<Overlay onClick={handleOverlayDismiss} />
-							{React.isValidElement(modalNode) &&
-								React.cloneElement(modalNode, {
-									onDismiss: handleDismiss
-								})}
-						</m.div>
-					)}
-				</AnimatePresence>
+				{/* <AnimatePresence> */}
+				{isOpen && (
+					<m.div
+						className={clsx(styles.modalWrapper, `${resolvedTheme}--mode`)}
+						ref={animationRef}
+						onAnimationStart={() => {
+							const element = animationRef.current
+							if (!element) return
+							if (element.classList.contains(styles.appear)) {
+								element.classList.remove(styles.appear)
+								element.classList.add(styles.disappear)
+							} else {
+								element.classList.remove(styles.disappear)
+								element.classList.add(styles.appear)
+							}
+						}}
+						{...animationMap}
+						variants={animationVariants}
+						transition={{ duration: 0.3 }}
+					>
+						<Overlay onClick={handleOverlayDismiss} />
+						{React.isValidElement(modalNode) && React.cloneElement(modalNode, partial)}
+					</m.div>
+				)}
+				{/* </AnimatePresence> */}
 			</LazyMotion>
 			{children}
 		</Context.Provider>

@@ -1,18 +1,7 @@
 import { useState, useMemo } from 'react'
 import debounce from 'lodash/debounce'
 import { useTranslation } from 'contexts/Localization'
-
-const StyledInput = styled(Input)`
-	border-radius: 16px;
-	margin-left: auto;
-`
-
-// const InputWrapper = styled.div`
-// 	position: relative;
-// 	${({ theme }) => theme.mediaQueries.sm} {
-// 		display: block;
-// 	}
-// `
+import { Form } from '@astraprotocol/astra-ui'
 
 interface Props {
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -35,9 +24,15 @@ const SearchInput: React.FC<Props> = ({ onChange: onChangeCallback, placeholder 
 	}
 
 	return (
-		<div>
-			<StyledInput value={searchText} onChange={onChange} placeholder={t(placeholder)} />
-		</div>
+		<Form.Input
+			classes={{
+				option: ' ',
+				inputWrapperPadding: 'padding-top-xs padding-bottom-xs padding-left-md padding-right-md'
+			}}
+			value={searchText}
+			onChange={onChange}
+			placeholder={t(placeholder)}
+		/>
 	)
 }
 

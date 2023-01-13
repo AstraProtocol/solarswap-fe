@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'contexts/Localization'
-import { NormalButton } from '@astraprotocol/astra-ui'
+import { Checkbox, NormalButton } from '@astraprotocol/astra-ui'
 
 interface AcknowledgementProps {
 	handleContinueClick: () => void

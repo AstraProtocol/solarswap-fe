@@ -1,0 +1,44 @@
+.arrow {
+    &,
+    &::before {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        z-index: -1;
+    }
+
+    &::before {
+        content: "";
+        transform: rotate(45deg);
+        // background: ${({ theme }) => theme.tooltip.background};
+    }
+}
+
+.tooltip {
+    padding: 16px;
+    font-size: 16px;
+    line-height: 130%;
+    border-radius: 16px;
+    max-width: 320px;
+    z-index: 101;
+    // background: ${({ theme }) => theme.tooltip.background};
+    // color: ${({ theme }) => theme.tooltip.text};
+    // box-shadow: ${({ theme }) => theme.tooltip.boxShadow};
+  
+    &[data-popper-placement^="top"] > .arrow {
+      bottom: -4px;
+    }
+  
+    &[data-popper-placement^="bottom"] > .arrow {
+      top: -4px;
+    }
+  
+    &[data-popper-placement^="left"] > .arrow {
+      right: -4px;
+    }
+  
+    &[data-popper-placement^="right"] > .arrow {
+      left: -4px;
+    }   
+}

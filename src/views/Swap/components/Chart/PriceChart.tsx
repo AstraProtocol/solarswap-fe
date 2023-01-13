@@ -1,15 +1,3 @@
-// import {
-// 	Button,
-// 	ExpandIcon,
-// 	Flex,
-// 	IconButton,
-// 	ShrinkIcon,
-// 	SyncAltIcon,
-// 	span,
-// 	// TradingViewIcon,
-// 	LineGraphIcon,
-// 	useMatchBreakpoints
-// } from '@solarswap/uikit'
 import { IconButton, IconEnum, NormalButton } from '@astraprotocol/astra-ui'
 import { CurrencyLogo, DoubleCurrencyLogo } from 'components/Logo'
 // import { TradingViewLabel } from 'components/TradingView'
@@ -17,18 +5,8 @@ import { useTranslation } from 'contexts/Localization'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import { ChartViewMode } from 'state/user/actions'
 import { useExchangeChartViewManager } from 'state/user/hooks'
-// import styled from 'styled-components'
 import BasicChart from './BasicChart'
 import StyledPriceChart from './StyledPriceChart'
-// import { StyledPriceChart } from './styles'
-// import TradingViewChart from './TradingViewChart'
-// import PairPriceDisplay from '../../../../components/PairPriceDisplay'
-
-// const ChartButton = styled(Button)`
-// 	background-color: ${({ $active, theme }) => $active && `${theme.colors.primary}0f`};
-// 	padding: 4px 8px;
-// 	border-radius: 6px;
-// `
 
 const PriceChart = ({
 	inputCurrency,
@@ -55,7 +33,8 @@ const PriceChart = ({
 	return (
 		<StyledPriceChart
 			style={{
-				height: isMobile ? '100%' : '70%',
+				// height: isMobile ? '100%' : '70%',
+				height: isMobile ? '100%' : 'auto',
 				overflow: 'unset'
 			}}
 			isExpanded={isChartExpanded}

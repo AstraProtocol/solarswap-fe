@@ -30,7 +30,6 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 						text={t(
 							'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.'
 						)}
-						id="tooltip-amount"
 					/>
 				</Row>
 				<span className="text text-base">
@@ -48,7 +47,6 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 					<span className="text text-sm contrast-color-70 margin-right-2xs">{t('Price Impact')}</span>
 					<QuestionHelper
 						text={t('The difference between the market price and estimated price due to trade size.')}
-						id="tooltip-price-impact"
 					/>
 				</Row>
 				<FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
@@ -59,7 +57,6 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 					<span className="text text-sm contrast-color-70 margin-right-2xs">
 						{t('Liquidity Provider Fee')}
 						<QuestionHelper
-							id="tooltip-provider-fee"
 							text={`
 							${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })}
 							`}
@@ -103,7 +100,6 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
 										text={t(
 											'Routing through these tokens resulted in the best price for your trade.'
 										)}
-										id="tooltip-route"
 									/>
 								</span>
 								<SwapRoute trade={trade} />

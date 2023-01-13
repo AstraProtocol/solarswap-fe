@@ -15,7 +15,7 @@ import { AutoColumn } from '../Layout/Column'
 import CurrencyLogo from '../Logo/CurrencyLogo'
 import { DoubleCurrencyLogo } from '../Logo'
 // import { RowBetween, Row } from 'components/Layout/Row'
-import { Row, Icon, NormalButton, Container } from '@astraprotocol/astra-ui'
+import { Row, Icon, NormalButton, Container, IconEnum } from '@astraprotocol/astra-ui'
 import { BIG_INT_ZERO } from '../../config/constants'
 import Dots from '../Loader/Dots'
 import Link from 'next/link'
@@ -66,7 +66,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }) {
 					className="padding-md width-100 border border-base radius-lg margin-top-md margin-bottom-xl"
 					style={{ maxWidth: 436 }}
 				>
-					<div className="flex col" gap="16px">
+					<div className="flex col">
 						<Row>
 							<Row>
 								<span
@@ -80,7 +80,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }) {
 						<Row className="flex-justify-space-between" onClick={() => setShowMore(!showMore)}>
 							<Row>
 								<DoubleCurrencyLogo currency0={currency0} currency1={currency1} margin size={20} />
-								<span className="text text-sm margin-top-md margin-bottom-md" small color="textSubtle">
+								<span className="text text-sm margin-top-md margin-bottom-md" color="textSubtle">
 									{currency0.symbol}-{currency1.symbol} LP
 								</span>
 							</Row>
@@ -90,9 +90,9 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }) {
 								</span>
 							</div>
 						</Row>
-						<div className="flex col" gap="4px">
+						<div className="flex col">
 							<Row className="flex-justify-space-between padding-top-xs">
-								<span className="text text-sm" color="textSubtle" small>
+								<span className="text text-sm" color="textSubtle">
 									{t('Share of Pool')}:
 								</span>
 								<div className="padding-right-2xs">
@@ -102,12 +102,12 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }) {
 								</div>
 							</Row>
 							<Row className="margin-top-md margin-bottom-md flex-justify-space-between">
-								<span className="text text-sm" color="textSubtle" small>
+								<span className="text text-sm" color="textSubtle">
 									{t('Pooled %asset%', { asset: currency0.symbol })}:
 								</span>
 								{token0Deposited ? (
 									<div className="padding-right-2xs">
-										<span className="text text-bold" ml="6px">
+										<span className="text text-bold margin-left-xs">
 											{token0Deposited?.toSignificant(6)}
 										</span>
 									</div>
@@ -116,12 +116,12 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }) {
 								)}
 							</Row>
 							<Row className="margin-bottom-md flex-justify-space-between">
-								<span className="text text-sm" color="textSubtle" small>
+								<span className="text text-sm" color="textSubtle">
 									{t('Pooled %asset%', { asset: currency1.symbol })}:
 								</span>
 								{token1Deposited ? (
 									<div className="padding-right-2xs">
-										<span className="text text-bold" ml="6px">
+										<span className="text text-bold margin-left-xs">
 											{token1Deposited?.toSignificant(6)}
 										</span>
 									</div>
@@ -188,7 +188,7 @@ export default function FullPositionCard({ pair, ...props }) {
 				<div className="flex col">
 					<div className="flex flex-align-center margin-bottom-sm">
 						<DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
-						<span className="text text-bold margin-left-2xs" ml="8px">
+						<span className="text text-bold margin-left-2xs">
 							{!currency0 || !currency1 ? (
 								<Dots>{t('Loading')}</Dots>
 							) : (
@@ -196,11 +196,11 @@ export default function FullPositionCard({ pair, ...props }) {
 							)}
 						</span>
 					</div>
-					<span className="text text-sm" fontSize="14px" color="textSubtle">
+					<span className="text text-sm" color="textSubtle">
 						{userPoolBalance?.toSignificant(4)}
 					</span>
 				</div>
-				{showMore ? <Icon icon="icon-arrow-up" /> : <Icon icon="icon-dropdown" />}
+				{showMore ? <Icon icon={IconEnum.ICON_ARROW_UP} /> : <Icon icon={IconEnum.ICON_ARROW_DOWN} />}
 			</div>
 
 			{showMore && (
@@ -208,14 +208,14 @@ export default function FullPositionCard({ pair, ...props }) {
 					<Row className="flex-justify-space-between padding-left-md">
 						<Row>
 							<CurrencyLogo size={20} currency={currency0} />
-							<span className="text text-sm margin-left-2xs" color="textSubtle" ml="4px">
+							<span className="text text-sm margin-left-2xs" color="textSubtle">
 								{t('Pooled %asset%', { asset: currency0.symbol })}:
 							</span>
 						</Row>
 						<div className="padding-right-md">
 							{token0Deposited ? (
 								<Row>
-									<span className="text text-sm text-bold" ml="6px">
+									<span className="text text-sm text-bold margin-left-xs">
 										{token0Deposited?.toSignificant(6)}
 									</span>
 								</Row>
@@ -228,14 +228,14 @@ export default function FullPositionCard({ pair, ...props }) {
 					<Row className="flex-justify-space-between padding-left-md">
 						<Row>
 							<CurrencyLogo size={20} currency={currency1} />
-							<span className="text text-sm margin-left-2xs" color="textSubtle" ml="4px">
+							<span className="text text-sm margin-left-2xs" color="textSubtle">
 								{t('Pooled %asset%', { asset: currency1.symbol })}:
 							</span>
 						</Row>
 						<div className="padding-right-md">
 							{token1Deposited ? (
 								<Row>
-									<span className="text text-sm text-bold" ml="6px">
+									<span className="text text-sm text-bold margin-left-xs">
 										{token1Deposited?.toSignificant(6)}
 									</span>
 								</Row>
@@ -264,14 +264,7 @@ export default function FullPositionCard({ pair, ...props }) {
 						<div className="flex col">
 							<div className="text-center margin-sm">
 								<Link href={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`} passHref>
-									<NormalButton
-										as={NextLinkFromReactRouter}
-										to={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`}
-										variant="primary"
-										width="100%"
-										mb="8px"
-										classes={{ other: 'width-100 text-base' }}
-									>
+									<NormalButton variant="primary" classes={{ other: 'width-100 text-base' }}>
 										{t('Remove Liquidity')}
 									</NormalButton>
 								</Link>
@@ -282,12 +275,7 @@ export default function FullPositionCard({ pair, ...props }) {
 									href={`/remove-single/${currencyId(currency0)}/${currencyId(currency1)}`}
 									passHref
 								>
-									<NormalButton
-										classes={{ other: 'width-100 text-base' }}
-										as={NextLinkFromReactRouter}
-										variant="primary"
-										width="100%"
-									>
+									<NormalButton classes={{ other: 'width-100 text-base' }} variant="primary">
 										{t('Remove Single Liquidity')}
 									</NormalButton>
 								</Link>
@@ -295,14 +283,9 @@ export default function FullPositionCard({ pair, ...props }) {
 
 							<div className="text-center margin-sm">
 								<Link href={`/add/${currencyId(currency0)}/${currencyId(currency1)}`} passHref>
-									<NormalButton
-										as={NextLinkFromReactRouter}
-										variant="default"
-										startIcon={<Icon icon="icon-plus" />}
-										width="100%"
-									>
+									<NormalButton variant="default" classes={{ other: 'width-100' }}>
 										<div>
-											<Icon className="padding-2xs" icon="icon-plus" />
+											<Icon className="padding-2xs" icon={IconEnum.ICON_PLUS} />
 											<span className="text-bold">{t('Add liquidity instead')}</span>
 										</div>
 									</NormalButton>

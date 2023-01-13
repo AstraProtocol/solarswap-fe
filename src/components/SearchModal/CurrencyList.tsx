@@ -98,7 +98,7 @@ function CurrencyRow({
 					{!isOnSelectedList && customAdded && 'Added by user •'} {currency.name}
 				</span>
 			</div>
-			<Row style={{ justifySelf: 'flex-end' }}>
+			<Row style={{ justifySelf: 'flex-end', alignItems: 'center' }}>
 				{balance ? <Balance balance={balance} /> : account ? <Spinner /> : null}
 			</Row>
 		</div>
@@ -160,7 +160,7 @@ export default function CurrencyList({
 					<div className={styles.fixedContentRow} style={style}>
 						<div className="border radius-sm padding-top-xs padding-bottom-xs padding-left-sm padding-right-sm">
 							{/** LightGreyCard */}
-							<Row style={{ justifyContent: 'space-between' }}>
+							<div className="row flex flex-justify-space-between">
 								<span className="text text-xs contrast-color-100">
 									{t('Expanded results from inactive Token Lists')}
 								</span>
@@ -168,9 +168,8 @@ export default function CurrencyList({
 									text={t(
 										"Tokens from inactive lists. Import specific tokens below or click 'Manage' to activate more lists."
 									)}
-									ml="4px"
 								/>
-							</Row>
+							</div>
 						</div>
 					</div>
 				)

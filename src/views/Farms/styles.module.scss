@@ -1,0 +1,59 @@
+.controlContainer {
+    display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+
+	flex-direction: column;
+	margin-bottom: 32px;
+
+	@media only screen and (min-width: 576px) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding: 16px 32px;
+		margin-bottom: 0;
+	}
+}
+
+.viewControl {
+    flex-wrap: wrap;
+	justify-content: space-between;
+	display: flex;
+	align-items: center;
+	// width: 100%;
+
+	> div {
+		padding: 8px 0px;
+	}
+
+    @media only screen and (min-width: 576px) {
+		justify-content: flex-start;
+		width: auto;
+
+		> div {
+			padding: 0;
+		}
+	}
+}
+
+.filterContainer {
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	// width: 100%;
+	padding: 8px 0px;
+
+	@media only screen and (min-width: 576px) {
+		width: auto;
+		padding: 0;
+	}
+}
+
+
+
+.image {
+    margin-left: auto;
+	margin-right: auto;
+	margin-top: 58px;
+}

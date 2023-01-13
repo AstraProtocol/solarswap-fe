@@ -84,9 +84,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 							text={t(
 								'Bypasses confirmation modals and allows high slippage trades. Use at your own risk.'
 							)}
-							id="tooltip-expert-mode"
 							placement="top"
-							hasInsideModal
 						/>
 					</div>
 					<Toggle
@@ -99,12 +97,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
 					<div className="flex flex-align-center">
 						<span className="text text-base text-bold margin-right-xs">{t('Disable Multihops')}</span>
-						<QuestionHelper
-							text={t('Restricts swaps to direct pairs only.')}
-							id="tooltip-multihops"
-							placement="top"
-							hasInsideModal
-						/>
+						<QuestionHelper text={t('Restricts swaps to direct pairs only.')} placement="top" />
 					</div>
 					<Toggle
 						id="toggle-disable-multihop-button"
@@ -124,9 +117,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 							text={t(
 								'Turn on NFT market subgraph health indicator all the time. Default is to show the indicator only when the network is delayed'
 							)}
-							id="tooltip-subgraph-indicator"
 							placement="top"
-							hasInsideModal
 						/>
 					</div>
 					<Toggle

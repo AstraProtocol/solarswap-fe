@@ -1,7 +1,6 @@
 import { memo, useCallback, useMemo, useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import ReactTooltip from 'react-tooltip'
 import { TokenList, Version } from '@uniswap/token-lists'
 import { UNSUPPORTED_LIST_URLS } from 'config/constants/lists'
 import { parseENSAddress } from 'utils/ENS/parseENSAddress'
@@ -13,31 +12,16 @@ import { acceptListUpdate, removeList, disableList, enableList } from '../../sta
 import { useIsListActive, useAllLists, useActiveListUrls } from '../../state/lists/hooks'
 import uriToHttp from '../../utils/uriToHttp'
 
-import Column, { AutoColumn } from '../Layout/Column'
 import { ListLogo } from '../Logo'
 // import Row, { Row, RowBetween } from '../Layout/Row'
 import { CurrencyModalView } from './types'
 import { Form, NormalButton, Row, Toggle, Typography } from '@astraprotocol/astra-ui'
 import styles from './styles.module.scss'
+import { useTooltip } from 'hooks/useTooltip'
 
 function listVersionLabel(version: Version): string {
 	return `v${version.major}.${version.minor}.${version.patch}`
 }
-
-// const Wrapper = styled(Column)`
-//   width: 100%;
-//   height: 100%;
-// `
-
-// const RowWrapper = styled(Row)<{ active: boolean }>`
-//   background-color: ${({ active, theme }) => (active ? `${theme.colors.success}19` : 'transparent')};
-//   border: solid 1px;
-//   border-color: ${({ active, theme }) => (active ? theme.colors.success : theme.colors.tertiary)};
-//   transition: 200ms;
-//   align-items: center;
-//   padding: 1rem;
-//   border-radius: 20px;
-// `
 
 function listUrlRowHTMLId(listUrl: string) {
 	return `list-row-${listUrl.replace(/\./g, '-')}`
@@ -72,41 +56,28 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 		dispatch(disableList(listUrl))
 	}, [dispatch, listUrl])
 
-	// const { targetRef, tooltip, tooltipVisible } = useTooltip(
-	// 	<div>
-	// 		<span>{list && listVersionLabel(list.version)}</span>
-	// 		<Typography.Link href={`https://tokenlists.org/token-list?url=${listUrl}`}>{t('See')}</Typography.Link>
-	// 		<NormalButton
-	// 			// variant="danger"
-	// 			// scale="xs"
-	// 			onClick={handleRemoveList}
-	// 			disabled={Object.keys(listsByUrl).length === 1}
-	// 		>
-	// 			{t('Remove')}
-	// 		</NormalButton>
-	// 		{pending && (
-	// 			<NormalButton variant="text" onClick={handleAcceptListUpdate} style={{ fontSize: '12px' }}>
-	// 				{t('Update list')}
-	// 			</NormalButton>
-	// 		)}
-	// 	</div>,
-	// 	{ placement: 'right-end', trigger: 'click' }
-	// )
+	const { targetRef, tooltip, tooltipVisible } = useTooltip(
+		<div>
+			<span>{list && listVersionLabel(list.version)}</span>
+			<Typography.Link href={`https://tokenlists.org/token-list?url=${listUrl}`}>{t('See')}</Typography.Link>
+			<NormalButton onClick={handleRemoveList} disabled={Object.keys(listsByUrl).length === 1}>
+				{t('Remove')}
+			</NormalButton>
+			{pending && (
+				<NormalButton variant="text" onClick={handleAcceptListUpdate} style={{ fontSize: '12px' }}>
+					{t('Update list')}
+				</NormalButton>
+			)}
+		</div>,
+		{ placement: 'right-end', trigger: 'click' }
+	)
 
 	if (!list) return null
 
 	return (
-		<div className={styles.rowWrapper} active={isActive} key={listUrl} id={listUrlRowHTMLId(listUrl)}>
-			{/* {tooltipVisible && tooltip} */}
-			{/* <ReactTooltip
-				id={data?.id}
-				arrowColor="#3B4B89"
-				multiline
-				className={styles.tooltip}
-				effect="solid"
-				place="right"
-				offset={{ right: 20 }}
-			/> */}
+		<div className={styles.rowWrapper} key={listUrl} id={listUrlRowHTMLId(listUrl)}>
+			{tooltipVisible && tooltip}
+
 			{list.logoURI ? (
 				<ListLogo
 					size="40px"
@@ -117,17 +88,17 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 			) : (
 				<div style={{ width: '24px', height: '24px', marginRight: '1rem' }} />
 			)}
-			<Column style={{ flex: '1' }}>
+			<div className="flex flex-1">
 				<Row>
 					<span className="text text-bold">{list.name}</span>
 				</Row>
-				<Row mt="4px">
+				<Row style={{ marginTop: 4 }}>
 					<span className="text text-sm text-lowercase">
 						{list.tokens.length} {t('Tokens')}
 					</span>
-					{/* <span ref={targetRef}><CogIcon color="text" width="12px" /></span> */}
+					<span ref={targetRef}>{/* <CogIcon color="text" width="12px" /> */}</span>
 				</Row>
-			</Column>
+			</div>
 			<Toggle
 				checked={isActive}
 				onChange={() => {
@@ -142,11 +113,6 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 	)
 })
 
-// const ListContainer = styled.div`
-//   padding: 1rem 0;
-//   height: 100%;
-//   overflow: auto;
-// `
 
 function ManageLists({
 	setModalView,

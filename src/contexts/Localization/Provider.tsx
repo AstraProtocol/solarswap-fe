@@ -44,7 +44,10 @@ languageMap.set(VI.locale, getTranslationsWithIncludesVariable(translations))
 
 export const LanguageContext = createContext<ContextApi>(undefined)
 
-export const LanguageProvider: React.FC = ({ children }) => {
+interface Props {
+	children?: JSX.Element | JSX.Element[] | string | string[]
+}
+export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 	const [state, setState] = useState<ProviderState>(() => {
 		const codeFromStorage = getLanguageCodeFromLS()
 

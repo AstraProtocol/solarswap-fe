@@ -25,7 +25,7 @@ export function isAddress(value: any): string | false {
 	}
 }
 
-export function getAstraScanLink(
+export function getAstraExplorerLink(
 	data: string | number,
 	type: 'transaction' | 'token' | 'address' | 'block' | 'countdown',
 	chainIdOverride?: number

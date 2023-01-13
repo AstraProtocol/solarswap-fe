@@ -16,14 +16,6 @@ interface Props {
 	noConfig?: boolean
 }
 
-// const AppHeaderContainer = styled(Flex)`
-//   align-items: center;
-//   justify-content: space-between;
-//   padding: 24px;
-//   width: 100%;
-//   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
-// `
-
 const AppHeader: React.FC<Props> = ({ title, subtitle, helper, backTo, noConfig = false }) => {
 	const [expertMode] = useExpertModeManager()
 	const [onPresentTransactionsModal] = useModal(<TransactionsModal />)
@@ -57,7 +49,7 @@ const AppHeader: React.FC<Props> = ({ title, subtitle, helper, backTo, noConfig 
 			</div>
 
 			<div className="flex flex-align-center">
-				{helper && <QuestionHelper className="margin-right-2xs" text={helper} mr="4px" placement="top-start" />}
+				{helper && <QuestionHelper className="margin-right-2xs" text={helper} placement="top-start" />}
 				<span className="text text-sm contrast-color-70">{subtitle}</span>
 			</div>
 		</div>

@@ -52,7 +52,7 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 				const emitter = new EventEmitter()
 
 				class EthProvider {
-					public request: EIP1193Provider['request']
+					public request: any // EIP1193Provider['request']
 					public connector: Connector
 					public addresses?: ProviderAccounts
 					public disconnect: EIP1193Provider['disconnect']

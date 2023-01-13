@@ -16,8 +16,7 @@ const GasSettings = () => {
 					text={t(
 						'Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees'
 					)}
-					hasInsideModal
-					id="tooltip-transaction-speed"
+					placement="top"
 				/>
 			</div>
 			<div className="flex flex-wrap">

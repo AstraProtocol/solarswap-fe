@@ -32,6 +32,8 @@ import getNodeUrl from 'utils/getRpcUrl'
 import { WalletHelper } from 'utils/wallet'
 import 'react-toastify/dist/ReactToastify.css'
 import useEagerConnect from 'hooks/useEagerConnect'
+import { AppState } from '../state'
+import { PageLoader } from '@astraprotocol/astra-ui'
 // const EasterEgg = dynamic(() => import('components/EasterEgg'), { ssr: false })
 
 // This config is required for number formatting
@@ -110,7 +112,14 @@ const web3Onboard = init({
 	}
 })
 
-function MyApp(props: AppProps) {
+interface AppPropsExtends extends AppProps {
+	pageProps: {
+		[key: string]: any
+		initialReduxState: AppState
+	}
+}
+
+function MyApp(props: AppPropsExtends) {
 	const { pageProps } = props
 	const store = useStore(pageProps.initialReduxState)
 
@@ -132,7 +141,7 @@ function MyApp(props: AppProps) {
 					content="Swap, earn and win ASA through yield farming on the first DEFI exchange for Astra token."
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:title" content="SolarSwap - A DEFI exchange on Astra Protocol" />
+				<meta name="twitter:title" content="SolarSwap - A DEFI exchange on Astra Blockchain" />
 				<title>SolarSwap</title>
 			</Head>
 			<Web3OnboardProvider web3Onboard={web3Onboard}>
@@ -142,7 +151,7 @@ function MyApp(props: AppProps) {
 						<Updaters />
 						{/* <GlobalStyle /> */}
 						{/* <GlobalCheckClaimStatus excludeLocations={[]} /> */}
-						<PersistGate loading={null} persistor={persistor}>
+						<PersistGate loading={<PageLoader />} persistor={persistor}>
 							<App {...props} />
 						</PersistGate>
 					</Blocklist>
@@ -164,11 +173,14 @@ const ProductionErrorBoundary = process.env.NODE_ENV === 'production' ? ErrorBou
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 	// Use the layout defined at the page level, if available
+	const ComponentLayout = Component.Layout || Fragment
 	return (
 		<ProductionErrorBoundary>
 			{/* <Menu> */}
 			<Layout>
-				<Component {...pageProps} />
+				<ComponentLayout>
+					<Component {...pageProps} />
+				</ComponentLayout>
 			</Layout>
 			{/* </Menu> */}
 			{/* <EasterEgg iterations={2} /> */}

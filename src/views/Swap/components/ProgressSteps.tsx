@@ -27,16 +27,23 @@ export default function ProgressCircles({ steps, disabled = false, ...rest }: Pr
 						<div className={styles.circleRow} key={i}>
 							<div
 								className={styles.circle}
-								confirmed={step}
-								disabled={disabled || (!steps[i - 1] && i !== 0)}
+								// confirmed={step}
+								// disabled={disabled || (!steps[i - 1] && i !== 0)}
 							>
 								{step ? '✓' : i + 1}
 							</div>
-							<div className={styles.connector} prevConfirmed={step} disabled={disabled} />
+							<div
+								className={styles.connector}
+								// prevConfirmed={step}
+								// disabled={disabled}
+							/>
 						</div>
 					)
 				})}
-				<div className={styles.circle} disabled={disabled || !steps[steps.length - 1]}>
+				<div
+					className={styles.circle}
+					// disabled={disabled || !steps[steps.length - 1]}
+				>
 					{steps.length + 1}
 				</div>
 			</Row>

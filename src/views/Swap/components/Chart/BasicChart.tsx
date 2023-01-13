@@ -58,14 +58,14 @@ const BasicChart = ({
 		)
 
 	if (isBadData) {
-		return (
-			<NoChartAvailable
-				token0Address={token0Address}
-				token1Address={token1Address}
-				pairAddress={pairId}
-				isMobile={isMobile}
-			/>
-		)
+	return (
+		<NoChartAvailable
+			token0Address={token0Address}
+			token1Address={token1Address}
+			pairAddress={pairId}
+			isMobile={isMobile}
+		/>
+	)
 	}
 
 	return (

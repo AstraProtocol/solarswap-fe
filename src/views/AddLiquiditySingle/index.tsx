@@ -2,9 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@solarswap/sdk'
-import { CardBody } from '@solarswap/uikit'
 import useModal from 'components/Modal/useModal'
-import { NormalButton, Icon, Row, Message } from '@astraprotocol/astra-ui'
+import { NormalButton, Icon, Row, Message, IconEnum } from '@astraprotocol/astra-ui'
 import { logError } from 'utils/sentry'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import { useTranslation } from 'contexts/Localization'
@@ -345,7 +344,7 @@ export default function AddLiquiditySingle() {
 								showCommonBases
 							/>
 							<ColumnCenter>
-								<Icon icon="icon-plus" />
+								<Icon icon={IconEnum.ICON_PLUS} />
 							</ColumnCenter>
 							<CurrencyInputPanel
 								value={formattedAmounts[Field.CURRENCY_B]}
@@ -364,7 +363,7 @@ export default function AddLiquiditySingle() {
 								pairState !== PairState.INVALID && (
 									<div className="border border-base radius-lg margin-bottom-xl margin-left-sm">
 										{priceImpactWithoutFee && (
-											<Row className='padding-md' padding="1rem">
+											<Row className="padding-md">
 												<span className="text text-sm" style={{ marginRight: 5 }}>
 													{t('Price Impact Without Fee')}:{' '}
 												</span>
@@ -377,7 +376,8 @@ export default function AddLiquiditySingle() {
 											<span className="text text-sm">
 												{noLiquidity
 													? t('Initial prices and pool share')
-													: t('Prices and pool share')}:{' '}
+													: t('Prices and pool share')}
+												:{' '}
 											</span>
 										</div>{' '}
 										<div className="border border-base radius-lg">
@@ -392,7 +392,7 @@ export default function AddLiquiditySingle() {
 								)}
 
 							{addIsUnsupported ? (
-								<NormalButton classes={{ other: 'width-100 text-base' }} disabled mb="4px">
+								<NormalButton classes={{ other: 'width-100 text-base margin-bottom-2xs' }} disabled>
 									{t('Unsupported Asset')}
 								</NormalButton>
 							) : !account ? (
@@ -411,7 +411,6 @@ export default function AddLiquiditySingle() {
 															classes={{ other: 'width-100 text-base' }}
 															onClick={approveACallback}
 															disabled={approvalA === ApprovalState.PENDING}
-															width="100%"
 														>
 															{approvalA === ApprovalState.PENDING ? (
 																<Dots>
@@ -432,7 +431,6 @@ export default function AddLiquiditySingle() {
 															classes={{ other: 'width-100 text-base' }}
 															onClick={approveBCallback}
 															disabled={approvalB === ApprovalState.PENDING}
-															width="100%"
 														>
 															{approvalB === ApprovalState.PENDING ? (
 																<Dots>

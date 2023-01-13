@@ -1,0 +1,14 @@
+.annualRoiDisplay {
+    width: 72px;
+	max-width: 72px;
+	overflow: hidden;
+	text-align: right;
+	text-overflow: ellipsis;
+}
+
+.divider {
+	// background-color: ${({ theme }) => theme.colors.textSubtle};
+  height: 1px;
+  margin: 0 auto 32px;
+  width: 100%;
+}

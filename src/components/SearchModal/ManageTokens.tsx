@@ -5,7 +5,7 @@ import { useToken } from 'hooks/Tokens'
 import { useRemoveUserAddedToken } from 'state/user/hooks'
 import useUserAddedTokens from 'state/user/hooks/useUserAddedTokens'
 import { CurrencyLogo } from 'components/Logo'
-import { getAstraScanLink, isAddress } from 'utils'
+import { getAstraExplorerLink, isAddress } from 'utils'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useTranslation } from 'contexts/Localization'
 // import Column, { AutoColumn } from '../Layout/Column'
@@ -55,9 +55,9 @@ export default function ManageTokens({
 			userAddedTokens.map(token => (
 				<Row key={token.address} style={{ justifyContent: 'space-between' }}>
 					<Row style={{ alignItems: 'center' }}>
-						<CurrencyLogo currency={token} size="20px" />
+						<CurrencyLogo currency={token} size={20} />
 						<Typography.Link
-							href={getAstraScanLink(token.address, 'address', chainId)}
+							href={getAstraExplorerLink(token.address, 'address', chainId)}
 							classes="margin-left-xs"
 						>
 							{token.symbol}
@@ -66,7 +66,7 @@ export default function ManageTokens({
 					<Row style={{ alignItems: 'center', justifyContent: 'flex-end' }}>
 						<IconButton icon={IconEnum.ICON_CLOSE} onClick={() => removeToken(chainId, token.address)} />
 						<Typography.Link
-							href={getAstraScanLink(token.address, 'address', chainId)}
+							href={getAstraExplorerLink(token.address, 'address', chainId)}
 							classes="margin-left-md"
 						>
 							<Icon icon={IconEnum.ICON_SEARCH} />

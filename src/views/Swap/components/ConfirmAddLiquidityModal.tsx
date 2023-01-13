@@ -14,24 +14,25 @@ import { DoubleCurrencyLogo } from 'components/Logo'
 import ConfirmAddModalBottom from '../../AddLiquidity/ConfirmAddModalBottom'
 import ConfirmAddSingleModalBottom from '../../AddLiquiditySingle/ConfirmAddModalBottom'
 
-// interface ConfirmAddLiquidityModalProps {
-//   title: string
-//   customOnDismiss: () => void
-//   attemptingTxn: boolean
-//   hash: string
-//   pendingText: string
-//   currencies: { [field in Field]?: Currency }
-//   noLiquidity: boolean
-//   allowedSlippage: number
-//   liquidityErrorMessage: string
-//   price: Fraction
-//   parsedAmounts: { [field in Field]?: CurrencyAmount }
-//   onAdd: () => void
-//   poolTokenPercentage: Percent
-//   liquidityMinted: TokenAmount
-//   currencyToAdd: Token
-//   isSingleLiquidity?: boolean
-// }
+interface ConfirmAddLiquidityModalProps {
+	title: string
+	onDismiss?: () => void
+	customOnDismiss: () => void
+	attemptingTxn: boolean
+	hash: string
+	pendingText: string
+	currencies: { [field in Field]?: Currency }
+	noLiquidity: boolean
+	allowedSlippage: number
+	liquidityErrorMessage: string
+	price: Fraction
+	parsedAmounts: { [field in Field]?: CurrencyAmount }
+	onAdd: () => void
+	poolTokenPercentage: Percent
+	liquidityMinted: TokenAmount
+	currencyToAdd: Token
+	isSingleLiquidity?: boolean
+}
 
 const ConfirmAddLiquidityModal = ({
 	title,
@@ -51,7 +52,7 @@ const ConfirmAddLiquidityModal = ({
 	liquidityMinted,
 	currencyToAdd,
 	isSingleLiquidity
-}) => {
+}: ConfirmAddLiquidityModalProps) => {
 	const { t } = useTranslation()
 
 	const slippage = allowedSlippage / 100

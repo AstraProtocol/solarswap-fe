@@ -88,9 +88,7 @@ const SlippageTabs = () => {
 						text={t(
 							'Setting a high slippage tolerance can help transactions succeed, but you may not get such a good price. Use with caution.'
 						)}
-						id="tooltip-slippage-tolerance"
-						placement="right"
-						hasInsideModal
+						placement="top"
 					/>
 				</div>
 				<div className="flex flex-wrap flex-align-center">
@@ -162,9 +160,7 @@ const SlippageTabs = () => {
 					<span className="text text-base text-bold margin-right-xs">{t('Tx deadline (mins)')}</span>
 					<QuestionHelper
 						text={t('Your transaction will revert if it is left confirming for longer than this time.')}
-						id="tooltip-tx-deadline"
-						placement="right"
-						hasInsideModal
+						placement="top"
 					/>
 				</div>
 				<div>

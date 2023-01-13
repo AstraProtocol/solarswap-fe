@@ -5,7 +5,7 @@ import { useModal } from 'components/Modal'
 // import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 // import { Link } from 'components/NextLink'
-import { LightCard } from '../../components/Card'
+
 import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
 import { CurrencyLogo } from '../../components/Logo'
 import { MinimalPositionCard } from '../../components/PositionCard'
@@ -97,9 +97,9 @@ export default function PoolFinder() {
 			<div className="flex flex-justify-center">
 				<AppBody className="border border-base radius-lg">
 					<AppHeader title={t('Import Pool')} subtitle={t('Import an existing pool')} backTo="/liquidity" />
-					<div className="flex col" style={{ padding: '2rem' }} gap="md">
+					<div className="flex col" style={{ padding: '2rem' }}>
 						<NormalButton
-							// endIcon={<Icon icon="icon-dropdown" />}
+							// endIcon={<Icon icon={IconEnum.ICON_DROPDOWN} />}
 							classes={{ other: 'width-100 text-base' }}
 							onClick={() => {
 								onPresentCurrencyModal()
@@ -114,24 +114,24 @@ export default function PoolFinder() {
 											{currency0.symbol}
 										</span>
 									</Row>
-									<Icon icon="icon-dropdown" className="padding-right-2xs"></Icon>
+									<Icon icon={IconEnum.ICON_DROPDOWN} className="padding-right-2xs"></Icon>
 								</Row>
 							) : (
 								<Row className="flex-justify-space-between">
 									<Row>
 										<span className="text">{t('Select a Token')}</span>
 									</Row>
-									<Icon icon="icon-dropdown" className="padding-right-2xs"></Icon>
+									<Icon icon={IconEnum.ICON_DROPDOWN} className="padding-right-2xs"></Icon>
 								</Row>
 							)}
 						</NormalButton>
 
 						<ColumnCenter>
-							<Icon icon="icon-plus" className="padding-lg" />
+							<Icon icon={IconEnum.ICON_PLUS} className="padding-lg" />
 						</ColumnCenter>
 
 						<NormalButton
-							// endIcon={<Icon icon="icon-dropdown" />}
+							// endIcon={<Icon icon={IconEnum.ICON_DROPDOWN} />}
 							classes={{ other: 'width-100 text-base margin-bottom-lg' }}
 							onClick={() => {
 								onPresentCurrencyModal()
@@ -146,14 +146,14 @@ export default function PoolFinder() {
 											{currency1.symbol}
 										</span>
 									</Row>
-									<Icon icon="icon-dropdown" className="padding-right-2xs"></Icon>
+									<Icon icon={IconEnum.ICON_DROPDOWN} className="padding-right-2xs"></Icon>
 								</Row>
 							) : (
 								<Row className="flex-justify-space-between">
 									<Row>
 										<span className="text">{t('Select a Token')}</span>
 									</Row>
-									<Icon icon="icon-dropdown" className="padding-right-2xs"></Icon>
+									<Icon icon={IconEnum.ICON_DROPDOWN} className="padding-right-2xs"></Icon>
 								</Row>
 							)}
 						</NormalButton>
@@ -164,12 +164,7 @@ export default function PoolFinder() {
 									<>
 										<MinimalPositionCard pair={pair} />
 										<Link href="/pool" passHref>
-											<NormalButton
-												classes={{ other: 'width-100 text-base' }}
-												as={Link}
-												variant="default"
-												width="100%"
-											>
+											<NormalButton classes={{ other: 'width-100 text-base' }} variant="default">
 												{t('Manage this pool')}
 											</NormalButton>
 										</Link>
@@ -186,8 +181,6 @@ export default function PoolFinder() {
 											>
 												<NormalButton
 													classes={{ other: 'width-100 text-base margin-top-xl' }}
-													as={Link}
-													to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}
 													variant="default"
 												>
 													{t('Add Liquidity')}
@@ -203,8 +196,6 @@ export default function PoolFinder() {
 										<Link href={`/add/${currencyId(currency0)}/${currencyId(currency1)}`} passHref>
 											<NormalButton
 												classes={{ other: 'width-100 text-base margin-top-lg' }}
-												as={Link}
-												to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}
 												variant="default"
 											>
 												{t('Create pool')}
