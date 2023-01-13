@@ -41,7 +41,7 @@
 		"@astra-sdk/connector": "^1.1.5",
 		"@astra-sdk/wallet-connect": "^1.0.4",
 		"@astra-sdk/walletconnect-connector": "^1.0.3",
-		"@astraprotocol/astra-ui": "file:../../Github/astra-ui",
+		"@astraprotocol/astra-ui": "^1.0.29",
 		"@ethersproject/abi": "^5.5.0",
 		"@ethersproject/address": "^5.5.0",
 		"@ethersproject/bignumber": "^5.5.0",
