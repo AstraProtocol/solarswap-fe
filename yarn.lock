@@ -36,10 +36,10 @@
   resolved "https://registry.yarnpkg.com/@astra-sdk/walletconnect-connector/-/walletconnect-connector-1.0.3.tgz#24381d75124889dd4aef7c5667004da802c48734"
   integrity sha512-Azq0Yqged21YVt9gznIhNURsSy0uws3o50x/adBn45eUwrVyNZwcNBZ9kEoXL3y3dRN5jYGiECL1XM+oAEB1Kw==
 
-"@astraprotocol/astra-ui@^1.0.29":
-  version "1.0.29"
-  resolved "https://npm.pkg.github.com/download/@astraprotocol/astra-ui/1.0.29/361f7dcfdcfbe68aa6ca500166bde2ff0e8b9656#361f7dcfdcfbe68aa6ca500166bde2ff0e8b9656"
-  integrity sha512-p28SE39f2X6WPHHRm2wBYwQrrKYrqXt8zobuHZP+wo4hIJy3Ahz10Y96rwgPyuntcc9bzs9wkXSIYwoTv3W1Iw==
+"@astraprotocol/astra-ui@^1.0.30":
+  version "1.0.30"
+  resolved "https://npm.pkg.github.com/download/@astraprotocol/astra-ui/1.0.30/4f575e3bd0238e23506158ea894611a0b1b228f1#4f575e3bd0238e23506158ea894611a0b1b228f1"
+  integrity sha512-7CAlhY+wdWCdHf1nsSjpQNjRi+rydkPQdYdP/hbJ70UdkBL4LM9txdUJCu+69vkQzrS+TgeeCVQSjUhqEUlB9Q==
   dependencies:
     "@types/numeral" "^2.0.2"
     "@types/react-copy-to-clipboard" "^5.0.4"
