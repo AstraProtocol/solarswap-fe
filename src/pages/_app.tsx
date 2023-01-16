@@ -63,7 +63,7 @@ const walletConnect = walletConnectModule({
 
 const astraWallet = astraConnectModule({
 	icon: '/images/logo/asa.svg',
-	chainId: parseInt(CHAIN_ID),
+	chainId,
 	rpcUrl: getNodeUrl(),
 	onAppDisconnect: () => WalletHelper.removeCacheConnect(),
 	metadata: {
@@ -82,9 +82,9 @@ const web3Onboard = init({
 			id: `0x${chainId.toString(16)}`,
 			token: 'ASA',
 			label: 'Astra testnet',
-			rpcUrl: 'https://rpc.astranaut.dev/',
+			rpcUrl: getNodeUrl(),
 			icon: '/images/logo/transparent_logo.svg',
-			blockExplorerUrl: 'https://explorer.astranaut.dev/'
+			blockExplorerUrl: process.env.NEXT_PUBLIC_EXPLORER
 		}
 	],
 	appMetadata: {
