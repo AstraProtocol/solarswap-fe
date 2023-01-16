@@ -42,7 +42,7 @@ describe('Swap', () => {
 	})
 
 	it('should get input and output currency from url params', () => {
-		cy.visit('/swap?inputCurrency=0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5&outputCurrency=ASA')
+		cy.visit('/swap?inputCurrency=0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2&outputCurrency=ASA')
 		cy.get('#swap-currency-input #pair').should('contain', 'BUSD')
 		cy.get('#swap-currency-output #pair').should('contain', 'ASA')
 	})

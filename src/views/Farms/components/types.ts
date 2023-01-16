@@ -82,14 +82,15 @@ export const DesktopColumnSchema: ColumnsDefTypes[] = [
     sortable: true,
     label: 'Liquidity',
   },
+  // Temporarily removed this column because of there is only one Token pair (ASA/USDT) 
+  // {
+  //   id: 5,
+  //   name: 'multiplier',
+  //   sortable: true,
+  //   label: 'Multiplier 3',
+  // },
   {
     id: 5,
-    name: 'multiplier',
-    sortable: true,
-    label: 'Multiplier',
-  },
-  {
-    id: 6,
     name: 'details',
     sortable: true,
     label: '',
