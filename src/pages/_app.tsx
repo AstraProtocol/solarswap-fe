@@ -42,8 +42,8 @@ BigNumber.config({
 	DECIMAL_PLACES: 80
 })
 
-console.log('CHAIN_ID', process.env)
-const chainId = parseInt(CHAIN_ID)
+console.log('CHAIN_ID', process.env.NEXT_PUBLIC_CHAIN_ID)
+const chainId = parseInt(CHAIN_ID || '11115')
 
 function GlobalHooks() {
 	usePollBlockNumber()
