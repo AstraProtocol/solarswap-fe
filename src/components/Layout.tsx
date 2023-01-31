@@ -10,6 +10,7 @@ import WalletWrongNetworkModal from './Wallet/WalletWrongNetworkModal'
 import { useSetChain } from '@web3-onboard/react'
 import { useTranslation } from 'contexts/Localization'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
+import { CHAIN_ID } from 'config/constants/networks'
 
 type Props = {
 	children: ReactNode
@@ -19,8 +20,7 @@ const Layout: React.FC<Props> = props => {
 	const { isMobile } = useMatchBreakpoints()
 	const [onPresentWalletWrongNetworkModal] = useModal(<WalletWrongNetworkModal />)
 	const [{ connectedChain }, setChain] = useSetChain()
-	const _needToChangeNetwork = () =>
-		connectedChain && parseInt(connectedChain?.id, 16) !== parseInt(process.env.NEXT_PUBLIC_CHAIN_ID, 10)
+	const _needToChangeNetwork = () => connectedChain && parseInt(connectedChain?.id, 16) !== parseInt(CHAIN_ID, 10)
 
 	const { resolvedTheme } = useTheme()
 	const { t } = useTranslation()

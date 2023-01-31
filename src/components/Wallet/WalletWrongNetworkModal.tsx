@@ -5,11 +5,12 @@ import { init, useSetChain } from '@web3-onboard/react'
 import { useTranslation } from 'contexts/Localization'
 import { InjectedProps } from '../Modal/types'
 import decimalToHex from '../../utils/numberHelper'
+import { CHAIN_ID } from 'config/constants/networks'
 
 const WalletWrongNetworkModal: React.FC<InjectedProps> = ({ onDismiss }) => {
 	const { t } = useTranslation()
 	const [{ chains, connectedChain }, setChain] = useSetChain()
-	var chainId: string = process.env.NEXT_PUBLIC_CHAIN_ID || '11115'
+	var chainId: string = CHAIN_ID || '11115'
 	const _changeChain = () => {
 		setChain({
 			chainId: decimalToHex(parseInt(chainId)),
@@ -18,7 +19,7 @@ const WalletWrongNetworkModal: React.FC<InjectedProps> = ({ onDismiss }) => {
 	}
 
 	useEffect(() => {
-		if (parseInt(connectedChain?.id, 16) == parseInt(process.env.NEXT_PUBLIC_CHAIN_ID, 10)) {
+		if (parseInt(connectedChain?.id, 16) == parseInt(CHAIN_ID, 10)) {
 			onDismiss()
 		}
 	}, [connectedChain])

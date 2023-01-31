@@ -5,8 +5,8 @@ import { NextPage } from 'next'
 // import GlobalCheckClaimStatus from "components/GlobalCheckClaimStatus";
 // import FixedSubgraphHealthIndicator from "components/SubgraphHealthIndicator";
 // import useEagerConnect from "hooks/useEagerConnect";
-// import { useInactiveListener } from "hooks/useInactiveListener";
-// import useSentryUser from "hooks/useSentryUser";
+import { useInactiveListener } from 'hooks/useInactiveListener'
+import useSentryUser from 'hooks/useSentryUser'
 // import useUserAgent from "hooks/useUserAgent";
 import type { AppProps } from 'next/app'
 import { init, Web3OnboardProvider } from '@web3-onboard/react'
@@ -17,7 +17,7 @@ import { Fragment } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 import { useStore, persistor } from 'state'
 import { usePollBlockNumber } from 'state/block/hooks'
-// import { usePollCoreFarmData } from "state/farms/hooks";
+import { usePollCoreFarmData } from 'state/farms/hooks'
 import astraConnectModule from 'libs/astrawallet'
 import '@astraprotocol/astra-ui/lib/shared/style.css'
 import { Blocklist, Updaters } from '..'
@@ -42,15 +42,16 @@ BigNumber.config({
 	DECIMAL_PLACES: 80
 })
 
+console.log('CHAIN_ID', CHAIN_ID)
 const chainId = parseInt(CHAIN_ID)
 
 function GlobalHooks() {
 	usePollBlockNumber()
-	// usePollCoreFarmData()
+	usePollCoreFarmData()
 	useEagerConnect()
 	// useUserAgent()
-	// useInactiveListener()
-	// useSentryUser()
+	useInactiveListener()
+	useSentryUser()
 	return null
 }
 

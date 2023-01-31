@@ -3,6 +3,7 @@
 import { ExternalProvider } from '@ethersproject/providers'
 import { ChainId } from '@solarswap/sdk'
 import { BASE_URL, BASE_ASTRA_EXPLORER_URLS } from 'config'
+import { CHAIN_ID } from 'config/constants/networks'
 import { nodes } from './getRpcUrl'
 
 const NETWORK_CONFIG = {
@@ -22,7 +23,7 @@ const NETWORK_CONFIG = {
  */
 export const setupNetwork = async (externalProvider?: ExternalProvider) => {
 	const provider = externalProvider || window.ethereum
-	const chainId = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID, 10) as keyof typeof NETWORK_CONFIG
+	const chainId = parseInt(CHAIN_ID, 10) as keyof typeof NETWORK_CONFIG
 	if (!NETWORK_CONFIG[chainId]) {
 		console.error('Invalid chain id')
 		return false
