@@ -18,7 +18,7 @@ const Balance: React.FC<BalanceProps> = ({
 	decimals = 3,
 	isDisabled = false,
 	unit,
-	prefix,
+	prefix = '',
 	onClick,
 	className,
 	...props
