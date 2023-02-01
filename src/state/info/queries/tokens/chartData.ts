@@ -25,7 +25,7 @@ const getTokenChartData = async (skip: number, address: string): Promise<{ data?
 		const { tokenDayDatas } = await infoClient.request<TokenDayDatasResponse>(query, {
 			startTime: SS_START,
 			skip,
-			address
+			address,
 		})
 		const data = tokenDayDatas.map(mapDayData)
 		return { data, error: false }

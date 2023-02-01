@@ -16,7 +16,7 @@ const Card = ({ width, padding, border, borderRadius, children, className }: Car
 			padding: padding ?? '1.25rem',
 			border: border,
 			borderRadius: borderRadius ?? '16px',
-			backgroundColor: clsx('secondary-bg-color-lightest')
+			backgroundColor: clsx('secondary-bg-color-lightest'),
 		}}
 	>
 		{children}
@@ -36,4 +36,3 @@ export const LightGreyCard = ({ children }) => (
 export const GreyCard = ({ children }) => (
 	<Card className="border-solid border-base secondary-bg-color-lightest">{children}</Card>
 )
-

@@ -1,43 +1,42 @@
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
-
 @keyframes ellipsis {
-    0% {
-        content: '.';
-    }
-    33% {
-        content: '..';
-    }
-    66% {
-        content: '...';
-    }
+	0% {
+		content: '.';
+	}
+	33% {
+		content: '..';
+	}
+	66% {
+		content: '...';
+	}
 }
 
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-};
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
 
-.svg { 
-    animation: 2s rotate linear infinite;
+.svg {
+	animation: 2s rotate linear infinite;
 	path {
 		stroke: var(--secondary-color-normal);
 	}
 }
 
 .dot {
-    &::after {
+	&::after {
 		display: inline-block;
 		animation: ellipsis 1.25s infinite;
 		content: '.';
@@ -47,7 +46,7 @@
 }
 
 .astraSpinner {
-    position: absolute;
+	position: absolute;
 	top: 0;
 	left: 0;
 	animation: rotate 2s linear infinite;

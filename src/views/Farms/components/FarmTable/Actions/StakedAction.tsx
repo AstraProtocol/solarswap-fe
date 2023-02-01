@@ -44,7 +44,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 	displayApr,
 	lpTotalSupply,
 	tokenAmountTotal,
-	quoteTokenAmountTotal
+	quoteTokenAmountTotal,
 }) => {
 	const { t } = useTranslation()
 	const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
@@ -61,7 +61,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 	const lpAddress = getAddress(lpAddresses)
 	const liquidityUrlPathParts = getLiquidityUrlPathParts({
 		quoteTokenAddress: quoteToken.address,
-		tokenAddress: token.address
+		tokenAddress: token.address,
 	})
 	const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
 
@@ -77,9 +77,9 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 						<ToastDescriptionWithTx txHash={receipt.transactionHash}>
 							{t('Your funds have been staked in the farm')}
 						</ToastDescriptionWithTx>
-					)
+					),
 				},
-				{ type: 'success' }
+				{ type: 'success' },
 			)
 			dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
 		}
@@ -97,9 +97,9 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 						<ToastDescriptionWithTx txHash={receipt.transactionHash}>
 							{t('Your earnings have also been harvested to your wallet')}
 						</ToastDescriptionWithTx>
-					)
+					),
 				},
-				{ type: 'success' }
+				{ type: 'success' },
 			)
 			dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
 		}
@@ -118,10 +118,10 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 			multiplier={multiplier}
 			addLiquidityUrl={addLiquidityUrl}
 			astraPrice={astraPrice}
-		/>
+		/>,
 	)
 	const [onPresentWithdraw] = useModal(
-		<WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />
+		<WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
 	)
 	const lpContract = useERC20(lpAddress)
 	const dispatch = useAppDispatch()
@@ -134,7 +134,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 		if (receipt?.status) {
 			withToast(
 				{ title: t('Contract Enabled'), moreInfo: <ToastDescriptionWithTx txHash={receipt.transactionHash} /> },
-				{ type: 'success' }
+				{ type: 'success' },
 			)
 			dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
 		}

@@ -84,7 +84,7 @@ const fetchPoolData = async (
 	block48h: number,
 	block7d: number,
 	block14d: number,
-	poolAddresses: string[]
+	poolAddresses: string[],
 ) => {
 	try {
 		const query = gql`
@@ -118,7 +118,7 @@ const parsePoolData = (pairs?: PoolFields[]) => {
 			reserve0: parseFloat(reserve0),
 			reserve1: parseFloat(reserve1),
 			token0Price: parseFloat(token0Price),
-			token1Price: parseFloat(token1Price)
+			token1Price: parseFloat(token1Price),
 		}
 		return accum
 	}, {})
@@ -147,7 +147,7 @@ const usePoolDatas = (poolAddresses: string[]): PoolDatas => {
 				block48h.number,
 				block7d.number,
 				block14d.number,
-				poolAddresses
+				poolAddresses,
 			)
 			if (error) {
 				setFetchState({ error: true })
@@ -170,12 +170,12 @@ const usePoolDatas = (poolAddresses: string[]): PoolDatas => {
 					const [volumeUSD, volumeUSDChange] = getChangeForPeriod(
 						current?.volumeUSD,
 						oneDay?.volumeUSD,
-						twoDays?.volumeUSD
+						twoDays?.volumeUSD,
 					)
 					const [volumeUSDWeek, volumeUSDChangeWeek] = getChangeForPeriod(
 						current?.volumeUSD,
 						week?.volumeUSD,
-						twoWeeks?.volumeUSD
+						twoWeeks?.volumeUSD,
 					)
 
 					const liquidityUSD = current ? current.reserveUSD : 0
@@ -188,7 +188,7 @@ const usePoolDatas = (poolAddresses: string[]): PoolDatas => {
 					const { totalFees24h, totalFees7d, lpFees24h, lpFees7d, lpApr7d } = getLpFeesAndApr(
 						volumeUSD,
 						volumeUSDWeek,
-						liquidityUSD
+						liquidityUSD,
 					)
 
 					if (current) {
@@ -197,12 +197,12 @@ const usePoolDatas = (poolAddresses: string[]): PoolDatas => {
 							token0: {
 								address: current.token0.id,
 								name: current.token0.name,
-								symbol: current.token0.symbol
+								symbol: current.token0.symbol,
 							},
 							token1: {
 								address: current.token1.id,
 								name: current.token1.name,
-								symbol: current.token1.symbol
+								symbol: current.token1.symbol,
 							},
 							token0Price: current.token0Price,
 							token1Price: current.token1Price,
@@ -218,7 +218,7 @@ const usePoolDatas = (poolAddresses: string[]): PoolDatas => {
 							liquidityUSD,
 							liquidityUSDChange,
 							liquidityToken0,
-							liquidityToken1
+							liquidityToken1,
 						}
 					}
 

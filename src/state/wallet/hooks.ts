@@ -21,13 +21,13 @@ export function useASABalances(uncheckedAddresses?: (string | undefined)[]): {
 			uncheckedAddresses
 				? orderBy(uncheckedAddresses.map(isAddress).filter((a): a is string => a !== false))
 				: [],
-		[uncheckedAddresses]
+		[uncheckedAddresses],
 	)
 
 	const results = useSingleContractMultipleData(
 		multicallContract,
 		'getEthBalance',
-		addresses.map(address => [address])
+		addresses.map(address => [address]),
 	)
 
 	return useMemo(
@@ -37,7 +37,7 @@ export function useASABalances(uncheckedAddresses?: (string | undefined)[]): {
 				if (value) memo[address] = CurrencyAmount.ether(JSBI.BigInt(value.toString()))
 				return memo
 			}, {}),
-		[addresses, results]
+		[addresses, results],
 	)
 }
 
@@ -46,11 +46,11 @@ export function useASABalances(uncheckedAddresses?: (string | undefined)[]): {
  */
 export function useTokenBalancesWithLoadingIndicator(
 	address?: string,
-	tokens?: (Token | undefined)[]
+	tokens?: (Token | undefined)[],
 ): [{ [tokenAddress: string]: TokenAmount | undefined }, boolean] {
 	const validatedTokens: Token[] = useMemo(
 		() => tokens?.filter((t?: Token): t is Token => isAddress(t?.address) !== false) ?? [],
-		[tokens]
+		[tokens],
 	)
 
 	const validatedTokenAddresses = useMemo(() => validatedTokens.map(vt => vt.address), [validatedTokens])
@@ -59,7 +59,7 @@ export function useTokenBalancesWithLoadingIndicator(
 		validatedTokenAddresses,
 		ERC20_INTERFACE,
 		'balanceOf',
-		useMemo(() => [address], [address])
+		useMemo(() => [address], [address]),
 	)
 
 	const anyLoading: boolean = useMemo(() => balances.some(callState => callState.loading), [balances])
@@ -77,15 +77,15 @@ export function useTokenBalancesWithLoadingIndicator(
 							return memo
 					  }, {})
 					: {},
-			[address, validatedTokens, balances]
+			[address, validatedTokens, balances],
 		),
-		anyLoading
+		anyLoading,
 	]
 }
 
 export function useTokenBalances(
 	address?: string,
-	tokens?: (Token | undefined)[]
+	tokens?: (Token | undefined)[],
 ): { [tokenAddress: string]: TokenAmount | undefined } {
 	return useTokenBalancesWithLoadingIndicator(address, tokens)[0]
 }
@@ -99,11 +99,11 @@ export function useTokenBalance(account?: string, token?: Token): TokenAmount | 
 
 export function useCurrencyBalances(
 	account?: string,
-	currencies?: (Currency | undefined)[]
+	currencies?: (Currency | undefined)[],
 ): (CurrencyAmount | undefined)[] {
 	const tokens = useMemo(
 		() => currencies?.filter((currency): currency is Token => currency instanceof Token) ?? [],
-		[currencies]
+		[currencies],
 	)
 
 	const tokenBalances = useTokenBalances(account, tokens)
@@ -118,7 +118,7 @@ export function useCurrencyBalances(
 				if (currency === ETHER) return ethBalance[account]
 				return undefined
 			}) ?? [],
-		[account, currencies, ethBalance, tokenBalances]
+		[account, currencies, ethBalance, tokenBalances],
 	)
 }
 

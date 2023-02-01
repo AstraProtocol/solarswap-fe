@@ -29,7 +29,7 @@ const NEW_LIST_STATE: ListState = {
 	error: null,
 	current: null,
 	loadingRequestId: null,
-	pendingUpdate: null
+	pendingUpdate: null,
 }
 
 type Mutable<T> = { -readonly [P in keyof T]: T[P] extends ReadonlyArray<infer U> ? U[] : T[P] }
@@ -42,10 +42,10 @@ export const initialState: ListsState = {
 				memo[listUrl] = NEW_LIST_STATE
 				return memo
 			},
-			{}
-		)
+			{},
+		),
 	},
-	activeListUrls: DEFAULT_ACTIVE_LIST_URLS
+	activeListUrls: DEFAULT_ACTIVE_LIST_URLS,
 }
 
 export default createReducer(initialState, builder =>
@@ -56,7 +56,7 @@ export default createReducer(initialState, builder =>
 				pendingUpdate: null,
 				...state.byUrl[url],
 				loadingRequestId: requestId,
-				error: null
+				error: null,
 			}
 		})
 		.addCase(fetchTokenList.fulfilled, (state, { payload: { requestId, tokenList, url } }) => {
@@ -74,7 +74,7 @@ export default createReducer(initialState, builder =>
 						loadingRequestId: null,
 						error: null,
 						current,
-						pendingUpdate: tokenList
+						pendingUpdate: tokenList,
 					}
 				}
 			} else {
@@ -88,7 +88,7 @@ export default createReducer(initialState, builder =>
 					loadingRequestId: null,
 					error: null,
 					current: tokenList,
-					pendingUpdate: null
+					pendingUpdate: null,
 				}
 			}
 		})
@@ -103,7 +103,7 @@ export default createReducer(initialState, builder =>
 				loadingRequestId: null,
 				error: errorMessage,
 				current: null,
-				pendingUpdate: null
+				pendingUpdate: null,
 			}
 		})
 		.addCase(addList, (state, { payload: url }) => {
@@ -145,7 +145,7 @@ export default createReducer(initialState, builder =>
 			state.byUrl[url] = {
 				...state.byUrl[url],
 				pendingUpdate: null,
-				current: state.byUrl[url].pendingUpdate
+				current: state.byUrl[url].pendingUpdate,
 			}
 		})
 		.addCase(updateVersion, state => {
@@ -156,7 +156,7 @@ export default createReducer(initialState, builder =>
 			} else if (state.lastInitializedDefaultListOfLists) {
 				const lastInitializedSet = state.lastInitializedDefaultListOfLists.reduce<Set<string>>(
 					(s, l) => s.add(l),
-					new Set()
+					new Set(),
 				)
 				const newListOfListsSet = DEFAULT_LIST_OF_LISTS.reduce<Set<string>>((s, l) => s.add(l), new Set())
 
@@ -187,5 +187,5 @@ export default createReducer(initialState, builder =>
 					return true
 				})
 			}
-		})
+		}),
 )

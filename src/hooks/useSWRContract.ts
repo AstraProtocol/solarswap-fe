@@ -8,7 +8,7 @@ import useSWR, {
 	SWRConfiguration,
 	KeyedMutator,
 	// eslint-disable-next-line camelcase
-	unstable_serialize
+	unstable_serialize,
 } from 'swr'
 import { multicallv2, MulticallOptions, Call } from 'utils/multicall'
 
@@ -40,7 +40,7 @@ export const fetchStatusMiddleware: Middleware = useSWRNext => {
 					status = FetchStatus.Failed
 				}
 				return status
-			}
+			},
 		})
 	}
 }
@@ -50,7 +50,7 @@ type ContractMethodName<C extends Contract = Contract> = keyof C['callStatic'] &
 
 type ContractMethodParams<
 	C extends Contract = Contract,
-	N extends ContractMethodName<C> = ContractMethodName<C>
+	N extends ContractMethodName<C> = ContractMethodName<C>,
 > = Parameters<C['callStatic'][N]>
 
 type UseSWRContractArrayKey<C extends Contract = Contract, N extends ContractMethodName<C> = any> =
@@ -59,7 +59,7 @@ type UseSWRContractArrayKey<C extends Contract = Contract, N extends ContractMet
 
 export type UseSWRContractObjectKey<
 	C extends Contract = Contract,
-	N extends ContractMethodName<C> = ContractMethodName<C>
+	N extends ContractMethodName<C> = ContractMethodName<C>,
 > = {
 	contract: MaybeContract<C>
 	methodName: N
@@ -74,21 +74,21 @@ type UseSWRContractSerializeKeys = {
 }
 
 const getContractKey = <T extends Contract = Contract, N extends ContractMethodName<T> = any>(
-	key?: UseSWRContractKey<T, N> | null
+	key?: UseSWRContractKey<T, N> | null,
 ) => {
 	if (Array.isArray(key)) {
 		const [contract, methodName, params] = key || []
 		return {
 			contract,
 			methodName,
-			params
+			params,
 		}
 	}
 	return key
 }
 
 const serializesContractKey = <T extends Contract = Contract>(
-	key?: UseSWRContractKey<T> | null
+	key?: UseSWRContractKey<T> | null,
 ): UseSWRContractSerializeKeys | null => {
 	const { contract, methodName, params } = getContractKey(key) || {}
 	const serializedKeys =
@@ -97,7 +97,7 @@ const serializesContractKey = <T extends Contract = Contract>(
 					address: contract.address,
 					interfaceFormat: contract.interface.format(FormatTypes.full) as string[],
 					methodName,
-					callData: contract.interface.encodeFunctionData(methodName, params)
+					callData: contract.interface.encodeFunctionData(methodName, params),
 			  }
 			: null
 	return serializedKeys
@@ -117,7 +117,7 @@ export function useSWRContract<
 	Error = any,
 	T extends Contract = Contract,
 	N extends ContractMethodName<T> = ContractMethodName<T>,
-	Data = Awaited<ReturnType<T['callStatic'][N]>>
+	Data = Awaited<ReturnType<T['callStatic'][N]>>,
 >(key?: UseSWRContractKey<T, N> | null, config: SWRConfiguration<Data, Error> = {}) {
 	const { contract, methodName, params } = getContractKey(key) || {}
 	const serializedKeys = useMemo(() => serializesContractKey(key), [key])
@@ -129,7 +129,7 @@ export function useSWRContract<
 			if (!params) return contract[methodName]()
 			return contract[methodName](...params)
 		},
-		config
+		config,
 	)
 }
 
@@ -145,7 +145,7 @@ export function useSWRMulticall<Data>(abi: any[], calls: Call[], options?: Multi
 	return useSWR<Data>(calls, () => multicallv2(abi, calls, { requireSuccess }), {
 		revalidateIfStale: false,
 		revalidateOnFocus: false,
-		...config
+		...config,
 	})
 }
 
@@ -180,7 +180,7 @@ export const localStorageMiddleware: Middleware = useSWRNext => (key, fetcher, c
 	}
 
 	return Object.defineProperty(swr, 'data', {
-		value: data || localStorageDataParsed
+		value: data || localStorageDataParsed,
 	})
 }
 
@@ -213,13 +213,13 @@ export const laggyMiddleware: Middleware = useSWRNext => {
 
 		// Also add a `isLagging` field to SWR.
 		Object.defineProperty(swr, 'isLagging', {
-			value: isLagging
+			value: isLagging,
 		})
 		Object.defineProperty(swr, 'resetLaggy', {
-			value: resetLaggy
+			value: resetLaggy,
 		})
 		Object.defineProperty(swr, 'data', {
-			value: dataOrLaggyData
+			value: dataOrLaggyData,
 		})
 		return swr
 	}

@@ -40,7 +40,7 @@ export const AutoColumn = ({ children, gap, justify, style }: AutoColumnProps) =
 			gridAutoRows: 'auto',
 			gridRowGap: (gap === 'sm' && '8px') || (gap === 'md' && '12px') || (gap === 'lg' && '24px') || gap,
 			justifyItems: justify,
-			...style
+			...style,
 		}}
 	>
 		{children}

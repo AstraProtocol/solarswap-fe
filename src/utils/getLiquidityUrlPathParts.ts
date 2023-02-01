@@ -4,7 +4,7 @@ import tokens from 'config/constants/tokens'
 
 const getLiquidityUrlPathParts = ({
 	quoteTokenAddress,
-	tokenAddress
+	tokenAddress,
 }: {
 	quoteTokenAddress: string
 	tokenAddress: string

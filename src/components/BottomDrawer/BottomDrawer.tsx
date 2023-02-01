@@ -46,7 +46,7 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({ content, isOpen, setIsOpen 
 					{content}
 				</div>
 			</div>,
-			portal
+			portal,
 		)
 	return null
 }

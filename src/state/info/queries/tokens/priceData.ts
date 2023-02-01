@@ -15,7 +15,7 @@ const getPriceSubqueries = (tokenAddress: string, blocks: any) =>
       b${block.timestamp}: bundle(id:"1", block: { number: ${block.number} }) { 
         bnbPrice
       }
-    `
+    `,
 	)
 
 /**
@@ -32,7 +32,7 @@ const priceQueryConstructor = (subqueries: string[]) => {
 const fetchTokenPriceData = async (
 	address: string,
 	interval: number,
-	startTimestamp: number
+	startTimestamp: number,
 ): Promise<{
 	data?: PriceChartEntry[]
 	error: boolean
@@ -50,7 +50,7 @@ const fetchTokenPriceData = async (
 		if (!blocks || blocks.length === 0) {
 			console.error('Error fetching blocks for timestamps', timestamps)
 			return {
-				error: false
+				error: false,
 			}
 		}
 
@@ -58,13 +58,13 @@ const fetchTokenPriceData = async (
 			priceQueryConstructor,
 			getPriceSubqueries(address, blocks),
 			INFO_CLIENT,
-			200
+			200,
 		)
 
 		if (!prices) {
 			console.error('Price data failed to load')
 			return {
-				error: false
+				error: false,
 			}
 		}
 
@@ -83,7 +83,7 @@ const fetchTokenPriceData = async (
 				tokenPrices.push({
 					timestamp,
 					derivedBNB: prices[priceKey]?.derivedBNB ? parseFloat(prices[priceKey].derivedBNB) : 0,
-					priceUSD: 0
+					priceUSD: 0,
 				})
 			}
 		})
@@ -113,7 +113,7 @@ const fetchTokenPriceData = async (
 				open: sortedTokenPrices[i].priceUSD,
 				close: sortedTokenPrices[i + 1].priceUSD,
 				high: sortedTokenPrices[i + 1].priceUSD,
-				low: sortedTokenPrices[i].priceUSD
+				low: sortedTokenPrices[i].priceUSD,
 			})
 		}
 
@@ -121,7 +121,7 @@ const fetchTokenPriceData = async (
 	} catch (error) {
 		console.error(`Failed to fetch price data for token ${address}`, error)
 		return {
-			error: true
+			error: true,
 		}
 	}
 }

@@ -28,7 +28,7 @@ export default function NavigationConnect({ classes = '' }) {
 		return (
 			<div
 				className={clsx(styles.item, 'radius-lg block-center', {
-					['margin-left-lg']: !isMobile
+					['margin-left-lg']: !isMobile,
 				})}
 			>
 				<div className="flex row flex-align-center text-base text-bold">

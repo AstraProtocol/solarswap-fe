@@ -34,7 +34,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 	lpLabel,
 	lpTotalSupply,
 	tokenAmountTotal,
-	quoteTokenAmountTotal
+	quoteTokenAmountTotal,
 }) => {
 	const { t } = useTranslation()
 	const { onStake } = useStakeFarms(pid)
@@ -59,9 +59,9 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 						<ToastDescriptionWithTx txHash={receipt.transactionHash}>
 							{t('Your funds have been staked in the farm')}
 						</ToastDescriptionWithTx>
-					)
+					),
 				},
-				{ type: 'success' }
+				{ type: 'success' },
 			)
 			dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
 		}
@@ -79,9 +79,9 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 						<ToastDescriptionWithTx txHash={receipt.transactionHash}>
 							{t('Your earnings have also been harvested to your wallet')}
 						</ToastDescriptionWithTx>
-					)
+					),
 				},
-				{ type: 'success' }
+				{ type: 'success' },
 			)
 
 			dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
@@ -101,10 +101,10 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 			displayApr={displayApr}
 			addLiquidityUrl={addLiquidityUrl}
 			astraPrice={astraPrice}
-		/>
+		/>,
 	)
 	const [onPresentWithdraw] = useModal(
-		<WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />
+		<WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
 	)
 
 	const renderStakingButtons = () => {

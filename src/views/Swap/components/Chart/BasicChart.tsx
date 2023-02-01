@@ -10,7 +10,7 @@ import { ButtonMenu, ButtonMenuItem, useMobileLayout } from '@astraprotocol/astr
 import clsx from 'clsx'
 
 const SwapLineChart = dynamic(() => import('./SwapLineChart'), {
-	ssr: false
+	ssr: false,
 })
 
 const BasicChart = ({
@@ -20,7 +20,7 @@ const BasicChart = ({
 	inputCurrency,
 	outputCurrency,
 	isMobile,
-	currentSwapPrice
+	currentSwapPrice,
 }) => {
 	const [timeWindow, setTimeWindow] = useState<PairDataTimeWindowEnum>(0)
 
@@ -28,7 +28,7 @@ const BasicChart = ({
 		token0Address,
 		token1Address,
 		timeWindow,
-		currentSwapPrice
+		currentSwapPrice,
 	})
 	const [hoverValue, setHoverValue] = useState<number | undefined>()
 	const [hoverDate, setHoverDate] = useState<string | undefined>()
@@ -38,14 +38,14 @@ const BasicChart = ({
 	const chartHeight = isChartExpanded ? 'calc(100% - 120px)' : '378px'
 	const {
 		t,
-		currentLanguage: { locale }
+		currentLanguage: { locale },
 	} = useTranslation()
 	const currentDate = new Date().toLocaleString(locale, {
 		year: 'numeric',
 		month: 'short',
 		day: '2-digit',
 		hour: '2-digit',
-		minute: '2-digit'
+		minute: '2-digit',
 	})
 
 	// Sometimes we might receive array full of zeros for obscure tokens while trying to derive data
@@ -54,18 +54,18 @@ const BasicChart = ({
 		pairPrices &&
 		pairPrices.length > 0 &&
 		pairPrices.every(
-			price => !price.value || price.value === 0 || price.value === Infinity || Number.isNaN(price.value)
+			price => !price.value || price.value === 0 || price.value === Infinity || Number.isNaN(price.value),
 		)
 
 	if (isBadData) {
-	return (
-		<NoChartAvailable
-			token0Address={token0Address}
-			token1Address={token1Address}
-			pairAddress={pairId}
-			isMobile={isMobile}
-		/>
-	)
+		return (
+			<NoChartAvailable
+				token0Address={token0Address}
+				token1Address={token1Address}
+				pairAddress={pairId}
+				isMobile={isMobile}
+			/>
+		)
 	}
 
 	return (

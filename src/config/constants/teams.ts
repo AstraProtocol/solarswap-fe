@@ -11,12 +11,12 @@ const teams: Team[] = [
 			md: 'syrup-storm-md.png',
 			sm: 'syrup-storm-sm.png',
 			alt: 'syrup-storm-alt.png',
-			ipfs: `${IPFS_GATEWAY}/QmXKzSojwzYjtDCVgR6mVx7w7DbyYpS7zip4ovJB9fQdMG/syrup-storm.png`
+			ipfs: `${IPFS_GATEWAY}/QmXKzSojwzYjtDCVgR6mVx7w7DbyYpS7zip4ovJB9fQdMG/syrup-storm.png`,
 		},
 		background: 'syrup-storm-bg.svg',
 		textColor: '#191326',
 		users: 0,
-		points: 0
+		points: 0,
 	},
 	{
 		id: 2,
@@ -27,12 +27,12 @@ const teams: Team[] = [
 			md: 'fearsome-flippers-md.png',
 			sm: 'fearsome-flippers-sm.png',
 			alt: 'fearsome-flippers-alt.png',
-			ipfs: `${IPFS_GATEWAY}/QmXKzSojwzYjtDCVgR6mVx7w7DbyYpS7zip4ovJB9fQdMG/fearsome-flippers.png`
+			ipfs: `${IPFS_GATEWAY}/QmXKzSojwzYjtDCVgR6mVx7w7DbyYpS7zip4ovJB9fQdMG/fearsome-flippers.png`,
 		},
 		background: 'fearsome-flippers-bg.svg',
 		textColor: '#FFFFFF',
 		users: 0,
-		points: 0
+		points: 0,
 	},
 	{
 		id: 3,
@@ -43,13 +43,13 @@ const teams: Team[] = [
 			md: 'chaotic-cakers-md.png',
 			sm: 'chaotic-cakers-sm.png',
 			alt: 'chaotic-cakers-alt.png',
-			ipfs: `${IPFS_GATEWAY}/QmXKzSojwzYjtDCVgR6mVx7w7DbyYpS7zip4ovJB9fQdMG/chaotic-cakers.png`
+			ipfs: `${IPFS_GATEWAY}/QmXKzSojwzYjtDCVgR6mVx7w7DbyYpS7zip4ovJB9fQdMG/chaotic-cakers.png`,
 		},
 		background: 'chaotic-cakers-bg.svg',
 		textColor: '#191326',
 		users: 0,
-		points: 0
-	}
+		points: 0,
+	},
 ]
 
 export default teams

@@ -5,7 +5,7 @@ import { withToast, Row, Icon, NormalButton, IconEnum } from '@astraprotocol/ast
 import { useTranslation } from 'contexts/Localization'
 import TransactionConfirmationModal, {
 	ConfirmationModalContent,
-	TransactionErrorContent
+	TransactionErrorContent,
 } from 'components/TransactionConfirmationModal'
 import { AutoColumn } from 'components/Layout/Column'
 import { Field } from 'state/burn/actions'
@@ -53,7 +53,7 @@ const ConfirmRemoveLiquidityModal = ({
 	tokenA,
 	tokenB,
 	currencyA,
-	currencyB
+	currencyB,
 }) => {
 	const { t } = useTranslation()
 
@@ -61,7 +61,7 @@ const ConfirmRemoveLiquidityModal = ({
 
 	const slippageText = t(
 		'Output is estimated. If the price changes by more than %slippage%% your transaction will revert.',
-		{ slippage }
+		{ slippage },
 	)
 
 	const [estimatedText, transactionRevertText] = slippageText.split(`${slippage}%`)
@@ -106,7 +106,7 @@ const ConfirmRemoveLiquidityModal = ({
 						<span className="text text-sm">
 							{t('%assetA%/%assetB% Burned', {
 								assetA: currencyA?.symbol ?? '',
-								assetB: currencyB?.symbol ?? ''
+								assetB: currencyB?.symbol ?? '',
 							})}
 						</span>
 						<div className="flex">
@@ -151,7 +151,7 @@ const ConfirmRemoveLiquidityModal = ({
 			) : (
 				<ConfirmationModalContent topContent={modalHeader} bottomContent={modalBottom} />
 			),
-		[onDismiss, modalBottom, modalHeader, liquidityErrorMessage]
+		[onDismiss, modalBottom, modalHeader, liquidityErrorMessage],
 	)
 
 	return (

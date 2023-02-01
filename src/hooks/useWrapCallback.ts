@@ -11,7 +11,7 @@ import { useCallWithGasPrice } from './useCallWithGasPrice'
 export enum WrapType {
 	NOT_APPLICABLE,
 	WRAP,
-	UNWRAP
+	UNWRAP,
 }
 
 const NOT_APPLICABLE = { wrapType: WrapType.NOT_APPLICABLE }
@@ -24,7 +24,7 @@ const NOT_APPLICABLE = { wrapType: WrapType.NOT_APPLICABLE }
 export default function useWrapCallback(
 	inputCurrency: Currency | undefined,
 	outputCurrency: Currency | undefined,
-	typedValue: string | undefined
+	typedValue: string | undefined,
 ): { wrapType: WrapType; execute?: undefined | (() => Promise<void>); inputError?: string } {
 	const { t } = useTranslation()
 	const { chainId, account } = useActiveWeb3React()
@@ -48,17 +48,17 @@ export default function useWrapCallback(
 						? async () => {
 								try {
 									const txReceipt = await callWithGasPrice(wethContract, 'deposit', undefined, {
-										value: `0x${inputAmount.raw.toString(16)}`
+										value: `0x${inputAmount.raw.toString(16)}`,
 									})
 									addTransaction(txReceipt, {
-										summary: `Wrap ${inputAmount.toSignificant(6)} ASA to WASA`
+										summary: `Wrap ${inputAmount.toSignificant(6)} ASA to WASA`,
 									})
 								} catch (error) {
 									console.error('Could not deposit', error)
 								}
 						  }
 						: undefined,
-				inputError: sufficientBalance ? undefined : t('Insufficient ASA balance')
+				inputError: sufficientBalance ? undefined : t('Insufficient ASA balance'),
 			}
 		}
 		if (currencyEquals(WETH[chainId], inputCurrency) && outputCurrency === ETHER) {
@@ -69,17 +69,17 @@ export default function useWrapCallback(
 						? async () => {
 								try {
 									const txReceipt = await callWithGasPrice(wethContract, 'withdraw', [
-										`0x${inputAmount.raw.toString(16)}`
+										`0x${inputAmount.raw.toString(16)}`,
 									])
 									addTransaction(txReceipt, {
-										summary: `Unwrap ${inputAmount.toSignificant(6)} WASA to ASA`
+										summary: `Unwrap ${inputAmount.toSignificant(6)} WASA to ASA`,
 									})
 								} catch (error) {
 									console.error('Could not withdraw', error)
 								}
 						  }
 						: undefined,
-				inputError: sufficientBalance ? undefined : t('Insufficient WASA balance')
+				inputError: sufficientBalance ? undefined : t('Insufficient WASA balance'),
 			}
 		}
 		return NOT_APPLICABLE
@@ -92,6 +92,6 @@ export default function useWrapCallback(
 		inputAmount,
 		balance,
 		addTransaction,
-		callWithGasPrice
+		callWithGasPrice,
 	])
 }

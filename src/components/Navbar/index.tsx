@@ -5,7 +5,7 @@ import {
 	IconEnum,
 	Logo,
 	ModalWrapper,
-	useClickOutsideElement
+	useClickOutsideElement,
 } from '@astraprotocol/astra-ui'
 import { useConnectWallet } from '@web3-onboard/react'
 import clsx from 'clsx'
@@ -69,8 +69,8 @@ export default function Navbar() {
 				const walletConnected = await connect({
 					autoSelect: {
 						label: previouslyConnectedWallets[0],
-						disableModals: true
-					}
+						disableModals: true,
+					},
 				})
 
 				if (isEmpty(walletConnected)) {
@@ -99,22 +99,22 @@ export default function Navbar() {
 					{
 						id: '1.1',
 						label: t('Swap'),
-						link: '/swap'
+						link: '/swap',
 					},
 
 					{
 						id: '1.2',
 						label: t('Liquidity'),
-						link: '/liquidity'
-					}
-				]
+						link: '/liquidity',
+					},
+				],
 			},
 			{
 				id: '2',
 				type: 'static',
 				label: t('Farm'),
 				link: '/farms',
-				submenus: []
+				submenus: [],
 			},
 			{
 				id: '4',
@@ -124,16 +124,16 @@ export default function Navbar() {
 						id: '4.1',
 						label: EN.language,
 						link: EN.code,
-						onClick: () => setLanguage(EN)
+						onClick: () => setLanguage(EN),
 					},
 					{
 						id: '4.2',
 						label: VI.language,
 						link: VI.code,
-						onClick: () => setLanguage(VI)
-					}
-				]
-			}
+						onClick: () => setLanguage(VI),
+					},
+				],
+			},
 		]
 
 		return MENU_ITEMS
@@ -145,7 +145,7 @@ export default function Navbar() {
 		<div
 			className={clsx(styles.hamburgerMenuContainer, 'padding-lg ', {
 				[styles.hamburgerActive]: showHamburgerMenu,
-				[styles.hamburgerDeactive]: !showHamburgerMenu
+				[styles.hamburgerDeactive]: !showHamburgerMenu,
 			})}
 			ref={_searchWrapperRef}
 		>
@@ -168,7 +168,7 @@ export default function Navbar() {
 			<nav
 				className={clsx(styles.navbar, 'margin-bottom-sm', {
 					'shadow-xs': shadow,
-					[styles.topBackground]: shadow
+					[styles.topBackground]: shadow,
 				})}
 			>
 				<div className={clsx(styles.container, 'margin-auto')}>

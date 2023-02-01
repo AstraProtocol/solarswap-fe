@@ -29,7 +29,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
 	multiplier,
 	liquidity,
 	userDataReady,
-	expanded
+	expanded,
 }) => {
 	const farm = details
 
@@ -40,7 +40,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
 	const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
 	const liquidityUrlPathParts = getLiquidityUrlPathParts({
 		quoteTokenAddress: quoteToken.address,
-		tokenAddress: token.address
+		tokenAddress: token.address,
 	})
 	const lpAddress = getAddress(farm.lpAddresses)
 	const bsc = getAstraExplorerLink(lpAddress, 'address')

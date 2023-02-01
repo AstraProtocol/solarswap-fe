@@ -1,32 +1,31 @@
 .viewBalanceMaxMini {
-    height: 22px;
-    width: 22px;
-    // background-color: ${({ theme }) => theme.colors.background};
-    border: none;
-    border-radius: 50%;
-    padding: 0.2rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    margin-left: 0.4rem;
-    cursor: pointer;
-    // color: ${({ theme }) => theme.colors.text};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: right;
+	height: 22px;
+	width: 22px;
+	// background-color: ${({ theme }) => theme.colors.background};
+	border: none;
+	border-radius: 50%;
+	padding: 0.2rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	margin-left: 0.4rem;
+	cursor: pointer;
+	// color: ${({ theme }) => theme.colors.text};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: right;
 
-    :hover {
-        // background-color: ${({ theme }) => theme.colors.dropdown};
-    }
-    :focus {
-        // background-color: ${({ theme }) => theme.colors.dropdown};
-        outline: none;
-    }
+	:hover {
+		// background-color: ${({ theme }) => theme.colors.dropdown};
+	}
+	:focus {
+		// background-color: ${({ theme }) => theme.colors.dropdown};
+		outline: none;
+	}
 }
 
-
 .swapCallbackErrorInner {
-    // background-color: ${({ theme }) => `${theme.colors.failure}`};
+	// background-color: ${({ theme }) => `${theme.colors.failure}`};
 	// border-radius: 1rem;
 	display: flex;
 	align-items: center;
@@ -44,7 +43,7 @@
 }
 
 .swapCallbackErrorInnerAlertTriangle {
-    background-color: var(--contrast-color-theme-10);
+	background-color: var(--contrast-color-theme-10);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -55,51 +54,48 @@
 }
 // ------------ AdvancedSwapDetailsDropdown.tsx ---------------------
 .advancedDetailsFooter {
-    margin-top: 0;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 20px;
-    background-color: var(--same-color-theme-30);
+	margin-top: 0;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	width: 100%;
+	max-width: 400px;
+	border-radius: 20px;
+	background-color: var(--same-color-theme-30);
 
-    transform: translateY(-100%);
-    transition: transform 300ms ease-in-out;
+	transform: translateY(-100%);
+	transition: transform 300ms ease-in-out;
 }
 
 .advancedDetailsFooterShow {
-    margin-top: 16px;
-    transform: translateY(0%);
+	margin-top: 16px;
+	transform: translateY(0%);
 }
 
 // ------------ AdvancedSwapDetailsDropdown.tsx ---------------------
 
 // ------------ AddressInputPanel.tsx ---------------------
 .addressInputPanel {
-    display: flex;
-    flex-flow: column nowrap;
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    margin: 0 1rem;
+	display: flex;
+	flex-flow: column nowrap;
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	margin: 0 1rem;
 }
 
 .containerRow {
-    transition: border-color 300ms 'step-start',
-        color 500ms 'step-start';
+	transition: border-color 300ms 'step-start', color 500ms 'step-start';
 }
 
 .containerRowError {
-    transition: border-color 300ms 'step-end',
-        color 500ms 'step-end';
+	transition: border-color 300ms 'step-end', color 500ms 'step-end';
 }
-
 
 // ------------ AddressInputPanel.tsx ---------------------
 
 // ------------ ProgressSteps.tsx ---------------------
 .circle {
-    min-width: 20px;
+	min-width: 20px;
 	min-height: 20px;
 	// background-color: ${({ theme, confirmed, disabled }) =>
 	// 	disabled ? theme.colors.backgroundDisabled : confirmed ? theme.colors.success : theme.colors.primary};
@@ -113,13 +109,13 @@
 }
 
 .circleRow {
-    width: calc(100% - 20px);
+	width: calc(100% - 20px);
 	display: flex;
 	align-items: center;
-} 
+}
 
 .connector {
-    width: 100%;
+	width: 100%;
 	height: 2px;
 	// background: linear-gradient(
 	// 	90deg,

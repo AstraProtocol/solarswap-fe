@@ -6,7 +6,7 @@ describe('truncateHash', () => {
 		['aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb', 'aaaaa...bbbb', 5, 4],
 		['aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb', 'a...bbbbb', 1, 5],
 		['aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb', 'aaaaaa...b', 6, 1],
-		['aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb', 'aaaaaaaa...bbbbbbbb', 8, 8]
+		['aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb', 'aaaaaaaa...bbbbbbbb', 8, 8],
 	])('truncates "%s" to "%s" correctly', (address, expected, startLength, endLength) => {
 		expect(truncateHash(address, startLength, endLength)).toEqual(expected)
 	})

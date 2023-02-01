@@ -40,5 +40,5 @@ export const TOKEN_BLACKLIST = [
 	'0xdbf8913dfe14536c0dae5dd06805afb2731f7e7b',
 	// These ones are newly found
 	'0xF1D50dB2C40b63D2c598e2A808d1871a40b1E653',
-	'0x4269e4090ff9dfc99d8846eb0d42e67f01c3ac8b'
+	'0x4269e4090ff9dfc99d8846eb0d42e67f01c3ac8b',
 ]

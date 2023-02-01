@@ -49,12 +49,12 @@ export default function useCatchTxError(): CatchTxErrorReturn {
 			withToast(
 				{
 					title: t('Error'),
-					moreInfo: err
+					moreInfo: err,
 				},
-				{ type: 'error' }
+				{ type: 'error' },
 			)
 		},
-		[t]
+		[t],
 	)
 
 	const fetchWithCatchTxError = useCallback(
@@ -74,9 +74,9 @@ export default function useCatchTxError(): CatchTxErrorReturn {
 				withToast(
 					{
 						title: t('Transaction Submitted'),
-						moreInfo: <ToastDescriptionWithTx txHash={tx.hash} />
+						moreInfo: <ToastDescriptionWithTx txHash={tx.hash} />,
 					},
-					{ type: 'success' }
+					{ type: 'success' },
 				)
 
 				const receipt = await tx.wait()
@@ -130,9 +130,9 @@ export default function useCatchTxError(): CatchTxErrorReturn {
 														? `Transaction failed with error: ${reason}`
 														: 'Transaction failed. For detailed error message:'}
 												</ToastDescriptionWithTx>
-											)
+											),
 										},
-										{ type: 'error' }
+										{ type: 'error' },
 									)
 								}
 							})
@@ -144,11 +144,11 @@ export default function useCatchTxError(): CatchTxErrorReturn {
 
 			return null
 		},
-		[handleNormalError, library, t]
+		[handleNormalError, library, t],
 	)
 
 	return {
 		fetchWithCatchTxError,
-		loading
+		loading,
 	}
 }

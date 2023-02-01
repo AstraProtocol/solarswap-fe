@@ -21,7 +21,7 @@ interface SwapCall {
 export function useSwapCallArguments(
 	trade: Trade | undefined, // trade to execute, required
 	allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE, // in bips
-	recipientAddressOrName: string | null // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
+	recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
 ): SwapCall[] {
 	const { account, chainId, library } = useActiveWeb3React()
 
@@ -44,8 +44,8 @@ export function useSwapCallArguments(
 				feeOnTransfer: false,
 				allowedSlippage: new Percent(JSBI.BigInt(allowedSlippage), BIPS_BASE),
 				recipient,
-				deadline: deadline.toNumber()
-			})
+				deadline: deadline.toNumber(),
+			}),
 		)
 
 		if (trade.tradeType === TradeType.EXACT_INPUT) {
@@ -54,8 +54,8 @@ export function useSwapCallArguments(
 					feeOnTransfer: true,
 					allowedSlippage: new Percent(JSBI.BigInt(allowedSlippage), BIPS_BASE),
 					recipient,
-					deadline: deadline.toNumber()
-				})
+					deadline: deadline.toNumber(),
+				}),
 			)
 		}
 

@@ -21,7 +21,7 @@ export function useBurnState(): AppState['burn'] {
 
 export function useDerivedBurnInfo(
 	currencyA: Currency | undefined,
-	currencyB: Currency | undefined
+	currencyB: Currency | undefined,
 ): {
 	pair?: Pair | null
 	parsedAmounts: {
@@ -49,7 +49,7 @@ export function useDerivedBurnInfo(
 	const tokens = {
 		[Field.CURRENCY_A]: tokenA,
 		[Field.CURRENCY_B]: tokenB,
-		[Field.LIQUIDITY]: pair?.liquidityToken
+		[Field.LIQUIDITY]: pair?.liquidityToken,
 	}
 
 	// liquidity values
@@ -74,7 +74,7 @@ export function useDerivedBurnInfo(
 			: undefined
 	const liquidityValues: { [Field.CURRENCY_A]?: TokenAmount; [Field.CURRENCY_B]?: TokenAmount } = {
 		[Field.CURRENCY_A]: liquidityValueA,
-		[Field.CURRENCY_B]: liquidityValueB
+		[Field.CURRENCY_B]: liquidityValueB,
 	}
 
 	let percentToRemove: Percent = new Percent('0', '100')
@@ -118,7 +118,7 @@ export function useDerivedBurnInfo(
 		[Field.CURRENCY_B]:
 			tokenB && percentToRemove && percentToRemove.greaterThan('0') && liquidityValueB
 				? new TokenAmount(tokenB, percentToRemove.multiply(liquidityValueB.raw).quotient)
-				: undefined
+				: undefined,
 	}
 
 	let error: string | undefined
@@ -141,7 +141,7 @@ export function useDerivedBurnInfo(
  */
 export function useDerivedBurnSingleInfo(
 	currencyA: Currency | undefined,
-	currencyB: Currency | undefined
+	currencyB: Currency | undefined,
 ): {
 	pair?: Pair | null
 	parsedAmounts: {
@@ -174,14 +174,14 @@ export function useDerivedBurnSingleInfo(
 	const tokens = {
 		[Field.CURRENCY_A]: tokenA,
 		[Field.CURRENCY_B]: tokenB,
-		[Field.LIQUIDITY]: pair?.liquidityToken
+		[Field.LIQUIDITY]: pair?.liquidityToken,
 	}
 
 	const zapOutAmountMax = useZapOutAmount(
 		tokenB?.address,
 		tokenA?.address,
 		pairAddress,
-		userLiquidity?.raw.toString()
+		userLiquidity?.raw.toString(),
 	)
 
 	let percentToRemove: Percent = new Percent('0', '100')
@@ -241,7 +241,7 @@ export function useDerivedBurnSingleInfo(
 			percentToRemove.greaterThan('0') &&
 			(percentToRemove.lessThan('1') || percentToRemove.equalTo('1'))
 				? new TokenAmount(tokenB, percentToRemove.multiply(0).quotient)
-				: undefined
+				: undefined,
 	}
 
 	const bestTradeExactOut = useTradeExactOut(currencyB, parsedAmounts[Field.CURRENCY_A])
@@ -275,10 +275,10 @@ export function useBurnActionHandlers(): {
 		(field: Field, typedValue: string) => {
 			dispatch(typeInput({ field, typedValue }))
 		},
-		[dispatch]
+		[dispatch],
 	)
 
 	return {
-		onUserInput
+		onUserInput,
 	}
 }

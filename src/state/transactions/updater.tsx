@@ -10,7 +10,7 @@ import { withToast } from '@astraprotocol/astra-ui'
 
 export function shouldCheck(
 	currentBlock: number,
-	tx: { addedTime: number; receipt?: any; lastCheckedBlockNumber?: number }
+	tx: { addedTime: number; receipt?: any; lastCheckedBlockNumber?: number },
 ): boolean {
 	if (tx.receipt) return false
 	if (!tx.lastCheckedBlockNumber) return true
@@ -62,18 +62,18 @@ export default function Updater(): null {
 										status: receipt.status,
 										to: receipt.to,
 										transactionHash: receipt.transactionHash,
-										transactionIndex: receipt.transactionIndex
-									}
-								})
+										transactionIndex: receipt.transactionIndex,
+									},
+								}),
 							)
 
 							const type = receipt.status === 1 ? 'success' : 'error'
 							withToast(
 								{
 									title: t('Transaction receipt'),
-									moreInfo: <ToastDescriptionWithTx txHash={receipt.transactionHash} />
+									moreInfo: <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
 								},
-								{ type }
+								{ type },
 							)
 						} else {
 							dispatch(checkedTransaction({ chainId, hash, blockNumber: currentBlock }))

@@ -6,11 +6,10 @@ import getTokenLogoURL from '../../utils/getTokenLogoURL'
 import AstraIcon from './AstraIcon'
 import Logo from './Logo'
 
-
 export default function CurrencyLogo({
 	currency,
 	size = 24,
-	style
+	style,
 }: {
 	currency?: Currency | Token
 	size?: number
@@ -30,7 +29,7 @@ export default function CurrencyLogo({
 		return []
 	}, [currency, uriLocations])
 
-	if (JSON.stringify(currency) === JSON.stringify(ETHER) || currency?.symbol === "WASA") {
+	if (JSON.stringify(currency) === JSON.stringify(ETHER) || currency?.symbol === 'WASA') {
 		return <AstraIcon height={size} width={size} style={style} />
 	}
 

@@ -25,7 +25,7 @@ const ExpertModal: React.FC<ExpertModalProps> = ({ setShowConfirmExpertModal, se
 			<Message variant="warning">
 				<span className="text text-base">
 					{t(
-						"Expert mode turns off the 'Confirm' transaction prompt, and allows high slippage trades that often result in bad rates and lost funds."
+						"Expert mode turns off the 'Confirm' transaction prompt, and allows high slippage trades that often result in bad rates and lost funds.",
 					)}
 				</span>
 			</Message>

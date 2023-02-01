@@ -22,6 +22,6 @@ export default function useENS(nameOrAddress?: string | null): {
 			? reverseLookup.ENSName
 			: !validated && lookup.address
 			? nameOrAddress || null
-			: null
+			: null,
 	}
 }

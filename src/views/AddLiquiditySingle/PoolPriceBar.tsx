@@ -9,7 +9,7 @@ function PoolPriceBar({
 	currencies,
 	noLiquidity,
 	poolTokenPercentage,
-	price
+	price,
 }: {
 	currencies: { [field in Field]?: Currency }
 	noLiquidity?: boolean
@@ -25,7 +25,7 @@ function PoolPriceBar({
 					<span className="text text-sm padding-top-sm">
 						{t('%assetA% per %assetB%', {
 							assetA: currencies[Field.CURRENCY_B]?.symbol ?? '',
-							assetB: currencies[Field.CURRENCY_A]?.symbol ?? ''
+							assetB: currencies[Field.CURRENCY_A]?.symbol ?? '',
 						})}
 					</span>
 				</AutoColumn>
@@ -34,7 +34,7 @@ function PoolPriceBar({
 					<span className="text text-sm padding-top-sm">
 						{t('%assetA% per %assetB%', {
 							assetA: currencies[Field.CURRENCY_A]?.symbol ?? '',
-							assetB: currencies[Field.CURRENCY_B]?.symbol ?? ''
+							assetB: currencies[Field.CURRENCY_B]?.symbol ?? '',
 						})}
 					</span>
 				</AutoColumn>

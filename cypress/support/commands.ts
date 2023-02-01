@@ -86,7 +86,7 @@ Cypress.Commands.overwrite('visit', (original, url, options) => {
 			// eslint-disable-next-line no-param-reassign
 			win.ethereum = new CustomizedBridge(signer, provider)
 			win.localStorage.setItem('connectorIdv2', 'injected')
-		}
+		},
 	})
 })
 

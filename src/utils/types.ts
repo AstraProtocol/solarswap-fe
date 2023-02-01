@@ -9,7 +9,7 @@ export type MultiCallResponse<T> = T | null
 export enum FarmAuctionContractStatus {
 	Pending,
 	Open,
-	Close
+	Close,
 }
 
 export interface AuctionsResponse {
@@ -32,5 +32,5 @@ type GetWhitelistedAddressesResponse = [
 		lpToken: string
 		token: string
 	}[],
-	BigNumber
+	BigNumber,
 ]

@@ -39,11 +39,11 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 				console.log(rpcUrl, chainId, ' aaa')
 				const connector = new WalletConnectConnector({
 					url: rpcUrl,
-					chainId: chainId
+					chainId: chainId,
 				})
 				await connector.setup({
 					relayUrl: `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${RELAY_URL}`,
-					metadata
+					metadata,
 				})
 
 				const { Subject, fromEvent } = await import('rxjs')
@@ -92,7 +92,7 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 									onAppDisconnect()
 									this.emit('accountsChanged', [])
 									// this.disconnected$.next(true)
-								}
+								},
 							})
 						// listen for disconnect event
 						fromEvent(this.connector.client, 'session_event', (error: any, payload: any) => {
@@ -108,7 +108,7 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 									console.log('change ee', args)
 									// Handle session events, such as "chainChanged", "accountsChanged", etc.
 								},
-								error: console.warn
+								error: console.warn,
 							})
 
 						this.disconnect = () => this.connector.deactivate()
@@ -132,8 +132,8 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 											reject(
 												new ProviderRpcError({
 													code: 4001,
-													message: 'User rejected the request.'
-												})
+													message: 'User rejected the request.',
+												}),
 											)
 										}
 									} else {
@@ -146,7 +146,7 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 							if (method === 'wallet_switchEthereumChain' || method === 'eth_selectAccounts') {
 								throw new ProviderRpcError({
 									code: ProviderRpcErrorCode.UNSUPPORTED_METHOD,
-									message: `The Provider does not support the requested method: ${method}`
+									message: `The Provider does not support the requested method: ${method}`,
 								})
 							}
 
@@ -160,10 +160,10 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 
 				return {
 					provider: new EthProvider({
-						connector
-					})
+						connector,
+					}),
 				}
-			}
+			},
 		}
 	}
 }

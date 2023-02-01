@@ -14,56 +14,56 @@ describe('Trade', () => {
 			mockUsePairs.mockReturnValue([
 				[
 					PairState.EXISTS,
-					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 				],
 				[
 					PairState.INVALID,
-					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.usdt, '1'))
+					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.usdt, '1')),
 				],
 				[
 					PairState.LOADING,
-					new Pair(new TokenAmount(mainnetTokens.usdt, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+					new Pair(new TokenAmount(mainnetTokens.usdt, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 				],
-				[PairState.EXISTS, null]
+				[PairState.EXISTS, null],
 			])
 
 			const { result } = renderHook(() => {
 				const pairs = Trades.useAllCommonPairs(mainnetTokens.wbnb, mainnetTokens.wasa)
 				return {
-					pairs
+					pairs,
 				}
 			})
 
 			expect(result.current.pairs).toStrictEqual([
-				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 			])
 		})
 		it('should filter out duplicated Pair', () => {
 			mockUsePairs.mockReturnValue([
 				[
 					PairState.EXISTS,
-					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 				],
 				[
 					PairState.EXISTS,
-					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+					new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 				],
 				[
 					PairState.EXISTS,
-					new Pair(new TokenAmount(mainnetTokens.wasa, '1'), new TokenAmount(mainnetTokens.wbnb, '1'))
+					new Pair(new TokenAmount(mainnetTokens.wasa, '1'), new TokenAmount(mainnetTokens.wbnb, '1')),
 				],
-				[PairState.EXISTS, null]
+				[PairState.EXISTS, null],
 			])
 
 			const { result } = renderHook(() => {
 				const pairs = Trades.useAllCommonPairs(mainnetTokens.wbnb, mainnetTokens.wasa)
 				return {
-					pairs
+					pairs,
 				}
 			})
 
 			expect(result.current.pairs).toStrictEqual([
-				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 			])
 		})
 
@@ -93,7 +93,7 @@ describe('Trade', () => {
 
 		it('should call with maxHops 1 with singleHopOnly', () => {
 			const allowPairs = [
-				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 			]
 			const argA = CurrencyAmount.ether('1000000')
 			const argB = mainnetTokens.wasa
@@ -103,8 +103,8 @@ describe('Trade', () => {
 					Trades.useTradeExactIn(argA, argB)
 				},
 				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: true } })
-				}
+					wrapper: createWrapper({ user: { userSingleHopOnly: true } }),
+				},
 			)
 
 			expect(mockTradeExactIn).toBeCalledWith(allowPairs, argA, argB, { maxHops: 1, maxNumResults: 1 })
@@ -116,8 +116,8 @@ describe('Trade', () => {
 					Trades.useTradeExactOut(argB, argA)
 				},
 				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: true } })
-				}
+					wrapper: createWrapper({ user: { userSingleHopOnly: true } }),
+				},
 			)
 
 			expect(mockTradeExactOut).toBeCalledWith(allowPairs, argB, argA, { maxHops: 1, maxNumResults: 1 })
@@ -126,7 +126,7 @@ describe('Trade', () => {
 
 		it('should call with 3 times without singleHopOnly', () => {
 			const allowPairs = [
-				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1'))
+				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
 			]
 			const argA = CurrencyAmount.ether('1000000')
 			const argB = mainnetTokens.wasa
@@ -136,8 +136,8 @@ describe('Trade', () => {
 					Trades.useTradeExactIn(argA, argB)
 				},
 				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: false } })
-				}
+					wrapper: createWrapper({ user: { userSingleHopOnly: false } }),
+				},
 			)
 
 			renderHook(
@@ -146,8 +146,8 @@ describe('Trade', () => {
 					Trades.useTradeExactOut(argB, argA)
 				},
 				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: false } })
-				}
+					wrapper: createWrapper({ user: { userSingleHopOnly: false } }),
+				},
 			)
 
 			expect(mockTradeExactOut).toBeCalledTimes(3)

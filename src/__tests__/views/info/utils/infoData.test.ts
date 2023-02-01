@@ -2,7 +2,7 @@ import {
 	getAmountChange,
 	getPercentChange,
 	getChangeForPeriod,
-	getLpFeesAndApr
+	getLpFeesAndApr,
 } from 'views/Info/utils/infoDataHelpers'
 
 describe('info/utils/infoDataHelpers', () => {
@@ -46,7 +46,7 @@ describe('info/utils/infoDataHelpers', () => {
 		({ valueNow, valueOnePeriodAgo, valueTwoPeriodsAgo, expected }) => {
 			const actual = getChangeForPeriod(valueNow, valueOnePeriodAgo, valueTwoPeriodsAgo)
 			expect(actual).toStrictEqual(expected)
-		}
+		},
 	)
 
 	it.each`
@@ -56,28 +56,28 @@ describe('info/utils/infoDataHelpers', () => {
 	totalFees7d: 0,
 	lpFees24h: 0,
 	lpFees7d: 0,
-	lpApr7d: 0
+	lpApr7d: 0,
 }}
 		${100} | ${0} | ${0} | ${{
 	totalFees24h: 0.25,
 	totalFees7d: 0,
 	lpFees24h: 0.17,
 	lpFees7d: 0,
-	lpApr7d: 0
+	lpApr7d: 0,
 }}
 		${100} | ${1000} | ${0} | ${{
 	totalFees24h: 0.25,
 	totalFees7d: 2.5,
 	lpFees24h: 0.17,
 	lpFees7d: 1.7,
-	lpApr7d: 0
+	lpApr7d: 0,
 }}
 		${1000} | ${10000} | ${1000} | ${{
 	totalFees24h: 2.5,
 	totalFees7d: 25,
 	lpFees24h: 1.7,
 	lpFees7d: 17,
-	lpApr7d: 88.64
+	lpApr7d: 88.64,
 }}
 	`(
 		'getLpFeesAndApr returns expected fees and APR for $volumeUSD, $volumeUSDWeek and $liquidityUSD',
@@ -88,6 +88,6 @@ describe('info/utils/infoDataHelpers', () => {
 				actual[key] = parseFloat(actual[key].toFixed(2))
 			})
 			expect(actual).toStrictEqual(expected)
-		}
+		},
 	)
 })

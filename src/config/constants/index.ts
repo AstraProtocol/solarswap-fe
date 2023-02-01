@@ -4,12 +4,12 @@ import { mainnetTokens, testnetTokens } from './tokens'
 
 export const ROUTER_ADDRESS = {
 	[ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-	[ChainId.TESTNET]: '0x3410255e7E6d2e33D85aC07796048713fAdFEcf3'
+	[ChainId.TESTNET]: '0x3410255e7E6d2e33D85aC07796048713fAdFEcf3',
 }
 
 export const ZAP_ADDRESS = {
 	[ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-	[ChainId.TESTNET]: '0xBE56dE92c45d48C35f4d313a0471F545FA59234d'
+	[ChainId.TESTNET]: '0xBE56dE92c45d48C35f4d313a0471F545FA59234d',
 }
 
 // a list of tokens by chain
@@ -20,7 +20,7 @@ type ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 	[ChainId.MAINNET]: [mainnetTokens.wbnb],
-	[ChainId.TESTNET]: [testnetTokens.wasa, testnetTokens.usdt]
+	[ChainId.TESTNET]: [testnetTokens.wasa, testnetTokens.usdt],
 }
 
 /**
@@ -30,7 +30,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const ADDITIONAL_BASES: {
 	[chainId in ChainId]?: { [tokenAddress: string]: Token[] }
 } = {
-	[ChainId.TESTNET]: {}
+	[ChainId.TESTNET]: {},
 }
 
 /**
@@ -41,25 +41,25 @@ export const ADDITIONAL_BASES: {
 export const CUSTOM_BASES: {
 	[chainId in ChainId]?: { [tokenAddress: string]: Token[] }
 } = {
-	[ChainId.TESTNET]: {}
+	[ChainId.TESTNET]: {},
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
 	[ChainId.MAINNET]: [mainnetTokens.usdt],
-	[ChainId.TESTNET]: [testnetTokens.usdt]
+	[ChainId.TESTNET]: [testnetTokens.usdt],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 	[ChainId.MAINNET]: [mainnetTokens.wbnb, mainnetTokens.usdt],
-	[ChainId.TESTNET]: [testnetTokens.wasa, testnetTokens.usdt]
+	[ChainId.TESTNET]: [testnetTokens.wasa, testnetTokens.usdt],
 }
 
 export const PINNED_PAIRS: {
 	readonly [chainId in ChainId]?: [Token, Token][]
 } = {
-	[ChainId.TESTNET]: [[mainnetTokens.wasa, mainnetTokens.usdt]]
+	[ChainId.TESTNET]: [[mainnetTokens.wasa, mainnetTokens.usdt]],
 }
 
 export const NetworkContextName = 'NETWORK'
@@ -102,7 +102,7 @@ export const BLOCKED_ADDRESSES: string[] = [
 	'0xd882cFc20F52f2599D84b8e8D58C7FB62cfE344b',
 	'0x901bb9583b24D97e995513C6778dc6888AB6870e',
 	'0xA7e5d5A720f06526557c513402f2e6B5fA20b008',
-	'0x8576aCC5C05D6Ce88f4e49bf65BdF0C62F91353C'
+	'0x8576aCC5C05D6Ce88f4e49bf65BdF0C62F91353C',
 ]
 
 export { default as farmsConfig } from './farms'
@@ -127,5 +127,5 @@ export enum ConnectorNames {
 	Blocto = 'blocto',
 	WalletLink = 'walletlink',
 	AstraWallet = 'astrawallet',
-	AstraConnect = 'astraconnect'
+	AstraConnect = 'astraconnect',
 }

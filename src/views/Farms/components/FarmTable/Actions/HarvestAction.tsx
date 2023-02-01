@@ -77,12 +77,12 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
 									moreInfo: (
 										<ToastDescriptionWithTx txHash={receipt.transactionHash}>
 											{t('Your %symbol% earnings have been sent to your wallet!', {
-												symbol: 'ASA'
+												symbol: 'ASA',
 											})}
 										</ToastDescriptionWithTx>
-									)
+									),
 								},
-								{ type: 'success' }
+								{ type: 'success' },
 							)
 							dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
 						}

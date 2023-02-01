@@ -1,17 +1,17 @@
 .notificationDot {
-    display: inline-flex;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10px;
-    height: 10px;
-    pointer-events: none;
-    border: 2px solid;
-    border-radius: 50%;
-    background-color: var(--secondary-color-normal);
-    // background-color: ${({ theme, color }) => theme.colors[color]};
+	display: inline-flex;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 10px;
+	height: 10px;
+	pointer-events: none;
+	border: 2px solid;
+	border-radius: 50%;
+	background-color: var(--secondary-color-normal);
+	// background-color: ${({ theme, color }) => theme.colors[color]};
 }
 
 .hide {
-    display: none;
+	display: none;
 }

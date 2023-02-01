@@ -24,7 +24,7 @@ import Page from 'components/Layout/Page'
 
 enum Fields {
 	TOKEN0 = 0,
-	TOKEN1 = 1
+	TOKEN1 = 1,
 }
 
 // const StyledButton = styled(Button)`
@@ -56,7 +56,7 @@ export default function PoolFinder() {
 			pairState === PairState.EXISTS &&
 				pair &&
 				JSBI.equal(pair.reserve0.raw, JSBI.BigInt(0)) &&
-				JSBI.equal(pair.reserve1.raw, JSBI.BigInt(0))
+				JSBI.equal(pair.reserve1.raw, JSBI.BigInt(0)),
 		)
 
 	const position: TokenAmount | undefined = useTokenBalance(account ?? undefined, pair?.liquidityToken)
@@ -70,7 +70,7 @@ export default function PoolFinder() {
 				setCurrency1(currency)
 			}
 		},
-		[activeField]
+		[activeField],
 	)
 
 	const prerequisiteMessage = (
@@ -89,7 +89,7 @@ export default function PoolFinder() {
 		/>,
 		true,
 		true,
-		'selectCurrencyModal'
+		'selectCurrencyModal',
 	)
 
 	return (

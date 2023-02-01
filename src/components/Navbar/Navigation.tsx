@@ -57,7 +57,7 @@ export default function Navigation({ items }: NavigationProps) {
 		onClick?: Function,
 		locale = false,
 		align = '',
-		hover = 'hover'
+		hover = 'hover',
 	) => {
 		const span = () => (
 			<span
@@ -68,7 +68,7 @@ export default function Navigation({ items }: NavigationProps) {
 					align || 'flex-justify-center flex-align-center',
 					hover,
 					{ 'radius-tl-sm radius-tr-sm': index === 0 },
-					{ 'radius-bl-sm radius-br-sm': index === len - 1 }
+					{ 'radius-bl-sm radius-br-sm': index === len - 1 },
 				)}
 				onClick={onClick as MouseEventHandler<HTMLSpanElement>}
 			>
@@ -121,7 +121,7 @@ export default function Navigation({ items }: NavigationProps) {
 					key={id}
 					className={clsx(styles.item, 'margin-left-lg', 'block-center', 'padding-right-lg radius-lg', {
 						[`padding-left-lg ${styles.background}`]: prefixIcon,
-						'padding-right-md padding-left-xs': !prefixIcon
+						'padding-right-md padding-left-xs': !prefixIcon,
 					})}
 					onClick={event => _showSubMenu(event, id)}
 					onMouseEnter={event => _showSubMenu(event, id)}
@@ -142,13 +142,13 @@ export default function Navigation({ items }: NavigationProps) {
 							<ul
 								className={clsx(styles.submenu, className, 'radius-sm', {
 									[styles.show]: show,
-									[styles.locale]: type === 'locale'
+									[styles.locale]: type === 'locale',
 								})}
 							>
 								{sub1?.map((menu, index) => (
 									<li
 										className={clsx({
-											'border border-bottom-base': index !== sub1.length - 1
+											'border border-bottom-base': index !== sub1.length - 1,
 										})}
 										key={menu.id}
 										// onClick={event => _showSubMenu(event, [id, menu.id])}
@@ -161,12 +161,12 @@ export default function Navigation({ items }: NavigationProps) {
 											menu.onClick,
 											type === 'locale',
 											menu.align,
-											menu.hover
+											menu.hover,
 										)}
 										{menu.submenus && (
 											<ul
 												className={clsx(styles.submenu2, 'contrast-bg-color-50', 'radius-xs', {
-													[styles.show]: menu.show
+													[styles.show]: menu.show,
 												})}
 											>
 												{menu.submenus.map(sub2 => (
@@ -177,7 +177,7 @@ export default function Navigation({ items }: NavigationProps) {
 															index,
 															sub1.length,
 															menu.onClick,
-															true
+															true,
 														)}
 													</li>
 												))}

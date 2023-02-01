@@ -70,7 +70,7 @@ import clsx from 'clsx'
 export default function AddressInputPanel({
 	id,
 	value,
-	onChange
+	onChange,
 }: {
 	id?: string
 	// the typed string value
@@ -90,7 +90,7 @@ export default function AddressInputPanel({
 			const withoutSpaces = input.replace(/\s+/g, '')
 			onChange(withoutSpaces)
 		},
-		[onChange]
+		[onChange],
 	)
 
 	const error = Boolean(value.length > 0 && !loading && !address)
@@ -101,7 +101,7 @@ export default function AddressInputPanel({
 				className={clsx(
 					styles.containerRow,
 					'flex col border border-base radius-lg padding-md',
-					error && styles.containerRowError
+					error && styles.containerRowError,
 				)}
 			>
 				<Row style={{ justifyContent: 'space-between' }}>

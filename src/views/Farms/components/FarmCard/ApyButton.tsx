@@ -28,7 +28,7 @@ const ApyButton: React.FC<ApyButtonProps> = ({
 	apr,
 	multiplier,
 	displayApr,
-	addLiquidityUrl
+	addLiquidityUrl,
 }) => {
 	const { t } = useTranslation()
 	const lpPrice = useLpTokenPrice(lpSymbol)
@@ -45,7 +45,7 @@ const ApyButton: React.FC<ApyButtonProps> = ({
 			displayApr={displayApr}
 			linkHref={addLiquidityUrl}
 			isFarm
-		/>
+		/>,
 	)
 
 	const handleClickButton = (event): void => {

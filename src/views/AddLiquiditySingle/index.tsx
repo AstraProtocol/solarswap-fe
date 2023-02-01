@@ -63,7 +63,7 @@ export default function AddLiquiditySingle() {
 	const oneCurrencyIsWETH = Boolean(
 		chainId &&
 			((currencyA && currencyEquals(currencyA, WETH[chainId])) ||
-				(currencyB && currencyEquals(currencyB, WETH[chainId])))
+				(currencyB && currencyEquals(currencyB, WETH[chainId]))),
 	)
 
 	const expertMode = useIsExpertMode()
@@ -86,7 +86,7 @@ export default function AddLiquiditySingle() {
 		poolTokenPercentage,
 		priceImpactWithoutFee,
 		priceImpactSeverity,
-		error
+		error,
 	} = useDerivedSingleMintInfo(tokenIn, tokenOut)
 
 	const { onFieldAInput, onFieldBInput } = useMintActionHandlers(noLiquidity)
@@ -108,7 +108,7 @@ export default function AddLiquiditySingle() {
 	}>({
 		attemptingTxn: false,
 		liquidityErrorMessage: undefined,
-		txHash: undefined
+		txHash: undefined,
 	})
 
 	// txn values
@@ -118,7 +118,7 @@ export default function AddLiquiditySingle() {
 	// get formatted amounts
 	const formattedAmounts = {
 		[independentField]: typedValue,
-		[dependentField]: noLiquidity ? otherTypedValue : parsedAmounts[dependentField]?.toSignificant(6) ?? ''
+		[dependentField]: noLiquidity ? otherTypedValue : parsedAmounts[dependentField]?.toSignificant(6) ?? '',
 	}
 
 	// get the max amounts user can add
@@ -126,20 +126,20 @@ export default function AddLiquiditySingle() {
 		(accumulator, field) => {
 			return {
 				...accumulator,
-				[field]: maxAmountSpend(currencyBalances[field])
+				[field]: maxAmountSpend(currencyBalances[field]),
 			}
 		},
-		{}
+		{},
 	)
 
 	const atMaxAmounts: { [field in Field]?: TokenAmount } = [Field.CURRENCY_A, Field.CURRENCY_B].reduce(
 		(accumulator, field) => {
 			return {
 				...accumulator,
-				[field]: maxAmounts[field]?.equalTo(parsedAmounts[field] ?? '0')
+				[field]: maxAmounts[field]?.equalTo(parsedAmounts[field] ?? '0'),
 			}
 		},
-		{}
+		{},
 	)
 
 	// check whether the user has approved the router on the tokens
@@ -179,7 +179,7 @@ export default function AddLiquiditySingle() {
 				pair.liquidityToken.address,
 				account,
 				1, // token min
-				deadline.toHexString()
+				deadline.toHexString(),
 			]
 			value = BigNumber.from(amountsMin.toString())
 		} else {
@@ -193,7 +193,7 @@ export default function AddLiquiditySingle() {
 				pair.liquidityToken.address,
 				account,
 				1,
-				deadline.toHexString()
+				deadline.toHexString(),
 			]
 			value = null
 		}
@@ -204,7 +204,7 @@ export default function AddLiquiditySingle() {
 				method(...args, {
 					...(value ? { value } : {}),
 					gasLimit: calculateGasMargin(estimatedGasLimit),
-					gasPrice
+					gasPrice,
 				}).then(response => {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 
@@ -213,9 +213,9 @@ export default function AddLiquiditySingle() {
 							currencies[Field.CURRENCY_A]?.symbol
 						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) || 0} ${
 							currencies[Field.CURRENCY_B]?.symbol
-						}`
+						}`,
 					})
-				})
+				}),
 			)
 			.catch(err => {
 				if (err && err.code !== 4001) {
@@ -226,7 +226,7 @@ export default function AddLiquiditySingle() {
 					attemptingTxn: false,
 					liquidityErrorMessage:
 						err && err.code !== 4001 ? `Add Liquidity failed: ${err.message}` : undefined,
-					txHash: undefined
+					txHash: undefined,
 				})
 			})
 	}
@@ -235,7 +235,7 @@ export default function AddLiquiditySingle() {
 		amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(6) ?? '',
 		symbolA: currencies[Field.CURRENCY_A]?.symbol ?? '',
 		amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(6) ?? '',
-		symbolB: currencies[Field.CURRENCY_B]?.symbol ?? ''
+		symbolB: currencies[Field.CURRENCY_B]?.symbol ?? '',
 	})
 
 	const handleCurrencyASelect = useCallback(
@@ -249,7 +249,7 @@ export default function AddLiquiditySingle() {
 				router.replace(`/add-single/${newCurrencyIdA}`, undefined, { shallow: true })
 			}
 		},
-		[currencyIdB, router, currencyIdA]
+		[currencyIdB, router, currencyIdA],
 	)
 	const handleCurrencyBSelect = useCallback(
 		(currencyB_: Currency) => {
@@ -264,7 +264,7 @@ export default function AddLiquiditySingle() {
 				router.replace(`/add-single/${currencyIdA || 'ASA'}/${newCurrencyIdB}`, undefined, { shallow: true })
 			}
 		},
-		[currencyIdA, router, currencyIdB]
+		[currencyIdA, router, currencyIdB],
 	)
 
 	const handleDismissConfirmation = useCallback(() => {
@@ -297,7 +297,7 @@ export default function AddLiquiditySingle() {
 		/>,
 		true,
 		true,
-		'addLiquidityModal'
+		'addLiquidityModal',
 	)
 
 	return (
@@ -308,7 +308,7 @@ export default function AddLiquiditySingle() {
 						title={t('Add Liquidity')}
 						subtitle={t('Add liquidity to receive LP tokens')}
 						helper={t(
-							'Liquidity providers earn a 0.2% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.'
+							'Liquidity providers earn a 0.2% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.',
 						)}
 						backTo="/liquidity"
 					/>
@@ -415,12 +415,12 @@ export default function AddLiquiditySingle() {
 															{approvalA === ApprovalState.PENDING ? (
 																<Dots>
 																	{t('Enabling %asset%', {
-																		asset: currencies[Field.CURRENCY_A]?.symbol
+																		asset: currencies[Field.CURRENCY_A]?.symbol,
 																	})}
 																</Dots>
 															) : (
 																t('Enable %asset%', {
-																	asset: currencies[Field.CURRENCY_A]?.symbol
+																	asset: currencies[Field.CURRENCY_A]?.symbol,
 																})
 															)}
 														</NormalButton>
@@ -435,12 +435,12 @@ export default function AddLiquiditySingle() {
 															{approvalB === ApprovalState.PENDING ? (
 																<Dots>
 																	{t('Enabling %asset%', {
-																		asset: currencies[Field.CURRENCY_B]?.symbol
+																		asset: currencies[Field.CURRENCY_B]?.symbol,
 																	})}
 																</Dots>
 															) : (
 																t('Enable %asset%', {
-																	asset: currencies[Field.CURRENCY_B]?.symbol
+																	asset: currencies[Field.CURRENCY_B]?.symbol,
 																})
 															)}
 														</NormalButton>
@@ -458,7 +458,7 @@ export default function AddLiquiditySingle() {
 												setLiquidityState({
 													attemptingTxn: false,
 													liquidityErrorMessage: undefined,
-													txHash: undefined
+													txHash: undefined,
 												})
 												onPresentAddLiquidityModal()
 											}

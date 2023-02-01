@@ -8,7 +8,7 @@ import {
 	getClaimRefundContract,
 	getErc721Contract,
 	getChainlinkOracleContract,
-	getErc721CollectionContract
+	getErc721CollectionContract,
 } from 'utils/contractHelpers'
 import { getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -20,7 +20,7 @@ import {
 	IfoPool,
 	Multicall,
 	Weth,
-	Erc721collection
+	Erc721collection,
 } from 'config/abi/types'
 
 // Imports below migrated from Exchange useContract.ts
@@ -57,7 +57,7 @@ export const useERC20 = (address: string, withSignerIfPossible = true) => {
 	const { library, account } = useActiveWeb3React()
 	return useMemo(
 		() => getBep20Contract(address, withSignerIfPossible ? getProviderOrSigner(library, account) : null),
-		[account, address, library, withSignerIfPossible]
+		[account, address, library, withSignerIfPossible],
 	)
 }
 
@@ -174,7 +174,7 @@ export const useChainlinkOracleContract = (withSignerIfPossible = true) => {
 	const { library, account } = useActiveWeb3React()
 	return useMemo(
 		() => getChainlinkOracleContract(withSignerIfPossible ? getProviderOrSigner(library, account) : null),
-		[account, library, withSignerIfPossible]
+		[account, library, withSignerIfPossible],
 	)
 }
 
@@ -227,15 +227,15 @@ export const useChainlinkOracleContract = (withSignerIfPossible = true) => {
 // }
 
 export const useErc721CollectionContract = (
-	collectionAddress: string
+	collectionAddress: string,
 ): { reader: Erc721collection; signer: Erc721collection } => {
 	const { library, account } = useActiveWeb3React()
 	return useMemo(
 		() => ({
 			reader: getErc721CollectionContract(null, collectionAddress),
-			signer: getErc721CollectionContract(getProviderOrSigner(library, account), collectionAddress)
+			signer: getErc721CollectionContract(getProviderOrSigner(library, account), collectionAddress),
 		}),
-		[account, library, collectionAddress]
+		[account, library, collectionAddress],
 	)
 }
 
@@ -245,7 +245,7 @@ export const useErc721CollectionContract = (
 function useContract<T extends Contract = Contract>(
 	address: string | undefined,
 	ABI: any,
-	withSignerIfPossible = true
+	withSignerIfPossible = true,
 ): T | null {
 	const { library, account } = useActiveWeb3React()
 

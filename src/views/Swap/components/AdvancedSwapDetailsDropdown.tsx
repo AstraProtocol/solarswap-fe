@@ -3,7 +3,6 @@ import useLastTruthy from 'hooks/useLast'
 import { AdvancedSwapDetails, AdvancedSwapDetailsProps } from './AdvancedSwapDetails'
 import styles from './styles.module.scss'
 
-
 export default function AdvancedSwapDetailsDropdown({ trade, ...rest }: AdvancedSwapDetailsProps) {
 	const lastTrade = useLastTruthy(trade)
 

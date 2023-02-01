@@ -13,7 +13,7 @@ import {
 	getPointCenterIfoAddress,
 	getClaimRefundAddress,
 	getChainlinkOracleAddress,
-	getMulticallAddress
+	getMulticallAddress,
 } from 'utils/addressHelpers'
 
 // ABI
@@ -44,7 +44,7 @@ import type {
 	ClaimRefund,
 	Multicall,
 	Erc721collection,
-	PointCenterIfo
+	PointCenterIfo,
 } from 'config/abi/types'
 
 const getContract = (abi: any, address: string, signer?: Signer | Provider) => {

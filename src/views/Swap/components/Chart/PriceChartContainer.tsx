@@ -30,7 +30,7 @@ const PriceChartContainer: React.FC<PriceChartContainerProps> = ({
 	isChartDisplayed,
 	isMobile,
 	isFullWidthContainer = false,
-	currentSwapPrice
+	currentSwapPrice,
 }) => {
 	const token0Address = getTokenAddress(inputCurrencyId)
 	const token1Address = getTokenAddress(outputCurrencyId)

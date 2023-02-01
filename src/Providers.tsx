@@ -22,7 +22,7 @@ const Providers: React.FC<Props> = ({ children, store }: Props) => {
 					<LanguageProvider>
 						<SWRConfig
 							value={{
-								use: [fetchStatusMiddleware]
+								use: [fetchStatusMiddleware],
 							}}
 						>
 							<ModalProvider>{children}</ModalProvider>

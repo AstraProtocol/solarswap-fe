@@ -5,14 +5,14 @@ import { CHAIN_ID } from './constants/networks'
 
 BigNumber.config({
 	EXPONENTIAL_AT: 1000,
-	DECIMAL_PLACES: 80
+	DECIMAL_PLACES: 80,
 })
 
 export const ASA_BLOCK_TIME = 3
 
 export const BASE_ASTRA_EXPLORER_URLS = {
 	[ChainId.MAINNET]: process.env.NEXT_PUBLIC_EXPLORER,
-	[ChainId.TESTNET]: process.env.NEXT_PUBLIC_EXPLORER
+	[ChainId.TESTNET]: process.env.NEXT_PUBLIC_EXPLORER,
 }
 
 // ASA_PER_BLOCK details

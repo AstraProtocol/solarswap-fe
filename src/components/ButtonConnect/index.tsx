@@ -33,7 +33,7 @@ export default function ButtonConnect({ classes = '' }) {
 				other: clsx('text-base text-bold', classes),
 				color: 'contrast-color-100',
 				background: 'primary-bg-color-normal',
-				boxShadowHoverColor: 'rgb(227 17 80 / 42%)'
+				boxShadowHoverColor: 'rgb(227 17 80 / 42%)',
 			}}
 			onClick={_connectWallet}
 		>

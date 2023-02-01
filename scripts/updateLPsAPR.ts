@@ -44,7 +44,7 @@ const getBlockAtTimestamp = async (timestamp: number) => {
           number
         }
       }`,
-			{ timestampGreater: timestamp, timestampLess: timestamp + 600 }
+			{ timestampGreater: timestamp, timestampLess: timestamp + 600 },
 		)
 		return parseInt(blocks[0].number, 10)
 	} catch (error) {
@@ -69,7 +69,7 @@ const getAprsForFarmGroup = async (addresses: string[], blockWeekAgo: number): P
 					}
 				}
 			`,
-			{ addresses, blockWeekAgo }
+			{ addresses, blockWeekAgo },
 		)
 		const aprs: AprMap = farmsAtLatestBlock.reduce((aprMap, farm) => {
 			const farmWeekAgo = farmsOneWeekAgo.find(oldFarm => oldFarm.id === farm.id)
@@ -87,7 +87,7 @@ const getAprsForFarmGroup = async (addresses: string[], blockWeekAgo: number): P
 			}
 			return {
 				...aprMap,
-				[farm.id]: lpApr.decimalPlaces(2).toNumber()
+				[farm.id]: lpApr.decimalPlaces(2).toNumber(),
 			}
 		}, {})
 		return aprs

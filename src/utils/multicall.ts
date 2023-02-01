@@ -17,7 +17,7 @@ const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
 
 	const calldata = calls.map(call => ({
 		target: call.address.toLowerCase(),
-		callData: itf.encodeFunctionData(call.name, call.params)
+		callData: itf.encodeFunctionData(call.name, call.params),
 	}))
 	const { returnData } = await multi.aggregate(calldata)
 
@@ -35,7 +35,7 @@ const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
 export const multicallv2 = async <T = any>(
 	abi: any[],
 	calls: Call[],
-	options: MulticallOptions = { requireSuccess: true }
+	options: MulticallOptions = { requireSuccess: true },
 ): Promise<T> => {
 	const { requireSuccess } = options
 	const multi = getMulticallContract()
@@ -43,7 +43,7 @@ export const multicallv2 = async <T = any>(
 
 	const calldata = calls.map(call => ({
 		target: call.address.toLowerCase(),
-		callData: itf.encodeFunctionData(call.name, call.params)
+		callData: itf.encodeFunctionData(call.name, call.params),
 	}))
 
 	const returnData = await multi.tryAggregate(requireSuccess, calldata)

@@ -9,11 +9,11 @@ import { Form, NormalButton } from '@astraprotocol/astra-ui'
 enum SlippageError {
 	InvalidInput = 'InvalidInput',
 	RiskyLow = 'RiskyLow',
-	RiskyHigh = 'RiskyHigh'
+	RiskyHigh = 'RiskyHigh',
 }
 
 enum DeadlineError {
-	InvalidInput = 'InvalidInput'
+	InvalidInput = 'InvalidInput',
 }
 
 const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`) // match escaped "." characters via in a non-capturing group
@@ -86,7 +86,7 @@ const SlippageTabs = () => {
 					<span className="text text-base text-bold  margin-right-xs">{t('Slippage Tolerance')}</span>
 					<QuestionHelper
 						text={t(
-							'Setting a high slippage tolerance can help transactions succeed, but you may not get such a good price. Use with caution.'
+							'Setting a high slippage tolerance can help transactions succeed, but you may not get such a good price. Use with caution.',
 						)}
 						placement="top"
 					/>
@@ -125,7 +125,7 @@ const SlippageTabs = () => {
 						classes={{
 							wapper: 'margin-left-xs',
 							option: 'x',
-							inputWrapperPadding: 'padding-sm'
+							inputWrapperPadding: 'padding-sm',
 						}}
 						inputMode="decimal"
 						pattern="^[0-9]*[.,]?[0-9]{0,2}$"
@@ -169,7 +169,7 @@ const SlippageTabs = () => {
 						pattern="^[0-9]+$"
 						classes={{
 							inputWrapperPadding: 'padding-top-xs padding-bottom-xs padding-left-md padding-right-md',
-							option: '.'
+							option: '.',
 						}}
 						// color={deadlineError ? 'red' : undefined}
 						// isWarning={!!deadlineError}

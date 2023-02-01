@@ -15,13 +15,13 @@ import {
 	addTokenPoolAddresses,
 	updateTokenChartData,
 	updateTokenPriceData,
-	updateTokenTransactions
+	updateTokenTransactions,
 } from './actions'
 
 const initialState: InfoState = {
 	protocol: {},
 	pools: { byAddress: {} },
-	tokens: { byAddress: {} }
+	tokens: { byAddress: {} },
 }
 
 export default createReducer(initialState, builder =>
@@ -41,7 +41,7 @@ export default createReducer(initialState, builder =>
 			pools.forEach(poolData => {
 				state.pools.byAddress[poolData.address] = {
 					...state.pools.byAddress[poolData.address],
-					data: poolData
+					data: poolData,
 				}
 			})
 		})
@@ -51,7 +51,7 @@ export default createReducer(initialState, builder =>
 					state.pools.byAddress[address] = {
 						data: undefined,
 						chartData: undefined,
-						transactions: undefined
+						transactions: undefined,
 					}
 				}
 			})
@@ -67,7 +67,7 @@ export default createReducer(initialState, builder =>
 			tokens.forEach(tokenData => {
 				state.tokens.byAddress[tokenData.address] = {
 					...state.tokens.byAddress[tokenData.address],
-					data: tokenData
+					data: tokenData,
 				}
 			})
 		})
@@ -79,7 +79,7 @@ export default createReducer(initialState, builder =>
 						data: undefined,
 						chartData: undefined,
 						priceData: {},
-						transactions: undefined
+						transactions: undefined,
 					}
 				}
 			})
@@ -101,9 +101,9 @@ export default createReducer(initialState, builder =>
 					priceData: {
 						...state.tokens.byAddress[tokenAddress]?.priceData,
 						[secondsInterval]: priceData,
-						oldestFetchedTimestamp
-					}
+						oldestFetchedTimestamp,
+					},
 				}
-			}
-		)
+			},
+		),
 )

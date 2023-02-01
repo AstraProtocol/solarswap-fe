@@ -21,7 +21,7 @@ export function useCallWithGasPrice() {
 			contract: Contract,
 			methodName: string,
 			methodArgs: any[] = [],
-			overrides: CallOverrides = null
+			overrides: CallOverrides = null,
 		): Promise<TransactionResponse> => {
 			Sentry.addBreadcrumb({
 				type: 'Transaction',
@@ -30,15 +30,15 @@ export function useCallWithGasPrice() {
 					contractAddress: contract.address,
 					methodName,
 					methodArgs,
-					overrides
-				}
+					overrides,
+				},
 			})
 			const contractMethod = get(contract, methodName)
 			const hasManualGasPriceOverride = overrides?.gasPrice
 
 			const tx = await contractMethod(
 				...methodArgs,
-				hasManualGasPriceOverride ? { ...overrides } : { ...overrides, gasPrice }
+				hasManualGasPriceOverride ? { ...overrides } : { ...overrides, gasPrice },
 			)
 
 			if (tx) {
@@ -49,14 +49,14 @@ export function useCallWithGasPrice() {
 						hash: tx.hash,
 						from: tx.from,
 						gasLimit: tx.gasLimit?.toString(),
-						nonce: tx.nonce
-					}
+						nonce: tx.nonce,
+					},
 				})
 			}
 
 			return tx
 		},
-		[gasPrice]
+		[gasPrice],
 	)
 
 	return { callWithGasPrice }

@@ -13,7 +13,7 @@ export default function FormattedPriceImpact({ priceImpact }: { priceImpact?: Pe
 			className={clsx('text text-sm', {
 				['alert-color-success']: severity == 0,
 				['alert-color-warning']: severity == 2,
-				['alert-color-failure']: severity == 3 || severity == 4
+				['alert-color-failure']: severity == 3 || severity == 4,
 			})}
 		>
 			{priceImpact ? (priceImpact.lessThan(ONE_BIPS) ? '<0.01%' : `${priceImpact.toFixed(2)}%`) : '-'}

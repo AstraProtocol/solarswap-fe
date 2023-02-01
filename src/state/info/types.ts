@@ -23,7 +23,7 @@ export interface PriceChartEntry {
 export enum TransactionType {
 	SWAP,
 	MINT,
-	BURN
+	BURN,
 }
 
 export type Transaction = {

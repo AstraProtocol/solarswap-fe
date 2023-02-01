@@ -15,8 +15,8 @@ const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
 				fallback: {
 					totalTx30Days,
 					addressCount30Days,
-					tvl
-				}
+					tvl,
+				},
 			}}
 		>
 			<Swap />
@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	const results = {
 		totalTx30Days: txCount,
 		addressCount30Days: addressCount,
-		tvl
+		tvl,
 	}
 
 	// if (process.env.SF_HEADER) {
@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		try {
 			const result = await bitQueryServerClient.request(usersQuery, {
 				since: days30Ago.toISOString(),
-				till: new Date().toISOString()
+				till: new Date().toISOString(),
 			})
 			if (result?.ethereum?.dexTrades?.[0]?.count) {
 				results.addressCount30Days = result.ethereum.dexTrades[0].count
@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: results,
-		revalidate: 60 * 60 * 24 * 30 // 30 days
+		revalidate: 60 * 60 * 24 * 30, // 30 days
 	}
 }
 

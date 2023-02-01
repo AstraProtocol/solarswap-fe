@@ -8,7 +8,7 @@ import { Flex, FlexGap } from './Layout/Flex'
 const formatOptions = {
 	notation: 'standard' as formatAmountNotation,
 	displayThreshold: 0.001,
-	tokenPrecision: true
+	tokenPrecision: true,
 }
 
 interface TokenDisplayProps {

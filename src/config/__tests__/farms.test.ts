@@ -28,10 +28,10 @@ describe('Config farms', () => {
 		const token1Address = (await lpContract.token1()).toLowerCase()
 
 		expect(
-			token0Address === tokenAddress.toLowerCase() || token0Address === quoteTokenAddress.toLowerCase()
+			token0Address === tokenAddress.toLowerCase() || token0Address === quoteTokenAddress.toLowerCase(),
 		).toBeTruthy()
 		expect(
-			token1Address === tokenAddress.toLowerCase() || token1Address === quoteTokenAddress.toLowerCase()
+			token1Address === tokenAddress.toLowerCase() || token1Address === quoteTokenAddress.toLowerCase(),
 		).toBeTruthy()
 	})
 

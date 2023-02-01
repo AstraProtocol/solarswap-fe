@@ -10,7 +10,7 @@ describe('mint reducer', () => {
 		store = createStore(reducer, {
 			independentField: Field.CURRENCY_A,
 			typedValue: '',
-			otherTypedValue: ''
+			otherTypedValue: '',
 		})
 	})
 
@@ -20,7 +20,7 @@ describe('mint reducer', () => {
 			expect(store.getState()).toEqual({
 				independentField: Field.CURRENCY_A,
 				typedValue: '1.0',
-				otherTypedValue: ''
+				otherTypedValue: '',
 			})
 		})
 		it('clears other value', () => {
@@ -29,7 +29,7 @@ describe('mint reducer', () => {
 			expect(store.getState()).toEqual({
 				independentField: Field.CURRENCY_B,
 				typedValue: '1.0',
-				otherTypedValue: ''
+				otherTypedValue: '',
 			})
 		})
 	})

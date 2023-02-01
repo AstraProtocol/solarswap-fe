@@ -7,7 +7,7 @@ export const getDerivedPrices = (tokenAddress: string, blocks: Block[]) =>
     t${block.timestamp}:token(id:"${tokenAddress}", block: { number: ${block.number} }) { 
         derivedBNB
       }
-    `
+    `,
 	)
 
 export const getDerivedPricesQueryConstructor = (subqueries: string[]) => {

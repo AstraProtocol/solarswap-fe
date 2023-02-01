@@ -15,7 +15,7 @@ export const getInterestBreakdown = ({
 	apr,
 	earningTokenPrice,
 	compoundFrequency = 1,
-	performanceFee = 0
+	performanceFee = 0,
 }: {
 	principalInUSD: number
 	apr: number
@@ -64,7 +64,7 @@ export const getPrincipalForInterest = (
 	interest: number,
 	apr: number,
 	compoundingFrequency: number,
-	performanceFee = 0
+	performanceFee = 0,
 ) => {
 	return DAYS_TO_CALCULATE_AGAINST.map(days => {
 		const apyAsDecimal = getApy(apr, compoundingFrequency, days, performanceFee)

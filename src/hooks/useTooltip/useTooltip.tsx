@@ -13,7 +13,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
 		trigger = 'hover',
 		arrowPadding = 16,
 		tooltipPadding = { left: 16, right: 16 },
-		tooltipOffset = [0, 10]
+		tooltipOffset = [0, 10],
 	} = options
 	const [targetElement, setTargetElement] = useState<HTMLElement | null>(null)
 	const [tooltipElement, setTooltipElement] = useState<HTMLElement | null>(null)
@@ -49,7 +49,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
 				hide()
 			}
 		},
-		[tooltipElement, trigger]
+		[tooltipElement, trigger],
 	)
 
 	const showTooltip = useCallback(
@@ -68,7 +68,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
 				}
 			}
 		},
-		[tooltipElement, targetElement, trigger]
+		[tooltipElement, targetElement, trigger],
 	)
 
 	const toggleTooltip = useCallback(
@@ -76,7 +76,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
 			e.stopPropagation()
 			setVisible(!visible)
 		},
-		[visible]
+		[visible],
 	)
 
 	// Trigger = hover
@@ -167,11 +167,11 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
 		modifiers: [
 			{
 				name: 'arrow',
-				options: { element: arrowElement, padding: arrowPadding }
+				options: { element: arrowElement, padding: arrowPadding },
 			},
 			{ name: 'offset', options: { offset: tooltipOffset } },
-			{ name: 'preventOverflow', options: { padding: tooltipPadding } }
-		]
+			{ name: 'preventOverflow', options: { padding: tooltipPadding } },
+		],
 	})
 
 	const tooltip = (
@@ -196,7 +196,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
 	return {
 		targetRef: setTargetElement,
 		tooltip: tooltipInPortal ?? tooltip,
-		tooltipVisible: visible
+		tooltipVisible: visible,
 	}
 }
 

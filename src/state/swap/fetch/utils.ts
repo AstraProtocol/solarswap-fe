@@ -20,7 +20,7 @@ export const getIdsByTimeWindow = ({
 	pairAddress,
 	pairLastId,
 	timeWindow,
-	idsCount
+	idsCount,
 }: getPairHoursIdsByTimeWindowParams) => {
 	const pairLastIdAsNumber = Number(pairLastId)
 	if (timeWindow === PairDataTimeWindowEnum.DAY) {
@@ -31,7 +31,7 @@ export const getIdsByTimeWindow = ({
 
 export const pairHasEnoughLiquidity = (
 	data: PairHoursDatasResponse | PairDayDatasResponse | null,
-	timeWindow: PairDataTimeWindowEnum
+	timeWindow: PairDataTimeWindowEnum,
 ) => {
 	const liquidityThreshold = 0
 	switch (timeWindow) {
@@ -42,7 +42,7 @@ export const pairHasEnoughLiquidity = (
 				(totalLiquidity, fetchPairEntry) => {
 					return totalLiquidity + parseFloat(fetchPairEntry.reserveUSD)
 				},
-				0
+				0,
 			)
 			console.log('totalUSD :>> ', totalUSD)
 			return totalUSD / amountOfDataPoints >= liquidityThreshold

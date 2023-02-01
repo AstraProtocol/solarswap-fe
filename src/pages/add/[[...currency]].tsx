@@ -8,7 +8,7 @@ const OLD_PATH_STRUCTURE = /^(0x[a-fA-F0-9]{40}|ASA)-(0x[a-fA-F0-9]{40}|ASA)$/
 export const getStaticPaths: GetStaticPaths = () => {
 	return {
 		paths: [{ params: { currency: [] } }],
-		fallback: true
+		fallback: true,
 	}
 }
 
@@ -21,8 +21,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		return {
 			redirect: {
 				statusCode: 301,
-				destination: `/add/${match[1]}/${match[2]}`
-			}
+				destination: `/add/${match[1]}/${match[2]}`,
+			},
 		}
 	}
 
@@ -30,12 +30,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		return {
 			redirect: {
 				statusCode: 303,
-				destination: `/add/${currencyIdA}`
-			}
+				destination: `/add/${currencyIdA}`,
+			},
 		}
 	}
 
 	return {
-		props: {}
+		props: {},
 	}
 }

@@ -14,94 +14,94 @@ describe('hooks', () => {
 			expect(
 				queryParametersToSwapState(
 					parse(
-						'inputCurrency=BNB&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f&exactAmount=20.5&exactField=outPUT'
-					)
-				)
+						'inputCurrency=ASA&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f&exactAmount=20.5&exactField=outPUT',
+					),
+				),
 			).toEqual({
 				[Field.OUTPUT]: { currencyId: '0x6B175474E89094C44Da98b954EedeAC495271d0F' },
-				[Field.INPUT]: { currencyId: 'BNB' },
+				[Field.INPUT]: { currencyId: 'ASA' },
 				typedValue: '20.5',
 				independentField: Field.OUTPUT,
 				pairDataById: {},
 				derivedPairDataById: {},
-				recipient: null
+				recipient: null,
 			})
 		})
 
-		test('should return BNB BUSD pair by default', () => {
+		test('should return ASA USDT pair by default', () => {
 			expect(queryParametersToSwapState(parse(''))).toEqual({
 				[Field.OUTPUT]: { currencyId: DEFAULT_OUTPUT_CURRENCY },
-				[Field.INPUT]: { currencyId: 'BNB' },
+				[Field.INPUT]: { currencyId: 'ASA' },
 				typedValue: '',
 				independentField: Field.INPUT,
 				pairDataById: {},
 				derivedPairDataById: {},
-				recipient: null
+				recipient: null,
 			})
 		})
 
-		test('does not duplicate BNB for invalid output token', () => {
+		test('does not duplicate ASA for invalid output token', () => {
 			expect(queryParametersToSwapState(parse('outputCurrency=invalid'))).toEqual({
 				[Field.INPUT]: { currencyId: '' },
-				[Field.OUTPUT]: { currencyId: 'BNB' },
+				[Field.OUTPUT]: { currencyId: 'ASA' },
 				typedValue: '',
 				independentField: Field.INPUT,
 				pairDataById: {},
 				derivedPairDataById: {},
-				recipient: null
+				recipient: null,
 			})
 		})
 
-		test('output BNB only', () => {
+		test('output ASA only', () => {
 			expect(queryParametersToSwapState(parse('outputCurrency=bnb&exactAmount=20.5'))).toEqual({
-				[Field.OUTPUT]: { currencyId: 'BNB' },
+				[Field.OUTPUT]: { currencyId: 'ASA' },
 				[Field.INPUT]: { currencyId: '' },
 				typedValue: '20.5',
 				independentField: Field.INPUT,
 				pairDataById: {},
 				derivedPairDataById: {},
-				recipient: null
+				recipient: null,
 			})
 		})
 
 		test('invalid recipient', () => {
-			expect(queryParametersToSwapState(parse('outputCurrency=BNB&exactAmount=20.5&recipient=abc'))).toEqual({
-				[Field.OUTPUT]: { currencyId: 'BNB' },
+			expect(queryParametersToSwapState(parse('outputCurrency=ASA&exactAmount=20.5&recipient=abc'))).toEqual({
+				[Field.OUTPUT]: { currencyId: 'ASA' },
 				[Field.INPUT]: { currencyId: '' },
 				typedValue: '20.5',
 				independentField: Field.INPUT,
 				pairDataById: {},
 				derivedPairDataById: {},
-				recipient: null
+				recipient: null,
 			})
 		})
 
 		test('valid recipient', () => {
 			expect(
 				queryParametersToSwapState(
-					parse('outputCurrency=BNB&exactAmount=20.5&recipient=0x0fF2D1eFd7A57B7562b2bf27F3f37899dB27F4a5')
-				)
+					parse('outputCurrency=ASA&exactAmount=20.5&recipient=0x0fF2D1eFd7A57B7562b2bf27F3f37899dB27F4a5'),
+				),
 			).toEqual({
-				[Field.OUTPUT]: { currencyId: 'BNB' },
+				[Field.OUTPUT]: { currencyId: 'ASA' },
 				[Field.INPUT]: { currencyId: '' },
 				typedValue: '20.5',
 				independentField: Field.INPUT,
 				pairDataById: {},
 				derivedPairDataById: {},
-				recipient: '0x0fF2D1eFd7A57B7562b2bf27F3f37899dB27F4a5'
+				recipient: '0x0fF2D1eFd7A57B7562b2bf27F3f37899dB27F4a5',
 			})
 		})
 		test('accepts any recipient', () => {
 			expect(
-				queryParametersToSwapState(parse('outputCurrency=BNB&exactAmount=20.5&recipient=bob.argent.xyz'))
+				queryParametersToSwapState(parse('outputCurrency=ASA&exactAmount=20.5&recipient=bob.argent.xyz')),
 			).toEqual({
-				[Field.OUTPUT]: { currencyId: 'BNB' },
+				[Field.OUTPUT]: { currencyId: 'ASA' },
 				[Field.INPUT]: { currencyId: '' },
 				typedValue: '20.5',
 				independentField: Field.INPUT,
 				pairDataById: {},
 				derivedPairDataById: {},
-				recipient: 'bob.argent.xyz'
+				recipient: 'bob.argent.xyz',
 			})
 		})
 	})
@@ -114,7 +114,7 @@ jest.mock('../../hooks/useActiveWeb3React', () => {
 	mockUseActiveWeb3React = jest.fn().mockReturnValue({})
 	return {
 		__esModule: true,
-		default: mockUseActiveWeb3React
+		default: mockUseActiveWeb3React,
 	}
 })
 
@@ -127,7 +127,7 @@ describe('#useDerivedSwapInfo', () => {
 					typedValue,
 					recipient,
 					[Field.INPUT]: { currencyId: inputCurrencyId },
-					[Field.OUTPUT]: { currencyId: outputCurrencyId }
+					[Field.OUTPUT]: { currencyId: outputCurrencyId },
 				} = useSwapState()
 				const inputCurrency = useCurrency(inputCurrencyId)
 				const outputCurrency = useCurrency(outputCurrencyId)
@@ -138,17 +138,17 @@ describe('#useDerivedSwapInfo', () => {
 					inputCurrency,
 					outputCurrencyId,
 					outputCurrency,
-					recipient
+					recipient,
 				)
 			},
-			{ wrapper: createWrapper() }
+			{ wrapper: createWrapper() },
 		)
-		expect(result.current.inputError).toBe('Connect Wallet')
+		expect(result.current.inputError).toBe('Kết nối Ví')
 
 		mockUseActiveWeb3React.mockReturnValue({ account: '0x33edFBc4934baACc78f4d317bc07639119dd3e78' })
 		rerender()
 
-		expect(result.current.inputError).toBe('Enter an amount')
+		expect(result.current.inputError).toBe('Nhập số lượng')
 		mockUseActiveWeb3React.mockClear()
 	})
 
@@ -161,7 +161,7 @@ describe('#useDerivedSwapInfo', () => {
 					typedValue,
 					recipient,
 					[Field.INPUT]: { currencyId: inputCurrencyId },
-					[Field.OUTPUT]: { currencyId: outputCurrencyId }
+					[Field.OUTPUT]: { currencyId: outputCurrencyId },
 				} = useSwapState()
 				const inputCurrency = useCurrency(inputCurrencyId)
 				const outputCurrency = useCurrency(outputCurrencyId)
@@ -172,7 +172,7 @@ describe('#useDerivedSwapInfo', () => {
 					inputCurrency,
 					outputCurrencyId,
 					outputCurrency,
-					recipient
+					recipient,
 				)
 			},
 			{
@@ -180,15 +180,15 @@ describe('#useDerivedSwapInfo', () => {
 					swap: {
 						typedValue: '0.11',
 						[Field.INPUT]: { currencyId: 'BNB' },
-						[Field.OUTPUT]: { currencyId: 'BNB' }
-					}
-				})
-			}
+						[Field.OUTPUT]: { currencyId: 'BNB' },
+					},
+				}),
+			},
 		)
 
 		rerender()
 
-		expect(result.current.inputError).toBe('Enter a recipient')
+		expect(result.current.inputError).toBe('Nhập số lượng')
 		mockUseActiveWeb3React.mockClear()
 	})
 
@@ -200,7 +200,7 @@ describe('#useDerivedSwapInfo', () => {
 					typedValue,
 					recipient,
 					[Field.INPUT]: { currencyId: inputCurrencyId },
-					[Field.OUTPUT]: { currencyId: outputCurrencyId }
+					[Field.OUTPUT]: { currencyId: outputCurrencyId },
 				} = useSwapState()
 				const inputCurrency = useCurrency(inputCurrencyId)
 				const outputCurrency = useCurrency(outputCurrencyId)
@@ -211,15 +211,15 @@ describe('#useDerivedSwapInfo', () => {
 					inputCurrency,
 					outputCurrencyId,
 					outputCurrency,
-					recipient
+					recipient,
 				)
 				return {
-					swapInfo
+					swapInfo,
 				}
 			},
 			{
-				wrapper: createWrapper()
-			}
+				wrapper: createWrapper(),
+			},
 		)
 
 		expect(result.current.swapInfo.currencies.INPUT).toBeUndefined()

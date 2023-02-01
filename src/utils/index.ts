@@ -28,7 +28,7 @@ export function isAddress(value: any): string | false {
 export function getAstraExplorerLink(
 	data: string | number,
 	type: 'transaction' | 'token' | 'address' | 'block' | 'countdown',
-	chainIdOverride?: number
+	chainIdOverride?: number,
 ): string {
 	const chainId = chainIdOverride || CHAIN_ID
 	switch (type) {
@@ -71,7 +71,7 @@ export function calculateSlippageAmount(value: CurrencyAmount, slippage: number)
 	}
 	return [
 		JSBI.divide(JSBI.multiply(value.raw, JSBI.BigInt(10000 - slippage)), JSBI.BigInt(10000)),
-		JSBI.divide(JSBI.multiply(value.raw, JSBI.BigInt(10000 + slippage)), JSBI.BigInt(10000))
+		JSBI.divide(JSBI.multiply(value.raw, JSBI.BigInt(10000 + slippage)), JSBI.BigInt(10000)),
 	]
 }
 
@@ -99,7 +99,7 @@ export function getRouterContract(_: number, library: Web3Provider, account?: st
 	return getContract(
 		ROUTER_ADDRESS[CHAIN_ID],
 		ISolardexRouter02ABI,
-		getProviderOrSigner(library, account)
+		getProviderOrSigner(library, account),
 	) as ISolardexRouter02
 }
 

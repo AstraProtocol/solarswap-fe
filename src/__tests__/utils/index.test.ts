@@ -6,29 +6,29 @@ import {
 	calculateSlippageAmount,
 	isAddress,
 	calculateGasMargin,
-	basisPointsToPercent
+	basisPointsToPercent,
 } from 'utils'
 
 describe('utils', () => {
 	describe('#getAstraExplorerLink', () => {
 		it('correct for tx', () => {
-			expect(getAstraExplorerLink('abc', 'transaction', ChainId.MAINNET)).toEqual(
-				'https://explorer.astranaut.io/tx/abc'
+			expect(getAstraExplorerLink('abc', 'transaction', ChainId.TESTNET)).toEqual(
+				'https://explorer.astranaut.dev/tx/abc',
 			)
 		})
 		it('correct for token', () => {
-			expect(getAstraExplorerLink('abc', 'token', ChainId.MAINNET)).toEqual(
-				'https://explorer.astranaut.io/token/abc'
+			expect(getAstraExplorerLink('abc', 'token', ChainId.TESTNET)).toEqual(
+				'https://explorer.astranaut.dev/token/abc',
 			)
 		})
 		it('correct for address', () => {
-			expect(getAstraExplorerLink('abc', 'address', ChainId.MAINNET)).toEqual(
-				'https://explorer.astranaut.io/address/abc'
+			expect(getAstraExplorerLink('abc', 'address', ChainId.TESTNET)).toEqual(
+				'https://explorer.astranaut.dev/address/abc',
 			)
 		})
 		it('enum', () => {
 			expect(getAstraExplorerLink('abc', 'address', ChainId.TESTNET)).toEqual(
-				'https://explorer.astranaut.dev/address/abc'
+				'https://explorer.astranaut.dev/address/abc',
 			)
 		})
 	})
@@ -56,16 +56,16 @@ describe('utils', () => {
 
 		it('returns the checksummed address', () => {
 			expect(isAddress('0xf164fc0ec4e93095b804a4795bbe1e041497b92a')).toBe(
-				'0xf164fC0Ec4E93095b804a4795bBe1e041497b92a'
+				'0xf164fC0Ec4E93095b804a4795bBe1e041497b92a',
 			)
 			expect(isAddress('0xf164fC0Ec4E93095b804a4795bBe1e041497b92a')).toBe(
-				'0xf164fC0Ec4E93095b804a4795bBe1e041497b92a'
+				'0xf164fC0Ec4E93095b804a4795bBe1e041497b92a',
 			)
 		})
 
 		it('succeeds even without prefix', () => {
 			expect(isAddress('f164fc0ec4e93095b804a4795bbe1e041497b92a')).toBe(
-				'0xf164fC0Ec4E93095b804a4795bBe1e041497b92a'
+				'0xf164fC0Ec4E93095b804a4795bBe1e041497b92a',
 			)
 		})
 		it('fails if too long', () => {

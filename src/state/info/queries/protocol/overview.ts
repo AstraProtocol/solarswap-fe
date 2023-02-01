@@ -43,7 +43,7 @@ const formatSolarFactoryResponse = (rawSolarFactory?: SolarFactory) => {
 		return {
 			totalTransactions: parseFloat(rawSolarFactory.totalTransactions),
 			totalVolumeUSD: parseFloat(rawSolarFactory.totalVolumeUSD),
-			totalLiquidityUSD: parseFloat(rawSolarFactory.totalLiquidityUSD)
+			totalLiquidityUSD: parseFloat(rawSolarFactory.totalLiquidityUSD),
 		}
 	}
 	return null
@@ -56,7 +56,7 @@ interface ProtocolFetchState {
 
 const useFetchProtocolData = (): ProtocolFetchState => {
 	const [fetchState, setFetchState] = useState<ProtocolFetchState>({
-		error: false
+		error: false,
 	})
 	const [t24, t48] = getDeltaTimestamps()
 	const { blocks, error: blockError } = useBlocksFromTimestamps([t24, t48])
@@ -74,23 +74,23 @@ const useFetchProtocolData = (): ProtocolFetchState => {
 			const allDataAvailable = overviewData && overviewData24 && overviewData48
 			if (anyError || !allDataAvailable) {
 				setFetchState({
-					error: true
+					error: true,
 				})
 			} else {
 				const [volumeUSD, volumeUSDChange] = getChangeForPeriod(
 					overviewData.totalVolumeUSD,
 					overviewData24.totalVolumeUSD,
-					overviewData48.totalVolumeUSD
+					overviewData48.totalVolumeUSD,
 				)
 				const liquidityUSDChange = getPercentChange(
 					overviewData.totalLiquidityUSD,
-					overviewData24.totalLiquidityUSD
+					overviewData24.totalLiquidityUSD,
 				)
 				// 24H transactions
 				const [txCount, txCountChange] = getChangeForPeriod(
 					overviewData.totalTransactions,
 					overviewData24.totalTransactions,
-					overviewData48.totalTransactions
+					overviewData48.totalTransactions,
 				)
 				const protocolData: ProtocolData = {
 					volumeUSD,
@@ -98,11 +98,11 @@ const useFetchProtocolData = (): ProtocolFetchState => {
 					liquidityUSD: overviewData.totalLiquidityUSD,
 					liquidityUSDChange,
 					txCount,
-					txCountChange
+					txCountChange,
 				}
 				setFetchState({
 					error: false,
-					data: protocolData
+					data: protocolData,
 				})
 			}
 		}

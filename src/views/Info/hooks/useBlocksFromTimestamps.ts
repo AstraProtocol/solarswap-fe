@@ -27,7 +27,7 @@ const blocksQueryConstructor = (subqueries: string[]) => {
 export const getBlocksFromTimestamps = async (
 	timestamps: number[],
 	sortDirection: 'asc' | 'desc' = 'desc',
-	skipCount = 500
+	skipCount = 500,
 ): Promise<Block[]> => {
 	if (timestamps?.length === 0) {
 		return []
@@ -37,7 +37,7 @@ export const getBlocksFromTimestamps = async (
 		blocksQueryConstructor,
 		getBlockSubqueries(timestamps),
 		BLOCKS_CLIENT,
-		skipCount
+		skipCount,
 	)
 
 	const blocks: Block[] = []
@@ -47,7 +47,7 @@ export const getBlocksFromTimestamps = async (
 			if (fetchedData[key].length > 0) {
 				blocks.push({
 					timestamp: key.split('t')[1],
-					number: parseInt(fetchedData[key][0].number, 10)
+					number: parseInt(fetchedData[key][0].number, 10),
 				})
 			}
 		}
@@ -66,7 +66,7 @@ export const getBlocksFromTimestamps = async (
 export const useBlocksFromTimestamps = (
 	timestamps: number[],
 	sortDirection: 'asc' | 'desc' = 'desc',
-	skipCount = 1000
+	skipCount = 1000,
 ): {
 	blocks?: Block[]
 	error: boolean
@@ -95,6 +95,6 @@ export const useBlocksFromTimestamps = (
 
 	return {
 		blocks,
-		error
+		error,
 	}
 }

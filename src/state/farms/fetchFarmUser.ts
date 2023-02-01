@@ -26,7 +26,7 @@ export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: 
 		return {
 			address: lpContractAddress,
 			name: 'balanceOf',
-			params: [account]
+			params: [account],
 		}
 	})
 
@@ -44,7 +44,7 @@ export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch:
 		return {
 			address: masterChefAddress,
 			name: 'userInfo',
-			params: [farm.pid, account]
+			params: [farm.pid, account],
 		}
 	})
 
@@ -64,7 +64,7 @@ export const fetchFarmUserEarnings = async (account: string, farmsToFetch: Seria
 		return {
 			address: masterChefAddress,
 			name: 'pendingWASA',
-			params: [farm.pid, account]
+			params: [farm.pid, account],
 		}
 	})
 

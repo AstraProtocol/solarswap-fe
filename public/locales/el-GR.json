@@ -1007,7 +1007,7 @@
 	"1Y": "1 Ε",
 	"5Y": "5 Ε",
 	"Annual ROI at current rates": "Ετήσια ROI με τις τρέχουσες τιμές",
-	"Default Transaction Speed (GWEI)": "Προεπιλεγμένη ταχύτητα συναλλαγής (GWEI)",
+	"Default Transaction Speed (%gasUnit%)": "Προεπιλεγμένη ταχύτητα συναλλαγής (%gasUnit%)",
 	"Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees": "Ρυθμίζει την τιμή του καύσιμου (τέλος συναλλαγής) για τη συναλλαγή σας. Υψηλότερο GWEI = υψηλότερη ταχύτητα = υψηλότερα τέλη",
 	"Standard (%gasPrice%)": "Τυπική (%gasPrice%)",
 	"Fast (%gasPrice%)": "Γρήγορη (%gasPrice%)",

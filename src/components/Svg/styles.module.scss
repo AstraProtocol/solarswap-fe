@@ -1,17 +1,17 @@
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .svg {
-    align-self: center; // Safari fix
+	align-self: center; // Safari fix
 	flex-shrink: 0;
 }
 
 .svgSpin {
-    animation: rotate 2s linear infinite;
+	animation: rotate 2s linear infinite;
 }

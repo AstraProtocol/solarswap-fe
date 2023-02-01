@@ -34,7 +34,7 @@ const TransactionsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 	const sortedRecentTransactions = orderBy(
 		Object.values(allTransactions).filter(isTransactionRecent),
 		'addedTime',
-		'desc'
+		'desc',
 	)
 
 	const pending = sortedRecentTransactions.filter(tx => !tx.receipt)

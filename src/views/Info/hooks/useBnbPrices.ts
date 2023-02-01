@@ -49,13 +49,13 @@ interface PricesResponse {
 const fetchBnbPrices = async (
 	block24: number,
 	block48: number,
-	blockWeek: number
+	blockWeek: number,
 ): Promise<{ bnbPrices: BnbPrices | undefined; error: boolean }> => {
 	try {
 		const data = await infoClient.request<PricesResponse>(BNB_PRICES, {
 			block24,
 			block48,
-			blockWeek
+			blockWeek,
 		})
 		return {
 			error: false,
@@ -63,14 +63,14 @@ const fetchBnbPrices = async (
 				current: parseFloat(data.current?.bnbPrice ?? '0'),
 				oneDay: parseFloat(data.oneDay?.bnbPrice ?? '0'),
 				twoDay: parseFloat(data.twoDay?.bnbPrice ?? '0'),
-				week: parseFloat(data.oneWeek?.bnbPrice ?? '0')
-			}
+				week: parseFloat(data.oneWeek?.bnbPrice ?? '0'),
+			},
 		}
 	} catch (error) {
 		console.error('Failed to fetch BNB prices', error)
 		return {
 			error: true,
-			bnbPrices: undefined
+			bnbPrices: undefined,
 		}
 	}
 }
@@ -91,7 +91,7 @@ export const useBnbPrices = (): BnbPrices | undefined => {
 			const { bnbPrices, error: fetchError } = await fetchBnbPrices(
 				block24.number,
 				block48.number,
-				blockWeek.number
+				blockWeek.number,
 			)
 			if (fetchError) {
 				setError(true)

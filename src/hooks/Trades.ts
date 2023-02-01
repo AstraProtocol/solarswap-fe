@@ -10,7 +10,7 @@ import {
 	BASES_TO_CHECK_TRADES_AGAINST,
 	CUSTOM_BASES,
 	BETTER_TRADE_LESS_HOPS_THRESHOLD,
-	ADDITIONAL_BASES
+	ADDITIONAL_BASES,
 } from '../config/constants'
 import { PairState, usePairs } from './usePairs'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
@@ -36,7 +36,7 @@ export function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): P
 
 	const basePairs: [Token, Token][] = useMemo(
 		() => flatMap(bases, (base): [Token, Token][] => bases.map(otherBase => [base, otherBase])),
-		[bases]
+		[bases],
 	)
 
 	const allPairCombinations: [Token, Token][] = useMemo(
@@ -50,7 +50,7 @@ export function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): P
 						// token B against all bases
 						...bases.map((base): [Token, Token] => [tokenB, base]),
 						// each base against all bases
-						...basePairs
+						...basePairs,
 				  ]
 						.filter((tokens): tokens is [Token, Token] => Boolean(tokens[0] && tokens[1]))
 						.filter(([t0, t1]) => t0.address !== t1.address)
@@ -69,7 +69,7 @@ export function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): P
 							return true
 						})
 				: [],
-		[tokenA, tokenB, bases, basePairs, chainId]
+		[tokenA, tokenB, bases, basePairs, chainId],
 	)
 
 	const allPairs = usePairs(allPairCombinations)
@@ -81,15 +81,15 @@ export function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): P
 				allPairs
 					// filter out invalid pairs
 					.filter((result): result is [PairState.EXISTS, Pair] =>
-						Boolean(result[0] === PairState.EXISTS && result[1])
+						Boolean(result[0] === PairState.EXISTS && result[1]),
 					)
 					// filter out duplicated pairs
 					.reduce<{ [pairAddress: string]: Pair }>((memo, [, curr]) => {
 						memo[curr.liquidityToken.address] = memo[curr.liquidityToken.address] ?? curr
 						return memo
-					}, {})
+					}, {}),
 			),
-		[allPairs]
+		[allPairs],
 	)
 }
 
@@ -109,7 +109,7 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
 				return (
 					Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, {
 						maxHops: 1,
-						maxNumResults: 1
+						maxNumResults: 1,
 					})[0] ?? null
 				)
 			}
@@ -119,7 +119,7 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
 				const currentTrade: Trade | null =
 					Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, {
 						maxHops: i,
-						maxNumResults: 1
+						maxNumResults: 1,
 					})[0] ?? null
 				// if current trade is best yet, save it
 				if (isTradeBetter(bestTradeSoFar, currentTrade, BETTER_TRADE_LESS_HOPS_THRESHOLD)) {
@@ -147,7 +147,7 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
 				return (
 					Trade.bestTradeExactOut(allowedPairs, currencyIn, currencyAmountOut, {
 						maxHops: 1,
-						maxNumResults: 1
+						maxNumResults: 1,
 					})[0] ?? null
 				)
 			}
@@ -157,7 +157,7 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
 				const currentTrade =
 					Trade.bestTradeExactOut(allowedPairs, currencyIn, currencyAmountOut, {
 						maxHops: i,
-						maxNumResults: 1
+						maxNumResults: 1,
 					})[0] ?? null
 				if (isTradeBetter(bestTradeSoFar, currentTrade, BETTER_TRADE_LESS_HOPS_THRESHOLD)) {
 					bestTradeSoFar = currentTrade

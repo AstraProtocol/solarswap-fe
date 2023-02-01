@@ -83,15 +83,15 @@ export function confirmOrderCancellation(chainId: number, account: string, cance
 			const ordersToSave = removeOrder(chainId, account, confirmedOrder)
 			ordersToSave.push({
 				...confirmedOrder,
-				cancelledTxHash: cancelHash
+				cancelledTxHash: cancelHash,
 			})
 			set(ordersKey, ordersToSave)
 		} else {
 			set(ordersKey, [
 				{
 					...confirmedOrder,
-					cancelledTxHash: cancelHash
-				}
+					cancelledTxHash: cancelHash,
+				},
 			])
 		}
 	}
@@ -111,19 +111,19 @@ export function confirmOrderSubmission(chainId: number, account: string, submiss
 		if (orders) {
 			const ordersToSave = removeOrder(chainId, account, {
 				...confirmedOrder,
-				createdTxHash: creationHash
+				createdTxHash: creationHash,
 			})
 			ordersToSave.push({
 				...confirmedOrder,
-				createdTxHash: creationHash
+				createdTxHash: creationHash,
 			})
 			set(ordersKey, ordersToSave)
 		} else {
 			set(ordersKey, [
 				{
 					...confirmedOrder,
-					createdTxHash: creationHash
-				}
+					createdTxHash: creationHash,
+				},
 			])
 		}
 	}
@@ -131,6 +131,6 @@ export function confirmOrderSubmission(chainId: number, account: string, submiss
 
 export const getUniqueOrders = (allOrders: Order[]): Order[] => [
 	...new Map(
-		orderBy(allOrders, order => parseFloat(order.updatedAt), 'desc').map(order => [order.id, order])
-	).values()
+		orderBy(allOrders, order => parseFloat(order.updatedAt), 'desc').map(order => [order.id, order]),
+	).values(),
 ]

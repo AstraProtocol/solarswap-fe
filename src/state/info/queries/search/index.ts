@@ -61,7 +61,7 @@ const getIds = (entityArrays: SingleQueryResponse[][]) => {
 }
 
 const useFetchSearchResults = (
-	searchString: string
+	searchString: string,
 ): {
 	tokens: TokenData[]
 	pools: PoolData[]
@@ -73,7 +73,7 @@ const useFetchSearchResults = (
 		tokens: [], // Token ids found by search query
 		pools: [], // Pool ids found by search query
 		loading: false, // Search query is in progress
-		error: false // GraphQL returned error
+		error: false, // GraphQL returned error
 	})
 
 	const searchStringTooShort = searchString.length < MINIMUM_SEARCH_CHARACTERS
@@ -84,7 +84,7 @@ const useFetchSearchResults = (
 			tokens: [],
 			pools: [],
 			loading: !searchStringTooShort,
-			error: false
+			error: false,
 		})
 	}, [searchString, searchStringTooShort])
 
@@ -95,18 +95,18 @@ const useFetchSearchResults = (
 					symbol: searchString.toUpperCase(),
 					// Most well known tokens have first letter capitalized
 					name: searchString.charAt(0).toUpperCase() + searchString.slice(1),
-					id: searchString.toLowerCase()
+					id: searchString.toLowerCase(),
 				})
 				const tokenIds = getIds([tokens.asAddress, tokens.asSymbol, tokens.asName])
 				const pools = await infoClient.request<PoolSearchResponse>(POOL_SEARCH, {
 					tokens: tokenIds,
-					id: searchString.toLowerCase()
+					id: searchString.toLowerCase(),
 				})
 				setSearchResults({
 					tokens: tokenIds,
 					pools: getIds([pools.asAddress, pools.as0, pools.as1]),
 					loading: false,
-					error: false
+					error: false,
 				})
 			} catch (error) {
 				console.error(`Search failed for ${searchString}`, error)
@@ -114,7 +114,7 @@ const useFetchSearchResults = (
 					tokens: [],
 					pools: [],
 					loading: false,
-					error: true
+					error: true,
 				})
 			}
 		}
@@ -139,7 +139,7 @@ const useFetchSearchResults = (
 		pools: poolDatasFull,
 		tokensLoading,
 		poolsLoading,
-		error: searchResults.error
+		error: searchResults.error,
 	}
 }
 

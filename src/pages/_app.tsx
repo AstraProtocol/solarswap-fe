@@ -39,7 +39,7 @@ import { PageLoader } from '@astraprotocol/astra-ui'
 // This config is required for number formatting
 BigNumber.config({
 	EXPONENTIAL_AT: 1000,
-	DECIMAL_PLACES: 80
+	DECIMAL_PLACES: 80,
 })
 
 console.log('CHAIN_ID', process.env.NEXT_PUBLIC_CHAIN_ID)
@@ -57,9 +57,9 @@ function GlobalHooks() {
 
 const walletConnect = walletConnectModule({
 	qrcodeModalOptions: {
-		mobileLinks: ['metamask', 'trust']
+		mobileLinks: ['metamask', 'trust'],
 	},
-	connectFirstChainId: true
+	connectFirstChainId: true,
 })
 
 const astraWallet = astraConnectModule({
@@ -71,8 +71,8 @@ const astraWallet = astraConnectModule({
 		description: process.env.NEXT_PUBLIC_TITLE,
 		name: process.env.NEXT_PUBLIC_TITLE,
 		url: typeof window !== 'undefined' ? window.location.origin : '',
-		icons: ['']
-	}
+		icons: [''],
+	},
 })
 const wallets = [injectedModule(), walletConnect, astraWallet]
 
@@ -85,32 +85,32 @@ const web3Onboard = init({
 			label: 'Astra testnet',
 			rpcUrl: getNodeUrl(),
 			icon: '/images/logo/transparent_logo.svg',
-			blockExplorerUrl: process.env.NEXT_PUBLIC_EXPLORER
-		}
+			blockExplorerUrl: process.env.NEXT_PUBLIC_EXPLORER,
+		},
 	],
 	appMetadata: {
 		name: 'Solarswap',
 		icon: '/images/logo/asa.svg',
-		description: 'Solarswap'
+		description: 'Solarswap',
 	},
 	notify: {
 		desktop: {
 			enabled: false,
-			transactionHandler: () => {}
+			transactionHandler: () => {},
 		},
 		mobile: {
 			enabled: false,
-			transactionHandler: () => {}
-		}
+			transactionHandler: () => {},
+		},
 	},
 	accountCenter: {
 		desktop: {
-			enabled: false
+			enabled: false,
 		},
 		mobile: {
-			enabled: false
-		}
-	}
+			enabled: false,
+		},
+	},
 })
 
 interface AppPropsExtends extends AppProps {

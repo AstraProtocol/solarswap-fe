@@ -14,7 +14,7 @@ const WalletWrongNetworkModal: React.FC<InjectedProps> = ({ onDismiss }) => {
 	const _changeChain = () => {
 		setChain({
 			chainId: decimalToHex(parseInt(chainId)),
-			chainNamespace: 'evm'
+			chainNamespace: 'evm',
 		})
 	}
 

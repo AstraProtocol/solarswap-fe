@@ -4,21 +4,21 @@ import { useAppDispatch } from '../state'
 import { clearUserStates } from '../utils/clearUserStates'
 
 export const useInactiveListener = () => {
-  const { account, chainId, connector } = useWeb3React()
-  const dispatch = useAppDispatch()
+	const { account, chainId, connector } = useWeb3React()
+	const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (account && connector) {
-      const handleDeactivate = () => {
-        clearUserStates(dispatch, chainId)
-      }
+	useEffect(() => {
+		if (account && connector) {
+			const handleDeactivate = () => {
+				clearUserStates(dispatch, chainId)
+			}
 
-      connector.addListener('Web3ReactDeactivate', handleDeactivate)
+			connector.addListener('Web3ReactDeactivate', handleDeactivate)
 
-      return () => {
-        connector.removeListener('Web3ReactDeactivate', handleDeactivate)
-      }
-    }
-    return undefined
-  }, [account, chainId, dispatch, connector])
+			return () => {
+				connector.removeListener('Web3ReactDeactivate', handleDeactivate)
+			}
+		}
+		return undefined
+	}, [account, chainId, dispatch, connector])
 }

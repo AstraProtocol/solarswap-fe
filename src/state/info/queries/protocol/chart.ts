@@ -24,7 +24,7 @@ const getOverviewChartData = async (skip: number): Promise<{ data?: ChartEntry[]
 	try {
 		const { solarDayDatas } = await infoClient.request<SolarDayDatasResponse>(SOLAR_DAY_DATAS, {
 			startTime: SS_START,
-			skip
+			skip,
 		})
 		const data = solarDayDatas.map(mapDayData)
 		return { data, error: false }
@@ -60,7 +60,7 @@ const useFetchGlobalChartData = (): {
 
 	return {
 		error,
-		data: overviewChartData
+		data: overviewChartData,
 	}
 }
 

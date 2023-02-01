@@ -17,12 +17,12 @@ Sentry.init({
 	dsn: SENTRY_DSN,
 	integrations: [
 		new Sentry.Integrations.Breadcrumbs({
-			console: ENV === 'production'
+			console: ENV === 'production',
 		}),
 		new Sentry.Integrations.GlobalHandlers({
 			onerror: false,
-			onunhandledrejection: false
-		})
+			onunhandledrejection: false,
+		}),
 	],
 	environment: ENV === 'production' ? 'production' : 'development',
 	// Adjust this value in production, or use tracesSampler for greater control
@@ -43,6 +43,6 @@ Sentry.init({
 		'Non-Error promise rejection captured',
 		'User rejected the transaction',
 		'cancelled',
-		'PollingBlockTracker'
-	]
+		'PollingBlockTracker',
+	],
 })

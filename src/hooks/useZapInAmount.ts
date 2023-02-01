@@ -10,7 +10,7 @@ function useZapInAmount(tokenA: string, tokenB: string, pool: string, userIn: st
 		tokenA,
 		tokenB,
 		pool,
-		userIn === '0' ? undefined : userIn // https://github.com/AstraProtocol/astra-defi-fe/issues/12
+		userIn === '0' ? undefined : userIn, // https://github.com/AstraProtocol/astra-defi-fe/issues/12
 	])
 	if (result) {
 		const [tokenInAmount, tokenOutAmount] = result

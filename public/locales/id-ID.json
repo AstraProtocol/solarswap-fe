@@ -1007,7 +1007,7 @@
 	"1Y": "1 T",
 	"5Y": "5 T",
 	"Annual ROI at current rates": "ROI Tahunan pada kurs saat ini",
-	"Default Transaction Speed (GWEI)": "Kecepatan Transaksi Standar (GWEI)",
+	"Default Transaction Speed (%gasUnit%)": "Kecepatan Transaksi Standar (%gasUnit%)",
 	"Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees": "Menyesuaikan harga bahan bakar (biaya transaksi) untuk transaksi Anda. GWEI lebih tinggi = kecepatan lebih tinggi = biaya lebih tinggi",
 	"Standard (%gasPrice%)": "Standar (%gasPrice%)",
 	"Fast (%gasPrice%)": "Cepat (%gasPrice%)",

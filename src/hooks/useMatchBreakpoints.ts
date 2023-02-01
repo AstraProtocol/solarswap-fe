@@ -7,7 +7,7 @@ export const breakpointMap: { [key: string]: number } = {
 	md: 852,
 	lg: 968,
 	xl: 1080,
-	xxl: 1200
+	xxl: 1200,
 }
 
 type State = {
@@ -57,7 +57,7 @@ const getState = () => {
 		if (typeof window === 'undefined') {
 			return {
 				...accum,
-				[key]: false
+				[key]: false,
 			}
 		}
 
@@ -83,7 +83,7 @@ const useMatchBreakpoints = (): BreakpointChecks => {
 					const key = getKey(size)
 					setState(prevState => ({
 						...prevState,
-						[key]: matchMediaQuery.matches
+						[key]: matchMediaQuery.matches,
 					}))
 				}
 
@@ -114,7 +114,7 @@ const useMatchBreakpoints = (): BreakpointChecks => {
 		...state,
 		isMobile: state.isXs || state.isSm,
 		isTablet: state.isMd || state.isLg,
-		isDesktop: state.isXl || state.isXxl
+		isDesktop: state.isXl || state.isXxl,
 	}
 }
 

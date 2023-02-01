@@ -12,7 +12,7 @@ import {
 	Team,
 	TranslatableText,
 	DeserializedFarmConfig,
-	FetchStatus
+	FetchStatus,
 } from 'config/constants/types'
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>
@@ -66,7 +66,7 @@ export interface DeserializedFarm extends DeserializedFarmConfig {
 
 export enum VaultKey {
 	CakeVault = 'asaVault',
-	IfoPool = 'ifoPool'
+	IfoPool = 'ifoPool',
 }
 
 interface CorePoolProps {
@@ -234,19 +234,19 @@ export interface Achievement {
 export enum BetPosition {
 	BULL = 'Bull',
 	BEAR = 'Bear',
-	HOUSE = 'House'
+	HOUSE = 'House',
 }
 
 export enum PredictionStatus {
 	INITIAL = 'initial',
 	LIVE = 'live',
 	PAUSED = 'paused',
-	ERROR = 'error'
+	ERROR = 'error',
 }
 
 export enum PredictionsChartView {
 	TradingView = 'TradingView',
-	Chainlink = 'Chainlink Oracle'
+	Chainlink = 'Chainlink Oracle',
 }
 
 export interface Round {
@@ -320,7 +320,7 @@ export interface PredictionUser {
 export enum HistoryFilter {
 	ALL = 'all',
 	COLLECTED = 'collected',
-	UNCOLLECTED = 'uncollected'
+	UNCOLLECTED = 'uncollected',
 }
 
 export interface LedgerData {
@@ -438,19 +438,19 @@ export interface VoteWhere {
 
 export enum SnapshotCommand {
 	PROPOSAL = 'proposal',
-	VOTE = 'vote'
+	VOTE = 'vote',
 }
 
 export enum ProposalType {
 	ALL = 'all',
 	CORE = 'core',
-	COMMUNITY = 'community'
+	COMMUNITY = 'community',
 }
 
 export enum ProposalState {
 	ACTIVE = 'active',
 	PENDING = 'pending',
-	CLOSED = 'closed'
+	CLOSED = 'closed',
 }
 
 export interface Space {

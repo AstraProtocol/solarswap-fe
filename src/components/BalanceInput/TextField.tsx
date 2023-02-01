@@ -9,7 +9,7 @@ const Textfield: React.FC<TextfieldProps> = ({
 	placeholder,
 	onUserInput,
 	inputProps,
-	isWarning = false
+	isWarning = false,
 }) => {
 	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		onUserInput(e.target.value)

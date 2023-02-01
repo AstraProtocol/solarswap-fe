@@ -40,7 +40,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	lpLabel,
 	apr,
 	addLiquidityUrl,
-	astraPrice
+	astraPrice,
 }) => {
 	const [val, setVal] = useState('')
 	const [pendingTx, setPendingTx] = useState(false)
@@ -58,7 +58,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	const interestBreakdown = getInterestBreakdown({
 		principalInUSD: !lpTokensToStake.isNaN() ? usdToStake.toNumber() : 0,
 		apr,
-		earningTokenPrice: astraPrice.toNumber()
+		earningTokenPrice: astraPrice.toNumber(),
 	})
 
 	const annualRoi = astraPrice.times(interestBreakdown[3])
@@ -71,7 +71,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 				setVal(e.currentTarget.value.replace(/,/g, '.'))
 			}
 		},
-		[setVal]
+		[setVal],
 	)
 
 	const handleSelectMax = useCallback(() => {

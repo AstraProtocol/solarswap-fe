@@ -11,18 +11,18 @@ import { useState, useEffect } from 'react'
  * delayTime should be the same as animation time in most cases.
  */
 const useDelayedUnmount = (isMounted: boolean, delayTime: number) => {
-  const [shouldRender, setShouldRender] = useState(false)
+	const [shouldRender, setShouldRender] = useState(false)
 
-  useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>
-    if (isMounted && !shouldRender) {
-      setShouldRender(true)
-    } else if (!isMounted && shouldRender) {
-      timeoutId = setTimeout(() => setShouldRender(false), delayTime)
-    }
-    return () => clearTimeout(timeoutId)
-  }, [isMounted, delayTime, shouldRender])
-  return shouldRender
+	useEffect(() => {
+		let timeoutId: ReturnType<typeof setTimeout>
+		if (isMounted && !shouldRender) {
+			setShouldRender(true)
+		} else if (!isMounted && shouldRender) {
+			timeoutId = setTimeout(() => setShouldRender(false), delayTime)
+		}
+		return () => clearTimeout(timeoutId)
+	}, [isMounted, delayTime, shouldRender])
+	return shouldRender
 }
 
 export default useDelayedUnmount

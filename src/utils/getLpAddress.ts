@@ -29,7 +29,7 @@ const getLpAddress = memoize(
 	(token1, token2) => {
 		// @ts-ignore
 		return `${token1?.address || token1}#${token2?.address || token2}#${ChainId[CHAIN_ID]}`
-	}
+	},
 )
 
 export default getLpAddress

@@ -16,7 +16,7 @@ export const mapMints = (mint: MintResponse) => {
 		token1Address: mint.pair.token1.id,
 		amountUSD: parseFloat(mint.amountUSD),
 		amountToken0: parseFloat(mint.amount0),
-		amountToken1: parseFloat(mint.amount1)
+		amountToken1: parseFloat(mint.amount1),
 	}
 }
 
@@ -32,7 +32,7 @@ export const mapBurns = (burn: BurnResponse) => {
 		token1Address: burn.pair.token1.id,
 		amountUSD: parseFloat(burn.amountUSD),
 		amountToken0: parseFloat(burn.amount0),
-		amountToken1: parseFloat(burn.amount1)
+		amountToken1: parseFloat(burn.amount1),
 	}
 }
 
@@ -48,20 +48,20 @@ export const mapSwaps = (swap: SwapResponse) => {
 		token1Address: swap.pair.token1.id,
 		amountUSD: parseFloat(swap.amountUSD),
 		amountToken0: parseFloat(swap.amount0In) - parseFloat(swap.amount0Out),
-		amountToken1: parseFloat(swap.amount1In) - parseFloat(swap.amount1Out)
+		amountToken1: parseFloat(swap.amount1In) - parseFloat(swap.amount1Out),
 	}
 }
 
 export const mapDayData = (tokenDayData: TokenDayData | SolarDayData): ChartEntry => ({
 	date: tokenDayData.date,
 	volumeUSD: parseFloat(tokenDayData.dailyVolumeUSD),
-	liquidityUSD: parseFloat(tokenDayData.totalLiquidityUSD)
+	liquidityUSD: parseFloat(tokenDayData.totalLiquidityUSD),
 })
 
 export const mapPairDayData = (pairDayData: PairDayData): ChartEntry => ({
 	date: pairDayData.date,
 	volumeUSD: parseFloat(pairDayData.dailyVolumeUSD),
-	liquidityUSD: parseFloat(pairDayData.reserveUSD)
+	liquidityUSD: parseFloat(pairDayData.reserveUSD),
 })
 
 type PoolOrTokenFetchFn = (skip: number, address: string) => Promise<{ data?: ChartEntry[]; error: boolean }>
@@ -71,7 +71,7 @@ type OverviewFetchFn = (skip: number) => Promise<{ data?: ChartEntry[]; error: b
 // Used for both Pool and Token charts
 export const fetchChartData = async (
 	getEntityDayDatas: PoolOrTokenFetchFn | OverviewFetchFn,
-	address?: string
+	address?: string,
 ): Promise<{ data?: ChartEntry[]; error: boolean }> => {
 	let chartEntries: ChartEntry[] = []
 	let error = false
@@ -91,7 +91,7 @@ export const fetchChartData = async (
 
 	if (error || chartEntries.length === 0) {
 		return {
-			error: true
+			error: true,
 		}
 	}
 
@@ -100,7 +100,7 @@ export const fetchChartData = async (
 		const dayOrdinal = parseInt((dayData.date / ONE_DAY_UNIX).toFixed(0))
 		return {
 			[dayOrdinal]: dayData,
-			...accum
+			...accum,
 		}
 	}, {})
 
@@ -118,7 +118,7 @@ export const fetchChartData = async (
 			formattedDayDatas[dayOrdinal] = {
 				date: timestamp,
 				volumeUSD: 0,
-				liquidityUSD: latestLiquidityUSD
+				liquidityUSD: latestLiquidityUSD,
 			}
 		} else {
 			latestLiquidityUSD = formattedDayDatas[dayOrdinal].liquidityUSD
@@ -127,6 +127,6 @@ export const fetchChartData = async (
 
 	return {
 		data: Object.values(formattedDayDatas),
-		error: false
+		error: false,
 	}
 }

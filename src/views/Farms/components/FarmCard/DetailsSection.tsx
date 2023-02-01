@@ -25,7 +25,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
 	removed,
 	totalValueFormatted,
 	lpLabel,
-	addLiquidityUrl
+	addLiquidityUrl,
 }) => {
 	const { t } = useTranslation()
 

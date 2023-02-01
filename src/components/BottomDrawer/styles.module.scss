@@ -1,42 +1,41 @@
 @keyframes mountAnimation {
-    0% {
-      transform: translateY(100%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
-  };
+	0% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateY(0%);
+	}
+}
 
 @keyframes unmountAnimation {
-    0% {
-      transform: translateY(0%);
-    }
-    100% {
-      transform: translateY(100%);
-    }
-};
+	0% {
+		transform: translateY(0%);
+	}
+	100% {
+		transform: translateY(100%);
+	}
+}
 
 .drawContainer {
-  width: 100%;
-  height: 80vh;
-  bottom: 0;
-  background-color: var(--theme-backgorund-mode);
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
-  position: fixed;
-  
-  padding-bottom: env(safe-area-inset-bottom);
-  html[data-useragent*="TokenPocket_iOS"] & {
-    padding-bottom: 45px;
-  }
-  will-change: transform;
-  z-index: 21;
-  animation: unmountAnimation 350ms ease forwards;
-  
-};
+	width: 100%;
+	height: 80vh;
+	bottom: 0;
+	background-color: var(--theme-backgorund-mode);
+	border-top-left-radius: 32px;
+	border-top-right-radius: 32px;
+	position: fixed;
+
+	padding-bottom: env(safe-area-inset-bottom);
+	html[data-useragent*='TokenPocket_iOS'] & {
+		padding-bottom: 45px;
+	}
+	will-change: transform;
+	z-index: 21;
+	animation: unmountAnimation 350ms ease forwards;
+}
 .mounting {
-  animation: mountAnimation 350ms ease forwards;
+	animation: mountAnimation 350ms ease forwards;
 }
 .unmouting {
-  animation: unmountAnimation 350ms ease forwards;
+	animation: unmountAnimation 350ms ease forwards;
 }

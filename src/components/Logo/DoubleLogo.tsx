@@ -14,7 +14,7 @@ export default function DoubleCurrencyLogo({
 	currency0,
 	currency1,
 	size = 20,
-	margin = false
+	margin = false,
 }: DoubleCurrencyLogoProps) {
 	return (
 		<div className={clsx('flex flex-hor-center flex-col-center', margin && 'margin-right-2xs')}>

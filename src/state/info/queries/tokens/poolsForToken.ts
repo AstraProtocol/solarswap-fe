@@ -36,7 +36,7 @@ interface PoolsForTokenResponse {
 }
 
 const fetchPoolsForToken = async (
-	address: string
+	address: string,
 ): Promise<{
 	error: boolean
 	addresses?: string[]
@@ -44,16 +44,16 @@ const fetchPoolsForToken = async (
 	try {
 		const data = await infoClient.request<PoolsForTokenResponse>(POOLS_FOR_TOKEN, {
 			address,
-			blacklist: TOKEN_BLACKLIST
+			blacklist: TOKEN_BLACKLIST,
 		})
 		return {
 			error: false,
-			addresses: data.asToken0.concat(data.asToken1).map(p => p.id)
+			addresses: data.asToken0.concat(data.asToken1).map(p => p.id),
 		}
 	} catch (error) {
 		console.error(`Failed to fetch pools for token ${address}`, error)
 		return {
-			error: true
+			error: true,
 		}
 	}
 }

@@ -79,21 +79,21 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 			farm.pid !== 0 &&
 			farm.multiplier !== '0X' &&
 			!isArchivedPid(farm.pid) &&
-			(!poolLength || poolLength > farm.pid)
+			(!poolLength || poolLength > farm.pid),
 	)
 	const inactiveFarms = farmsLP.filter(farm => farm.pid !== 0 && farm.multiplier === '0X' && !isArchivedPid(farm.pid))
 	const archivedFarms = farmsLP.filter(farm => isArchivedPid(farm.pid))
 
 	const stakedOnlyFarms = activeFarms.filter(
-		farm => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)
+		farm => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
 	)
 
 	const stakedInactiveFarms = inactiveFarms.filter(
-		farm => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)
+		farm => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
 	)
 
 	const stakedArchivedFarms = archivedFarms.filter(
-		farm => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)
+		farm => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
 	)
 
 	const farmsList = useCallback(
@@ -108,7 +108,7 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 							new BigNumber(farm.poolWeight),
 							astraPrice,
 							totalLiquidity,
-							farm.lpAddresses[ChainId.TESTNET]
+							farm.lpAddresses[ChainId.TESTNET],
 					  )
 					: { asaRewardsApr: 0, lpRewardsApr: 0 }
 
@@ -123,7 +123,7 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 			}
 			return farmsToDisplayWithAPR
 		},
-		[astraPrice, query, isActive]
+		[astraPrice, query, isActive],
 	)
 
 	const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,13 +143,13 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 					return orderBy(
 						farms,
 						(farm: FarmWithStakedValue) => (farm.multiplier ? Number(farm.multiplier.slice(0, -1)) : 0),
-						'desc'
+						'desc',
 					)
 				case 'earned':
 					return orderBy(
 						farms,
 						(farm: FarmWithStakedValue) => (farm.userData ? Number(farm.userData.earnings) : 0),
-						'desc'
+						'desc',
 					)
 				case 'liquidity':
 					return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.liquidity), 'desc')
@@ -184,7 +184,7 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 		stakedInactiveFarms,
 		stakedOnly,
 		stakedOnlyFarms,
-		numberOfFarmsVisible
+		numberOfFarmsVisible,
 	])
 
 	chosenFarmsLength.current = chosenFarmsMemoized.length
@@ -218,25 +218,25 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 				tokenAddress,
 				quoteTokenAddress,
 				astraPrice,
-				originalValue: farm.apr
+				originalValue: farm.apr,
 			},
 			farm: {
 				label: lpLabel,
 				pid: farm.pid,
 				token: farm.token,
-				quoteToken: farm.quoteToken
+				quoteToken: farm.quoteToken,
 			},
 			earned: {
 				earnings: getBalanceNumber(new BigNumber(farm.userData.earnings)),
-				pid: farm.pid
+				pid: farm.pid,
 			},
 			liquidity: {
-				liquidity: farm.liquidity
+				liquidity: farm.liquidity,
 			},
 			multiplier: {
-				multiplier: farm.multiplier
+				multiplier: farm.multiplier,
 			},
-			details: farm
+			details: farm,
 		}
 
 		return row
@@ -266,7 +266,7 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 							return 1
 					}
 				},
-				sortable: column.sortable
+				sortable: column.sortable,
 			}))
 
 			return <Table data={rowData} columns={columns} userDataReady={userDataReady} />
@@ -285,7 +285,7 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 				<div
 					className={clsx('col', {
 						['padding-top-xl padding-bottom-xl padding-left-lg padding-right-lg']: !isMobile,
-						['padding-top-lg padding-bottom-lg padding-left-2xs padding-right-2xs']: isMobile
+						['padding-top-lg padding-bottom-lg padding-left-2xs padding-right-2xs']: isMobile,
 					})}
 				>
 					<span className="text text-4xl text-bold secondary-color-normal">{t('Farms')}</span>
@@ -319,28 +319,28 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 								options={[
 									{
 										label: t('Hot'),
-										value: 'hot'
+										value: 'hot',
 									},
 									{
 										label: t('APR'),
-										value: 'apr'
+										value: 'apr',
 									},
 									{
 										label: t('Multiplier'),
-										value: 'multiplier'
+										value: 'multiplier',
 									},
 									{
 										label: t('Earned'),
-										value: 'earned'
+										value: 'earned',
 									},
 									{
 										label: t('Liquidity'),
-										value: 'liquidity'
+										value: 'liquidity',
 									},
 									{
 										label: t('Latest'),
-										value: 'latest'
-									}
+										value: 'latest',
+									},
 								]}
 								onOptionChange={handleSortOptionChange}
 							/>

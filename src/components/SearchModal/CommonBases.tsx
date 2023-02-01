@@ -10,7 +10,7 @@ import styles from './styles.module.scss'
 export default function CommonBases({
 	chainId,
 	onSelect,
-	selectedCurrency
+	selectedCurrency,
 }: {
 	chainId?: ChainId
 	selectedCurrency?: Currency | null
@@ -46,8 +46,8 @@ export default function CommonBases({
 							variant="default"
 							classes={{
 								other: clsx(styles.baseWrapper, 'border border-base', {
-									['margin-right-xs']: index != suggestedBases.length - 1
-								})
+									['margin-right-xs']: index != suggestedBases.length - 1,
+								}),
 							}}
 							key={token.address}
 							onClick={() => !selected && onSelect(token)}

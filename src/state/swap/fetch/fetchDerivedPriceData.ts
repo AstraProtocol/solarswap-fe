@@ -13,7 +13,7 @@ const getTokenDerivedBnbPrices = async (tokenAddress: string, blocks: Block[]) =
 		getDerivedPricesQueryConstructor,
 		getDerivedPrices(tokenAddress, blocks),
 		INFO_CLIENT,
-		200
+		200,
 	)
 
 	// console.log('getTokenDerivedBnbPrices tokenAddress :>> ', tokenAddress);
@@ -38,7 +38,7 @@ const getTokenDerivedBnbPrices = async (tokenAddress: string, blocks: Block[]) =
 			tokenPrices.push({
 				tokenAddress,
 				timestamp,
-				derivedBNB: prices[priceKey]?.derivedBNB ? parseFloat(prices[priceKey].derivedBNB) : 0
+				derivedBNB: prices[priceKey]?.derivedBNB ? parseFloat(prices[priceKey].derivedBNB) : 0,
 			})
 		}
 	})
@@ -81,7 +81,7 @@ const getSkipDaysToStart = (timeWindow: PairDataTimeWindowEnum) => {
 const fetchDerivedPriceData = async (
 	token0Address: string,
 	token1Address: string,
-	timeWindow: PairDataTimeWindowEnum
+	timeWindow: PairDataTimeWindowEnum,
 ) => {
 	const interval = getInterval(timeWindow)
 	const endTimestamp = getUnixTime(new Date())

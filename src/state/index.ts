@@ -10,7 +10,7 @@ import {
 	PURGE,
 	REGISTER,
 	REHYDRATE,
-	createMigrate
+	createMigrate,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 // import burn from './burn/reducer'
@@ -38,10 +38,10 @@ const migrations = {
 			...state,
 			user: {
 				...state?.user,
-				userPredictionChainlinkChartDisclaimerShow: true
-			}
+				userPredictionChainlinkChartDisclaimerShow: true,
+			},
 		}
-	}
+	},
 }
 
 const persistConfig = {
@@ -50,7 +50,7 @@ const persistConfig = {
 	blacklist: ['profile'],
 	storage,
 	version: 0,
-	migrate: createMigrate(migrations, { debug: false })
+	migrate: createMigrate(migrations, { debug: false }),
 }
 
 const persistedReducer = persistReducer(
@@ -71,8 +71,8 @@ const persistedReducer = persistReducer(
 		mint,
 		burn,
 		multicall,
-		lists
-	})
+		lists,
+	}),
 )
 
 // eslint-disable-next-line import/no-mutable-exports
@@ -85,11 +85,11 @@ export function makeStore(preloadedState = undefined) {
 			getDefaultMiddleware({
 				thunk: true,
 				serializableCheck: {
-					ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-				}
+					ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+				},
 			}),
 		devTools: process.env.NODE_ENV === 'development',
-		preloadedState
+		preloadedState,
 	})
 }
 
@@ -101,7 +101,7 @@ export const initializeStore = (preloadedState = undefined) => {
 	if (preloadedState && store) {
 		_store = makeStore({
 			...store.getState(),
-			...preloadedState
+			...preloadedState,
 		})
 		// Reset the current store
 		store = undefined

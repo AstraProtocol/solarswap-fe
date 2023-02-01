@@ -12,7 +12,7 @@ function useTokenAllowance(token?: Token, owner?: string, spender?: string): Tok
 
 	return useMemo(
 		() => (token && allowance ? new TokenAmount(token, allowance.toString()) : undefined),
-		[token, allowance]
+		[token, allowance],
 	)
 }
 

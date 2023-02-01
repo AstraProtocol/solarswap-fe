@@ -19,9 +19,9 @@ export default function useBUSDPrice(currency?: Currency): Price | undefined {
 		() => [
 			[chainId && wrapped && currencyEquals(WBNB, wrapped) ? undefined : currency, chainId ? WBNB : undefined],
 			[wrapped?.equals(usdt) ? undefined : wrapped, usdt],
-			[chainId ? WBNB : undefined, usdt]
+			[chainId ? WBNB : undefined, usdt],
 		],
-		[chainId, currency, wrapped]
+		[chainId, currency, wrapped],
 	)
 	const [[ethPairState, ethPair], [busdPairState, busdPair], [busdEthPairState, busdEthPair]] = usePairs(tokenPairs)
 

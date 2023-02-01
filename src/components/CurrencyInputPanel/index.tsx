@@ -41,13 +41,13 @@ export default function CurrencyInputPanel({
 	pair = null, // used for double token logo
 	otherCurrency,
 	id,
-	showCommonBases
+	showCommonBases,
 }: CurrencyInputPanelProps) {
 	const { account, library } = useActiveWeb3React()
 	const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
 	const {
 		t,
-		currentLanguage: { locale }
+		currentLanguage: { locale },
 	} = useTranslation()
 
 	const token = pair ? pair.liquidityToken : currency instanceof Token ? currency : null
@@ -59,7 +59,7 @@ export default function CurrencyInputPanel({
 			selectedCurrency={currency}
 			otherSelectedCurrency={otherCurrency}
 			showCommonBases={showCommonBases}
-		/>
+		/>,
 	)
 	return (
 		<div id={id}>
@@ -89,7 +89,7 @@ export default function CurrencyInputPanel({
 									{(currency && currency.symbol && currency.symbol.length > 20
 										? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
 												currency.symbol.length - 5,
-												currency.symbol.length
+												currency.symbol.length,
 										  )}`
 										: currency?.symbol) || t('Select a currency')}
 								</span>
@@ -121,7 +121,7 @@ export default function CurrencyInputPanel({
 					>
 						{!hideBalance && !!currency
 							? t('Balance: %balance%', {
-									balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading')
+									balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading'),
 							  })
 							: ' -'}
 					</span>

@@ -12,14 +12,14 @@ import {
 	RowType,
 	HeaderType,
 	HeaderRenderType,
-	ColumnStateType
+	ColumnStateType,
 } from './types'
 import { byTextAscending, byTextDescending } from './utils'
 
 const sortByColumn = <T extends DataType>(
 	data: RowType<T>[],
 	sortColumn: string,
-	columns: ColumnStateType<T>[]
+	columns: ColumnStateType<T>[],
 ): RowType<T>[] => {
 	let isAscending = null
 	let sortedRows: RowType<T>[] = [...data]
@@ -54,7 +54,7 @@ const getColumnsByName = <T extends DataType>(columns: ColumnType<T>[]): ColumnB
 	columns.forEach(column => {
 		const col: ColumnType<T> = {
 			name: column.name,
-			label: column.label
+			label: column.label,
 		}
 
 		if (column.render) {
@@ -103,8 +103,8 @@ const createReducer =
 							...column,
 							sorted: {
 								on: true,
-								asc: column.sorted.asc
-							}
+								asc: column.sorted.asc,
+							},
 						}
 					}
 
@@ -115,7 +115,7 @@ const createReducer =
 					...state,
 					rows,
 					originalRows: action.data,
-					columns: columnCopy
+					columns: columnCopy,
 				}
 
 			case 'NEXT_PAGE':
@@ -127,8 +127,8 @@ const createReducer =
 						...state.pagination,
 						page: nextPage,
 						canNext: nextPage * state.pagination.perPage < state.originalRows.length,
-						canPrev: nextPage !== 1
-					}
+						canPrev: nextPage !== 1,
+					},
 				}
 			case 'PREV_PAGE':
 				prevPage = state.pagination.page === 1 ? 1 : state.pagination.page - 1
@@ -140,8 +140,8 @@ const createReducer =
 						...state.pagination,
 						page: prevPage,
 						canNext: prevPage * state.pagination.perPage < state.originalRows.length,
-						canPrev: prevPage !== 1
-					}
+						canPrev: prevPage !== 1,
+					},
 				}
 			case 'TOGGLE_SORT':
 				if (!(action.columnName in state.columnsByName)) {
@@ -175,8 +175,8 @@ const createReducer =
 							...column,
 							sorted: {
 								on: true,
-								asc: isAscending
-							}
+								asc: isAscending,
+							},
 						}
 					}
 					// set sorting to false for all other columns
@@ -184,8 +184,8 @@ const createReducer =
 						...column,
 						sorted: {
 							on: false,
-							asc: false
-						}
+							asc: false,
+						},
 					}
 				})
 
@@ -194,7 +194,7 @@ const createReducer =
 					columns: columnCopy,
 					rows: sortedRows,
 					sortColumn: action.columnName,
-					columnsByName: getColumnsByName(columnCopy)
+					columnsByName: getColumnsByName(columnCopy),
 				}
 			case 'GLOBAL_FILTER':
 				filteredRows = action.filter(state.originalRows)
@@ -208,7 +208,7 @@ const createReducer =
 					rows: filteredRows.map(row => {
 						return selectedRowsById[row.id] ? { ...row, selected: selectedRowsById[row.id] } : { ...row }
 					}),
-					filterOn: true
+					filterOn: true,
 				}
 			case 'SELECT_ROW':
 				stateCopy = { ...state }
@@ -296,7 +296,7 @@ export const makeRender = <T extends DataType>(
 	// eslint-disable-next-line
 	value: any,
 	render: (({ value, row }: { value: any; row: T }) => ReactNode) | undefined,
-	row: T
+	row: T,
 ): (() => React.ReactNode) => {
 	return render ? () => render({ row, value }) : () => value
 }
@@ -308,7 +308,7 @@ const makeHeaderRender = (label: string, render?: HeaderRenderType) => {
 export const useTable = <T extends DataType>(
 	columns: ColumnType<T>[],
 	data: T[],
-	options?: UseTableOptionsType<T>
+	options?: UseTableOptionsType<T>,
 ): UseTableReturnType<T> => {
 	const columnsWithSorting: ColumnStateType<T>[] = useMemo(
 		() =>
@@ -320,11 +320,11 @@ export const useTable = <T extends DataType>(
 					sort: column.sort,
 					sorted: {
 						on: false,
-						asc: false
-					}
+						asc: false,
+					},
 				}
 			}),
-		[columns]
+		[columns],
 	)
 	const columnsByName = useMemo(() => getColumnsByName(columnsWithSorting), [columnsWithSorting])
 
@@ -343,10 +343,10 @@ export const useTable = <T extends DataType>(
 							hidden: columnsByName[column].hidden,
 							field: column,
 							value,
-							render: makeRender(value, columnsByName[column].render, row)
+							render: makeRender(value, columnsByName[column].render, row),
 						}
 					})
-					.filter(cell => !cell.hidden)
+					.filter(cell => !cell.hidden),
 			}
 		})
 		return newData
@@ -370,8 +370,8 @@ export const useTable = <T extends DataType>(
 			canNext: true,
 			canPrev: false,
 			nextPage: noop,
-			prevPage: noop
-		}
+			prevPage: noop,
+		},
 	})
 
 	state.pagination.nextPage = useCallback(() => {
@@ -389,9 +389,9 @@ export const useTable = <T extends DataType>(
 				const label = column.label ? column.label : column.name
 				return {
 					...column,
-					render: makeHeaderRender(label, column.headerRender)
+					render: makeHeaderRender(label, column.headerRender),
 				}
-			})
+			}),
 		]
 	}, [state.columns])
 
@@ -413,6 +413,6 @@ export const useTable = <T extends DataType>(
 			dispatch({ type: 'TOGGLE_SORT', columnName, isAscOverride }),
 		setSearchString: (searchString: string) => dispatch({ type: 'SEARCH_STRING', searchString }),
 		pagination: state.pagination,
-		toggleAllState: state.toggleAllState
+		toggleAllState: state.toggleAllState,
 	}
 }

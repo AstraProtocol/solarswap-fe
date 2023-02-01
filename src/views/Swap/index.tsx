@@ -36,13 +36,13 @@ import {
 	useDerivedSwapInfo,
 	useSwapActionHandlers,
 	useSwapState,
-	useSingleTokenSwapInfo
+	useSingleTokenSwapInfo,
 } from '../../state/swap/hooks'
 import {
 	useExpertModeManager,
 	useUserSlippageTolerance,
 	useUserSingleHopOnly,
-	useExchangeChartManager
+	useExchangeChartManager,
 } from '../../state/user/hooks'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
@@ -65,7 +65,6 @@ import ButtonConnect from 'components/ButtonConnect'
 import CircleLoader from 'components/Loader/CircleLoader'
 import { SwapCallbackError } from './components/SwapCallbackError'
 
-
 export default function Swap() {
 	const router = useRouter()
 	const loadedUrlParams = useDefaultsFromURLSearch()
@@ -83,11 +82,11 @@ export default function Swap() {
 	// token warning stuff
 	const [loadedInputCurrency, loadedOutputCurrency] = [
 		useCurrency(loadedUrlParams?.inputCurrencyId),
-		useCurrency(loadedUrlParams?.outputCurrencyId)
+		useCurrency(loadedUrlParams?.outputCurrencyId),
 	]
 	const urlLoadedTokens: Token[] = useMemo(
 		() => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c instanceof Token) ?? [],
-		[loadedInputCurrency, loadedOutputCurrency]
+		[loadedInputCurrency, loadedOutputCurrency],
 	)
 
 	// dismiss warning if all imported tokens are in active lists
@@ -112,7 +111,7 @@ export default function Swap() {
 		typedValue,
 		recipient,
 		[Field.INPUT]: { currencyId: inputCurrencyId },
-		[Field.OUTPUT]: { currencyId: outputCurrencyId }
+		[Field.OUTPUT]: { currencyId: outputCurrencyId },
 	} = useSwapState()
 	const inputCurrency = useCurrency(inputCurrencyId)
 	const outputCurrency = useCurrency(outputCurrencyId)
@@ -121,7 +120,7 @@ export default function Swap() {
 		currencyBalances,
 		parsedAmount,
 		currencies,
-		inputError: swapInputError
+		inputError: swapInputError,
 	} = useDerivedSwapInfo(
 		independentField,
 		typedValue,
@@ -129,13 +128,13 @@ export default function Swap() {
 		inputCurrency,
 		outputCurrencyId,
 		outputCurrency,
-		recipient
+		recipient,
 	)
 
 	const {
 		wrapType,
 		execute: onWrap,
-		inputError: wrapInputError
+		inputError: wrapInputError,
 	} = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
 	const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
 	const trade = showWrap ? undefined : v2Trade
@@ -145,11 +144,11 @@ export default function Swap() {
 	const parsedAmounts = showWrap
 		? {
 				[Field.INPUT]: parsedAmount,
-				[Field.OUTPUT]: parsedAmount
+				[Field.OUTPUT]: parsedAmount,
 		  }
 		: {
 				[Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-				[Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
+				[Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
 		  }
 
 	const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
@@ -160,13 +159,13 @@ export default function Swap() {
 		(value: string) => {
 			onUserInput(Field.INPUT, value)
 		},
-		[onUserInput]
+		[onUserInput],
 	)
 	const handleTypeOutput = useCallback(
 		(value: string) => {
 			onUserInput(Field.OUTPUT, value)
 		},
-		[onUserInput]
+		[onUserInput],
 	)
 
 	// modal and loading
@@ -179,21 +178,21 @@ export default function Swap() {
 		tradeToConfirm: undefined,
 		attemptingTxn: false,
 		swapErrorMessage: undefined,
-		txHash: undefined
+		txHash: undefined,
 	})
 
 	const formattedAmounts = {
 		[independentField]: typedValue,
 		[dependentField]: showWrap
 			? parsedAmounts[independentField]?.toExact() ?? ''
-			: parsedAmounts[dependentField]?.toSignificant(6) ?? ''
+			: parsedAmounts[dependentField]?.toSignificant(6) ?? '',
 	}
 
 	const route = trade?.route
 	const userHasSpecifiedInputOutput = Boolean(
 		currencies[Field.INPUT] &&
 			currencies[Field.OUTPUT] &&
-			parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
+			parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0)),
 	)
 	const noRoute = !route
 
@@ -237,7 +236,7 @@ export default function Swap() {
 					attemptingTxn: false,
 					tradeToConfirm,
 					swapErrorMessage: error.message,
-					txHash: undefined
+					txHash: undefined,
 				})
 			})
 	}, [priceImpactWithoutFee, swapCallback, tradeToConfirm, t])
@@ -299,7 +298,7 @@ export default function Swap() {
 				setSwapWarningCurrency(null)
 			}
 		},
-		[onCurrencySelection]
+		[onCurrencySelection],
 	)
 
 	const handleMaxInput = useCallback(() => {
@@ -319,13 +318,13 @@ export default function Swap() {
 			}
 		},
 
-		[onCurrencySelection]
+		[onCurrencySelection],
 	)
 
 	const swapIsUnsupported = useIsTransactionUnsupported(currencies?.INPUT, currencies?.OUTPUT)
 
 	const [onPresentImportTokenWarningModal] = useModal(
-		<ImportTokenWarningModal tokens={importTokensNotInDefault} onCancel={() => router.push('/swap')} />
+		<ImportTokenWarningModal tokens={importTokensNotInDefault} onCancel={() => router.push('/swap')} />,
 	)
 
 	useEffect(() => {
@@ -350,7 +349,7 @@ export default function Swap() {
 		/>,
 		true,
 		true,
-		'confirmSwapModal'
+		'confirmSwapModal',
 	)
 
 	const hasAmount = Boolean(parsedAmount)
@@ -435,7 +434,7 @@ export default function Swap() {
 													}}
 													className={clsx(
 														styles.switchIconButton,
-														'link block-hor-center contrast-bg-color-10 padding-xs border radius-sm'
+														'link block-hor-center contrast-bg-color-10 padding-xs border radius-sm',
 													)}
 												>
 													<Icon icon={IconEnum.ICON_DOWN} classes={styles.iconDown} />
@@ -451,7 +450,7 @@ export default function Swap() {
 														id="add-recipient-button"
 														classes={{
 															color: 'secondary-color-normal',
-															other: 'text text-sm'
+															other: 'text text-sm',
 														}}
 														onClick={() => onChangeRecipient('')}
 													>
@@ -480,14 +479,14 @@ export default function Swap() {
 												<Row
 													style={{
 														padding: '0 2rem',
-														alignItems: 'center'
+														alignItems: 'center',
 													}}
 												>
 													<Icon icon={IconEnum.ICON_DOWN} />
 													<NormalButton
 														classes={{
 															color: 'secondary-color-normal',
-															other: 'text text-sm'
+															other: 'text text-sm',
 														}}
 														variant="text"
 														id="remove-recipient-button"
@@ -587,7 +586,7 @@ export default function Swap() {
 														t('Enabled')
 													) : (
 														t('Enable %asset%', {
-															asset: currencies[Field.INPUT]?.symbol ?? ''
+															asset: currencies[Field.INPUT]?.symbol ?? '',
 														})
 													)}
 												</NormalButton>
@@ -601,7 +600,7 @@ export default function Swap() {
 																tradeToConfirm: trade,
 																attemptingTxn: false,
 																swapErrorMessage: undefined,
-																txHash: undefined
+																txHash: undefined,
 															})
 															onPresentConfirmModal()
 														}
@@ -637,7 +636,7 @@ export default function Swap() {
 															tradeToConfirm: trade,
 															attemptingTxn: false,
 															swapErrorMessage: undefined,
-															txHash: undefined
+															txHash: undefined,
 														})
 														onPresentConfirmModal()
 													}

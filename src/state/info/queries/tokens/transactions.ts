@@ -136,7 +136,7 @@ interface TransactionResults {
 const fetchTokenTransactions = async (address: string): Promise<{ data?: Transaction[]; error: boolean }> => {
 	try {
 		const data = await infoClient.request<TransactionResults>(TOKEN_TRANSACTIONS, {
-			address
+			address,
 		})
 		const mints0 = data.mintsAs0.map(mapMints)
 		const mints1 = data.mintsAs1.map(mapMints)
@@ -151,7 +151,7 @@ const fetchTokenTransactions = async (address: string): Promise<{ data?: Transac
 	} catch (error) {
 		console.error(`Failed to fetch transactions for token ${address}`, error)
 		return {
-			error: true
+			error: true,
 		}
 	}
 }

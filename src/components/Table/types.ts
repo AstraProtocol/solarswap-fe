@@ -34,27 +34,27 @@ export type HeaderType<T> = {
 	render: () => React.ReactNode
 }
 
-export type DataType = { [key: string]: any };
+export type DataType = { [key: string]: any }
 
 export type ColumnByNamesType<T> = {
-  [key: string]: ColumnType<T>;
-};
+	[key: string]: ColumnType<T>
+}
 
-export type RenderFunctionType<T> = ({ value, row }: RenderFunctionArgsType<T>) => React.ReactNode | undefined;
+export type RenderFunctionType<T> = ({ value, row }: RenderFunctionArgsType<T>) => React.ReactNode | undefined
 
 type RenderFunctionArgsType<T> = {
 	value: any
 	row: T
 }
 
-export type ColumnByNameType<T> = Omit<Required<ColumnType<T>>, "name" | "sort">;
+export type ColumnByNameType<T> = Omit<Required<ColumnType<T>>, 'name' | 'sort'>
 
 export interface RowType<T extends DataType> {
-  id: number;
-  cells: CellType[];
-  hidden?: boolean;
-  selected?: boolean;
-  original: T;
+	id: number
+	cells: CellType[]
+	hidden?: boolean
+	selected?: boolean
+	original: T
 }
 
 export type CellType = {
@@ -63,77 +63,77 @@ export type CellType = {
 }
 
 export interface UseTableTypeParams<T extends DataType> {
-  columns: ColumnType<T>[];
-  data: T[];
-  options?: {
-    sortable?: boolean;
-    selectable?: boolean;
-    filter?: (row: RowType<T>[]) => RowType<T>[];
-    filterOn?: boolean;
-  };
+	columns: ColumnType<T>[]
+	data: T[]
+	options?: {
+		sortable?: boolean
+		selectable?: boolean
+		filter?: (row: RowType<T>[]) => RowType<T>[]
+		filterOn?: boolean
+	}
 }
 
 export interface UseTablePropsType<T> {
-  columns: ColumnType<T>[];
-  data: T[];
-  options?: {
-    sortable?: boolean;
-    selectable?: boolean;
-    filter?: (row: RowType<T>[]) => RowType<T>[];
-  };
+	columns: ColumnType<T>[]
+	data: T[]
+	options?: {
+		sortable?: boolean
+		selectable?: boolean
+		filter?: (row: RowType<T>[]) => RowType<T>[]
+	}
 }
 
 export interface UseTableOptionsType<T> {
-  sortable?: boolean;
-  selectable?: boolean;
-  pagination?: boolean;
-  sortColumn?: string;
-  filter?: (row: RowType<T>[]) => RowType<T>[];
+	sortable?: boolean
+	selectable?: boolean
+	pagination?: boolean
+	sortColumn?: string
+	filter?: (row: RowType<T>[]) => RowType<T>[]
 }
 
 export interface UseTableReturnType<T> {
-  headers: HeaderType<T>[];
-  originalRows: RowType<T>[];
-  rows: RowType<T>[];
-  selectedRows: RowType<T>[];
-  dispatch: React.Dispatch<TableAction<T>>;
-  toggleSort: (columnName: string, isAscOverride?: boolean) => void;
-  selectRow: (id: number) => void;
-  toggleAll: () => void;
-  setSearchString: (searchString: string) => void;
-  toggleAllState: boolean;
-  pagination: PaginatorType;
+	headers: HeaderType<T>[]
+	originalRows: RowType<T>[]
+	rows: RowType<T>[]
+	selectedRows: RowType<T>[]
+	dispatch: React.Dispatch<TableAction<T>>
+	toggleSort: (columnName: string, isAscOverride?: boolean) => void
+	selectRow: (id: number) => void
+	toggleAll: () => void
+	setSearchString: (searchString: string) => void
+	toggleAllState: boolean
+	pagination: PaginatorType
 }
 
 type PaginatorType = {
-  nextPage: () => void;
-  prevPage: () => void;
-  page: number;
-  perPage: number;
-  canNext: boolean;
-  canPrev: boolean;
-};
+	nextPage: () => void
+	prevPage: () => void
+	page: number
+	perPage: number
+	canNext: boolean
+	canPrev: boolean
+}
 
 export type TableState<T extends DataType> = {
-  columnsByName: ColumnByNamesType<T>;
-  columns: ColumnStateType<T>[];
-  rows: RowType<T>[];
-  originalRows: RowType<T>[];
-  selectedRows: RowType<T>[];
-  filterOn: boolean;
-  sortColumn: string | null | undefined;
-  toggleAllState: boolean;
-  pagination: PaginatorType;
-  paginationEnabled: boolean;
-};
+	columnsByName: ColumnByNamesType<T>
+	columns: ColumnStateType<T>[]
+	rows: RowType<T>[]
+	originalRows: RowType<T>[]
+	selectedRows: RowType<T>[]
+	filterOn: boolean
+	sortColumn: string | null | undefined
+	toggleAllState: boolean
+	pagination: PaginatorType
+	paginationEnabled: boolean
+}
 
 export type TableAction<T extends DataType> =
-  | { type: "TOGGLE_SORT"; columnName: string; isAscOverride?: boolean }
-  | { type: "SELECT_ROW"; rowId: number }
-  | { type: "GLOBAL_FILTER"; filter: (row: RowType<T>[]) => RowType<T>[] }
-  | { type: "SEARCH_STRING"; searchString: string }
-  | { type: "GLOBAL_FILTER_OFF" }
-  | { type: "SET_ROWS"; data: RowType<T>[] }
-  | { type: "NEXT_PAGE" }
-  | { type: "PREV_PAGE" }
-  | { type: "TOGGLE_ALL" };
+	| { type: 'TOGGLE_SORT'; columnName: string; isAscOverride?: boolean }
+	| { type: 'SELECT_ROW'; rowId: number }
+	| { type: 'GLOBAL_FILTER'; filter: (row: RowType<T>[]) => RowType<T>[] }
+	| { type: 'SEARCH_STRING'; searchString: string }
+	| { type: 'GLOBAL_FILTER_OFF' }
+	| { type: 'SET_ROWS'; data: RowType<T>[] }
+	| { type: 'NEXT_PAGE' }
+	| { type: 'PREV_PAGE' }
+	| { type: 'TOGGLE_ALL' }

@@ -7,7 +7,7 @@ const useModal = (
 	modal: React.ReactNode,
 	closeOnOverlayClick = true,
 	updateOnPropsChange = false,
-	modalId = 'defaultNodeId'
+	modalId = 'defaultNodeId',
 ): [Handler, Handler] => {
 	const { isOpen, nodeId, modalNode, setModalNode, onPresent, onDismiss, setCloseOnOverlayClick } =
 		useContext(Context)

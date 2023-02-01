@@ -10,8 +10,8 @@ describe('maxAmountSpend', () => {
 		expect(
 			JSBI.greaterThan(
 				maxAmountSpend(CurrencyAmount.ether(JSBI.exponentiate(JSBI.BigInt(100), JSBI.BigInt(16)))).raw,
-				JSBI.BigInt(0)
-			)
+				JSBI.BigInt(0),
+			),
 		).toBeTruthy()
 	})
 

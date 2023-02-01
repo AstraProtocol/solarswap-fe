@@ -4,7 +4,7 @@ import {
 	useExpertModeManager,
 	useSubgraphHealthIndicatorManager,
 	useUserExpertModeAcknowledgementShow,
-	useUserSingleHopOnly
+	useUserSingleHopOnly,
 } from 'state/user/hooks'
 import { useTranslation } from 'contexts/Localization'
 import { useSwapActionHandlers } from 'state/swap/hooks'
@@ -82,7 +82,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						<span className="text text-base text-bold margin-right-xs">{t('Expert Mode')}</span>
 						<QuestionHelper
 							text={t(
-								'Bypasses confirmation modals and allows high slippage trades. Use at your own risk.'
+								'Bypasses confirmation modals and allows high slippage trades. Use at your own risk.',
 							)}
 							placement="top"
 						/>
@@ -115,7 +115,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						</span>
 						<QuestionHelper
 							text={t(
-								'Turn on NFT market subgraph health indicator all the time. Default is to show the indicator only when the network is delayed'
+								'Turn on NFT market subgraph health indicator all the time. Default is to show the indicator only when the network is delayed',
 							)}
 							placement="top"
 						/>

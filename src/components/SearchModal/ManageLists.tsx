@@ -69,7 +69,7 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 				</NormalButton>
 			)}
 		</div>,
-		{ placement: 'right-end', trigger: 'click' }
+		{ placement: 'right-end', trigger: 'click' },
 	)
 
 	if (!list) return null
@@ -113,11 +113,10 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 	)
 })
 
-
 function ManageLists({
 	setModalView,
 	setImportList,
-	setListUrl
+	setListUrl,
 }: {
 	setModalView: (view: CurrencyModalView) => void
 	setImportList: (list: TokenList) => void

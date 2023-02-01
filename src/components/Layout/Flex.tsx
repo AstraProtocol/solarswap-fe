@@ -20,7 +20,7 @@ export const FlexGap = ({ children, gap, rowGap, columnGap, ...style }: FlexGapP
 			gap,
 			rowGap: rowGap,
 			columnGap: columnGap,
-			...style
+			...style,
 		}}
 	>
 		{children}

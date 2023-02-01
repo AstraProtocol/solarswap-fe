@@ -31,24 +31,24 @@ export function useMintActionHandlers(noLiquidity: boolean | undefined): {
 		(typedValue: string) => {
 			dispatch(typeInput({ field: Field.CURRENCY_A, typedValue, noLiquidity: noLiquidity === true }))
 		},
-		[dispatch, noLiquidity]
+		[dispatch, noLiquidity],
 	)
 	const onFieldBInput = useCallback(
 		(typedValue: string) => {
 			dispatch(typeInput({ field: Field.CURRENCY_B, typedValue, noLiquidity: noLiquidity === true }))
 		},
-		[dispatch, noLiquidity]
+		[dispatch, noLiquidity],
 	)
 
 	return {
 		onFieldAInput,
-		onFieldBInput
+		onFieldBInput,
 	}
 }
 
 export function useDerivedMintInfo(
 	currencyA: Currency | undefined,
-	currencyB: Currency | undefined
+	currencyB: Currency | undefined,
 ): {
 	dependentField: Field
 	currencies: { [field in Field]?: Currency }
@@ -74,9 +74,9 @@ export function useDerivedMintInfo(
 	const currencies: { [field in Field]?: Currency } = useMemo(
 		() => ({
 			[Field.CURRENCY_A]: currencyA ?? undefined,
-			[Field.CURRENCY_B]: currencyB ?? undefined
+			[Field.CURRENCY_B]: currencyB ?? undefined,
 		}),
-		[currencyA, currencyB]
+		[currencyA, currencyB],
 	)
 
 	// pair
@@ -90,11 +90,11 @@ export function useDerivedMintInfo(
 	// balances
 	const balances = useCurrencyBalances(account ?? undefined, [
 		currencies[Field.CURRENCY_A],
-		currencies[Field.CURRENCY_B]
+		currencies[Field.CURRENCY_B],
 	])
 	const currencyBalances: { [field in Field]?: CurrencyAmount } = {
 		[Field.CURRENCY_A]: balances[0],
-		[Field.CURRENCY_B]: balances[1]
+		[Field.CURRENCY_B]: balances[1],
 	}
 
 	// amounts
@@ -133,15 +133,15 @@ export function useDerivedMintInfo(
 		chainId,
 		currencyA,
 		currencyB,
-		pair
+		pair,
 	])
 
 	const parsedAmounts: { [field in Field]: CurrencyAmount | undefined } = useMemo(
 		() => ({
 			[Field.CURRENCY_A]: independentField === Field.CURRENCY_A ? independentAmount : dependentAmount,
-			[Field.CURRENCY_B]: independentField === Field.CURRENCY_A ? dependentAmount : independentAmount
+			[Field.CURRENCY_B]: independentField === Field.CURRENCY_A ? dependentAmount : independentAmount,
 		}),
-		[dependentAmount, independentAmount, independentField]
+		[dependentAmount, independentAmount, independentField],
 	)
 
 	const price = useMemo(() => {
@@ -152,7 +152,7 @@ export function useDerivedMintInfo(
 					currencyAAmount.currency,
 					currencyBAmount.currency,
 					currencyAAmount.raw,
-					currencyBAmount.raw
+					currencyBAmount.raw,
 				)
 			}
 			return undefined
@@ -166,7 +166,7 @@ export function useDerivedMintInfo(
 		const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts
 		const [tokenAmountA, tokenAmountB] = [
 			wrappedCurrencyAmount(currencyAAmount, chainId),
-			wrappedCurrencyAmount(currencyBAmount, chainId)
+			wrappedCurrencyAmount(currencyBAmount, chainId),
 		]
 		if (pair && totalSupply && tokenAmountA && tokenAmountB) {
 			try {
@@ -220,13 +220,13 @@ export function useDerivedMintInfo(
 		noLiquidity,
 		liquidityMinted,
 		poolTokenPercentage,
-		error
+		error,
 	}
 }
 
 export function useDerivedSingleMintInfo(
 	currencyIn: Currency | undefined, // tokenIn
-	currencyOut: Currency | undefined // tokenOut
+	currencyOut: Currency | undefined, // tokenOut
 ): {
 	dependentField: Field
 	currencies: { [field in Field]?: Currency }
@@ -254,9 +254,9 @@ export function useDerivedSingleMintInfo(
 	const currencies: { [field in Field]?: Currency } = useMemo(
 		() => ({
 			[independentField]: currencyIn ?? undefined,
-			[dependentField]: currencyOut ?? undefined
+			[dependentField]: currencyOut ?? undefined,
 		}),
-		[currencyIn, currencyOut, dependentField, independentField]
+		[currencyIn, currencyOut, dependentField, independentField],
 	)
 
 	// pair
@@ -275,7 +275,7 @@ export function useDerivedSingleMintInfo(
 		tokenIn?.address,
 		tokenOut?.address,
 		pairAddress,
-		independentAmount?.raw.toString()
+		independentAmount?.raw.toString(),
 	)
 
 	const noLiquidity: boolean =
@@ -286,20 +286,20 @@ export function useDerivedSingleMintInfo(
 
 	const currencyBalances: { [key: string]: CurrencyAmount } = {
 		[independentField]: balances[0],
-		[dependentField]: balances[1]
+		[dependentField]: balances[1],
 	}
 
 	const parsedAmounts: { [key: string]: CurrencyAmount | undefined } = useMemo(
 		() => ({
 			[independentField]: independentAmount,
-			[dependentField]: dependentAmount
+			[dependentField]: dependentAmount,
 		}),
-		[dependentAmount, dependentField, independentAmount, independentField]
+		[dependentAmount, dependentField, independentAmount, independentField],
 	)
 
 	const bestTradeExactOut = useTradeExactOut(
 		currencyIn,
-		tokenOut ? new TokenAmount(tokenOut, tokenOutAmount || '') : undefined
+		tokenOut ? new TokenAmount(tokenOut, tokenOutAmount || '') : undefined,
 	)
 
 	const { priceImpactWithoutFee } = computeTradePriceBreakdown(bestTradeExactOut)
@@ -316,12 +316,12 @@ export function useDerivedSingleMintInfo(
 			try {
 				const tokenAmounts = {
 					[independentField]: new TokenAmount(tokenIn, tokenInAmount || ''),
-					[dependentField]: new TokenAmount(tokenOut, tokenOutAmount || '')
+					[dependentField]: new TokenAmount(tokenOut, tokenOutAmount || ''),
 				}
 				return pair.getSingleLiquidityMinted(
 					totalSupply,
 					tokenAmounts[independentField],
-					tokenAmounts[dependentField]
+					tokenAmounts[dependentField],
 				)
 			} catch (err) {
 				console.error(err)
@@ -375,6 +375,6 @@ export function useDerivedSingleMintInfo(
 		poolTokenPercentage,
 		priceImpactWithoutFee,
 		priceImpactSeverity,
-		error
+		error,
 	}
 }

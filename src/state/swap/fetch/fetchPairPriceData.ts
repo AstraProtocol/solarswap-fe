@@ -10,7 +10,7 @@ import {
 	LastPairDayIdResponse,
 	LastPairHourIdResponse,
 	PairDayDatasResponse,
-	PairHoursDatasResponse
+	PairHoursDatasResponse,
 } from './types'
 import { getIdsByTimeWindow, getPairSequentialId } from './utils'
 import pairDayDatas from '../queries/pairDayDatas'
@@ -25,13 +25,13 @@ const fetchPairPriceData = async ({ pairId, timeWindow }: fetchPairDataParams) =
 			case PairDataTimeWindowEnum.DAY: {
 				const data = await requestWithTimeout<PairHoursDatasResponse>(client, pairHourDatas, {
 					pairId,
-					first: timeWindowIdsCountMapping[timeWindow]
+					first: timeWindowIdsCountMapping[timeWindow],
 				})
 				return { data, error: false }
 			}
 			case PairDataTimeWindowEnum.WEEK: {
 				const lastPairHourIdData = await requestWithTimeout<LastPairHourIdResponse>(client, lastPairHourId, {
-					pairId
+					pairId,
 				})
 				const lastId = lastPairHourIdData?.pairHourDatas ? lastPairHourIdData.pairHourDatas[0]?.id : null
 				if (!lastId) {
@@ -42,24 +42,24 @@ const fetchPairPriceData = async ({ pairId, timeWindow }: fetchPairDataParams) =
 					pairAddress: pairId,
 					pairLastId: pairHourId,
 					timeWindow,
-					idsCount: timeWindowIdsCountMapping[timeWindow]
+					idsCount: timeWindowIdsCountMapping[timeWindow],
 				})
 
 				const pairHoursData = await requestWithTimeout<PairHoursDatasResponse>(client, pairHourDatasByIds, {
-					pairIds: pairHourIds
+					pairIds: pairHourIds,
 				})
 				return { data: pairHoursData, error: false }
 			}
 			case PairDataTimeWindowEnum.MONTH: {
 				const data = await requestWithTimeout<PairHoursDatasResponse>(client, pairDayDatas, {
 					pairId,
-					first: timeWindowIdsCountMapping[timeWindow]
+					first: timeWindowIdsCountMapping[timeWindow],
 				})
 				return { data, error: false }
 			}
 			case PairDataTimeWindowEnum.YEAR: {
 				const lastPairDayIdData = await requestWithTimeout<LastPairDayIdResponse>(client, lastPairDayId, {
-					pairId
+					pairId,
 				})
 				const lastId = lastPairDayIdData?.pairDayDatas ? lastPairDayIdData.pairDayDatas[0]?.id : null
 				if (!lastId) {
@@ -70,10 +70,10 @@ const fetchPairPriceData = async ({ pairId, timeWindow }: fetchPairDataParams) =
 					pairAddress: pairId,
 					pairLastId,
 					timeWindow,
-					idsCount: timeWindowIdsCountMapping[timeWindow]
+					idsCount: timeWindowIdsCountMapping[timeWindow],
 				})
 				const pairDayData = await requestWithTimeout<PairDayDatasResponse>(client, pairDayDatasByIdsQuery, {
-					pairIds: pairDayIds
+					pairIds: pairDayIds,
 				})
 				return { data: pairDayData, error: false }
 			}

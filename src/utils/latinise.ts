@@ -1,8 +1,8 @@
 export const Latinise = {
 	latin_map: {
 		τ: 't',
-		Τ: 'T'
-	}
+		Τ: 'T',
+	},
 }
 
 export const latinise = (input: string) => {

@@ -1,23 +1,22 @@
 @use 'sass:color';
 
 @keyframes mountAnimation {
-    0% {
-      transform: translateX(-20%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  };
+	0% {
+		transform: translateX(-20%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
 
 @keyframes unmountAnimation {
-    0% {
-      transform: translateX(-10%);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-};
-
+	0% {
+		transform: translateX(-10%);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
 
 $maxMobileSize: 960px;
 $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
@@ -174,9 +173,6 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 	width: 90%;
 	height: 100%;
 	z-index: 100;
-	
-	
-
 }
 .hamburgerMenuContent {
 	margin-left: 15%;
@@ -219,8 +215,6 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 		margin-top: 4px !important;
 	}
 }
-
-
 
 .hamburgerActive {
 	transform: translateX(-50%);

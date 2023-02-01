@@ -65,7 +65,7 @@ function CurrencyRow({
 	onSelect,
 	isSelected,
 	otherSelected,
-	style
+	style,
 }: {
 	currency: Currency
 	onSelect: () => void
@@ -87,7 +87,7 @@ function CurrencyRow({
 			className={clsx(
 				`token-item-${key}`,
 				styles.currencyMenuItem,
-				(isSelected || otherSelected) && styles.currencyMenuItemDisabled
+				(isSelected || otherSelected) && styles.currencyMenuItemDisabled,
 			)}
 			onClick={() => (isSelected ? null : onSelect())}
 		>
@@ -116,7 +116,7 @@ export default function CurrencyList({
 	showETH,
 	showImportView,
 	setImportToken,
-	breakIndex
+	breakIndex,
 }: {
 	height: number
 	currencies: Currency[]
@@ -166,7 +166,7 @@ export default function CurrencyList({
 								</span>
 								<QuestionHelper
 									text={t(
-										"Tokens from inactive lists. Import specific tokens below or click 'Manage' to activate more lists."
+										"Tokens from inactive lists. Import specific tokens below or click 'Manage' to activate more lists.",
 									)}
 								/>
 							</div>
@@ -205,8 +205,8 @@ export default function CurrencyList({
 			onCurrencySelect,
 			t,
 			showImportView,
-			setImportToken
-		]
+			setImportToken,
+		],
 	)
 
 	const itemKey = useCallback((index: number, data: any) => currencyKey(data[index]), [])

@@ -32,7 +32,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
 				setVal(e.currentTarget.value.replace(/,/g, '.'))
 			}
 		},
-		[setVal]
+		[setVal],
 	)
 
 	const handleSelectMax = useCallback(() => {

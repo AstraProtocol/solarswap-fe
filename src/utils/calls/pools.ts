@@ -22,11 +22,11 @@ export const getActivePools = async (block?: number) => {
 	const blockNumber = block || (await simpleRpcProvider.getBlockNumber())
 	const startBlockCalls = eligiblePools.map(({ contractAddress }) => ({
 		address: getAddress(contractAddress),
-		name: 'startBlock'
+		name: 'startBlock',
 	}))
 	const endBlockCalls = eligiblePools.map(({ contractAddress }) => ({
 		address: getAddress(contractAddress),
-		name: 'bonusEndBlock'
+		name: 'bonusEndBlock',
 	}))
 	const startBlocks = await multicall(sousChefV2, startBlockCalls)
 	const endBlocks = await multicall(sousChefV2, endBlockCalls)

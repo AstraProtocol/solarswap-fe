@@ -31,20 +31,20 @@ const Layout: React.FC<Props> = props => {
 				{ label: t('About us'), link: 'https://astranaut.io' },
 				{ label: t('Explorer'), link: 'https://explorer.astranaut.io' },
 				{ label: t('Bridge'), link: 'https://bridge.astranaut.io' },
-				{ label: t('DEX'), link: 'https://solarswap.io' }
+				{ label: t('DEX'), link: 'https://solarswap.io' },
 			],
 			[
 				{ label: t('Documents'), link: 'https://docs.astranaut.io' },
-				{ label: t('Whitepaper'), link: 'https://astranaut.io' }
+				{ label: t('Whitepaper'), link: 'https://astranaut.io' },
 			],
 			[
 				{ label: t('Privacy and Policy'), link: 'https://astranaut.io/' },
 				{ label: t('Term and Services'), link: 'https://astranaut.io/' },
 				{ label: t('FAQs'), link: 'https://astranaut.io/' },
-				{ label: t('Live Support'), link: 'https://astranaut.io/' }
-			]
+				{ label: t('Live Support'), link: 'https://astranaut.io/' },
+			],
 		],
-		[]
+		[],
 	)
 
 	useEffect(() => {

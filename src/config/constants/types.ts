@@ -25,7 +25,7 @@ export interface SerializedToken {
 
 export enum PoolIds {
 	poolBasic = 'poolBasic',
-	poolUnlimited = 'poolUnlimited'
+	poolUnlimited = 'poolUnlimited',
 }
 
 // interface IfoPoolInfo {
@@ -58,7 +58,7 @@ export enum PoolCategory {
 	'COMMUNITY' = 'Community',
 	'CORE' = 'Core',
 	'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
-	'AUTO' = 'Auto'
+	'AUTO' = 'Auto',
 }
 
 interface FarmConfigBaseProps {
@@ -154,7 +154,7 @@ export enum LotteryStatus {
 	PENDING = 'pending',
 	OPEN = 'open',
 	CLOSE = 'close',
-	CLAIMABLE = 'claimable'
+	CLAIMABLE = 'claimable',
 }
 
 export interface LotteryTicket {
@@ -191,7 +191,7 @@ export enum AuctionStatus {
 	Pending, // Auction is scheduled but not live yet (i.e. waiting for startBlock)
 	Open, // Auction is open for bids
 	Finished, // Auction end block is reached, bidding is not possible
-	Closed // Auction was closed in smart contract
+	Closed, // Auction was closed in smart contract
 }
 
 export interface Auction {
@@ -230,5 +230,5 @@ export enum FetchStatus {
 	Idle = 'IDLE',
 	Fetching = 'FETCHING',
 	Fetched = 'FETCHED',
-	Failed = 'FAILED'
+	Failed = 'FAILED',
 }

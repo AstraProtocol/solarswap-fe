@@ -1,24 +1,23 @@
-
-@keyframes expandAnimation{
-  from {
-    max-height: 0px;
-  }
-  to {
-    max-height: 500px;
-  }
+@keyframes expandAnimation {
+	from {
+		max-height: 0px;
+	}
+	to {
+		max-height: 500px;
+	}
 }
 
 @keyframes collapseAnimation {
-  from {
-    max-height: 500px;
-  }
-  to {
-    max-height: 0px;
-  }
+	from {
+		max-height: 500px;
+	}
+	to {
+		max-height: 0px;
+	}
 }
 // ------------------- ActionPanel --------------
 .actionPanelContainer {
-  animation: collapseAnimation 300ms linear forwards;
+	animation: collapseAnimation 300ms linear forwards;
 	overflow: hidden;
 	background: var(--same-color-theme-70);
 	display: flex;
@@ -26,9 +25,9 @@
 	flex-direction: column-reverse;
 	padding: 24px;
 
-  &.expanded {
-   animation: expandAnimation 300ms linear forwards;
-  }
+	&.expanded {
+		animation: expandAnimation 300ms linear forwards;
+	}
 
 	@media only screen and (min-width: 1080px) {
 		flex-direction: row;
@@ -36,31 +35,30 @@
 	}
 }
 .actionPanelActionContainer {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  @media only screen and (min-width: 576px) {
-    flex-direction: row;
-    align-items: center;
-    flex-grow: 1;
-    flex-basis: 0;
-  }
+	@media only screen and (min-width: 576px) {
+		flex-direction: row;
+		align-items: center;
+		flex-grow: 1;
+		flex-basis: 0;
+	}
 }
 
-
 .stakeContainer {
-  // color: ${({ theme }) => theme.colors.text};
-  	align-items: center;
-  	display: flex;
-  	justify-content: space-between;
-  
-  	@media only screen and (min-width: 576px) {
-  		justify-content: flex-start;
-  	}
+	// color: ${({ theme }) => theme.colors.text};
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+
+	@media only screen and (min-width: 576px) {
+		justify-content: flex-start;
+	}
 }
 
 .tagContainer {
-  display: flex;
+	display: flex;
 	align-items: center;
 	margin-top: 25px;
 
@@ -81,7 +79,7 @@
 }
 
 .valueContainer {
-  display: block;
+	display: block;
 
 	@media screen and (min-width: 968px) {
 		display: none;
@@ -90,26 +88,24 @@
 // ------------------- ActionPanel --------------
 
 .actionContainer {
-    padding: 16px;
-    border: 2px solid var(--border-color);
-    border-radius: 16px;
-    flex-grow: 1;
-    flex-basis: 0;
-    margin-bottom: 16px;
-  
-    @media only screen and (min-width: 576px) {
-      margin-left: 12px;
-      margin-right: 12px;
-      margin-bottom: 0;
-      height: 130px;
-    }
-  
-    @media only screen and (min-width: 1080px) {
-      margin-left: 48px;
-      margin-right: 0;
-      margin-bottom: 0;
-      height: 130px;
-    }
+	padding: 16px;
+	border: 2px solid var(--border-color);
+	border-radius: 16px;
+	flex-grow: 1;
+	flex-basis: 0;
+	margin-bottom: 16px;
+
+	@media only screen and (min-width: 576px) {
+		margin-left: 12px;
+		margin-right: 12px;
+		margin-bottom: 0;
+		height: 130px;
+	}
+
+	@media only screen and (min-width: 1080px) {
+		margin-left: 48px;
+		margin-right: 0;
+		margin-bottom: 0;
+		height: 130px;
+	}
 }
-
-

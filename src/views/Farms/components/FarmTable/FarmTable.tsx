@@ -23,7 +23,7 @@ const FarmTable: React.FC<ITableProps> = props => {
 
 	const scrollToTop = (): void => {
 		tableWrapperEl.current.scrollIntoView({
-			behavior: 'smooth'
+			behavior: 'smooth',
 		})
 	}
 

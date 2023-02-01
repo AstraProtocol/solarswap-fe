@@ -50,7 +50,7 @@ const RoiCalculatorModal: React.FC<RoiCalculatorModalProps> = ({
 	earningTokenSymbol = 'ASA',
 	autoCompoundFrequency = 0,
 	performanceFee = 0,
-	isFarm = false
+	isFarm = false,
 }) => {
 	const { t } = useTranslation()
 	const { account } = useActiveWeb3React()
@@ -65,7 +65,7 @@ const RoiCalculatorModal: React.FC<RoiCalculatorModalProps> = ({
 		toggleEditingCurrency,
 		setCompoundingFrequency,
 		setCalculatorMode,
-		setTargetRoi
+		setTargetRoi,
 	} = useRoiCalculatorReducer(stakingTokenPrice, earningTokenPrice, apr, autoCompoundFrequency, performanceFee)
 
 	const { compounding, activeCompoundingIndex, stakingDuration, editingCurrency } = state.controls
@@ -90,9 +90,9 @@ const RoiCalculatorModal: React.FC<RoiCalculatorModalProps> = ({
 			? t('“My Balance” here includes both LP Tokens in your wallet, and LP Tokens already staked in this farm.')
 			: t(
 					'“My Balance” here includes both %assetSymbol% in your wallet, and %assetSymbol% already staked in this pool.',
-					{ assetSymbol: stakingTokenSymbol }
+					{ assetSymbol: stakingTokenSymbol },
 			  ),
-		{ placement: 'top-end', tooltipOffset: [20, 10] }
+		{ placement: 'top-end', tooltipOffset: [20, 10] },
 	)
 
 	const onBalanceFocus = () => {
@@ -140,7 +140,7 @@ const RoiCalculatorModal: React.FC<RoiCalculatorModalProps> = ({
 							variant="default"
 							onClick={() =>
 								setPrincipalFromUSDValue(
-									getBalanceNumber(stakingTokenBalance.times(stakingTokenPrice)).toString()
+									getBalanceNumber(stakingTokenBalance.times(stakingTokenPrice)).toString(),
 								)
 							}
 						>

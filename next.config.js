@@ -1,6 +1,6 @@
 const { withSentryConfig } = require('@sentry/nextjs')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true'
+	enabled: process.env.ANALYZE === 'true',
 })
 
 const sentryWebpackPluginOptions =
@@ -17,23 +17,23 @@ const sentryWebpackPluginOptions =
 				// Set to env false will skip deploying release on Sentry except Production
 				// https://github.com/getsentry/sentry-webpack-plugin/blob/master/src/index.js#L522
 				deploy: {
-					env: process.env.VERCEL_ENV
-				}
+					env: process.env.VERCEL_ENV,
+				},
 				// For all available options, see:
 				// https://github.com/getsentry/sentry-webpack-plugin#options.
 		  }
 		: {
 				silent: true, // Suppresses all logs
-				dryRun: !process.env.SENTRY_AUTH_TOKEN
+				dryRun: !process.env.SENTRY_AUTH_TOKEN,
 		  }
 
 /** @type {import('next').NextConfig} */
 const config = {
 	compiler: {
-		styledComponents: true
+		styledComponents: true,
 	},
 	experimental: {
-		scrollRestoration: true
+		scrollRestoration: true,
 	},
 	reactStrictMode: true,
 	images: {
@@ -41,29 +41,29 @@ const config = {
 			{
 				protocol: 'https',
 				hostname: '*',
-				pathname: '/**'
+				pathname: '/**',
 			},
 			{
 				protocol: 'http',
 				hostname: 'localhost',
-				pathname: '/**'
-			}
-		]
+				pathname: '/**',
+			},
+		],
 	},
 	async rewrites() {
 		return [
 			{
 				source: '/info/token/:address',
-				destination: '/info/tokens/:address'
+				destination: '/info/tokens/:address',
 			},
 			{
 				source: '/info/pool/:address',
-				destination: '/info/pools/:address'
+				destination: '/info/pools/:address',
 			},
 			{
 				source: '/info/pair/:address',
-				destination: '/info/pools/:address'
-			}
+				destination: '/info/pools/:address',
+			},
 		]
 	},
 	async redirects() {
@@ -71,45 +71,45 @@ const config = {
 			{
 				source: '/send',
 				destination: '/swap',
-				permanent: true
+				permanent: true,
 			},
 			{
 				source: '/swap/:outputCurrency',
 				destination: '/swap?outputCurrency=:outputCurrency',
-				permanent: true
+				permanent: true,
 			},
 			{
 				source: '/create/:currency*',
 				destination: '/add/:currency*',
-				permanent: true
+				permanent: true,
 			},
 			{
 				source: '/farms/archived',
 				destination: '/farms/history',
-				permanent: true
+				permanent: true,
 			},
 			{
 				source: '/pool',
 				destination: '/liquidity',
-				permanent: true
+				permanent: true,
 			},
 			{
 				source: '/staking',
 				destination: '/pools',
-				permanent: true
+				permanent: true,
 			},
 			{
 				source: '/syrup',
 				destination: '/pools',
-				permanent: true
+				permanent: true,
 			},
 			{
 				source: '/collectibles',
 				destination: '/nfts',
-				permanent: true
-			}
+				permanent: true,
+			},
 		]
-	}
+	},
 }
 
 module.exports = withBundleAnalyzer(withSentryConfig(config, sentryWebpackPluginOptions))

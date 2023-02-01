@@ -1007,7 +1007,7 @@
 	"1Y": "1Y",
 	"5Y": "5Y",
 	"Annual ROI at current rates": "Taunang ROI sa kasaluyang mga rate",
-	"Default Transaction Speed (GWEI)": "Default na Transaction Speed (GWEI)",
+	"Default Transaction Speed (%gasUnit%)": "Default na Transaction Speed (%gasUnit%)",
 	"Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees": "Ina-adjust ang presyo ng gas (transaction fee) para sa iyong transaksyon. Mataas na GWEI = mabilis na tulin = mataas na singilin",
 	"Standard (%gasPrice%)": "Standard (%gasPrice%)",
 	"Fast (%gasPrice%)": "Mabilis (%gasPrice%)",

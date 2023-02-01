@@ -44,9 +44,9 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
 			withToast(
 				{
 					title: t('Contract Enabled'),
-					moreInfo: <ToastDescriptionWithTx txHash={receipt.transactionHash} />
+					moreInfo: <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
 				},
-				{ type: 'success' }
+				{ type: 'success' },
 			)
 			dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
 		}

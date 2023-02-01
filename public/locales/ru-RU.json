@@ -1007,7 +1007,7 @@
 	"1Y": "1Г",
 	"5Y": "5Л",
 	"Annual ROI at current rates": "ROI по текущему курсу",
-	"Default Transaction Speed (GWEI)": "Скорость транзакции по умолчанию (GWEI)",
+	"Default Transaction Speed (%gasUnit%)": "Скорость транзакции по умолчанию (%gasUnit%)",
 	"Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees": "Определите цену газа (комиссию за транзакцию) для транзакции. Выше GWEI = выше скорость = выше комиссия.",
 	"Standard (%gasPrice%)": "Стандартная (%gasPrice%)",
 	"Fast (%gasPrice%)": "Быстрая (%gasPrice%)",

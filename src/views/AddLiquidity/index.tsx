@@ -64,7 +64,7 @@ export default function AddLiquidity() {
 	const oneCurrencyIsWETH = Boolean(
 		chainId &&
 			((currencyA && currencyEquals(currencyA, WETH[chainId])) ||
-				(currencyB && currencyEquals(currencyB, WETH[chainId])))
+				(currencyB && currencyEquals(currencyB, WETH[chainId]))),
 	)
 
 	const expertMode = useIsExpertMode()
@@ -82,7 +82,7 @@ export default function AddLiquidity() {
 		noLiquidity,
 		liquidityMinted,
 		poolTokenPercentage,
-		error
+		error,
 	} = useDerivedMintInfo(currencyA ?? undefined, currencyB ?? undefined)
 
 	const { onFieldAInput, onFieldBInput } = useMintActionHandlers(noLiquidity)
@@ -97,7 +97,7 @@ export default function AddLiquidity() {
 	}>({
 		attemptingTxn: false,
 		liquidityErrorMessage: undefined,
-		txHash: undefined
+		txHash: undefined,
 	})
 
 	// txn values
@@ -107,7 +107,7 @@ export default function AddLiquidity() {
 	// get formatted amounts
 	const formattedAmounts = {
 		[independentField]: typedValue,
-		[dependentField]: noLiquidity ? otherTypedValue : parsedAmounts[dependentField]?.toSignificant(6) ?? ''
+		[dependentField]: noLiquidity ? otherTypedValue : parsedAmounts[dependentField]?.toSignificant(6) ?? '',
 	}
 
 	// get the max amounts user can add
@@ -115,20 +115,20 @@ export default function AddLiquidity() {
 		(accumulator, field) => {
 			return {
 				...accumulator,
-				[field]: maxAmountSpend(currencyBalances[field])
+				[field]: maxAmountSpend(currencyBalances[field]),
 			}
 		},
-		{}
+		{},
 	)
 
 	const atMaxAmounts: { [field in Field]?: TokenAmount } = [Field.CURRENCY_A, Field.CURRENCY_B].reduce(
 		(accumulator, field) => {
 			return {
 				...accumulator,
-				[field]: maxAmounts[field]?.equalTo(parsedAmounts[field] ?? '0')
+				[field]: maxAmounts[field]?.equalTo(parsedAmounts[field] ?? '0'),
 			}
 		},
-		{}
+		{},
 	)
 
 	// check whether the user has approved the router on the tokens
@@ -148,7 +148,7 @@ export default function AddLiquidity() {
 
 		const amountsMin = {
 			[Field.CURRENCY_A]: calculateSlippageAmount(parsedAmountA, noLiquidity ? 0 : allowedSlippage)[0],
-			[Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, noLiquidity ? 0 : allowedSlippage)[0]
+			[Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, noLiquidity ? 0 : allowedSlippage)[0],
 		}
 
 		let estimate
@@ -165,7 +165,7 @@ export default function AddLiquidity() {
 				amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
 				amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // eth min
 				account,
-				deadline.toHexString()
+				deadline.toHexString(),
 			]
 			value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
 		} else {
@@ -179,7 +179,7 @@ export default function AddLiquidity() {
 				amountsMin[Field.CURRENCY_A].toString(),
 				amountsMin[Field.CURRENCY_B].toString(),
 				account,
-				deadline.toHexString()
+				deadline.toHexString(),
 			]
 			value = null
 		}
@@ -190,7 +190,7 @@ export default function AddLiquidity() {
 				method(...args, {
 					...(value ? { value } : {}),
 					gasLimit: calculateGasMargin(estimatedGasLimit),
-					gasPrice
+					gasPrice,
 				}).then(response => {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 
@@ -199,9 +199,9 @@ export default function AddLiquidity() {
 							currencies[Field.CURRENCY_A]?.symbol
 						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${
 							currencies[Field.CURRENCY_B]?.symbol
-						}`
+						}`,
 					})
-				})
+				}),
 			)
 			.catch(err => {
 				if (err && err.code !== 4001) {
@@ -212,7 +212,7 @@ export default function AddLiquidity() {
 					attemptingTxn: false,
 					liquidityErrorMessage:
 						err && err.code !== 4001 ? `Add Liquidity failed: ${err.message}` : undefined,
-					txHash: undefined
+					txHash: undefined,
 				})
 			})
 	}
@@ -221,7 +221,7 @@ export default function AddLiquidity() {
 		amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(6) ?? '',
 		symbolA: currencies[Field.CURRENCY_A]?.symbol ?? '',
 		amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(6) ?? '',
-		symbolB: currencies[Field.CURRENCY_B]?.symbol ?? ''
+		symbolB: currencies[Field.CURRENCY_B]?.symbol ?? '',
 	})
 
 	const handleCurrencyASelect = useCallback(
@@ -235,7 +235,7 @@ export default function AddLiquidity() {
 				router.replace(`/add/${newCurrencyIdA}`, undefined, { shallow: true })
 			}
 		},
-		[currencyIdB, router, currencyIdA]
+		[currencyIdB, router, currencyIdA],
 	)
 	const handleCurrencyBSelect = useCallback(
 		(currencyB_: Currency) => {
@@ -250,7 +250,7 @@ export default function AddLiquidity() {
 				router.replace(`/add/${currencyIdA || 'ASA'}/${newCurrencyIdB}`, undefined, { shallow: true })
 			}
 		},
-		[currencyIdA, router, currencyIdB]
+		[currencyIdA, router, currencyIdB],
 	)
 
 	const handleDismissConfirmation = useCallback(() => {
@@ -282,7 +282,7 @@ export default function AddLiquidity() {
 		/>,
 		true,
 		true,
-		'addLiquidityModal'
+		'addLiquidityModal',
 	)
 
 	return (
@@ -293,7 +293,7 @@ export default function AddLiquidity() {
 						title={t('Add Liquidity')}
 						subtitle={t('Add liquidity to receive LP tokens')}
 						helper={t(
-							'Liquidity providers earn a 0.2% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.'
+							'Liquidity providers earn a 0.2% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.',
 						)}
 						backTo="/liquidity"
 					/>
@@ -391,18 +391,19 @@ export default function AddLiquidity() {
 														onClick={approveACallback}
 														disabled={approvalA === ApprovalState.PENDING}
 														style={{
-															width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%'
+															width:
+																approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
 														}}
 													>
 														{approvalA === ApprovalState.PENDING ? (
 															<Dots>
 																{t('Enabling %asset%', {
-																	asset: currencies[Field.CURRENCY_A]?.symbol
+																	asset: currencies[Field.CURRENCY_A]?.symbol,
 																})}
 															</Dots>
 														) : (
 															t('Enable %asset%', {
-																asset: currencies[Field.CURRENCY_A]?.symbol
+																asset: currencies[Field.CURRENCY_A]?.symbol,
 															})
 														)}
 													</NormalButton>
@@ -413,18 +414,19 @@ export default function AddLiquidity() {
 														onClick={approveBCallback}
 														disabled={approvalB === ApprovalState.PENDING}
 														style={{
-															width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%'
+															width:
+																approvalA !== ApprovalState.APPROVED ? '48%' : '100%',
 														}}
 													>
 														{approvalB === ApprovalState.PENDING ? (
 															<Dots>
 																{t('Enabling %asset%', {
-																	asset: currencies[Field.CURRENCY_B]?.symbol
+																	asset: currencies[Field.CURRENCY_B]?.symbol,
 																})}
 															</Dots>
 														) : (
 															t('Enable %asset%', {
-																asset: currencies[Field.CURRENCY_B]?.symbol
+																asset: currencies[Field.CURRENCY_B]?.symbol,
 															})
 														)}
 													</NormalButton>
@@ -447,7 +449,7 @@ export default function AddLiquidity() {
 												setLiquidityState({
 													attemptingTxn: false,
 													liquidityErrorMessage: undefined,
-													txHash: undefined
+													txHash: undefined,
 												})
 												onPresentAddLiquidityModal()
 											}

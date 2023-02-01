@@ -61,9 +61,9 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
 									<ToastDescriptionWithTx txHash={receipt.transactionHash}>
 										{t('Your %symbol% earnings have been sent to your wallet!', { symbol: 'ASA' })}
 									</ToastDescriptionWithTx>
-								)
+								),
 							},
-							{ type: 'success' }
+							{ type: 'success' },
 						)
 						dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
 					}

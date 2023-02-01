@@ -13,7 +13,7 @@ const StyledPriceChart = ({ children, isFullWidthContainer, isExpanded, style }:
 		style={{
 			width: '100%',
 			height: isExpanded ? 'calc(100vh - 100px)' : '516px',
-			...style
+			...style,
 		}}
 	>
 		{children}

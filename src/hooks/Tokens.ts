@@ -12,7 +12,7 @@ import {
 	combinedTokenMapFromActiveUrlsSelector,
 	combinedTokenMapFromOfficialsUrlsSelector,
 	TokenAddressMap,
-	useUnsupportedTokenList
+	useUnsupportedTokenList,
 } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import useUserAddedTokens, { userAddedTokenSelector } from '../state/user/hooks/useUserAddedTokens'
@@ -39,10 +39,10 @@ const allTokenSelector = createSelector(
 					},
 					// must make a copy because reduce modifies the map, and we do not
 					// want to make a copy in every iteration
-					mapWithoutUrls(tokenMap)
+					mapWithoutUrls(tokenMap),
 				)
 		)
-	}
+	},
 )
 
 const allOfficialsAndUserAddedTokensSelector = createSelector(
@@ -58,10 +58,10 @@ const allOfficialsAndUserAddedTokensSelector = createSelector(
 					},
 					// must make a copy because reduce modifies the map, and we do not
 					// want to make a copy in every iteration
-					mapWithoutUrls(tokenMap)
+					mapWithoutUrls(tokenMap),
 				)
 		)
-	}
+	},
 )
 
 /**
@@ -134,14 +134,14 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 		token ? undefined : tokenContractBytes32,
 		'name',
 		undefined,
-		NEVER_RELOAD
+		NEVER_RELOAD,
 	)
 	const symbol = useSingleCallResult(token ? undefined : tokenContract, 'symbol', undefined, NEVER_RELOAD)
 	const symbolBytes32 = useSingleCallResult(
 		token ? undefined : tokenContractBytes32,
 		'symbol',
 		undefined,
-		NEVER_RELOAD
+		NEVER_RELOAD,
 	)
 	const decimals = useSingleCallResult(token ? undefined : tokenContract, 'decimals', undefined, NEVER_RELOAD)
 
@@ -155,7 +155,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 				address,
 				decimals.result[0],
 				parseStringOrBytes32(symbol.result?.[0], symbolBytes32.result?.[0], 'UNKNOWN'),
-				parseStringOrBytes32(tokenName.result?.[0], tokenNameBytes32.result?.[0], 'Unknown Token')
+				parseStringOrBytes32(tokenName.result?.[0], tokenNameBytes32.result?.[0], 'Unknown Token'),
 			)
 		}
 		return undefined
@@ -170,7 +170,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 		token,
 		tokenName.loading,
 		tokenName.result,
-		tokenNameBytes32.result
+		tokenNameBytes32.result,
 	])
 }
 

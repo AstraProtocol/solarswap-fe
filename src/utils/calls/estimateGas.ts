@@ -14,7 +14,7 @@ export const estimateGas = async (
 	contract: Contract,
 	methodName: string,
 	methodArgs: any[],
-	gasMarginPer10000: number
+	gasMarginPer10000: number,
 ) => {
 	if (!contract[methodName]) {
 		throw new Error(`Method ${methodName} doesn't exist on ${contract.address}`)
@@ -40,12 +40,12 @@ export const callWithEstimateGas = async (
 	methodName: string,
 	methodArgs: any[] = [],
 	overrides: Overrides = {},
-	gasMarginPer10000 = 1000
+	gasMarginPer10000 = 1000,
 ): Promise<TransactionResponse> => {
 	const gasEstimation = estimateGas(contract, methodName, methodArgs, gasMarginPer10000)
 	const tx = await contract[methodName](...methodArgs, {
 		gasLimit: gasEstimation,
-		...overrides
+		...overrides,
 	})
 	return tx
 }

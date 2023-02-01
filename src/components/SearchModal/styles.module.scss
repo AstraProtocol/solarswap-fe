@@ -18,9 +18,9 @@
 	grid-gap: 16px;
 	// opacity: ${({ dim }) => (dim ? '0.4' : '1')};
 
-// 	${({ theme }) => theme.mediaQueries.md} {
-// 		grid-gap: 16px;
-// 	}
+	// 	${({ theme }) => theme.mediaQueries.md} {
+	// 		grid-gap: 16px;
+	// 	}
 }
 
 .nameOverflow {
@@ -46,10 +46,9 @@
 	grid-gap: 8px;
 	cursor: pointer;
 	&:hover {
-			background-color: var(--same-color-theme-10);
+		background-color: var(--same-color-theme-10);
 	}
 	opacity: 1;
-	
 }
 
 .currencyMenuItemDisabled {
@@ -87,12 +86,12 @@
 
 .baseWrapper {
 	// border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.colors.dropdown)};
-  border-radius: 10px;
-  display: flex;
-  padding: 6px 10px;
+	border-radius: 10px;
+	display: flex;
+	padding: 6px 10px;
 
-  align-items: center;
-  :hover {
-    cursor: pointer;
-  }
+	align-items: center;
+	:hover {
+		cursor: pointer;
+	}
 }

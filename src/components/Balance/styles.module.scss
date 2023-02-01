@@ -1,13 +1,13 @@
-@keyframes appear{
-  from {
-    opacity:0;
-  }
+@keyframes appear {
+	from {
+		opacity: 0;
+	}
 
-  to {
-    opacity:1;
-  }
+	to {
+		opacity: 1;
+	}
 }
 
 .animatedBalance {
-    animation: appear 0.65s ease-in-out forwards;
+	animation: appear 0.65s ease-in-out forwards;
 }

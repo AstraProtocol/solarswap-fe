@@ -9,12 +9,12 @@ import { nodes } from './getRpcUrl'
 const NETWORK_CONFIG = {
 	[ChainId.MAINNET]: {
 		name: 'Astra Blockchain Mainnet',
-		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.MAINNET]
+		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.MAINNET],
 	},
 	[ChainId.TESTNET]: {
 		name: 'Astra Blockchain Testnet',
-		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.TESTNET]
-	}
+		scanURL: BASE_ASTRA_EXPLORER_URLS[ChainId.TESTNET],
+	},
 }
 
 /**
@@ -32,7 +32,7 @@ export const setupNetwork = async (externalProvider?: ExternalProvider) => {
 		try {
 			await provider.request({
 				method: 'wallet_switchEthereumChain',
-				params: [{ chainId: `0x${chainId.toString(16)}` }]
+				params: [{ chainId: `0x${chainId.toString(16)}` }],
 			})
 			return true
 		} catch (switchError) {
@@ -47,12 +47,12 @@ export const setupNetwork = async (externalProvider?: ExternalProvider) => {
 								nativeCurrency: {
 									name: 'Astra',
 									symbol: 'asa',
-									decimals: 18
+									decimals: 18,
 								},
 								rpcUrls: nodes,
-								blockExplorerUrls: [`${NETWORK_CONFIG[chainId].scanURL}/`]
-							}
-						]
+								blockExplorerUrls: [`${NETWORK_CONFIG[chainId].scanURL}/`],
+							},
+						],
 					})
 					return true
 				} catch (error) {
@@ -84,9 +84,9 @@ export const registerToken = async (tokenAddress: string, tokenSymbol: string, t
 				address: tokenAddress,
 				symbol: tokenSymbol,
 				decimals: tokenDecimals,
-				image: `${BASE_URL}/images/tokens/${tokenAddress}.png`
-			}
-		}
+				image: `${BASE_URL}/images/tokens/${tokenAddress}.png`,
+			},
+		},
 	})
 
 	return tokenAdded

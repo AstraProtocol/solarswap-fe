@@ -25,19 +25,19 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 	multiplier,
 	linkLabel,
 	linkHref,
-	performanceFee
+	performanceFee,
 }) => {
 	const [isExpanded, setIsExpanded] = useState(false)
 	const { t } = useTranslation()
 	const {
 		targetRef: multiplierRef,
 		tooltip: multiplierTooltip,
-		tooltipVisible: multiplierTooltipVisible
+		tooltipVisible: multiplierTooltipVisible,
 	} = useTooltip(
 		<>
 			<span className="text text-base">
 				{t(
-					'The Multiplier represents the proportion of ASA rewards each farm receives, as a proportion of the ASA produced each block.'
+					'The Multiplier represents the proportion of ASA rewards each farm receives, as a proportion of the ASA produced each block.',
 				)}
 			</span>
 			<span className="text text-base">
@@ -47,12 +47,12 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 				{t('This amount is already included in all APR calculations for the farm.')}
 			</span>
 		</>,
-		{ placement: 'top-end', tooltipOffset: [20, 10] }
+		{ placement: 'top-end', tooltipOffset: [20, 10] },
 	)
 
 	const gridRowCount = isFarm ? 4 : 2
 	const apy = (getApy(apr, autoCompoundFrequency > 0 ? autoCompoundFrequency : 1, 365, performanceFee) * 100).toFixed(
-		2
+		2,
 	)
 
 	return (
@@ -67,7 +67,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 						style={{
 							gridTemplateColumns: '2.5fr 1fr',
 							gridRowGap: 8,
-							gridTemplateRows: `repeat(${gridRowCount}, auto)`
+							gridTemplateRows: `repeat(${gridRowCount}, auto)`,
 						}}
 					>
 						{isFarm && (
@@ -85,7 +85,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 						<Row style={{ justifyContent: 'space-between' }}>
 							<span className="text text-sm contrast-color-70">
 								{t('APY (%compoundTimes%x daily compound)', {
-									compoundTimes: autoCompoundFrequency > 0 ? autoCompoundFrequency : 1
+									compoundTimes: autoCompoundFrequency > 0 ? autoCompoundFrequency : 1,
 								})}
 							</span>
 							<span className="text text-sm text-right">{apy}%</span>
@@ -113,7 +113,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 							<li className="contrast-color-70">
 								<span className="text text-sm text-center contrast-color-70">
 									{t(
-										'LP rewards: 0.2% trading fees, distributed proportionally among LP token holders.'
+										'LP rewards: 0.2% trading fees, distributed proportionally among LP token holders.',
 									)}
 								</span>
 							</li>
@@ -121,7 +121,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 						<li className="contrast-color-70">
 							<span className="text text-sm text-center contrast-color-70">
 								{t(
-									'All figures are estimates provided for your convenience only, and by no means represent guaranteed returns.'
+									'All figures are estimates provided for your convenience only, and by no means represent guaranteed returns.',
 								)}
 							</span>
 						</li>
@@ -129,7 +129,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 							<li className="contrast-color-70">
 								<span className="text text-sm margin-top-sm text-center contrast-color-70">
 									{t('All estimated rates take into account this pool’s %fee%% performance fee', {
-										fee: performanceFee
+										fee: performanceFee,
 									})}
 								</span>
 							</li>

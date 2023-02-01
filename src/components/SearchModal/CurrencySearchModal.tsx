@@ -30,7 +30,7 @@ export default function CurrencySearchModal({
 	onCurrencySelect,
 	selectedCurrency,
 	otherSelectedCurrency,
-	showCommonBases = false
+	showCommonBases = false,
 }: CurrencySearchModalProps) {
 	const [modalView, setModalView] = useState<CurrencyModalView>(CurrencyModalView.search)
 
@@ -39,7 +39,7 @@ export default function CurrencySearchModal({
 			onDismiss?.()
 			onCurrencySelect(currency)
 		},
-		[onDismiss, onCurrencySelect]
+		[onDismiss, onCurrencySelect],
 	)
 
 	// for token import view
@@ -61,13 +61,13 @@ export default function CurrencySearchModal({
 			title: t('Import Tokens'),
 			onBack: () =>
 				setModalView(
-					prevView && prevView !== CurrencyModalView.importToken ? prevView : CurrencyModalView.search
-				)
+					prevView && prevView !== CurrencyModalView.importToken ? prevView : CurrencyModalView.search,
+				),
 		},
 		[CurrencyModalView.importList]: {
 			title: t('Import List'),
-			onBack: () => setModalView(CurrencyModalView.search)
-		}
+			onBack: () => setModalView(CurrencyModalView.search),
+		},
 	}
 
 	return (
@@ -110,7 +110,7 @@ export default function CurrencySearchModal({
 						<NormalButton
 							classes={{
 								color: 'secondary-color-normal',
-								other: 'text-bold text-base list-token-manage-button'
+								other: 'text-bold text-base list-token-manage-button',
 							}}
 							variant="text"
 							onClick={() => setModalView(CurrencyModalView.manage)}

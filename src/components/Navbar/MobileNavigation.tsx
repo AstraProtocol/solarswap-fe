@@ -20,7 +20,7 @@ const LinkMenuItem = ({
 	label,
 	pathname,
 	classes,
-	prefix
+	prefix,
 }: {
 	link?: string
 	label?: React.ReactNode
@@ -30,7 +30,7 @@ const LinkMenuItem = ({
 }) => (
 	<div
 		className={clsx('radius-base', 'padding-sm', styles.subItem, {
-			[styles.subActive]: pathname === link
+			[styles.subActive]: pathname === link,
 		})}
 	>
 		<span className="block-center">
@@ -110,14 +110,14 @@ export default function MoibleNavigation({ items }: MobileNavigationProps) {
 				}
 				const collapse: CollapseProps = {
 					title: titleElement,
-					content: <>{subCollapse}</>
+					content: <>{subCollapse}</>,
 				}
 				menus.push(
 					<Collapse
 						key={`collapse-${item.label}`}
 						{...collapse}
 						classes={{ wrapper: 'border border-bottom-base' }}
-					/>
+					/>,
 				)
 			} else {
 				menus.push(<LinkMenuItem key={item.label} link={item.link} label={item.label} pathname={pathname} />)

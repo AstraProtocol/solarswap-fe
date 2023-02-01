@@ -10,7 +10,7 @@ function useZapOutAmount(tokenA: string, tokenB: string, pool: string, userInLiq
 		tokenA,
 		tokenB,
 		pool,
-		userInLiquidity === '0' ? undefined : userInLiquidity // https://github.com/AstraProtocol/astra-defi-fe/issues/12
+		userInLiquidity === '0' ? undefined : userInLiquidity, // https://github.com/AstraProtocol/astra-defi-fe/issues/12
 	])?.result?.[0]
 	return zapOutAmount?.toString() || 0
 }

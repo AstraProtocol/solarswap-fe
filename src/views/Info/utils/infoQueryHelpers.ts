@@ -15,7 +15,7 @@ export const multiQuery = async (
 	queryConstructor: (subqueries: string[]) => string,
 	subqueries: string[],
 	endpoint: string,
-	skipCount = 1000
+	skipCount = 1000,
 ) => {
 	let fetchedData = {}
 	let allFound = false
@@ -32,7 +32,7 @@ export const multiQuery = async (
 			const result: any = await requestWithTimeout(client, queryConstructor(subqueriesSlice))
 			fetchedData = {
 				...fetchedData,
-				...result
+				...result,
 			}
 			allFound = Object.keys(result).length < skipCount || skip + skipCount > subqueries.length
 			skip += skipCount

@@ -71,7 +71,7 @@ function CurrencySearch({
 	otherSelectedCurrency,
 	showCommonBases,
 	showImportView,
-	setImportToken
+	setImportToken,
 }: CurrencySearchProps) {
 	const { t } = useTranslation()
 	const { chainId } = useActiveWeb3React()
@@ -118,7 +118,7 @@ function CurrencySearch({
 			// }
 		},
 		// [audioPlay, onCurrencySelect],
-		[onCurrencySelect]
+		[onCurrencySelect],
 	)
 
 	// manage focus on modal show
@@ -151,7 +151,7 @@ function CurrencySearch({
 				}
 			}
 		},
-		[filteredSortedTokens, handleCurrencySelect, debouncedQuery]
+		[filteredSortedTokens, handleCurrencySelect, debouncedQuery],
 	)
 
 	// if no results on main list, show option to expand into inactive

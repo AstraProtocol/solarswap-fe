@@ -28,7 +28,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 					</span>
 					<QuestionHelper
 						text={t(
-							'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.'
+							'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.',
 						)}
 					/>
 				</Row>
@@ -98,7 +98,7 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
 									<span className="text text-base">{t('Route')}</span>
 									<QuestionHelper
 										text={t(
-											'Routing through these tokens resulted in the best price for your trade.'
+											'Routing through these tokens resulted in the best price for your trade.',
 										)}
 									/>
 								</span>

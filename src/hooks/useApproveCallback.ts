@@ -22,13 +22,13 @@ export enum ApprovalState {
 	UNKNOWN,
 	NOT_APPROVED,
 	PENDING,
-	APPROVED
+	APPROVED,
 }
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 export function useApproveCallback(
 	amountToApprove?: CurrencyAmount,
-	spender?: string
+	spender?: string,
 ): [ApprovalState, () => Promise<void>] {
 	const { account } = useActiveWeb3React()
 	const { callWithGasPrice } = useCallWithGasPrice()
@@ -78,9 +78,9 @@ export function useApproveCallback(
 			withToast(
 				{
 					title: t('Error'),
-					moreInfo: error
+					moreInfo: error,
 				},
-				{ type: 'error' }
+				{ type: 'error' },
 			)
 			return
 		}
@@ -99,13 +99,13 @@ export function useApproveCallback(
 			'approve',
 			[spender, useExact ? amountToApprove.raw.toString() : MaxUint256],
 			{
-				gasLimit: calculateGasMargin(estimatedGas)
-			}
+				gasLimit: calculateGasMargin(estimatedGas),
+			},
 		)
 			.then((response: TransactionResponse) => {
 				addTransaction(response, {
 					summary: `Approve ${amountToApprove.currency.symbol}`,
-					approval: { tokenAddress: token.address, spender }
+					approval: { tokenAddress: token.address, spender },
 				})
 			})
 			.catch((error: any) => {
@@ -115,9 +115,9 @@ export function useApproveCallback(
 					withToast(
 						{
 							title: t('Error'),
-							moreInfo: error.message
+							moreInfo: error.message,
 						},
-						{ type: 'error' }
+						{ type: 'error' },
 					)
 				}
 				throw error
@@ -131,7 +131,7 @@ export function useApproveCallback(
 export function useApproveCallbackFromTrade(trade?: Trade, allowedSlippage = 0) {
 	const amountToApprove = useMemo(
 		() => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
-		[trade, allowedSlippage]
+		[trade, allowedSlippage],
 	)
 
 	return useApproveCallback(amountToApprove, ROUTER_ADDRESS[CHAIN_ID])

@@ -1007,7 +1007,7 @@
 	"1Y": "1 A",
 	"5Y": "5 A",
 	"Annual ROI at current rates": "RSI annuel selon les taux actuels",
-	"Default Transaction Speed (GWEI)": "Vitesse de transaction par défaut (GWEI)",
+	"Default Transaction Speed (%gasUnit%)": "Vitesse de transaction par défaut (%gasUnit%)",
 	"Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees": "Ajuste le prix du gaz (frais de transaction) pour votre transaction. GWEI plus élevé = vitesse plus élevée = frais plus élevés",
 	"Standard (%gasPrice%)": "Standard (%gasPrice%)",
 	"Fast (%gasPrice%)": "Rapide (%gasPrice%)",

@@ -29,7 +29,7 @@ export const getFullDisplayBalance = (balance: BigNumber, decimals = 18, display
 export const formatNumber = (number: number, minPrecision = 2, maxPrecision = 2) => {
 	const options = {
 		minimumFractionDigits: minPrecision,
-		maximumFractionDigits: maxPrecision
+		maximumFractionDigits: maxPrecision,
 	}
 	return number.toLocaleString(undefined, options)
 }
@@ -76,7 +76,7 @@ export const formatLocalisedCompactNumber = (number: number): string => {
 	return new Intl.NumberFormat(codeFromStorage, {
 		notation: 'compact',
 		compactDisplay: 'long',
-		maximumSignificantDigits: 2
+		maximumSignificantDigits: 2,
 	}).format(number)
 }
 

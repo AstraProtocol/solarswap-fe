@@ -50,7 +50,7 @@ export const Input = memo(function InnerInput({
 			className={clsx(
 				styles.input,
 				'padding-left-sm padding-right-sm padding-top-md padding-bottom-md same-bg-color-20 border radius-lg',
-				rest.className
+				rest.className,
 			)}
 		/>
 	)

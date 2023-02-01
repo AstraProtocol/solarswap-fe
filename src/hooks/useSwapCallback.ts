@@ -16,7 +16,7 @@ import { useSwapCallArguments } from './useSwapCallArguments'
 export enum SwapCallbackState {
 	INVALID,
 	LOADING,
-	VALID
+	VALID,
 }
 
 interface SwapCall {
@@ -41,7 +41,7 @@ interface SwapCallEstimate {
 export function useSwapCallback(
 	trade: Trade | undefined, // trade to execute, required
 	allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE, // in bips
-	recipientAddressOrName: string | null // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
+	recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
 ): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
 	const { account, chainId, library } = useActiveWeb3React()
 	const gasPrice = useGasPrice()
@@ -73,7 +73,7 @@ export function useSwapCallback(
 					swapCalls.map(call => {
 						const {
 							parameters: { methodName, args, value },
-							contract
+							contract,
 						} = call
 						const options = !value || isZero(value) ? {} : { value }
 
@@ -81,7 +81,7 @@ export function useSwapCallback(
 							.then(gasEstimate => {
 								return {
 									call,
-									gasEstimate
+									gasEstimate,
 								}
 							})
 							.catch(gasError => {
@@ -93,11 +93,11 @@ export function useSwapCallback(
 											'Unexpected successful call after failed estimate gas',
 											call,
 											gasError,
-											result
+											result,
 										)
 										return {
 											call,
-											error: t('Unexpected issue with estimating the gas. Please try again.')
+											error: t('Unexpected issue with estimating the gas. Please try again.'),
 										}
 									})
 									.catch(callError => {
@@ -106,13 +106,13 @@ export function useSwapCallback(
 										return { call, error: swapErrorToUserReadableMessage(callError, t) }
 									})
 							})
-					})
+					}),
 				)
 
 				// a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
 				const successfulEstimation = estimatedCalls.find(
 					(el, ix, list): el is SuccessfulCall =>
-						'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
+						'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1]),
 				)
 
 				if (!successfulEstimation) {
@@ -124,15 +124,15 @@ export function useSwapCallback(
 				const {
 					call: {
 						contract,
-						parameters: { methodName, args, value }
+						parameters: { methodName, args, value },
 					},
-					gasEstimate
+					gasEstimate,
 				} = successfulEstimation
 
 				return contract[methodName](...args, {
 					gasLimit: calculateGasMargin(gasEstimate),
 					gasPrice,
-					...(value && !isZero(value) ? { value, from: account } : { from: account })
+					...(value && !isZero(value) ? { value, from: account } : { from: account }),
 				})
 					.then((response: any) => {
 						const inputSymbol = trade.inputAmount.currency.symbol
@@ -151,7 +151,7 @@ export function useSwapCallback(
 								  }`
 
 						addTransaction(response, {
-							summary: withRecipient
+							summary: withRecipient,
 						})
 
 						return response.hash
@@ -164,12 +164,12 @@ export function useSwapCallback(
 							// otherwise, the error was unexpected and we need to convey that
 							console.error(`Swap failed`, error, methodName, args, value)
 							throw new Error(
-								t('Swap failed: %message%', { message: swapErrorToUserReadableMessage(error, t) })
+								t('Swap failed: %message%', { message: swapErrorToUserReadableMessage(error, t) }),
 							)
 						}
 					})
 			},
-			error: null
+			error: null,
 		}
 	}, [trade, library, account, chainId, recipient, recipientAddressOrName, swapCalls, gasPrice, t, addTransaction])
 }
@@ -195,7 +195,7 @@ function swapErrorToUserReadableMessage(error: any, t: TranslateFunction) {
 		case 'SolarswapZapIn: EXPIRED':
 		case 'SolarswapRouter: EXPIRED':
 			return t(
-				'The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low.'
+				'The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low.',
 			)
 		case 'SolarswapZapIn: INSUFFICIENT_OUTPUT_AMOUNT':
 		case 'SolarswapZapIn: INSUFFICIENT_MINT_QTY':
@@ -212,11 +212,11 @@ function swapErrorToUserReadableMessage(error: any, t: TranslateFunction) {
 			if (reason?.indexOf('undefined is not an object') !== -1) {
 				console.error(error, reason)
 				return t(
-					'An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading.'
+					'An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading.',
 				)
 			}
 			return t('Unknown error%reason%. Try increasing your slippage tolerance.', {
-				reason: reason ? `: "${reason}"` : ''
+				reason: reason ? `: "${reason}"` : '',
 			})
 	}
 }

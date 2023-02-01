@@ -17,7 +17,7 @@ export interface BackgroundImageProps extends ImageProps {
 
 export const variants = {
 	DEFAULT: 'default',
-	INVERTED: 'inverted'
+	INVERTED: 'inverted',
 } as const
 
 export type Variant = typeof variants[keyof typeof variants]

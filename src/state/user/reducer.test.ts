@@ -26,7 +26,7 @@ describe('swap reducer', () => {
 			store = createStore(reducer, {
 				...initialState,
 				userDeadline: undefined,
-				userSlippageTolerance: undefined
+				userSlippageTolerance: undefined,
 			} as any)
 			store.dispatch(updateVersion())
 			expect(store.getState().userDeadline).toEqual(DEFAULT_DEADLINE_FROM_NOW)
@@ -39,7 +39,7 @@ describe('swap reducer', () => {
 			expect(store.getState().gasPrice).toEqual(parseUnits(GAS_PRICE.default, 'gwei').toString())
 		})
 		it('gasPrice is fast after update', () => {
-			store.dispatch(updateGasPrice({ gasPrice: '6000000000' }))
+			store.dispatch(updateGasPrice({ gasPrice: '11000000000000' }))
 			expect(store.getState().gasPrice).toEqual(parseUnits(GAS_PRICE.fast, 'gwei').toString())
 		})
 	})

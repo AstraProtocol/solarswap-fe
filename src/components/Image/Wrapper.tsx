@@ -11,7 +11,7 @@ const Wrapper = forwardRef<HTMLDivElement, WrapperProps>(({ width, height, ...pr
 			ref={ref}
 			style={{
 				minHeight: height,
-				minWidth: width
+				minWidth: width,
 			}}
 			{...props}
 		>

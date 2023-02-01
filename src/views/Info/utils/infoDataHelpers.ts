@@ -38,7 +38,7 @@ export const getPercentChange = (valueNow?: number, valueBefore?: number): numbe
 export const getChangeForPeriod = (
 	valueNow?: number,
 	valueOnePeriodAgo?: number,
-	valueTwoPeriodsAgo?: number
+	valueTwoPeriodsAgo?: number,
 ): [number, number] => {
 	const currentPeriodAmount = getAmountChange(valueNow, valueOnePeriodAgo)
 	const previousPeriodAmount = getAmountChange(valueOnePeriodAgo, valueTwoPeriodsAgo)
@@ -58,6 +58,6 @@ export const getLpFeesAndApr = (volumeUSD: number, volumeUSDWeek: number, liquid
 		totalFees7d,
 		lpFees24h,
 		lpFees7d,
-		lpApr7d: lpApr7d !== Infinity ? lpApr7d : 0
+		lpApr7d: lpApr7d !== Infinity ? lpApr7d : 0,
 	}
 }

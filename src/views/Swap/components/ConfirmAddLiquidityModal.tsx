@@ -5,7 +5,7 @@ import { NormalButton, Icon, Row, Message } from '@astraprotocol/astra-ui'
 import { useTranslation } from 'contexts/Localization'
 import TransactionConfirmationModal, {
 	ConfirmationModalContent,
-	TransactionErrorContent
+	TransactionErrorContent,
 } from 'components/TransactionConfirmationModal'
 import { AutoColumn } from 'components/Layout/Column'
 // import Row from 'components/Layout/Row'
@@ -51,7 +51,7 @@ const ConfirmAddLiquidityModal = ({
 	poolTokenPercentage,
 	liquidityMinted,
 	currencyToAdd,
-	isSingleLiquidity
+	isSingleLiquidity,
 }: ConfirmAddLiquidityModalProps) => {
 	const { t } = useTranslation()
 
@@ -59,7 +59,7 @@ const ConfirmAddLiquidityModal = ({
 
 	const slippageText = t(
 		'Output is estimated. If the price changes by more than %slippage%% your transaction will revert.',
-		{ slippage }
+		{ slippage },
 	)
 
 	const [estimatedText, transactionRevertText] = slippageText.split(`${slippage}%`)
@@ -133,7 +133,7 @@ const ConfirmAddLiquidityModal = ({
 			) : (
 				<ConfirmationModalContent topContent={modalHeader} bottomContent={modalBottom} />
 			),
-		[onDismiss, modalBottom, modalHeader, liquidityErrorMessage]
+		[onDismiss, modalBottom, modalHeader, liquidityErrorMessage],
 	)
 
 	return (

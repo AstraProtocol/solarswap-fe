@@ -28,7 +28,7 @@ const Modal: React.FC<ModalProps> = ({
 					styles.borderColor,
 					'flex-align-center',
 					'padding-left-lg padding-right-lg padding-top-md padding-bottom-md',
-					'border border-bottom-base'
+					'border border-bottom-base',
 				)}
 			>
 				{onBack && <IconButton icon={IconEnum.ICON_BACK} onClick={onBack} />}

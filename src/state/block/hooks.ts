@@ -18,8 +18,8 @@ export const usePollBlockNumber = () => {
 			return blockNumber
 		},
 		{
-			refreshInterval: REFRESH_BLOCK_INTERVAL
-		}
+			refreshInterval: REFRESH_BLOCK_INTERVAL,
+		},
 	)
 
 	useSWR(
@@ -28,8 +28,8 @@ export const usePollBlockNumber = () => {
 			return data
 		},
 		{
-			refreshInterval: FAST_INTERVAL
-		}
+			refreshInterval: FAST_INTERVAL,
+		},
 	)
 
 	useSWR(
@@ -38,8 +38,8 @@ export const usePollBlockNumber = () => {
 			return data
 		},
 		{
-			refreshInterval: SLOW_INTERVAL
-		}
+			refreshInterval: SLOW_INTERVAL,
+		},
 	)
 }
 

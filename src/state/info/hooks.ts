@@ -23,7 +23,7 @@ import {
 	addTokenPoolAddresses,
 	updateTokenChartData,
 	updateTokenPriceData,
-	updateTokenTransactions
+	updateTokenTransactions,
 } from './actions'
 import { ProtocolData, PoolData, TokenData, ChartEntry, PriceChartEntry } from './types'
 
@@ -35,7 +35,7 @@ export const useProtocolData = (): [ProtocolData | undefined, (protocolData: Pro
 	const dispatch = useDispatch<AppDispatch>()
 	const setProtocolData: (protocolData: ProtocolData) => void = useCallback(
 		(data: ProtocolData) => dispatch(updateProtocolData({ protocolData: data })),
-		[dispatch]
+		[dispatch],
 	)
 
 	return [protocolData, setProtocolData]
@@ -46,7 +46,7 @@ export const useProtocolChartData = (): [ChartEntry[] | undefined, (chartData: C
 	const dispatch = useDispatch<AppDispatch>()
 	const setChartData: (chartData: ChartEntry[]) => void = useCallback(
 		(data: ChartEntry[]) => dispatch(updateProtocolChartData({ chartData: data })),
-		[dispatch]
+		[dispatch],
 	)
 	return [chartData, setChartData]
 }
@@ -56,7 +56,7 @@ export const useProtocolTransactions = (): [Transaction[] | undefined, (transact
 	const dispatch = useDispatch<AppDispatch>()
 	const setTransactions: (transactions: Transaction[]) => void = useCallback(
 		(transactionsData: Transaction[]) => dispatch(updateProtocolTransactions({ transactions: transactionsData })),
-		[dispatch]
+		[dispatch],
 	)
 	return [transactions, setTransactions]
 }
@@ -166,7 +166,7 @@ export const useUpdateTokenData = (): ((tokens: TokenData[]) => void) => {
 		(tokens: TokenData[]) => {
 			dispatch(updateTokenData({ tokens }))
 		},
-		[dispatch]
+		[dispatch],
 	)
 }
 
@@ -267,7 +267,7 @@ export const useTokenChartData = (address: string): ChartEntry[] | undefined => 
 export const useTokenPriceData = (
 	address: string,
 	interval: number,
-	timeWindow: Duration
+	timeWindow: Duration,
 ): PriceChartEntry[] | undefined => {
 	const dispatch = useDispatch<AppDispatch>()
 	const token = useSelector((state: AppState) => state.info.tokens.byAddress[address])
@@ -288,8 +288,8 @@ export const useTokenPriceData = (
 						tokenAddress: address,
 						secondsInterval: interval,
 						priceData: data,
-						oldestFetchedTimestamp: startTimestamp
-					})
+						oldestFetchedTimestamp: startTimestamp,
+					}),
 				)
 			}
 			if (fetchingError) {

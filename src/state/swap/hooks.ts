@@ -22,7 +22,7 @@ import {
 	switchCurrencies,
 	typeInput,
 	updateDerivedPairData,
-	updatePairData
+	updatePairData,
 } from './actions'
 import { SwapState } from './reducer'
 import { useUserSlippageTolerance } from '../user/hooks'
@@ -31,7 +31,7 @@ import {
 	normalizeChartData,
 	normalizeDerivedChartData,
 	normalizeDerivedPairDataByActiveToken,
-	normalizePairDataByActiveToken
+	normalizePairDataByActiveToken,
 } from './normalizers'
 import { PairDataTimeWindowEnum } from './types'
 import { derivedPairByDataIdSelector, pairByDataIdSelector } from './selectors'
@@ -55,11 +55,11 @@ export function useSwapActionHandlers(): {
 			dispatch(
 				selectCurrency({
 					field,
-					currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'ASA' : ''
-				})
+					currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'ASA' : '',
+				}),
 			)
 		},
-		[dispatch]
+		[dispatch],
 	)
 
 	const onSwitchTokens = useCallback(() => {
@@ -70,28 +70,28 @@ export function useSwapActionHandlers(): {
 		(field: Field, typedValue: string) => {
 			dispatch(typeInput({ field, typedValue }))
 		},
-		[dispatch]
+		[dispatch],
 	)
 
 	const onChangeRecipient = useCallback(
 		(recipient: string | null) => {
 			dispatch(setRecipient({ recipient }))
 		},
-		[dispatch]
+		[dispatch],
 	)
 
 	return {
 		onSwitchTokens,
 		onCurrencySelection,
 		onUserInput,
-		onChangeRecipient
+		onChangeRecipient,
 	}
 }
 
 const BAD_RECIPIENT_ADDRESSES: string[] = [
 	'0x004B54A15fDC7F9B14829960978f8b5184c67478', // v2 factory
 	'0x7FEf19241AAC37D6946B20c04cB22664A0076d20', // v2 router 01
-	'0x1FAB8bdf244da099aC719FB4D393644D5fa4C6c4' // v2 router 02
+	'0x1FAB8bdf244da099aC719FB4D393644D5fa4C6c4', // v2 router 02
 ]
 
 /**
@@ -111,7 +111,7 @@ export function useSingleTokenSwapInfo(
 	inputCurrencyId: string | undefined,
 	inputCurrency: Currency | undefined,
 	outputCurrencyId: string | undefined,
-	outputCurrency: Currency | undefined
+	outputCurrency: Currency | undefined,
 ): { [key: string]: number } {
 	const token0Address = getTokenAddress(inputCurrencyId)
 	const token1Address = getTokenAddress(outputCurrencyId)
@@ -128,7 +128,7 @@ export function useSingleTokenSwapInfo(
 
 	return {
 		[token0Address]: inputTokenPrice,
-		[token1Address]: outputTokenPrice
+		[token1Address]: outputTokenPrice,
 	}
 }
 
@@ -140,7 +140,7 @@ export function useDerivedSwapInfo(
 	inputCurrency: Currency | undefined,
 	outputCurrencyId: string | undefined,
 	outputCurrency: Currency | undefined,
-	recipient: string
+	recipient: string,
 ): {
 	currencies: { [field in Field]?: Currency }
 	currencyBalances: { [field in Field]?: CurrencyAmount }
@@ -156,7 +156,7 @@ export function useDerivedSwapInfo(
 
 	const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
 		inputCurrency ?? undefined,
-		outputCurrency ?? undefined
+		outputCurrency ?? undefined,
 	])
 
 	const isExactIn: boolean = independentField === Field.INPUT
@@ -169,12 +169,12 @@ export function useDerivedSwapInfo(
 
 	const currencyBalances = {
 		[Field.INPUT]: relevantTokenBalances[0],
-		[Field.OUTPUT]: relevantTokenBalances[1]
+		[Field.OUTPUT]: relevantTokenBalances[1],
 	}
 
 	const currencies: { [field in Field]?: Currency } = {
 		[Field.INPUT]: inputCurrency ?? undefined,
-		[Field.OUTPUT]: outputCurrency ?? undefined
+		[Field.OUTPUT]: outputCurrency ?? undefined,
 	}
 
 	let inputError: string | undefined
@@ -209,7 +209,7 @@ export function useDerivedSwapInfo(
 	// compare input balance to max input based on version
 	const [balanceIn, amountIn] = [
 		currencyBalances[Field.INPUT],
-		slippageAdjustedAmounts ? slippageAdjustedAmounts[Field.INPUT] : null
+		slippageAdjustedAmounts ? slippageAdjustedAmounts[Field.INPUT] : null,
 	]
 
 	if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
@@ -221,7 +221,7 @@ export function useDerivedSwapInfo(
 		currencyBalances,
 		parsedAmount,
 		v2Trade: v2Trade ?? undefined,
-		inputError
+		inputError,
 	}
 }
 
@@ -259,7 +259,7 @@ export function queryParametersToSwapState(parsedQs: ParsedUrlQuery): SwapState 
 
 	console.log(
 		'parseCurrencyFromURLParameter(parsedQs.inputCurrency) :>> ',
-		parseCurrencyFromURLParameter(parsedQs.inputCurrency)
+		parseCurrencyFromURLParameter(parsedQs.inputCurrency),
 	)
 
 	let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency) || DEFAULT_OUTPUT_CURRENCY
@@ -275,16 +275,16 @@ export function queryParametersToSwapState(parsedQs: ParsedUrlQuery): SwapState 
 
 	return {
 		[Field.INPUT]: {
-			currencyId: inputCurrency
+			currencyId: inputCurrency,
 		},
 		[Field.OUTPUT]: {
-			currencyId: outputCurrency
+			currencyId: outputCurrency,
 		},
 		typedValue: parseTokenAmountURLParameter(parsedQs.exactAmount),
 		independentField: parseIndependentFieldURLParameter(parsedQs.exactField),
 		recipient,
 		pairDataById: {},
-		derivedPairDataById: {}
+		derivedPairDataById: {},
 	}
 }
 
@@ -309,13 +309,13 @@ export function useDefaultsFromURLSearch():
 				field: parsed.independentField,
 				inputCurrencyId: parsed[Field.INPUT].currencyId,
 				outputCurrencyId: parsed[Field.OUTPUT].currencyId,
-				recipient: null
-			})
+				recipient: null,
+			}),
 		)
 
 		setResult({
 			inputCurrencyId: parsed[Field.INPUT].currencyId,
-			outputCurrencyId: parsed[Field.OUTPUT].currencyId
+			outputCurrencyId: parsed[Field.OUTPUT].currencyId,
 		})
 	}, [dispatch, chainId, query])
 
@@ -335,7 +335,7 @@ export const useFetchPairPrices = ({
 	token0Address,
 	token1Address,
 	timeWindow,
-	currentSwapPrice
+	currentSwapPrice,
 }: useFetchPairPricesParams) => {
 	const [pairId, setPairId] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
@@ -346,7 +346,7 @@ export const useFetchPairPrices = ({
 	useEffect(() => {
 		const fetchDerivedData = async () => {
 			console.info(
-				'[Price Chart]: Not possible to retrieve price data from single pool, trying to fetch derived prices'
+				'[Price Chart]: Not possible to retrieve price data from single pool, trying to fetch derived prices',
 			)
 			try {
 				// Try to get at least derived data for chart
@@ -402,7 +402,7 @@ export const useFetchPairPrices = ({
 		token1Address,
 		derivedPairData,
 		dispatch,
-		isLoading
+		isLoading,
 	])
 
 	useEffect(() => {
@@ -422,12 +422,12 @@ export const useFetchPairPrices = ({
 
 	const normalizedPairData = useMemo(
 		() => normalizePairDataByActiveToken({ activeToken: token0Address, pairData }),
-		[token0Address, pairData]
+		[token0Address, pairData],
 	)
 
 	const normalizedDerivedPairData = useMemo(
 		() => normalizeDerivedPairDataByActiveToken({ activeToken: token0Address, pairData: derivedPairData }),
-		[token0Address, derivedPairData]
+		[token0Address, derivedPairData],
 	)
 
 	const hasSwapPrice = currentSwapPrice && currentSwapPrice[token0Address] > 0

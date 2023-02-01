@@ -33,7 +33,7 @@ import {
 	setChartViewMode,
 	ChartViewMode,
 	setSubgraphHealthIndicatorDisplayed,
-	updateUserLimitOrderAcceptedWarning
+	updateUserLimitOrderAcceptedWarning,
 } from './actions'
 import { GAS_PRICE_GWEI } from './hooks/helpers'
 
@@ -117,7 +117,7 @@ export const initialState: UserState = {
 	gasPrice: GAS_PRICE_GWEI.default,
 	watchlistTokens: [],
 	watchlistPools: [],
-	hideTimestampPhishingWarningBanner: null
+	hideTimestampPhishingWarningBanner: null,
 }
 
 export default createReducer(initialState, builder =>
@@ -222,7 +222,7 @@ export default createReducer(initialState, builder =>
 			updateUserExpertModeAcknowledgementShow,
 			(state, { payload: { userExpertModeAcknowledgementShow } }) => {
 				state.userExpertModeAcknowledgementShow = userExpertModeAcknowledgementShow
-			}
+			},
 		)
 		.addCase(updateUserUsernameVisibility, (state, { payload: { userUsernameVisibility } }) => {
 			state.userUsernameVisibility = userUsernameVisibility
@@ -263,5 +263,5 @@ export default createReducer(initialState, builder =>
 		})
 		.addCase(setSubgraphHealthIndicatorDisplayed, (state, { payload }) => {
 			state.isSubgraphHealthIndicatorDisplayed = payload
-		})
+		}),
 )

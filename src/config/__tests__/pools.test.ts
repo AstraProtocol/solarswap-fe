@@ -19,7 +19,7 @@ describe('Config pools', () => {
 		(sousId, contractAddress) => {
 			const duplicates = pools.filter(p => contractAddress[56] === p.contractAddress[56])
 			expect(duplicates).toHaveLength(1)
-		}
+		},
 	)
 	it.each(poolsToTest.filter(pool => pool.earningToken.symbol !== 'BNB'))(
 		'Pool %p has the correct earning token',
@@ -27,7 +27,7 @@ describe('Config pools', () => {
 			const contract = getSouschefContract(pool.sousId)
 			const rewardTokenAddress = await contract.rewardToken()
 			expect(rewardTokenAddress.toLowerCase()).toBe(pool.earningToken.address.toLowerCase())
-		}
+		},
 	)
 	it.each(poolsToTest.filter(pool => pool.stakingToken.symbol !== 'BNB'))(
 		'Pool %p has the correct staking token',
@@ -42,7 +42,7 @@ describe('Config pools', () => {
 			}
 
 			expect(stakingTokenAddress.toLowerCase()).toBe(pool.stakingToken.address.toLowerCase())
-		}
+		},
 	)
 
 	it.each(poolsToTest.filter(pool => pool.stakingToken.symbol !== 'BNB'))(
@@ -52,14 +52,14 @@ describe('Config pools', () => {
 			const rewardPerBlock = await contract.rewardPerBlock()
 
 			expect(String(parseFloat(formatUnits(rewardPerBlock, pool.earningToken.decimals)))).toBe(pool.tokenPerBlock)
-		}
+		},
 	)
 
 	it.each(
 		pools.map(p => ({
 			deployedBlockNumber: p.deployedBlockNumber,
-			address: p.contractAddress[56]
-		}))
+			address: p.contractAddress[56],
+		})),
 	)('Pool %p has deployed block number', pool => {
 		expect(pool.deployedBlockNumber || poolsDeployedBlockNumber[pool.address]).toBeTruthy()
 	})

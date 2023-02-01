@@ -1,59 +1,59 @@
 @keyframes rotate {
-  0% {
-    transform: scale(1);
-    stroke-width: 0;
-  }
-  50% {
-    transform: scale(1.3);
-    stroke-width: 2;
-  }
-  100% {
-    transform: scale(1);
-    stroke-width: 0;
-  }
+	0% {
+		transform: scale(1);
+		stroke-width: 0;
+	}
+	50% {
+		transform: scale(1.3);
+		stroke-width: 2;
+	}
+	100% {
+		transform: scale(1);
+		stroke-width: 0;
+	}
 }
 
 .arrowContainer {
-      animation: 0.2s rotate linear;
-      // stroke: ${({ theme }) => `${theme.colors.primary}`};
-      stroke-width: 0;
+	animation: 0.2s rotate linear;
+	// stroke: ${({ theme }) => `${theme.colors.primary}`};
+	stroke-width: 0;
 }
 
 // -------------------- RoiCalculatorFooter -----------------
 .bulletList {
-    list-style-type: none;
-    margin-top: 16px;
-    padding: 0;
-    li {
-      margin: 0;
-      padding: 0;
-    }
-    li::before {
-      content: '•';
-      margin-right: 4px;
-    //   color: ${({ theme }) => theme.colors.textSubtle};
-    }
-    li::marker {
-      font-size: 12px;
-    }
+	list-style-type: none;
+	margin-top: 16px;
+	padding: 0;
+	li {
+		margin: 0;
+		padding: 0;
+	}
+	li::before {
+		content: '•';
+		margin-right: 4px;
+		//   color: ${({ theme }) => theme.colors.textSubtle};
+	}
+	li::marker {
+		font-size: 12px;
+	}
 }
 // -------------------- RoiCalculatorFooter -----------------
 
 // -------------------- RoiCard -----------------
 .roiCardWrapper {
-    background: linear-gradient(180deg, #53dee9, #7645d9);
+	background: linear-gradient(180deg, #53dee9, #7645d9);
 	padding: 1px;
 	width: 100%;
 	// border-radius: ${({ theme }) => theme.radii.default};
 }
 .roiCardInner {
-    height: 120px;
+	height: 120px;
 	padding: 24px;
 	// border-radius: ${({ theme }) => theme.radii.default};
 	// background: ${({ theme }) => theme.colors.gradients.bubblegum};
 }
 .roiInputContainer {
-    position: relative;
+	position: relative;
 	& > input {
 		padding-left: 28px;
 		max-width: 70%;
@@ -67,46 +67,46 @@
 	}
 }
 .roiDisplayContainer {
-    max-width: 82%;
+	max-width: 82%;
 	margin-right: 8px;
 }
 .roiDollarAmount {
-    position: relative;
+	position: relative;
 	overflow-x: auto;
 	&::-webkit-scrollbar {
 		height: 0px;
 	}
 
-// 	${({ fadeOut, theme }) =>
-// 		fadeOut &&
-// 		`
-//       &:after {
-//         background: linear-gradient(
-//           to right,
-//           ${theme.colors.background}00,
-//           ${theme.colors.background}E6
-//         );
-//         content: '';
-//         height: 100%;
-//         pointer-events: none;
-//         position: absolute;
-//         right: 0;
-//         top: 0;
-//         width: 40px;
-//       }
-//   `}
+	// 	${({ fadeOut, theme }) =>
+	// 		fadeOut &&
+	// 		`
+	//       &:after {
+	//         background: linear-gradient(
+	//           to right,
+	//           ${theme.colors.background}00,
+	//           ${theme.colors.background}E6
+	//         );
+	//         content: '';
+	//         height: 100%;
+	//         pointer-events: none;
+	//         position: absolute;
+	//         right: 0;
+	//         top: 0;
+	//         width: 40px;
+	//       }
+	//   `}
 }
 // -------------------- RoiCard -----------------
 
 // -------------------- RoiCalculatorModal -----------------
 .roiCalculatorModal {
-    width: 400px;
+	width: 400px;
 	& > :nth-child(2) {
 		padding: 0;
 	}
 }
 .scrollableContainer {
-    padding: 24px;
+	padding: 24px;
 	max-height: 500px;
 	overflow-y: auto;
 	@media only screen and (max-width: 576px) {
@@ -114,23 +114,21 @@
 	}
 }
 .buttonMenu {
-    width: 100%;
+	width: 100%;
 
 	& > button {
 		width: 100%;
 	}
 
 	opacity: 1;
-    
-    &.disabled {
-        opacity: 0.5;
-    }
+
+	&.disabled {
+		opacity: 0.5;
+	}
 }
 // -------------------- RoiCalculatorModal -----------------
 
-
 // -------------------- RoiCalculatorFooter -----------------
 .roiCalculatorFooter {
-
 }
 // -------------------- RoiCalculatorFooter -----------------

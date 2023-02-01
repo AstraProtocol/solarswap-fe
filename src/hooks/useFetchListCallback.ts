@@ -21,7 +21,7 @@ function useFetchListCallback(): (listUrl: string, sendDispatch?: boolean) => Pr
 			}
 			return resolveENSContentHash(ensName, library)
 		},
-		[chainId, library]
+		[chainId, library],
 	)
 
 	// note: prevent dispatch if using for list search or unsupported list
@@ -48,7 +48,7 @@ function useFetchListCallback(): (listUrl: string, sendDispatch?: boolean) => Pr
 					throw error
 				})
 		},
-		[dispatch, ensResolver]
+		[dispatch, ensResolver],
 	)
 }
 

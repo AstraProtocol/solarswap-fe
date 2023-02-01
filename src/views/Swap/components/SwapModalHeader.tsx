@@ -15,7 +15,7 @@ export default function SwapModalHeader({
 	allowedSlippage,
 	recipient,
 	showAcceptChanges,
-	onAcceptChanges
+	onAcceptChanges,
 }: {
 	trade: Trade
 	allowedSlippage: number
@@ -26,7 +26,7 @@ export default function SwapModalHeader({
 	const { t } = useTranslation()
 	const slippageAdjustedAmounts = useMemo(
 		() => computeSlippageAdjustedAmounts(trade, allowedSlippage),
-		[trade, allowedSlippage]
+		[trade, allowedSlippage],
 	)
 	const { priceImpactWithoutFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade])
 	const priceImpactSeverity = warningSeverity(priceImpactWithoutFee)
@@ -44,11 +44,11 @@ export default function SwapModalHeader({
 		trade.tradeType === TradeType.EXACT_INPUT
 			? t('Output is estimated. You will receive at least %amount% %symbol% or the transaction will revert.', {
 					amount,
-					symbol
+					symbol,
 			  })
 			: t('Input is estimated. You will sell at most %amount% %symbol% or the transaction will revert.', {
 					amount,
-					symbol
+					symbol,
 			  })
 
 	const [estimatedText, transactionRevertText] = tradeInfoText.split(`${amount} ${symbol}`)
@@ -56,7 +56,7 @@ export default function SwapModalHeader({
 	const truncatedRecipient = recipient ? truncateHash(recipient) : ''
 
 	const recipientInfoText = t('Output will be sent to %recipient%', {
-		recipient: truncatedRecipient
+		recipient: truncatedRecipient,
 	})
 
 	const [recipientSentToText, postSentToText] = recipientInfoText.split(truncatedRecipient)

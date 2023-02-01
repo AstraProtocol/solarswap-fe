@@ -14,9 +14,9 @@ export const vaultPoolConfig = {
 		gasLimit: 380000,
 		tokenImage: {
 			primarySrc: `/images/tokens/${tokens.wasa.address}.svg`,
-			secondarySrc: '/images/tokens/autorenew.svg'
-		}
-	}
+			secondarySrc: '/images/tokens/autorenew.svg',
+		},
+	},
 } as const
 
 const pools: SerializedPoolConfig[] = [
@@ -26,14 +26,14 @@ const pools: SerializedPoolConfig[] = [
 		earningToken: serializedTokens.wasa,
 		contractAddress: {
 			11115: '0x47862AD34a6DC10d0dB988E56Ae8fE36818540Dc',
-			56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E'
+			56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
 		},
 		poolCategory: PoolCategory.CORE,
 		harvest: true,
 		tokenPerBlock: '10',
 		sortOrder: 1,
-		isFinished: false
-	}
+		isFinished: false,
+	},
 ].filter(p => !!p.contractAddress[CHAIN_ID])
 
 export default pools

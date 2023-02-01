@@ -1,10 +1,10 @@
 @keyframes toggled {
 	from {
-	  transform: rotate(180deg);
+		transform: rotate(180deg);
 	}
-  
+
 	to {
-	  transform: rotate(0);
+		transform: rotate(0);
 	}
 }
 
@@ -12,15 +12,14 @@
 	from {
 		transform: rotate(0);
 	}
-  
+
 	to {
 		transform: rotate(180deg);
 	}
 }
-  
 
 .tableWrapper {
-    overflow: visible;
+	overflow: visible;
 	scroll-margin-top: 64px;
 
 	&::-webkit-scrollbar {
@@ -29,7 +28,7 @@
 }
 
 .table {
-    border-collapse: collapse;
+	border-collapse: collapse;
 	font-size: 14px;
 	border-radius: 4px;
 	margin-left: auto;
@@ -38,16 +37,16 @@
 }
 
 .tbody {
-    & tr {
-        td {
-            font-size: 16px;
-            vertical-align: middle;
-        }
-    }
+	& tr {
+		td {
+			font-size: 16px;
+			vertical-align: middle;
+		}
+	}
 }
 
 .liquidityWrapper {
-    min-width: 110px;
+	min-width: 110px;
 	font-weight: 600;
 	text-align: right;
 	margin-right: 14px;
@@ -75,7 +74,7 @@
 	width: 100%;
 	align-items: center;
 	padding-right: 8px;
-	
+
 	@media only screen and (min-width: 1080px) {
 		padding-right: 32px;
 	}
@@ -84,21 +83,21 @@
 // ---------------- Farm -------------------
 .farmContainer {
 	padding-left: 16px;
-		display: flex;
-		align-items: center;
-	
-		@media only screen and (min-width: 576px) {
-			padding-left: 32px;
-		}
+	display: flex;
+	align-items: center;
+
+	@media only screen and (min-width: 576px) {
+		padding-left: 32px;
+	}
 }
 
 .farmTokenWrapper {
 	padding-right: 8px;
-		width: 24px;
-	
-		@media only screen and (min-width: 576px) {
-			width: 40px;
-		}
+	width: 24px;
+
+	@media only screen and (min-width: 576px) {
+		width: 40px;
+	}
 }
 // ---------------- Farm -------------------
 
@@ -117,7 +116,6 @@
 .iconArrow {
 	height: 20px;
 	animation: toggled 200ms ease forwards;
-	
 
 	&.toggled {
 		animation: untoggled 200ms ease forwards;
@@ -125,23 +123,22 @@
 }
 // ---------------- Detail -------------------
 
-
 // ---------------- Apr -------------------
 .aprContainer {
 	display: flex;
-  align-items: center;
-//   color: ${({ theme }) => theme.colors.text};
+	align-items: center;
+	//   color: ${({ theme }) => theme.colors.text};
 
-  button {
-    width: 20px;
-    height: 20px;
+	button {
+		width: 20px;
+		height: 20px;
 
-    svg {
-      path {
-        // fill: ${({ theme }) => theme.colors.textSubtle};
-      }
-    }
-  }
+		svg {
+			path {
+				// fill: ${({ theme }) => theme.colors.textSubtle};
+			}
+		}
+	}
 }
 .aprWrapper {
 	min-width: 60px;
@@ -152,7 +149,7 @@
 // ---------------- Earned -------------------
 .amount {
 	// color: ${({ earned, theme }) => (earned ? theme.colors.text : theme.colors.textDisabled)};
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 // ---------------- Earned -------------------

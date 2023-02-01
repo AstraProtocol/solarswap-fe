@@ -12,7 +12,7 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
 	// COINGECKO,
 	// SOLAR_TOP100,
 	// SOLAR_EXTENDED,
-	...UNSUPPORTED_LIST_URLS // need to load unsupported tokens as well
+	...UNSUPPORTED_LIST_URLS, // need to load unsupported tokens as well
 ]
 
 // default lists to be 'active' aka searched across

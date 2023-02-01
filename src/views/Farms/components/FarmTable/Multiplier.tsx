@@ -15,7 +15,7 @@ const Multiplier: React.FunctionComponent<MultiplierProps> = ({ multiplier }) =>
 		<>
 			<span className="text text-base">
 				{t(
-					'The Multiplier represents the proportion of ASA rewards each farm receives, as a proportion of the ASA produced each block.'
+					'The Multiplier represents the proportion of ASA rewards each farm receives, as a proportion of the ASA produced each block.',
 				)}
 			</span>
 			<span className="text text-base">

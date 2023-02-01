@@ -20,7 +20,7 @@ export const whitelistedBidders: FarmAuctionBidderConfig[] =
 				// },
 		  ].map(bidderConfig => ({
 				...bidderConfig,
-				lpAddress: getLpAddress(bidderConfig.tokenAddress, bidderConfig.quoteToken)
+				lpAddress: getLpAddress(bidderConfig.tokenAddress, bidderConfig.quoteToken),
 		  }))
 		: []
 
@@ -29,7 +29,7 @@ const UNKNOWN_BIDDER: FarmAuctionBidderConfig = {
 	tokenAddress: '',
 	quoteToken: tokens.wasa,
 	farmName: 'Unknown',
-	tokenName: 'Unknown'
+	tokenName: 'Unknown',
 }
 
 export const getBidderInfo = (account: string): FarmAuctionBidderConfig => {

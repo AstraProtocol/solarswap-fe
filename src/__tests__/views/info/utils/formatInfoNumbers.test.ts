@@ -49,6 +49,6 @@ describe('info/utils/formatInfoNumbers', () => {
 			const options = { notation, displayThreshold, tokenPrecision, isInteger }
 			const actual = formatAmount(amount, options)
 			expect(actual).toBe(expected)
-		}
+		},
 	)
 })

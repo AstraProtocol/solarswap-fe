@@ -7,6 +7,5 @@ export type {
 	ImageProps,
 	TokenPairImageProps,
 	variants as tokenPairImageVariant,
-	Variant as TokenPairImageVariant
+	Variant as TokenPairImageVariant,
 } from './types'
-  

@@ -36,7 +36,7 @@ export function TransactionSubmittedContent({
 	onDismiss,
 	chainId,
 	hash,
-	currencyToAdd
+	currencyToAdd,
 }: {
 	onDismiss: () => void
 	hash: string | undefined
@@ -88,7 +88,7 @@ export function TransactionSubmittedContent({
 
 export function ConfirmationModalContent({
 	bottomContent,
-	topContent
+	topContent,
 }: {
 	topContent: () => React.ReactNode
 	bottomContent: () => React.ReactNode
@@ -144,7 +144,7 @@ const TransactionConfirmationModal: React.FC<InjectedModalProps & ConfirmationMo
 	hash,
 	pendingText,
 	content,
-	currencyToAdd
+	currencyToAdd,
 }) => {
 	const { chainId } = useActiveWeb3React()
 

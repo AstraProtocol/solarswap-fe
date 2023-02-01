@@ -21,7 +21,7 @@ const StakedLP: React.FunctionComponent<StackedLPProps> = ({
 	tokenSymbol,
 	lpTotalSupply,
 	tokenAmountTotal,
-	quoteTokenAmountTotal
+	quoteTokenAmountTotal,
 }) => {
 	const lpPrice = useLpTokenPrice(lpSymbol)
 

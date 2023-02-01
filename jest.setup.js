@@ -20,14 +20,14 @@ Object.defineProperty(window, 'matchMedia', {
 		removeListener: jest.fn(), // Deprecated
 		addEventListener: jest.fn(),
 		removeEventListener: jest.fn(),
-		dispatchEvent: jest.fn()
-	}))
+		dispatchEvent: jest.fn(),
+	})),
 })
 
 window.IntersectionObserver = jest.fn(() => ({
 	observe: jest.fn(),
 	unobserve: jest.fn(),
-	disconnect: jest.fn()
+	disconnect: jest.fn(),
 }))
 
 jest.mock('next/dynamic', () => () => {

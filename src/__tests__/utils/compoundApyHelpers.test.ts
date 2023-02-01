@@ -8,11 +8,11 @@ const ONCE_PER_30_DAYS = 0.033333333
 it.each([
 	[
 		{ principalInUSD: 1000, apr: 120, earningTokenPrice: 16, performanceFee: 0, compoundFrequency: 1 },
-		[0.205, 1.453, 6.467, 144.599, 24904.871]
+		[0.205, 1.453, 6.467, 144.599, 24904.871],
 	],
 	[
 		{ principalInUSD: 1000, apr: 120, earningTokenPrice: 16, performanceFee: 0, compoundFrequency: 2 },
-		[0.206, 1.454, 6.473, 144.803, 25027.897]
+		[0.206, 1.454, 6.473, 144.803, 25027.897],
 	],
 	[
 		{
@@ -20,9 +20,9 @@ it.each([
 			apr: 120,
 			earningTokenPrice: 16,
 			performanceFee: 0,
-			compoundFrequency: ONCE_PER_7_DAYS
+			compoundFrequency: ONCE_PER_7_DAYS,
 		},
-		[0.203, 1.438, 6.402, 142.204, 23494.228]
+		[0.203, 1.438, 6.402, 142.204, 23494.228],
 	],
 	[
 		{
@@ -30,13 +30,13 @@ it.each([
 			apr: 120,
 			earningTokenPrice: 16,
 			performanceFee: 0,
-			compoundFrequency: ONCE_PER_30_DAYS
+			compoundFrequency: ONCE_PER_30_DAYS,
 		},
-		[0.196, 1.387, 6.164, 133.794, 19036.623]
+		[0.196, 1.387, 6.164, 133.794, 19036.623],
 	],
 	[
 		{ principalInUSD: 55000, apr: 120, earningTokenPrice: 5.5, performanceFee: 0, compoundFrequency: 1 },
-		[32.877, 232.419, 1034.795, 23135.884, 3984779.424]
+		[32.877, 232.419, 1034.795, 23135.884, 3984779.424],
 	],
 	[
 		{
@@ -44,13 +44,13 @@ it.each([
 			apr: 120,
 			earningTokenPrice: 5.5,
 			performanceFee: 0,
-			compoundFrequency: TWICE_PER_DAY
+			compoundFrequency: TWICE_PER_DAY,
 		},
-		[32.904, 232.612, 1035.687, 23168.475, 4004463.461]
+		[32.904, 232.612, 1035.687, 23168.475, 4004463.461],
 	],
 	[
 		{ principalInUSD: 55000, apr: 120, earningTokenPrice: 5.5, performanceFee: 2, compoundFrequency: 1 },
-		[32.219, 227.771, 1014.099, 22673.166, 3905083.836]
+		[32.219, 227.771, 1014.099, 22673.166, 3905083.836],
 	],
 	[
 		{
@@ -58,17 +58,17 @@ it.each([
 			apr: 120,
 			earningTokenPrice: 5.5,
 			performanceFee: 2,
-			compoundFrequency: FIVE_THOUSAND_TIMES_PER_DAY
+			compoundFrequency: FIVE_THOUSAND_TIMES_PER_DAY,
 		},
-		[32.272, 228.149, 1015.848, 22737.133, 3943794.378]
-	]
+		[32.272, 228.149, 1015.848, 22737.133, 3943794.378],
+	],
 ])(
 	'calculate cake earned with values %o',
 	({ principalInUSD, apr, earningTokenPrice, compoundFrequency, performanceFee }, expected) => {
 		expect(
-			getInterestBreakdown({ principalInUSD, apr, earningTokenPrice, compoundFrequency, performanceFee })
+			getInterestBreakdown({ principalInUSD, apr, earningTokenPrice, compoundFrequency, performanceFee }),
 		).toEqual(expected)
-	}
+	},
 )
 
 it.each([
@@ -76,7 +76,7 @@ it.each([
 	[{ amountEarned: 4.8, amountInvested: 10 }, 48],
 	[{ amountEarned: 217.48, amountInvested: 950 }, 22.892631578947366],
 	[{ amountEarned: 100.67, amountInvested: 100 }, 100.66999999999999],
-	[{ amountEarned: 8572.84, amountInvested: 20000 }, 42.864200000000004]
+	[{ amountEarned: 8572.84, amountInvested: 20000 }, 42.864200000000004],
 ])('calculate roi % with values %o', ({ amountEarned, amountInvested }, expected) => {
 	expect(getRoi({ amountEarned, amountInvested })).toEqual(expected)
 })
@@ -98,7 +98,7 @@ it.each`
 		const apy = getApy(apr, compoundFrequency, days, performanceFee)
 		const difference = Math.abs(apy - expectedApy)
 		expect(difference).toBeLessThanOrEqual(DIFFERENCE_THRESHOLD_IN_PERCENTS)
-	}
+	},
 )
 
 it.each`
@@ -125,7 +125,7 @@ it.each`
 			apr,
 			earningTokenPrice,
 			compoundFrequency,
-			performanceFee
+			performanceFee,
 		})
 		const interestBreakdownAsUSD = interestBreakdown.map(interest => interest * earningTokenPrice)
 		// 2. Calculate principal for same parameters and check if it matches the above
@@ -136,5 +136,5 @@ it.each`
 			const differenceAsPercentage = (difference * 1) / principalInUSD
 			expect(differenceAsPercentage).toBeLessThanOrEqual(DIFFERENCE_THRESHOLD_IN_PERCENTS)
 		})
-	}
+	},
 )

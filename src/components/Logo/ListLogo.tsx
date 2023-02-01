@@ -5,7 +5,7 @@ export default function ListLogo({
 	logoURI,
 	style,
 	size = '24px',
-	alt
+	alt,
 }: {
 	logoURI: string
 	size?: string

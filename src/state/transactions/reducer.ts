@@ -8,7 +8,7 @@ import {
 	clearAllTransactions,
 	finalizeTransaction,
 	SerializableTransactionReceipt,
-	TransactionType
+	TransactionType,
 } from './actions'
 import { resetUserState } from '../global/actions'
 
@@ -48,7 +48,7 @@ export default createReducer(initialState, builder =>
 				txs[hash] = { hash, approval, summary, claim, from, addedTime: now(), type, order }
 				transactions[chainId] = txs
 				if (order) saveOrder(chainId, from, order, true)
-			}
+			},
 		)
 		.addCase(clearAllTransactions, (transactions, { payload: { chainId } }) => {
 			if (!transactions[chainId]) return
@@ -83,5 +83,5 @@ export default createReducer(initialState, builder =>
 			if (transactions[chainId]) {
 				transactions[chainId] = {}
 			}
-		})
+		}),
 )

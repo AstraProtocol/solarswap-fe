@@ -14,7 +14,7 @@ export const getPoolApr = (
 	stakingTokenPrice: number,
 	rewardTokenPrice: number,
 	totalStaked: number,
-	tokenPerBlock: number
+	tokenPerBlock: number,
 ): number => {
 	const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(BLOCKS_PER_YEAR)
 	const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
@@ -34,7 +34,7 @@ export const getFarmApr = (
 	poolWeight: BigNumber,
 	astraPriceUsd: BigNumber,
 	poolLiquidityUsd: BigNumber,
-	farmAddress: string
+	farmAddress: string,
 ): { asaRewardsApr: number; lpRewardsApr: number } => {
 	const yearlyCakeRewardAllocation = poolWeight ? poolWeight.times(ASA_PER_YEAR) : new BigNumber(NaN)
 	const asaRewardsApr = yearlyCakeRewardAllocation.times(astraPriceUsd).div(poolLiquidityUsd).times(100)

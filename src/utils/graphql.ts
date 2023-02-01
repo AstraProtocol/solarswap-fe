@@ -13,27 +13,27 @@ export const getGQLHeaders = (endpoint: string) => {
 			//   (typeof window !== 'undefined' &&
 			//     // @ts-ignore
 			//     window.sfHeader),
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		}
 	}
 	return undefined
 }
 
 export const infoClient = new GraphQLClient(INFO_CLIENT, {
-	headers: getGQLHeaders(INFO_CLIENT)
+	headers: getGQLHeaders(INFO_CLIENT),
 })
 
 export const infoServerClient = new GraphQLClient(INFO_CLIENT, {
 	headers: {
-		'X-Sf': process.env.SF_HEADER
+		'X-Sf': process.env.SF_HEADER,
 	},
-	timeout: 5000
+	timeout: 5000,
 })
 
 export const bitQueryServerClient = new GraphQLClient(process.env.NEXT_PUBLIC_BIT_QUERY_ENDPOINT, {
 	headers: {
 		// only server, no `NEXT_PUBLIC` not going to expose in client
-		'X-API-KEY': process.env.BIT_QUERY_HEADER
+		'X-API-KEY': process.env.BIT_QUERY_HEADER,
 	},
-	timeout: 5000
+	timeout: 5000,
 })

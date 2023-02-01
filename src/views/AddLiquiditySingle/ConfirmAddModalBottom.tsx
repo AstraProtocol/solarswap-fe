@@ -10,7 +10,7 @@ function ConfirmAddModalBottom({
 	currencies,
 	parsedAmounts,
 	poolTokenPercentage,
-	onAdd
+	onAdd,
 }: {
 	noLiquidity?: boolean
 	price?: Fraction
@@ -37,7 +37,7 @@ function ConfirmAddModalBottom({
 									alignItems: 'center',
 									display: 'flex',
 									textAlign: 'right',
-									paddingLeft: '5px'
+									paddingLeft: '5px',
 								}}
 							>
 								{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}
@@ -59,7 +59,7 @@ function ConfirmAddModalBottom({
 									alignItems: 'center',
 									display: 'flex',
 									textAlign: 'right',
-									paddingLeft: '5px'
+									paddingLeft: '5px',
 								}}
 							>
 								{parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}

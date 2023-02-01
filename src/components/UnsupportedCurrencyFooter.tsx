@@ -56,7 +56,7 @@ const UnsupportedModal: React.FC<Props> = ({ currencies, onDismiss }) => {
 				<div>
 					<span className="text text-base">
 						{t(
-							'Some assets are not available through this interface because they may not work well with our smart contract or we are unable to allow trading for legal reasons.'
+							'Some assets are not available through this interface because they may not work well with our smart contract or we are unable to allow trading for legal reasons.',
 						)}
 					</span>
 				</div>

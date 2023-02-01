@@ -22,7 +22,7 @@ export const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 
 export const walletconnector = new WalletConnectConnector({
 	url: rpcUrl,
-	chainId
+	chainId,
 })
 export const connectorsByName = {
 	[ConnectorNames.Injected]: injected,
@@ -33,14 +33,14 @@ export const connectorsByName = {
 				name: 'Solar Swap',
 				description: 'Swap, earn and win ASA through yield farming on the first DEFI exchange for Astra token.',
 				url: window.location.origin,
-				icons: ['https://salt.tikicdn.com/ts/ta/8e/80/26/80c694f8ce25376dd97aa55d251a459f.png']
-			}
+				icons: ['https://salt.tikicdn.com/ts/ta/8e/80/26/80c694f8ce25376dd97aa55d251a459f.png'],
+			},
 		})
 		return walletconnector
 	},
 	[ConnectorNames.AstraWallet]: () => {
 		return AstraWalletConnector.create({ chainId, url: rpcUrl })
-	}
+	},
 	// [ConnectorNames.BSC]: bscConnector,
 	// [ConnectorNames.Blocto]: async () => {
 	// 	const { BloctoConnector } = await import("@blocto/blocto-connector");
@@ -71,7 +71,7 @@ export const signMessage = async (
 	connector: AbstractConnector,
 	provider: any,
 	account: string,
-	message: string
+	message: string,
 ): Promise<string> => {
 	// if (window.BinanceChain && connector instanceof BscConnector) {
 	// 	const { signature } = await window.BinanceChain.bnbSign(account, message)

@@ -5,7 +5,7 @@ import { ZERO_PERCENT, ONE_HUNDRED_PERCENT } from '../config/constants/index'
 export function isTradeBetter(
 	tradeA: Trade | undefined | null,
 	tradeB: Trade | undefined | null,
-	minimumDelta: Percent = ZERO_PERCENT
+	minimumDelta: Percent = ZERO_PERCENT,
 ): boolean | undefined {
 	if (tradeA && !tradeB) return false
 	if (tradeB && !tradeA) return true

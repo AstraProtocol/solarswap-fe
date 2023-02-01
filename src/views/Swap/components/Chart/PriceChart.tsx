@@ -18,7 +18,7 @@ const PriceChart = ({
 	isFullWidthContainer,
 	token0Address,
 	token1Address,
-	currentSwapPrice
+	currentSwapPrice,
 }) => {
 	const { isDesktop } = useMatchBreakpoints()
 	const toggleExpanded = () => setIsChartExpanded(currentIsExpanded => !currentIsExpanded)
@@ -35,7 +35,7 @@ const PriceChart = ({
 			style={{
 				// height: isMobile ? '100%' : '70%',
 				height: isMobile ? '100%' : 'auto',
-				overflow: 'unset'
+				overflow: 'unset',
 			}}
 			isExpanded={isChartExpanded}
 			isFullWidthContainer={isFullWidthContainer}

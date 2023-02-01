@@ -12,7 +12,7 @@ const PageLoader: React.FC = () => {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				flexDirection: 'column'
+				flexDirection: 'column',
 			}}
 		>
 			<svg

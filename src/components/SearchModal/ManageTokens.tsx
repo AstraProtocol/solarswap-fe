@@ -15,7 +15,7 @@ import { Form, Icon, IconButton, IconEnum, NormalButton, Row, Typography } from 
 
 export default function ManageTokens({
 	setModalView,
-	setImportToken
+	setImportToken,
 }: {
 	setModalView: (view: CurrencyModalView) => void
 	setImportToken: (token: Token) => void

@@ -142,5 +142,5 @@ export {
 	VoteNowTag,
 	SoonTag,
 	ClosedTag,
-	CommunityTag
+	CommunityTag,
 }

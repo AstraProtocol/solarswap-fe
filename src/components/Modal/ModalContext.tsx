@@ -9,13 +9,13 @@ import { useTheme } from 'next-themes'
 const animationMap = {
 	initial: 'initial',
 	animate: 'animate',
-	exit: 'exit'
+	exit: 'exit',
 }
 
 const animationVariants: Variants = {
 	initial: { transform: 'translateX(0px)' },
 	animate: { transform: 'translateX(0px)' },
-	exit: { transform: 'translateX(0px)' }
+	exit: { transform: 'translateX(0px)' },
 }
 
 interface ModalsContext {
@@ -35,7 +35,7 @@ export const Context = createContext<ModalsContext>({
 	setModalNode: () => null,
 	onPresent: () => null,
 	onDismiss: () => null,
-	setCloseOnOverlayClick: () => true
+	setCloseOnOverlayClick: () => true,
 })
 
 interface Props {
@@ -81,7 +81,7 @@ const ModalProvider: React.FC<any> = ({ children }: Props) => {
 				setModalNode,
 				onPresent: handlePresent,
 				onDismiss: handleDismiss,
-				setCloseOnOverlayClick
+				setCloseOnOverlayClick,
 			}}
 		>
 			<LazyMotion features={domAnimation}>

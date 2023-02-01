@@ -19,7 +19,6 @@ const BodyLock = () => {
 	return null
 }
 
-
 export const Overlay = props => {
 	return (
 		<>

@@ -24,8 +24,8 @@ const HoverUpdater = ({ locale, payload, setHoverValue, setHoverDate }) => {
 				month: 'short',
 				day: '2-digit',
 				hour: '2-digit',
-				minute: '2-digit'
-			})
+				minute: '2-digit',
+			}),
 		)
 	}, [locale, payload.value, payload.time, setHoverValue, setHoverDate])
 
@@ -41,20 +41,20 @@ const getChartColors = ({ isChangePositive }) => {
 const dateFormattingByTimewindow: Record<PairDataTimeWindowEnum, Intl.DateTimeFormatOptions> = {
 	[PairDataTimeWindowEnum.DAY]: {
 		hour: '2-digit',
-		minute: '2-digit'
+		minute: '2-digit',
 	},
 	[PairDataTimeWindowEnum.WEEK]: {
 		month: 'short',
-		day: '2-digit'
+		day: '2-digit',
 	},
 	[PairDataTimeWindowEnum.MONTH]: {
 		month: 'short',
-		day: '2-digit'
+		day: '2-digit',
 	},
 	[PairDataTimeWindowEnum.YEAR]: {
 		month: 'short',
-		day: '2-digit'
-	}
+		day: '2-digit',
+	},
 }
 
 /**
@@ -62,7 +62,7 @@ const dateFormattingByTimewindow: Record<PairDataTimeWindowEnum, Intl.DateTimeFo
  */
 const LineChart = ({ data, setHoverValue, setHoverDate, isChangePositive, timeWindow }: SwapLineChartProps) => {
 	const {
-		currentLanguage: { locale }
+		currentLanguage: { locale },
 	} = useTranslation()
 	const colors = getChartColors({ isChangePositive })
 	const dateFormatting = dateFormattingByTimewindow[timeWindow]
@@ -78,7 +78,7 @@ const LineChart = ({ data, setHoverValue, setHoverDate, isChangePositive, timeWi
 					top: 5,
 					right: 0,
 					left: 0,
-					bottom: 5
+					bottom: 5,
 				}}
 				onMouseLeave={() => {
 					if (setHoverDate) setHoverDate(undefined)

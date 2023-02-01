@@ -33,7 +33,7 @@ describe('formatBigNumber', () => {
 		['23810432295393761', 1, 18, '0.0'],
 		['1000000000000000000', 1, 18, '1.0'],
 		['0', 1, 18, '0.0'],
-		['0', 2, 18, '0.0']
+		['0', 2, 18, '0.0'],
 	])('correctly formats %s (%d, %d) correctly to %s', (value, displayDecimals, decimals, expected) => {
 		const ethersBn = BigNumber.from(value)
 		expect(formatBigNumber(ethersBn, displayDecimals, decimals)).toBe(expected)
@@ -46,7 +46,7 @@ describe('formatBigNumberToFixed', () => {
 		['1000000000000000000', 6, 18, '1.000000'],
 		['1200000000000000000', 3, 18, '1.200'],
 		['1020100000000000000', 6, 18, '1.020100'],
-		['1000000000000000000', 0, 18, '1']
+		['1000000000000000000', 0, 18, '1'],
 	])('correctly formats %s (%d, %d) correctly to %s', (value, displayDecimals, decimals, expected) => {
 		const ethersBn = BigNumber.from(value)
 		expect(formatBigNumberToFixed(ethersBn, displayDecimals, decimals)).toBe(expected)
@@ -62,7 +62,7 @@ describe('formatFixedNumber', () => {
 		['567008695201201503619.22', 5, 18, '567.00869'],
 		['97634105261.1196', 3, 9, '97.634'],
 		['97634105261', 1, 9, '97.6'],
-		['97634105261', 0, 9, '97.0']
+		['97634105261', 0, 9, '97.0'],
 	])('correctly formats %s (%d, %d) correctly to %s', (value, displayDecimals, decimals, expected) => {
 		const ethersFn = FixedNumber.from(value)
 		expect(formatFixedNumber(ethersFn, displayDecimals, decimals)).toBe(expected)

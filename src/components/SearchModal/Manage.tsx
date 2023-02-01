@@ -15,7 +15,7 @@ export default function Manage({
 	setModalView,
 	setImportList,
 	setImportToken,
-	setListUrl
+	setListUrl,
 }: {
 	setModalView: (view: CurrencyModalView) => void
 	setImportToken: (token: Token) => void

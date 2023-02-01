@@ -28,7 +28,7 @@ describe('Swap', () => {
 		cy.get('#swap-currency-output .open-currency-select-button').click()
 		cy.get('.token-item-0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56').should('be.visible')
 		cy.get('.token-item-0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56').click({
-			force: true
+			force: true,
 		})
 		cy.get('#swap-currency-input').should('be.visible')
 		cy.get('#swap-currency-input').type('0.001', { force: true, delay: 300 })

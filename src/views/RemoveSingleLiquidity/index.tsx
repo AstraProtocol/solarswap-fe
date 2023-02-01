@@ -67,7 +67,7 @@ export default function RemoveLiquidity() {
 
 	const [tokenA, tokenB] = useMemo(
 		() => [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)],
-		[currencyA, currencyB, chainId]
+		[currencyA, currencyB, chainId],
 	)
 
 	// for expert mode
@@ -75,7 +75,7 @@ export default function RemoveLiquidity() {
 
 	const {
 		t,
-		currentLanguage: { locale }
+		currentLanguage: { locale },
 	} = useTranslation()
 	const gasPrice = useGasPrice()
 
@@ -83,7 +83,7 @@ export default function RemoveLiquidity() {
 	const { independentField, typedValue } = useBurnState()
 	const { pair, parsedAmounts, error, priceImpactSeverity, priceImpactWithoutFee } = useDerivedBurnSingleInfo(
 		currencyA ?? undefined,
-		currencyB ?? undefined
+		currencyB ?? undefined,
 	)
 
 	const { onUserInput: _onUserInput } = useBurnActionHandlers()
@@ -99,7 +99,7 @@ export default function RemoveLiquidity() {
 	}>({
 		attemptingTxn: false,
 		liquidityErrorMessage: undefined,
-		txHash: undefined
+		txHash: undefined,
 	})
 
 	// txn values
@@ -119,7 +119,9 @@ export default function RemoveLiquidity() {
 				? typedValue
 				: parsedAmounts[Field.CURRENCY_A]?.toSignificant(6) ?? '',
 		[Field.CURRENCY_B]:
-			independentField === Field.CURRENCY_B ? typedValue : parsedAmounts[Field.CURRENCY_B]?.toSignificant(6) ?? ''
+			independentField === Field.CURRENCY_B
+				? typedValue
+				: parsedAmounts[Field.CURRENCY_B]?.toSignificant(6) ?? '',
 	}
 
 	const atMaxAmount = parsedAmounts[Field.LIQUIDITY_PERCENT]?.equalTo(new Percent('1'))
@@ -129,7 +131,7 @@ export default function RemoveLiquidity() {
 
 	// allowance handling
 	const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(
-		null
+		null,
 	)
 	const [approval, approveCallback] = useApproveCallback(parsedAmounts[Field.LIQUIDITY], ZAP_ADDRESS[CHAIN_ID])
 
@@ -158,7 +160,7 @@ export default function RemoveLiquidity() {
 			setSignatureData(null)
 			return _onUserInput(field, value)
 		},
-		[_onUserInput]
+		[_onUserInput],
 	)
 
 	const onLiquidityInput = useCallback((value: string): void => onUserInput(Field.LIQUIDITY, value), [onUserInput])
@@ -213,7 +215,7 @@ export default function RemoveLiquidity() {
 				pairContract.address,
 				account,
 				minTokenOut,
-				deadline.toHexString()
+				deadline.toHexString(),
 			]
 		} else {
 			methodName = 'zapOut'
@@ -224,7 +226,7 @@ export default function RemoveLiquidity() {
 				pairContract.address,
 				account,
 				minTokenOut,
-				deadline.toHexString()
+				deadline.toHexString(),
 			]
 		}
 
@@ -236,7 +238,7 @@ export default function RemoveLiquidity() {
 					estimateGasError = err?.data?.message
 					console.error(`estimateGas failed`, methodName, args, err)
 					return undefined
-				})
+				}),
 		])
 		// )
 		const indexOfSuccessfulEstimation = BigNumber.isBigNumber(safeGasEstimates[0])
@@ -245,7 +247,7 @@ export default function RemoveLiquidity() {
 		if (indexOfSuccessfulEstimation === false) {
 			withToast(
 				{ title: t('Error'), moreInfo: estimateGasError || t('This transaction would fail') },
-				{ type: 'error' }
+				{ type: 'error' },
 			)
 		} else {
 			const safeGasEstimate = safeGasEstimates[0]
@@ -253,14 +255,14 @@ export default function RemoveLiquidity() {
 			setLiquidityState({ attemptingTxn: true, liquidityErrorMessage: undefined, txHash: undefined })
 			await zapInContract[methodName](...args, {
 				gasLimit: safeGasEstimate,
-				gasPrice
+				gasPrice,
 			})
 				.then((response: TransactionResponse) => {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 					addTransaction(response, {
 						summary: `Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
 							currencyA?.symbol
-						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`
+						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
 					})
 				})
 				.catch(err => {
@@ -272,7 +274,7 @@ export default function RemoveLiquidity() {
 						attemptingTxn: false,
 						liquidityErrorMessage:
 							err && err?.code !== 4001 ? `Remove Liquidity failed: ${err.message}` : undefined,
-						txHash: undefined
+						txHash: undefined,
 					})
 				})
 		}
@@ -282,21 +284,21 @@ export default function RemoveLiquidity() {
 		amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(6) ?? '',
 		symbolA: currencyA?.symbol ?? '',
 		amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(6) ?? '',
-		symbolB: currencyB?.symbol ?? ''
+		symbolB: currencyB?.symbol ?? '',
 	})
 
 	const liquidityPercentChangeCallback = useCallback(
 		(value: number) => {
 			onUserInput(Field.LIQUIDITY_PERCENT, value.toString())
 		},
-		[onUserInput]
+		[onUserInput],
 	)
 
 	const oneCurrencyIsETH = currencyA === ETHER || currencyB === ETHER
 	const oneCurrencyIsWETH = Boolean(
 		chainId &&
 			((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
-				(currencyB && currencyEquals(WETH[chainId], currencyB)))
+				(currencyB && currencyEquals(WETH[chainId], currencyB))),
 	)
 
 	const handleSelectCurrencyA = useCallback(
@@ -307,7 +309,7 @@ export default function RemoveLiquidity() {
 				router.replace(`/remove-single/${currencyId(currency)}/${currencyIdB}`, undefined, { shallow: true })
 			}
 		},
-		[currencyIdA, currencyIdB, router]
+		[currencyIdA, currencyIdB, router],
 	)
 
 	const handleDismissConfirmation = useCallback(() => {
@@ -320,7 +322,7 @@ export default function RemoveLiquidity() {
 
 	const [innerLiquidityPercentage, setInnerLiquidityPercentage] = useDebouncedChangeHandler(
 		Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
-		liquidityPercentChangeCallback
+		liquidityPercentChangeCallback,
 	)
 
 	const [onPresentRemoveLiquidity] = useModal(
@@ -343,7 +345,7 @@ export default function RemoveLiquidity() {
 		/>,
 		true,
 		true,
-		'removeLiquidityModal'
+		'removeLiquidityModal',
 	)
 
 	return (
@@ -357,12 +359,12 @@ export default function RemoveLiquidity() {
 								? t('Remove liquidity')
 								: t('Remove %assetA%-%assetB% liquidity', {
 										assetA: currencyA?.symbol ?? '',
-										assetB: currencyB?.symbol ?? ''
+										assetB: currencyB?.symbol ?? '',
 								  })
 						}
 						subtitle={t('To receive %assetA% and %assetB%', {
 							assetA: currencyA?.symbol ?? '',
-							assetB: currencyB?.symbol ?? ''
+							assetB: currencyB?.symbol ?? '',
 						})}
 						// noConfig
 					/>
@@ -604,7 +606,7 @@ export default function RemoveLiquidity() {
 												setLiquidityState({
 													attemptingTxn: false,
 													liquidityErrorMessage: undefined,
-													txHash: undefined
+													txHash: undefined,
 												})
 												onPresentRemoveLiquidity()
 											}
@@ -640,7 +642,7 @@ export default function RemoveLiquidity() {
 											setLiquidityState({
 												attemptingTxn: false,
 												liquidityErrorMessage: undefined,
-												txHash: undefined
+												txHash: undefined,
 											})
 											onPresentRemoveLiquidity()
 										}

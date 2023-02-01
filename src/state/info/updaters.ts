@@ -15,7 +15,7 @@ import {
 	useAddPoolKeys,
 	useAllTokenData,
 	useUpdateTokenData,
-	useAddTokenKeys
+	useAddTokenKeys,
 } from './hooks'
 
 export const ProtocolUpdater: React.FC = () => {

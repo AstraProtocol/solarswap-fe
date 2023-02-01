@@ -82,7 +82,7 @@ function ImportList({ listURL, list, onImport }: ImportProps) {
 							</span>
 							<span className="text text-base alert-color-error">
 								{t(
-									'By adding this list you are implicitly trusting that the data is correct. Anyone can create a list, including creating fake versions of existing lists and lists that claim to represent projects that do not have one.'
+									'By adding this list you are implicitly trusting that the data is correct. Anyone can create a list, including creating fake versions of existing lists and lists that claim to represent projects that do not have one.',
 								)}
 							</span>
 							<span className="text text-base text-bold alert-color-error">

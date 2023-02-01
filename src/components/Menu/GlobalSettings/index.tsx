@@ -2,8 +2,6 @@ import { IconButton, IconEnum } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
 import SettingsModal from './SettingsModal'
 
-
-
 const GlobalSettings = () => {
 	const [onPresentSettingsModal] = useModal(<SettingsModal />)
 

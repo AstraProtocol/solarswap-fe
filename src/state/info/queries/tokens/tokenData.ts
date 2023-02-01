@@ -64,7 +64,7 @@ const fetchTokenData = async (
 	block48h: number,
 	block7d: number,
 	block14d: number,
-	tokenAddresses: string[]
+	tokenAddresses: string[],
 ) => {
 	try {
 		const query = gql`
@@ -97,7 +97,7 @@ const parseTokenData = (tokens?: TokenFields[]) => {
 			derivedUSD: parseFloat(derivedUSD),
 			tradeVolumeUSD: parseFloat(tradeVolumeUSD),
 			totalTransactions: parseFloat(totalTransactions),
-			totalLiquidity: parseFloat(totalLiquidity)
+			totalLiquidity: parseFloat(totalLiquidity),
 		}
 		return accum
 	}, {})
@@ -126,7 +126,7 @@ const useFetchedTokenDatas = (tokenAddresses: string[]): TokenDatas => {
 				block48h.number,
 				block7d.number,
 				block14d.number,
-				tokenAddresses
+				tokenAddresses,
 			)
 			if (error) {
 				setFetchState({ error: true })
@@ -148,12 +148,12 @@ const useFetchedTokenDatas = (tokenAddresses: string[]): TokenDatas => {
 					const [volumeUSD, volumeUSDChange] = getChangeForPeriod(
 						current?.tradeVolumeUSD,
 						oneDay?.tradeVolumeUSD,
-						twoDays?.tradeVolumeUSD
+						twoDays?.tradeVolumeUSD,
 					)
 					const [volumeUSDWeek] = getChangeForPeriod(
 						current?.tradeVolumeUSD,
 						week?.tradeVolumeUSD,
-						twoWeeks?.tradeVolumeUSD
+						twoWeeks?.tradeVolumeUSD,
 					)
 					const liquidityUSD = current ? current.totalLiquidity * current.derivedUSD : 0
 					const liquidityUSDOneDayAgo = oneDay ? oneDay.totalLiquidity * oneDay.derivedUSD : 0
@@ -181,7 +181,7 @@ const useFetchedTokenDatas = (tokenAddresses: string[]): TokenDatas => {
 						liquidityToken,
 						priceUSD,
 						priceUSDChange,
-						priceUSDChangeWeek
+						priceUSDChangeWeek,
 					}
 
 					return accum

@@ -24,5 +24,5 @@ export const NextLinkFromReactRouter = forwardRef<any, LinkProps>(
 				{children}
 			</a>
 		</NextLink>
-	)
+	),
 )

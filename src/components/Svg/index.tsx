@@ -4,14 +4,14 @@ import styles from './styles.module.scss'
 const Svg = ({ spin, ...props }) => (
 	<svg
 		className={clsx(styles.svg, {
-			[styles.svgSpin]: spin
+			[styles.svgSpin]: spin,
 		})}
 		{...props}
 	/>
 )
 
 Svg.defaultProps = {
-	spin: false
+	spin: false,
 }
 
 export default Svg

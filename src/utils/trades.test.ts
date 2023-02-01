@@ -17,10 +17,10 @@ describe('isTradeBetter', () => {
 				new Trade(
 					new Route([pair12], token1),
 					new TokenAmount(token1, JSBI.BigInt(1000)),
-					TradeType.EXACT_INPUT
+					TradeType.EXACT_INPUT,
 				),
-				undefined
-			)
+				undefined,
+			),
 		).toBeFalsy()
 	})
 
@@ -31,9 +31,9 @@ describe('isTradeBetter', () => {
 				new Trade(
 					new Route([pair12], token1),
 					new TokenAmount(token1, JSBI.BigInt(1000)),
-					TradeType.EXACT_INPUT
-				)
-			)
+					TradeType.EXACT_INPUT,
+				),
+			),
 		).toBeTruthy()
 	})
 
@@ -47,14 +47,14 @@ describe('isTradeBetter', () => {
 				new Trade(
 					new Route([pair12], token1),
 					new TokenAmount(token1, JSBI.BigInt(1000)),
-					TradeType.EXACT_INPUT
+					TradeType.EXACT_INPUT,
 				),
 				new Trade(
 					new Route([pair12], token2),
 					new TokenAmount(token1, JSBI.BigInt(1000)),
-					TradeType.EXACT_OUTPUT
-				)
-			)
+					TradeType.EXACT_OUTPUT,
+				),
+			),
 		).toThrow('Trades are not comparable')
 	})
 
@@ -64,14 +64,14 @@ describe('isTradeBetter', () => {
 				new Trade(
 					new Route([pair12], token1),
 					new TokenAmount(token1, JSBI.BigInt(1000)),
-					TradeType.EXACT_INPUT
+					TradeType.EXACT_INPUT,
 				),
 				new Trade(
 					new Route([pair23], token2),
 					new TokenAmount(token2, JSBI.BigInt(1000)),
-					TradeType.EXACT_INPUT
-				)
-			)
+					TradeType.EXACT_INPUT,
+				),
+			),
 		).toThrowError('Trades are not comparable')
 
 		expect(() =>
@@ -79,14 +79,14 @@ describe('isTradeBetter', () => {
 				new Trade(
 					new Route([pair12], token1, token2),
 					new TokenAmount(token1, JSBI.BigInt(1000)),
-					TradeType.EXACT_INPUT
+					TradeType.EXACT_INPUT,
 				),
 				new Trade(
 					new Route([pair13], token1, token3),
 					new TokenAmount(token1, JSBI.BigInt(1000)),
-					TradeType.EXACT_INPUT
-				)
-			)
+					TradeType.EXACT_INPUT,
+				),
+			),
 		).toThrowError('Trades are not comparable')
 	})
 
@@ -94,12 +94,12 @@ describe('isTradeBetter', () => {
 		const tradeA = new Trade(
 			new Route([pair13], token1, token3),
 			new TokenAmount(token1, JSBI.BigInt(9000)),
-			TradeType.EXACT_INPUT
+			TradeType.EXACT_INPUT,
 		)
 		const tradeB = new Trade(
 			new Route([pair12, pair23], token1, token3),
 			new TokenAmount(token1, JSBI.BigInt(9000)),
-			TradeType.EXACT_INPUT
+			TradeType.EXACT_INPUT,
 		)
 
 		expect(isTradeBetter(tradeA, tradeB)).toBeTruthy()
@@ -108,12 +108,12 @@ describe('isTradeBetter', () => {
 		const tradeA = new Trade(
 			new Route([pair13], token1, token3),
 			new TokenAmount(token1, JSBI.BigInt(9000)),
-			TradeType.EXACT_INPUT
+			TradeType.EXACT_INPUT,
 		)
 		const tradeB = new Trade(
 			new Route([pair12, pair23], token1, token3),
 			new TokenAmount(token1, JSBI.BigInt(9000)),
-			TradeType.EXACT_INPUT
+			TradeType.EXACT_INPUT,
 		)
 
 		expect(isTradeBetter(tradeA, tradeB, BETTER_TRADE_LESS_HOPS_THRESHOLD)).toBeTruthy()

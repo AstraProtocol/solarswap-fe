@@ -23,17 +23,17 @@ const mockRouter: NextRouter = {
 	events: {
 		on: jest.fn(),
 		off: jest.fn(),
-		emit: jest.fn()
+		emit: jest.fn(),
 	},
 	isFallback: false,
 	isLocaleDomain: false,
 	isReady: true,
-	isPreview: false
+	isPreview: false,
 }
 
 export function renderWithProvider(
 	ui,
-	{ preloadedState = undefined, store = initializeStore(preloadedState), router = {}, ...renderOptions } = {}
+	{ preloadedState = undefined, store = initializeStore(preloadedState), router = {}, ...renderOptions } = {},
 ) {
 	function Wrapper({ children }) {
 		return (

@@ -23,7 +23,7 @@ const CurrencyInputHeader: React.FC<Props> = ({
 	setIsChartDisplayed,
 	isChartDisplayed,
 	hasAmount,
-	onRefreshPrice
+	onRefreshPrice,
 }) => {
 	const { resolvedTheme } = useTheme()
 	const [expertMode] = useExpertModeManager()

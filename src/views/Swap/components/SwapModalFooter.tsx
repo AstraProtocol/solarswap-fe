@@ -8,7 +8,7 @@ import {
 	computeSlippageAdjustedAmounts,
 	computeTradePriceBreakdown,
 	formatExecutionPrice,
-	warningSeverity
+	warningSeverity,
 } from 'utils/prices'
 // import { AutoColumn } from 'components/Layout/Column'
 // import QuestionHelper from 'components/QuestionHelper'
@@ -33,7 +33,7 @@ export default function SwapModalFooter({
 	onConfirm,
 	allowedSlippage,
 	swapErrorMessage,
-	disabledConfirm
+	disabledConfirm,
 }: {
 	trade: Trade
 	allowedSlippage: number
@@ -45,7 +45,7 @@ export default function SwapModalFooter({
 	const [showInverted, setShowInverted] = useState<boolean>(false)
 	const slippageAdjustedAmounts = useMemo(
 		() => computeSlippageAdjustedAmounts(trade, allowedSlippage),
-		[allowedSlippage, trade]
+		[allowedSlippage, trade],
 	)
 	const { priceImpactWithoutFee, realizedLPFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade])
 	const severity = warningSeverity(priceImpactWithoutFee)
@@ -62,7 +62,7 @@ export default function SwapModalFooter({
 							alignItems: 'center',
 							display: 'flex',
 							textAlign: 'right',
-							paddingLeft: '10px'
+							paddingLeft: '10px',
 						}}
 					>
 						{formatExecutionPrice(trade, showInverted)}
@@ -79,7 +79,7 @@ export default function SwapModalFooter({
 						</span>
 						<QuestionHelper
 							text={t(
-								'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.'
+								'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.',
 							)}
 						/>
 					</Row>

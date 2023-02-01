@@ -7,7 +7,7 @@ import { LS_KEY, fetchLocale, getLanguageCodeFromLS } from './helpers'
 
 const initialState: ProviderState = {
 	isFetching: true,
-	currentLanguage: VI
+	currentLanguage: VI,
 }
 
 const includesVariableRegex = new RegExp(/%\S+?%/, 'gm')
@@ -17,7 +17,7 @@ const translatedTextIncludesVariable = (translatedText: string): boolean => {
 }
 
 const getTranslationsWithIncludesVariable = (
-	translationList: Record<string, string>
+	translationList: Record<string, string>,
 ): Record<string, { translatedText: string; includesVariable: boolean }> => {
 	if (!translationList) {
 		return null
@@ -29,9 +29,9 @@ const getTranslationsWithIncludesVariable = (
 			{
 				translatedText: value,
 				// Check the existence of at least one combination of %%, separated by 1 or more non space characters
-				includesVariable: translatedTextIncludesVariable(value)
-			}
-		])
+				includesVariable: translatedTextIncludesVariable(value),
+			},
+		]),
 	)
 }
 
@@ -53,7 +53,7 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 
 		return {
 			...initialState,
-			currentLanguage: languages[codeFromStorage] || VI
+			currentLanguage: languages[codeFromStorage] || VI,
 		}
 	})
 	const { currentLanguage } = state
@@ -69,14 +69,14 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 					const currentLocaleWithIncludesVariables = getTranslationsWithIncludesVariable(currentLocale)
 					languageMap.set(codeFromStorage, {
 						...viLocale,
-						...currentLocaleWithIncludesVariables
+						...currentLocaleWithIncludesVariables,
 					})
 				}
 			}
 
 			setState(prevState => ({
 				...prevState,
-				isFetching: false
+				isFetching: false,
 			}))
 		}
 
@@ -87,7 +87,7 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 		if (!languageMap.has(language.locale)) {
 			setState(prevState => ({
 				...prevState,
-				isFetching: true
+				isFetching: true,
 			}))
 
 			const locale = await fetchLocale(language.locale)
@@ -97,7 +97,7 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 				// Merge the VI locale to ensure that any locale fetched has all the keys
 				languageMap.set(language.locale, {
 					...viLocale,
-					...localeWithIncludesVariables
+					...localeWithIncludesVariables,
 				})
 			}
 
@@ -106,14 +106,14 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 			setState(prevState => ({
 				...prevState,
 				isFetching: false,
-				currentLanguage: language
+				currentLanguage: language,
 			}))
 		} else {
 			localStorage.setItem(LS_KEY, language.locale)
 			setState(prevState => ({
 				...prevState,
 				isFetching: false,
-				currentLanguage: language
+				currentLanguage: language,
 			}))
 		}
 	}, [])
@@ -123,7 +123,7 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 			const translationSet = languageMap.get(currentLanguage.locale) ?? languageMap.get(VI.locale)
 			const { translatedText, includesVariable } = translationSet[key] || {
 				translatedText: key,
-				includesVariable: translatedTextIncludesVariable(key)
+				includesVariable: translatedTextIncludesVariable(key),
 			}
 
 			if (includesVariable && data) {
@@ -138,7 +138,7 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 
 			return translatedText
 		},
-		[currentLanguage]
+		[currentLanguage],
 	)
 
 	return (

@@ -3,7 +3,7 @@ import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 
 import {
 	NoEthereumProviderError,
-	UserRejectedRequestError as UserRejectedRequestErrorInjected
+	UserRejectedRequestError as UserRejectedRequestErrorInjected,
 } from '@web3-react/injected-connector'
 
 import { connectorsByName } from 'utils/web3React'
@@ -59,7 +59,7 @@ const useAuth = () => {
 				// toastError(t('Unable to find connector'), t('The connector config is wrong'))
 			}
 		},
-		[t, activate, /*toastError,*/ setError]
+		[t, activate, /*toastError,*/ setError],
 	)
 
 	const logout = useCallback(() => {

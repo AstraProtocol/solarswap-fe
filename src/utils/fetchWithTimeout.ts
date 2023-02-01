@@ -11,7 +11,7 @@ const fetchWithTimeout = (url, options: FetchTimeoutOptions = {}): Promise<Respo
 			setTimeout(() => {
 				reject(new Error(`Request for ${url} timed out after ${timeout} milliseconds`))
 			}, timeout)
-		})
+		}),
 	]) as Promise<Response>
 }
 

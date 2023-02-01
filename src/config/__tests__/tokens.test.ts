@@ -14,7 +14,7 @@ const tokensToTest = omitBy(
 		token.symbol.toLowerCase() === 'bnb' ||
 		token.symbol.toLowerCase() === 'one' ||
 		token.symbol.toLowerCase() === 'bttold' ||
-		token.symbol.toLowerCase() === 'hero'
+		token.symbol.toLowerCase() === 'hero',
 )
 
 describe('Config tokens', () => {
@@ -24,17 +24,17 @@ describe('Config tokens', () => {
 			const [[symbol], [decimals]] = await multicall(erc20ABI, [
 				{
 					address: token.address,
-					name: 'symbol'
+					name: 'symbol',
 				},
 				{
 					address: token.address,
-					name: 'decimals'
-				}
+					name: 'decimals',
+				},
 			])
 
 			expect(key).toBe(token.symbol.toLowerCase())
 			expect(token.symbol.toLowerCase()).toBe(symbol.toLowerCase())
 			expect(token.decimals).toBe(parseInt(decimals, 10))
-		}
+		},
 	)
 })

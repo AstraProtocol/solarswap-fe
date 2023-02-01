@@ -57,7 +57,7 @@ describe('getIdsByTimeWindow', () => {
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451496',
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451490',
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451484',
-			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451478'
+			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451478',
 		]
 
 		// When
@@ -77,7 +77,7 @@ describe('getIdsByTimeWindow', () => {
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451496',
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451495',
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451494',
-			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451493'
+			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451493',
 		]
 
 		// When
@@ -97,7 +97,7 @@ describe('getIdsByTimeWindow', () => {
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451495',
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451480',
 			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451465',
-			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451450'
+			'0x00000cd505955c2aaefd16fc37a3fed35fd7b343-451450',
 		]
 
 		// When

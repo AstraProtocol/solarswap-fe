@@ -34,7 +34,7 @@ const cells = {
 	earned: Earned,
 	details: Details,
 	multiplier: Multiplier,
-	liquidity: Liquidity
+	liquidity: Liquidity,
 }
 
 const Row: React.FunctionComponent<RowPropsWithLoading> = props => {

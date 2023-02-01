@@ -4,7 +4,7 @@ import { Masterchef } from 'config/abi/types'
 import getGasPrice from 'utils/getGasPrice'
 
 const options = {
-	gasLimit: DEFAULT_GAS_LIMIT
+	gasLimit: DEFAULT_GAS_LIMIT,
 }
 
 export const stakeFarm = async (masterChefContract: Masterchef, pid, amount) => {

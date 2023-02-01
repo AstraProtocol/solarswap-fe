@@ -15,7 +15,7 @@ const SearchInput: React.FC<Props> = ({ onChange: onChangeCallback, placeholder 
 
 	const debouncedOnChange = useMemo(
 		() => debounce((e: React.ChangeEvent<HTMLInputElement>) => onChangeCallback(e), 500),
-		[onChangeCallback]
+		[onChangeCallback],
 	)
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ const SearchInput: React.FC<Props> = ({ onChange: onChangeCallback, placeholder 
 		<Form.Input
 			classes={{
 				option: ' ',
-				inputWrapperPadding: 'padding-top-xs padding-bottom-xs padding-left-md padding-right-md'
+				inputWrapperPadding: 'padding-top-xs padding-bottom-xs padding-left-md padding-right-md',
 			}}
 			value={searchText}
 			onChange={onChange}

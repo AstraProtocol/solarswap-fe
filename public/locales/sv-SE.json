@@ -1007,7 +1007,7 @@
 	"1Y": "1 år",
 	"5Y": "5Å",
 	"Annual ROI at current rates": "Årlig avkastning på investeringar med befintliga priser",
-	"Default Transaction Speed (GWEI)": "Förvald transaktionshastighet (GWEI)",
+	"Default Transaction Speed (%gasUnit%)": "Förvald transaktionshastighet (%gasUnit%)",
 	"Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees": "Justerar priset (transaktionsavgiften) på din transaktion. Högre GWEI = högre hastighet = högre avgifter",
 	"Standard (%gasPrice%)": "Standard (%gasPrice%)",
 	"Fast (%gasPrice%)": "Snabb (%gasPrice%)",

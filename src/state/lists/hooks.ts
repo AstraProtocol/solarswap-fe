@@ -60,7 +60,7 @@ export type TokenAddressMap = Readonly<{
  */
 const EMPTY_LIST: TokenAddressMap = {
 	[ChainId.MAINNET]: {},
-	[ChainId.TESTNET]: {}
+	[ChainId.TESTNET]: {},
 }
 
 // -------------------------------------
@@ -69,7 +69,7 @@ const EMPTY_LIST: TokenAddressMap = {
 const selectorActiveUrls = (state: AppState) => state.lists.activeListUrls
 const selectorByUrls = (state: AppState) => state.lists.byUrl
 const activeListUrlsSelector = createSelector(selectorActiveUrls, urls =>
-	urls?.filter(url => !UNSUPPORTED_LIST_URLS.includes(url))
+	urls?.filter(url => !UNSUPPORTED_LIST_URLS.includes(url)),
 )
 
 const combineTokenMapsWithDefault = (lists: AppState['lists']['byUrl'], urls: string[]) => {
@@ -103,7 +103,7 @@ export const combinedTokenMapFromActiveUrlsSelector = createSelector(
 	[selectorByUrls, selectorActiveUrls],
 	(lists, urls) => {
 		return combineTokenMapsWithDefault(lists, urls)
-	}
+	},
 )
 
 const inactiveUrlSelector = createSelector([selectorByUrls, selectorActiveUrls], (lists, urls) => {
@@ -114,7 +114,7 @@ export const combinedTokenMapFromInActiveUrlsSelector = createSelector(
 	[selectorByUrls, inactiveUrlSelector],
 	(lists, inactiveUrl) => {
 		return combineTokenMaps(lists, inactiveUrl)
-	}
+	},
 )
 
 export const combinedTokenMapFromOfficialsUrlsSelector = createSelector([selectorByUrls], lists => {
@@ -139,7 +139,7 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
 
 	const tokenMap: WrappedTokenInfo[] = uniqBy(
 		list.tokens,
-		tokenInfo => `${tokenInfo.chainId}#${tokenInfo.address}`
+		tokenInfo => `${tokenInfo.chainId}#${tokenInfo.address}`,
 	).map(tokenInfo => {
 		const tags: TagInfo[] =
 			tokenInfo.tags
@@ -157,15 +157,15 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
 	const tokenAddressMap = fromPairs(
 		Object.entries(groupedTokenMap).map(([chainId, tokenInfoList]) => [
 			chainId,
-			fromPairs(tokenInfoList.map(tokenInfo => [tokenInfo.address, { token: tokenInfo, list }]))
-		])
+			fromPairs(tokenInfoList.map(tokenInfo => [tokenInfo.address, { token: tokenInfo, list }])),
+		]),
 	) as TokenAddressMap
 
 	// add chain id item if not exist
 	enumKeys(ChainId).forEach(chainId => {
 		if (!(ChainId[chainId] in tokenAddressMap)) {
 			Object.defineProperty(tokenAddressMap, ChainId[chainId], {
-				value: {}
+				value: {},
 			})
 		}
 	})
@@ -191,7 +191,7 @@ export function useAllLists(): {
 function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
 	return {
 		[ChainId.MAINNET]: { ...map1[ChainId.MAINNET], ...map2[ChainId.MAINNET] },
-		[ChainId.TESTNET]: { ...map1[ChainId.TESTNET], ...map2[ChainId.TESTNET] }
+		[ChainId.TESTNET]: { ...map1[ChainId.TESTNET], ...map2[ChainId.TESTNET] },
 	}
 }
 

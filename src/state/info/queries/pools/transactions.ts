@@ -76,7 +76,7 @@ interface TransactionResults {
 const fetchPoolTransactions = async (address: string): Promise<{ data?: Transaction[]; error: boolean }> => {
 	try {
 		const data = await infoClient.request<TransactionResults>(POOL_TRANSACTIONS, {
-			address
+			address,
 		})
 		const mints = data.mints.map(mapMints)
 		const burns = data.burns.map(mapBurns)
@@ -85,7 +85,7 @@ const fetchPoolTransactions = async (address: string): Promise<{ data?: Transact
 	} catch (error) {
 		console.error(`Failed to fetch transactions for pool ${address}`, error)
 		return {
-			error: true
+			error: true,
 		}
 	}
 }

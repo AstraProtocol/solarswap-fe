@@ -1007,7 +1007,7 @@
 	"1Y": "1 سنة",
 	"5Y": "5 سنوات",
 	"Annual ROI at current rates": "العائد على الاستثمار السنوي بالأسعار الحالية",
-	"Default Transaction Speed (GWEI)": "سرعة المعاملة الافتراضية (GWEI)",
+	"Default Transaction Speed (%gasUnit%)": "سرعة المعاملة الافتراضية (%gasUnit%)",
 	"Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees": "يعدل سعر الوقود (رسوم المعاملة) لمعاملتك. GWEI المرتفع = سرعة عالية = رسوم مرتفعة",
 	"Standard (%gasPrice%)": "القياسي (%gasPrice%)",
 	"Fast (%gasPrice%)": "السريع (%gasPrice%)",
