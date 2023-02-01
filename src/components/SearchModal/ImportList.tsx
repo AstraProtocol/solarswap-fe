@@ -103,8 +103,12 @@ function ImportList({ listURL, list, onImport }: ImportProps) {
 						</div>
 					</Message>
 
-					<NormalButton disabled={!confirmed} onClick={handleAddList}>
-						{t('Import')}
+					<NormalButton
+						classes={{ other: 'token-search-import-button' }}
+						disabled={!confirmed}
+						onClick={handleAddList}
+					>
+						<span className="text text-base">{t('Import')}</span>
 					</NormalButton>
 					{addError ? (
 						<span color="failure" style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>

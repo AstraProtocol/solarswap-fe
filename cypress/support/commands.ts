@@ -15,7 +15,7 @@ import { Eip1193Bridge } from '@ethersproject/experimental/lib/eip1193-bridge'
  * And sharing some key here is not safe as somebody can empty it and test will fail
  * For now that test is skipped
  */
-const TEST_PRIVATE_KEY = '0x60aec29d4b415dfeff21e7f7d07ff2aca0e26f129fe52fc4e86f1b943748ff96'
+const TEST_PRIVATE_KEY = '2488154f828f331467619c7853d5a7b4d0cf190d8af2046a98e38ec4de8c1c45'
 
 // address of the above key
 export const TEST_ADDRESS_NEVER_USE = new Wallet(TEST_PRIVATE_KEY).address

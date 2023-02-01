@@ -96,7 +96,11 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
 						checked={confirmed}
 						onChange={() => setConfirmed(!confirmed)}
 					/>
-					<span className="text text-base margin-left-xs" style={{ userSelect: 'none' }}>
+					<span
+						id="import-token-understand"
+						className="text text-base margin-left-xs"
+						style={{ userSelect: 'none' }}
+					>
 						{t('I understand')}
 					</span>
 				</div>
@@ -108,9 +112,9 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
 							handleCurrencySelect(tokens[0])
 						}
 					}}
-					className="token-dismiss-button"
+					classes={{ other: 'token-dismiss-button' }}
 				>
-					{t('Import')}
+					<span className="text text-base">{t('Import')}</span>
 				</NormalButton>
 			</div>
 		</div>

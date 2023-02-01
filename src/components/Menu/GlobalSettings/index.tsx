@@ -10,6 +10,7 @@ const GlobalSettings = () => {
 	return (
 		<div className="flex">
 			<IconButton
+				id="open-settings-dialog-button"
 				size="lg"
 				onClick={onPresentSettingsModal}
 				icon={IconEnum.ICON_SETTING}

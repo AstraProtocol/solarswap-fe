@@ -108,7 +108,10 @@ export default function CurrencySearchModal({
 				{modalView === CurrencyModalView.search && (
 					<div className="flex flex-justify-center">
 						<NormalButton
-							classes={{ color: 'secondary-color-normal', other: 'text-bold text-base' }}
+							classes={{
+								color: 'secondary-color-normal',
+								other: 'text-bold text-base list-token-manage-button'
+							}}
 							variant="text"
 							onClick={() => setModalView(CurrencyModalView.manage)}
 						>

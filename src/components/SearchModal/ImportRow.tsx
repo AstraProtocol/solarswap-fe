@@ -66,6 +66,7 @@ export default function ImportRow({
 			</div>
 			{!isActive && !isAdded ? (
 				<NormalButton
+					classes={{ other: 'token-search-import-button' }}
 					onClick={() => {
 						if (setImportToken) {
 							setImportToken(token)
@@ -73,7 +74,7 @@ export default function ImportRow({
 						showImportView()
 					}}
 				>
-					{t('Import')}
+					<span className="text text-base">{t('Import')}</span>
 				</NormalButton>
 			) : (
 				<Row style={{ minWidth: 'fit-content' }}>

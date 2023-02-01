@@ -67,7 +67,7 @@ export default function CurrencyInputPanel({
 				<div className="flex">
 					<NormalButton
 						variant="text"
-						className="open-currency-select-button"
+						classes={{ other: 'open-currency-select-button' }}
 						onClick={() => {
 							if (!disableCurrencySelect) {
 								onPresentCurrencyModal()
