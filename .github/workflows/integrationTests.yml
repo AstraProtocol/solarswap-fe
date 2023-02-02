@@ -50,8 +50,7 @@ jobs:
                   source: '.env.sample'
                   target: '.env'
 
-            - run: yarn cypress install
-            - run: yarn build
-              env:
-                  NEXT_PUBLIC_SF_HEADER: ${{ secrets.SF_HEADER }}
-            - run: yarn integration-test
+            - uses: cypress-io/github-action@v5.0.7 # use the explicit version number
+              with:
+                  build: npm run build
+                  start: npm start
