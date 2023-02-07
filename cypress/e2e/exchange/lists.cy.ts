@@ -1,5 +1,5 @@
 describe('Lists', () => {
-	const HOST = 'http://localhost'
+	const HOST = 'http://localhost:3000'
 	const busd = '0x092d93f258ceea20c94ba01e8771115141dd7c20'
 	beforeEach(() => {
 		cy.visit(`${HOST}/swap`)

@@ -1,6 +1,7 @@
 describe('Swap', () => {
+	const HOST = 'http://localhost:3000'
 	beforeEach(() => {
-		cy.visit('http://localhost/swap')
+		cy.visit(`${HOST}/swap`)
 	})
 	const delay = 200
 	const usdt = '0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2'
@@ -47,7 +48,7 @@ describe('Swap', () => {
 	})
 
 	it('should get input and output currency from url params', () => {
-		cy.visit(`http://localhost/swap?inputCurrency=${usdt}&outputCurrency=ASA`)
+		cy.visit(`${HOST}/swap?inputCurrency=${usdt}&outputCurrency=ASA`)
 		cy.get('#swap-currency-input #pair').should('contain', 'USDT')
 		cy.get('#swap-currency-output #pair').should('contain', 'ASA')
 	})
