@@ -16,15 +16,10 @@ export const BASE_ASTRA_EXPLORER_URLS = {
 }
 
 // ASA_PER_BLOCK details
-// 40 ASA is minted per block
-// 20 ASA per block is sent to Burn pool (A farm just for burning cake)
-// 10 ASA per block goes to ASA syrup pool
-// 9 ASA per block goes to Yield farms and lottery
-// ASA_PER_BLOCK in config/index.ts = 40 as we only change the amount sent to the burn pool which is effectively a farm.
-// @todo ASA_PER_BLOCK chua chot
-export const ASA_PER_BLOCK = 2
+// 0.5 ASA is minted per block
+export const ASA_PER_BLOCK = 0.5
 export const BLOCKS_PER_YEAR = (60 / ASA_BLOCK_TIME) * 60 * 24 * 365 // 10512000
-export const ASA_PER_YEAR = ASA_PER_BLOCK * BLOCKS_PER_YEAR
+export const ASA_PER_YEAR = ASA_PER_BLOCK * BLOCKS_PER_YEAR // 5.256.000
 export const BASE_URL = process.env.NEXT_PUBLIC_HOST
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_URL}/add`
 export const BASE_ASTRA_EXPLORER_URL = BASE_ASTRA_EXPLORER_URLS[CHAIN_ID]

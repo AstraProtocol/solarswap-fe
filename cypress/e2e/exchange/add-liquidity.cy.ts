@@ -1,80 +1,187 @@
 describe('Add Liquidity', () => {
+	const HOST = 'http://localHOST:3000'
+
+	/**
+	 * Use contracts:
+	 * WASA: 0xC60F8AF409Eac14d4926e641170382f313749Fdc
+	 * USDT: 0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2
+	 * TNT:  0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548
+	 * TNT2: 0xe65585B6Aa50f27d8C8aFac544c01d8668850f21
+	 */
+
+	/** Normal Add Liquidity */
+
 	it('loads the two correct tokens', () => {
-		cy.visit('/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'CAKE')
-		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'BUSD')
+		cy.visit(`${HOST}/add/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'USDT')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'TNT')
 	})
 
-	it('loads the BNB and tokens', () => {
-		cy.visit('/add/BNB/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'BNB')
-		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'CAKE')
+	it('loads the ASA and tokens', () => {
+		cy.visit(`${HOST}/add/ASA/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'ASA')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'USDT')
 	})
 
-	it('loads the WBNB and tokens', () => {
-		cy.visit('/add/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'WBNB')
-		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'CAKE')
+	it('loads the WASA and tokens', () => {
+		cy.visit(`${HOST}/add/0xC60F8AF409Eac14d4926e641170382f313749Fdc/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'WASA')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'TNT')
 	})
 
-	it('does not crash if BNB is duplicated', () => {
-		cy.visit('/add/BNB/BNB')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'BNB')
-		cy.get('#add-liquidity-input-tokenb #pair').should('not.contain.text', 'BNB')
+	it('does not crash if ASA is duplicated', () => {
+		cy.visit(`${HOST}/add/ASA/ASA`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'ASA')
+		cy.get('#add-liquidity-input-tokenb #pair').should('not.contain.text', 'ASA')
 	})
 
 	it('does not crash if address is duplicated', () => {
-		cy.visit('/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'CAKE')
-		cy.get('#add-liquidity-input-tokenb #pair').should('not.contain.text', 'CAKE')
+		cy.visit(`${HOST}/add/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'TNT')
+		cy.get('#add-liquidity-input-tokenb #pair').should('not.contain.text', 'TNT')
 	})
 
 	it('token not in storage is loaded', () => {
-		cy.visit('/add/0xD74b782E05AA25c50e7330Af541d46E18f36661C/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'QUACK')
-		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'CAKE')
+		cy.visit(`${HOST}/add/0xe65585B6Aa50f27d8C8aFac544c01d8668850f21/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'TNT2')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'TNT')
 	})
 
 	it('single token can be selected', () => {
-		cy.visit('/add/0xD74b782E05AA25c50e7330Af541d46E18f36661C')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'QUACK')
-		cy.visit('/add/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'BUSD')
-		cy.visit('/add/BNB')
-		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'BNB')
+		cy.visit(`${HOST}/add/0xe65585B6Aa50f27d8C8aFac544c01d8668850f21`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'TNT2')
+		cy.visit(`${HOST}/add/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'USDT')
+		cy.visit(`${HOST}/add/ASA`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'ASA')
 	})
 
 	it('redirects /add/token-token to add/token/token', () => {
-		cy.visit('/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82-0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56')
+		cy.visit(`${HOST}/add/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548-0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`)
 		cy.url().should(
 			'contain',
-			'/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+			'/add/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2',
 		)
 	})
 
-	it('redirects /add/BNB-token to /add/BNB/token', () => {
-		cy.visit('/add/BNB-0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
-		cy.url().should('contain', '/add/BNB/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
+	it('redirects /add/ASA-token to /add/ASA/token', () => {
+		cy.visit(`${HOST}/add/ASA-0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`)
+		cy.url().should('contain', '/add/ASA/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2')
 	})
 
-	it('redirects /add/token-BNB to /add/token/BNB', () => {
-		cy.visit('/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82-BNB')
-		cy.url().should('contain', '/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/BNB')
+	it('redirects /add/token-ASA to /add/token/ASA', () => {
+		cy.visit(`${HOST}/add/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2-ASA`)
+		cy.url().should('contain', '/add/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2/ASA')
 	})
 
-	it('redirects /add/WBNB to /add/WBNB/token', () => {
-		cy.visit('/add/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c-0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
+	it('redirects /add/WASA-token to /add/WASA/token', () => {
+		cy.visit(`${HOST}/add/0xC60F8AF409Eac14d4926e641170382f313749Fdc-0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`)
 		cy.url().should(
 			'contain',
-			'/add/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
+			'/add/0xC60F8AF409Eac14d4926e641170382f313749Fdc/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548',
 		)
 	})
 
-	it('redirects /add/token-WBNB to /add/token/WBNB', () => {
-		cy.visit('/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82-0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c')
+	it('redirects /add/token-WASA to /add/token/WASA', () => {
+		cy.visit(`${HOST}/add/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548-0xC60F8AF409Eac14d4926e641170382f313749Fdc`)
 		cy.url().should(
 			'contain',
-			'/add/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+			'/add/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548/0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+		)
+	})
+
+	/** Single-sided Add Liquidity */
+
+	it('Single-sided - loads the two correct tokens', () => {
+		cy.visit(
+			`${HOST}/add-single/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`,
+		)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'USDT')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'TNT')
+	})
+
+	it('Single-sided - loads the ASA and tokens', () => {
+		cy.visit(`${HOST}/add-single/ASA/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'ASA')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'USDT')
+	})
+
+	it('Single-sided - loads the WASA and tokens', () => {
+		cy.visit(
+			`${HOST}/add-single/0xC60F8AF409Eac14d4926e641170382f313749Fdc/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`,
+		)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'WASA')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'TNT')
+	})
+
+	it('Single-sided - does not crash if ASA is duplicated', () => {
+		cy.visit(`${HOST}/add-single/ASA/ASA`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'ASA')
+		cy.get('#add-liquidity-input-tokenb #pair').should('not.contain.text', 'ASA')
+	})
+
+	it('Single-sided - does not crash if address is duplicated', () => {
+		cy.visit(
+			`${HOST}/add-single/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`,
+		)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'TNT')
+		cy.get('#add-liquidity-input-tokenb #pair').should('not.contain.text', 'TNT')
+	})
+
+	it('Single-sided - token not in storage is loaded', () => {
+		cy.visit(
+			`${HOST}/add-single/0xe65585B6Aa50f27d8C8aFac544c01d8668850f21/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`,
+		)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'TNT2')
+		cy.get('#add-liquidity-input-tokenb #pair').should('contain.text', 'TNT')
+	})
+
+	it('Single-sided - single token can be selected', () => {
+		cy.visit(`${HOST}/add-single/0xe65585B6Aa50f27d8C8aFac544c01d8668850f21`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'TNT2')
+		cy.visit(`${HOST}/add-single/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'USDT')
+		cy.visit(`${HOST}/add-single/ASA`)
+		cy.get('#add-liquidity-input-tokena #pair').should('contain.text', 'ASA')
+	})
+
+	it('Single-sided - redirects /add-single/token-token to add-single/token/token', () => {
+		cy.visit(
+			`${HOST}/add-single/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548-0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`,
+		)
+		cy.url().should(
+			'contain',
+			'/add/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2',
+		)
+	})
+
+	it('Single-sided - redirects /add-single/ASA-token to /add-single/ASA/token', () => {
+		cy.visit(`${HOST}/add-single/ASA-0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2`)
+		cy.url().should('contain', '/add-single/ASA/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2')
+	})
+
+	it('Single-sided - redirects /add-single/token-ASA to /add-single/token/ASA', () => {
+		cy.visit(`${HOST}/add-single/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2-ASA`)
+		cy.url().should('contain', '/add-single/0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2/ASA')
+	})
+
+	it('Single-sided - redirects /add-single/WASA-token to /add-single/WASA/token', () => {
+		cy.visit(
+			`${HOST}/add-single/0xC60F8AF409Eac14d4926e641170382f313749Fdc-0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548`,
+		)
+		cy.url().should(
+			'contain',
+			'/add/0xC60F8AF409Eac14d4926e641170382f313749Fdc/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548',
+		)
+	})
+
+	it('Single-sided - redirects /add-single/token-WASA to /add-single/token/WASA', () => {
+		cy.visit(
+			`${HOST}/add-single/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548-0xC60F8AF409Eac14d4926e641170382f313749Fdc`,
+		)
+		cy.url().should(
+			'contain',
+			'/add/0xEC846C99BB9Cb375DeC6c6E07DA0F35258F22548/0xC60F8AF409Eac14d4926e641170382f313749Fdc',
 		)
 	})
 })
