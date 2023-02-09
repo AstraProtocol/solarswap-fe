@@ -19,7 +19,7 @@ serve -s build -p 3000
 After that you can specify the test to run with the following command
 
 ```bash
-cypress run --spec cypress/integration/exchange/add-liquidity.test.ts
+npx cypress run --spec cypress/integration/exchange/add-liquidity.test.ts
 ```
 
 Remember that if you modify the code under test (e.g. adding id to some element) you need to rebuild the app.
@@ -31,7 +31,7 @@ Cypress GUI is a nice tool to use if screenshots don't tell enough information.
 You open it with
 
 ```bash
-cypress open
+npx cypress open
 ```
 
 It might ask you to update by installing latest GUI version - this will download normal MacOS app which you can open normally without `cypress open`
