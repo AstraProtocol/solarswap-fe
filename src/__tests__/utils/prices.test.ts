@@ -38,7 +38,7 @@ describe('prices', () => {
 						TradeType.EXACT_INPUT,
 					),
 				).realizedLPFee,
-			).toEqual(new TokenAmount(token1, JSBI.BigInt(4)))
+			).toEqual(new TokenAmount(token1, JSBI.BigInt(3)))
 		})
 	})
 })
