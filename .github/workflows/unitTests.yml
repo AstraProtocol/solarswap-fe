@@ -47,5 +47,11 @@ jobs:
             - name: Install dependencies
               run: yarn install --frozen-lockfile
 
+            - name: make env
+              uses: canastro/copy-file-action@master
+              with:
+                  source: '.env.sample'
+                  target: '.env'
+
             - name: Run tests
               run: yarn test --watchAll=false
