@@ -15,14 +15,14 @@ const getLpAddress = memoize(
 			if (!checksummedToken1Address) {
 				return null
 			}
-			token1AsTokenInstance = new Token(ChainId[CHAIN_ID], checksummedToken1Address, 18)
+			token1AsTokenInstance = new Token(parseInt(CHAIN_ID), checksummedToken1Address, 18)
 		}
 		if (typeof token2 === 'string' || token2 instanceof String) {
 			const checksummedToken2Address = isAddress(token2)
 			if (!checksummedToken2Address) {
 				return null
 			}
-			token2AsTokenInstance = new Token(ChainId[CHAIN_ID], checksummedToken2Address, 18)
+			token2AsTokenInstance = new Token(parseInt(CHAIN_ID), checksummedToken2Address, 18)
 		}
 		return Pair.getAddress(token1AsTokenInstance as Token, token2AsTokenInstance as Token)
 	},
