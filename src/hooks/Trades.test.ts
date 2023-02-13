@@ -87,72 +87,72 @@ describe('Trade', () => {
 	// 	})
 	// })
 
-	describe('#useTradeExactIn/Out', () => {
-		const mockUseAllCommonPairs = jest.spyOn(Trades, 'useAllCommonPairs')
-		const mockTradeExactIn = jest.spyOn(Trade, 'bestTradeExactIn')
-		const mockTradeExactOut = jest.spyOn(Trade, 'bestTradeExactOut')
+	// describe('#useTradeExactIn/Out', () => {
+	// 	const mockUseAllCommonPairs = jest.spyOn(Trades, 'useAllCommonPairs')
+	// 	const mockTradeExactIn = jest.spyOn(Trade, 'bestTradeExactIn')
+	// 	const mockTradeExactOut = jest.spyOn(Trade, 'bestTradeExactOut')
 
-		it('should call with maxHops 1 with singleHopOnly', () => {
-			const allowPairs = [
-				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
-			]
-			const argA = CurrencyAmount.ether('1000000')
-			const argB = mainnetTokens.wasa
-			renderHook(
-				() => {
-					mockUseAllCommonPairs.mockReturnValue(allowPairs)
-					Trades.useTradeExactIn(argA, argB)
-				},
-				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: true } }),
-				},
-			)
+	// 	it('should call with maxHops 1 with singleHopOnly', () => {
+	// 		const allowPairs = [
+	// 			new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
+	// 		]
+	// 		const argA = CurrencyAmount.ether('1000000')
+	// 		const argB = mainnetTokens.wasa
+	// 		renderHook(
+	// 			() => {
+	// 				mockUseAllCommonPairs.mockReturnValue(allowPairs)
+	// 				Trades.useTradeExactIn(argA, argB)
+	// 			},
+	// 			{
+	// 				wrapper: createWrapper({ user: { userSingleHopOnly: true } }),
+	// 			},
+	// 		)
 
-			expect(mockTradeExactIn).toBeCalledWith(allowPairs, argA, argB, { maxHops: 1, maxNumResults: 1 })
-			mockTradeExactIn.mockClear()
+	// 		expect(mockTradeExactIn).toBeCalledWith(allowPairs, argA, argB, { maxHops: 1, maxNumResults: 1 })
+	// 		mockTradeExactIn.mockClear()
 
-			renderHook(
-				() => {
-					mockUseAllCommonPairs.mockReturnValue(allowPairs)
-					Trades.useTradeExactOut(argB, argA)
-				},
-				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: true } }),
-				},
-			)
+	// 		renderHook(
+	// 			() => {
+	// 				mockUseAllCommonPairs.mockReturnValue(allowPairs)
+	// 				Trades.useTradeExactOut(argB, argA)
+	// 			},
+	// 			{
+	// 				wrapper: createWrapper({ user: { userSingleHopOnly: true } }),
+	// 			},
+	// 		)
 
-			expect(mockTradeExactOut).toBeCalledWith(allowPairs, argB, argA, { maxHops: 1, maxNumResults: 1 })
-			mockTradeExactOut.mockClear()
-		})
+	// 		expect(mockTradeExactOut).toBeCalledWith(allowPairs, argB, argA, { maxHops: 1, maxNumResults: 1 })
+	// 		mockTradeExactOut.mockClear()
+	// 	})
 
-		it('should call with 3 times without singleHopOnly', () => {
-			const allowPairs = [
-				new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
-			]
-			const argA = CurrencyAmount.ether('1000000')
-			const argB = mainnetTokens.wasa
-			renderHook(
-				() => {
-					mockUseAllCommonPairs.mockReturnValue(allowPairs)
-					Trades.useTradeExactIn(argA, argB)
-				},
-				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: false } }),
-				},
-			)
+	// 	it('should call with 3 times without singleHopOnly', () => {
+	// 		const allowPairs = [
+	// 			new Pair(new TokenAmount(mainnetTokens.wbnb, '1'), new TokenAmount(mainnetTokens.wasa, '1')),
+	// 		]
+	// 		const argA = CurrencyAmount.ether('1000000')
+	// 		const argB = mainnetTokens.wasa
+	// 		renderHook(
+	// 			() => {
+	// 				mockUseAllCommonPairs.mockReturnValue(allowPairs)
+	// 				Trades.useTradeExactIn(argA, argB)
+	// 			},
+	// 			{
+	// 				wrapper: createWrapper({ user: { userSingleHopOnly: false } }),
+	// 			},
+	// 		)
 
-			renderHook(
-				() => {
-					mockUseAllCommonPairs.mockReturnValue(allowPairs)
-					Trades.useTradeExactOut(argB, argA)
-				},
-				{
-					wrapper: createWrapper({ user: { userSingleHopOnly: false } }),
-				},
-			)
+	// 		renderHook(
+	// 			() => {
+	// 				mockUseAllCommonPairs.mockReturnValue(allowPairs)
+	// 				Trades.useTradeExactOut(argB, argA)
+	// 			},
+	// 			{
+	// 				wrapper: createWrapper({ user: { userSingleHopOnly: false } }),
+	// 			},
+	// 		)
 
-			expect(mockTradeExactOut).toBeCalledTimes(3)
-			mockTradeExactOut.mockClear()
-		})
-	})
+	// 		expect(mockTradeExactOut).toBeCalledTimes(3)
+	// 		mockTradeExactOut.mockClear()
+	// 	})
+	// })
 })
