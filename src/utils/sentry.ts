@@ -19,7 +19,7 @@ const assignError = (maybeError: any) => {
 
 export const isUserRejected = err => {
 	// provider user rejected error code
-	return typeof err === 'object' && 'code' in err && err.code === 4001
+	return typeof err === 'object' && 'code' in err && (err.code === 4001 || err.code === 'ACTION_REJECTED')
 }
 
 const ENABLED_LOG = false

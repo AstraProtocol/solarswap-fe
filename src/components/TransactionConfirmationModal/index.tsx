@@ -50,7 +50,7 @@ export function TransactionSubmittedContent({
 	const token: Token | undefined = wrappedCurrency(currencyToAdd, chainId)
 
 	return (
-		<div>
+		<div style={{ maxWidth: 500 }}>
 			<div>
 				<div className="flex flex-justify-center">
 					<Icon icon={IconEnum.ICON_UP} style={{ fontSize: 90 }} classes="secondary-color-normal" />
@@ -78,7 +78,7 @@ export function TransactionSubmittedContent({
 						classes={{ padding: 'padding-top-md padding-bottom-md padding-left-lg padding-right-lg' }}
 						onClick={onDismiss}
 					>
-						{t('Close')}
+						<span className="text text-base">{t('Close')}</span>
 					</NormalButton>
 				</AutoColumn>
 			</div>
@@ -104,22 +104,24 @@ export function ConfirmationModalContent({
 export function TransactionErrorContent({ message, onDismiss }: { message: string; onDismiss: () => void }) {
 	const { t } = useTranslation()
 	return (
-		<div>
-			<AutoColumn justify="center">
+		<div style={{ maxWidth: 500 }}>
+			<div className="col flex-align-center">
 				<Icon
 					icon={IconEnum.ICON_WARNING}
 					classes="alert-color-error margin-bottom-md"
 					style={{ fontSize: 48 }}
 				/>
-				<span style={{ textAlign: 'center', width: '85%', wordBreak: 'break-word' }}>{message}</span>
-			</AutoColumn>
+				<span className="text text-base" style={{ textAlign: 'left', width: '85%', wordBreak: 'break-word' }}>
+					{message}
+				</span>
+			</div>
 
 			<div className="flex flex-justify-center margin-top-md">
 				<NormalButton
 					classes={{ padding: 'padding-left-lg padding-right-lg padding-top-md padding-bottom-md' }}
 					onClick={onDismiss}
 				>
-					{t('Dismiss')}
+					<span className="text text-base">{t('Dismiss')}</span>
 				</NormalButton>
 			</div>
 		</div>
