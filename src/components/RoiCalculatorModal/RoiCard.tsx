@@ -64,13 +64,16 @@ const RoiCard: React.FC<RoiCardProps> = ({ earningTokenSymbol, calculatorState, 
 									type="text"
 									inputMode="decimal"
 									pattern="^[0-9]+[.,]?[0-9]*$"
-									// scale="sm"
 									value={expectedRoi}
 									placeholder="0.0"
+									classes={{
+										inputWrapperPadding:
+											'padding-top-2xs padding-bottom-2xs padding-left-md padding-right-md',
+									}}
 									onChange={handleExpectedRoiChange}
 								/>
 							</div>
-							<IconButton icon={IconEnum.ICON_CHECKED} onClick={onExitRoiEditing} />
+							<IconButton size="xl" icon={IconEnum.ICON_CHECKED} onClick={onExitRoiEditing} />
 						</>
 					) : (
 						<>
@@ -84,7 +87,7 @@ const RoiCard: React.FC<RoiCardProps> = ({ earningTokenSymbol, calculatorState, 
 									})}
 								</span>
 							</div>
-							<IconButton icon={IconEnum.ICON_EDIT} size="sm" onClick={onEnterEditing} />
+							<IconButton icon={IconEnum.ICON_EDIT} size="xl" onClick={onEnterEditing} />
 						</>
 					)}
 				</div>
