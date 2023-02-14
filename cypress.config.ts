@@ -6,7 +6,7 @@ export default defineConfig({
 	defaultCommandTimeout: 10000,
 	chromeWebSecurity: false,
 	pageLoadTimeout: 10000,
-
+	projectId: 'qjg2v4',
 	blockHosts: ['vitals.vercel-insights.com', '*sentry.io', '*googletagmanager.com'],
 
 	retries: {
