@@ -81,7 +81,7 @@ const web3Onboard = init({
 		{
 			id: `0x${chainId.toString(16)}`,
 			token: 'ASA',
-			label: 'Astra testnet',
+			label: 'Astra',
 			rpcUrl: getNodeUrl(),
 			icon: '/images/logo/transparent_logo.svg',
 			blockExplorerUrl: process.env.NEXT_PUBLIC_EXPLORER,
