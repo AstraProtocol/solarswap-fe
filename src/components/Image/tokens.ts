@@ -1,5 +1,5 @@
 /**
- * @see https://github.com/solarswap/solarswap-frontend/blob/develop/src/config/constants/tokens.ts
+ * @see https://github.com/SolarFinance/solarswap-fe/blob/develop/src/config/constants/tokens.ts
  */
 const tokens = {
 	cake: {
