@@ -113,7 +113,7 @@ export default function Pool() {
 					</div>
 					<div className="text-center padding-md">
 						<Link href="/add-single" passHref>
-							<NormalButton classes={{ other: 'width-100 text-base' }} id="join-pool-button">
+							<NormalButton classes={{ other: 'width-100 text-base' }} id="join-pool-single-button">
 								<div>
 									<Icon className="padding-xs" icon={IconEnum.ICON_PLUS} />
 									{t('Add Single Liquidity')}
