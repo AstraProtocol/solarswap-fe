@@ -90,7 +90,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 							</span>
 							<span className="text text-sm text-right">{apy}%</span>
 						</Row>
-						{isFarm && (
+						{/* {isFarm && (
 							<Row style={{ justifyContent: 'space-between' }}>
 								<span className="text text-sm contrast-color-70">{t('Farm Multiplier')}</span>
 								<div className="flex flex-justify-end flex-align-end">
@@ -101,7 +101,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
 									{multiplierTooltipVisible && multiplierTooltip}
 								</div>
 							</Row>
-						)}
+						)} */}
 					</div>
 					<div className={styles.bulletList}>
 						<li className="contrast-color-70">
