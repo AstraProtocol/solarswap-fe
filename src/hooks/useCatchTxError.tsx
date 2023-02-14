@@ -137,6 +137,14 @@ export default function useCatchTxError(): CatchTxErrorReturn {
 								}
 							})
 					}
+				} else {
+					withToast(
+						{
+							title: t('Error'),
+							moreInfo: t('User denied message signature.'),
+						},
+						{ type: 'error' },
+					)
 				}
 			} finally {
 				setLoading(false)

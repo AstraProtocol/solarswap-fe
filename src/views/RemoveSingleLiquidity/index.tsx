@@ -268,12 +268,20 @@ export default function RemoveLiquidity() {
 				.catch(err => {
 					if (err && err.code !== 4001) {
 						logError(err)
-						console.error(`Remove Liquidity failed`, err, args)
+						console.error(`Remove Single Liquidity failed`, err, args)
 					}
 					setLiquidityState({
 						attemptingTxn: false,
 						liquidityErrorMessage:
-							err && err?.code !== 4001 ? `Remove Liquidity failed: ${err.message}` : undefined,
+							err && err?.code !== 4001
+								? err?.code === -32603
+									? t(`Remove Liquidity failed: %message%`, {
+											message: t(
+												`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
+											),
+									  })
+									: t(`Remove Liquidity failed: %message%`, { message: err.message })
+								: undefined,
 						txHash: undefined,
 					})
 				})

@@ -23,7 +23,7 @@ const Layout: React.FC<Props> = props => {
 	const _needToChangeNetwork = () => connectedChain && parseInt(connectedChain?.id, 16) !== parseInt(CHAIN_ID, 10)
 
 	const { resolvedTheme } = useTheme()
-	const { t } = useTranslation()
+	const { t, currentLanguage } = useTranslation()
 
 	const footerLinks: FooterColumnLink[] = useMemo(
 		() => [
@@ -44,7 +44,7 @@ const Layout: React.FC<Props> = props => {
 				{ label: t('Live Support'), link: 'https://astranaut.io/' },
 			],
 		],
-		[],
+		[currentLanguage],
 	)
 
 	useEffect(() => {

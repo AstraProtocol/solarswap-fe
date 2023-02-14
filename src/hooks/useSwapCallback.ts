@@ -208,6 +208,7 @@ function swapErrorToUserReadableMessage(error: any, t: TranslateFunction) {
 			return t('The input token cannot be transferred. There may be an issue with the input token.')
 		case 'Solarswap: TRANSFER_FAILED':
 			return t('The output token cannot be transferred. There may be an issue with the output token.')
+
 		default:
 			if (reason?.indexOf('undefined is not an object') !== -1) {
 				console.error(error, reason)
@@ -215,6 +216,10 @@ function swapErrorToUserReadableMessage(error: any, t: TranslateFunction) {
 					'An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading.',
 				)
 			}
+			if (reason?.indexOf('insufficient fee'))
+				return t(
+					'Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)',
+				)
 			return t('Unknown error%reason%. Try increasing your slippage tolerance.', {
 				reason: reason ? `: "${reason}"` : '',
 			})

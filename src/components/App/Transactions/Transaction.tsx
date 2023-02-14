@@ -15,17 +15,19 @@ export default function Transaction({ tx }: { tx: TransactionDetails }) {
 
 	return (
 		<div>
-			<Typography.Link href={getAstraExplorerLink(tx.hash, 'transaction', chainId)}>
+			<Typography.Link target="_blank" href={getAstraExplorerLink(tx.hash, 'transaction', chainId)}>
 				{summary ?? tx.hash}
 			</Typography.Link>
 
-			{pending ? (
-				<CircleLoader />
-			) : success ? (
-				<Icon icon={IconEnum.ICON_CHECKED} color="success" />
-			) : (
-				<Icon icon={IconEnum.ICON_CLOSE} color="failure" />
-			)}
+			<span className="margin-left-xs">
+				{pending ? (
+					<CircleLoader />
+				) : success ? (
+					<Icon icon={IconEnum.ICON_CHECKED} className="alert-color-success" />
+				) : (
+					<Icon icon={IconEnum.ICON_CLOSE} className="alert-color-error" />
+				)}
+			</span>
 		</div>
 	)
 }
