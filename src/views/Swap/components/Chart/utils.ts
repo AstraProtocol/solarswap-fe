@@ -1,4 +1,5 @@
-import { WASA_ADDRESS } from './constants'
+import { WASA_ADDRESS } from 'config/constants'
+import { CHAIN_ID } from 'config/constants/networks'
 
 const MIN_VALUE_DISPLAYED = 0.001
 
@@ -29,7 +30,7 @@ export const getTokenAddress = (tokenAddress: undefined | string) => {
 	}
 	const lowerCaseAddress = tokenAddress.toLowerCase()
 	if (lowerCaseAddress === 'bnb') {
-		return WASA_ADDRESS
+		return WASA_ADDRESS[CHAIN_ID]
 	}
 
 	return lowerCaseAddress

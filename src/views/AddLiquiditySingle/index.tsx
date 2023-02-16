@@ -13,8 +13,7 @@ import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { CHAIN_ID } from 'config/constants/networks'
 import { AppDispatch } from '../../state'
-import { LightCard } from '../../components/Card'
-import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
+import { ColumnCenter } from '../../components/Layout/Column'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import { AppHeader, AppBody } from '../../components/App'
 import { MinimalPositionCard } from '../../components/PositionCard'
@@ -370,16 +369,14 @@ export default function AddLiquiditySingle() {
 								currencies[Field.CURRENCY_B] &&
 								pairState !== PairState.INVALID && (
 									<div className="border border-base radius-lg margin-bottom-xl margin-left-sm">
-										{priceImpactWithoutFee && (
-											<Row className="padding-md">
-												<span className="text text-sm" style={{ marginRight: 5 }}>
-													{t('Price Impact Without Fee')}:{' '}
-												</span>
-												<span className="text text-sm text-bold">
-													{priceImpactWithoutFee.toFixed(3)}%
-												</span>
-											</Row>
-										)}{' '}
+										<Row className="padding-md">
+											<span className="text text-sm" style={{ marginRight: 5 }}>
+												{t('Price Impact Without Fee')}:{' '}
+											</span>
+											<span className="text text-sm text-bold">
+												{priceImpactWithoutFee ? `${priceImpactWithoutFee.toFixed(3)}%` : ''}
+											</span>
+										</Row>
 										<div className="padding-md">
 											<span className="text text-sm">
 												{noLiquidity

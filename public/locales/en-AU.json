@@ -333,5 +333,6 @@
 	"Compound: collect and restake ASA into pool.": "Compound: collect and restake ASA into pool.",
 	"Harvest: collect ASA and send to wallet": "Harvest: collect ASA and send to wallet",
 	"%position% Entered": "%position% Entered",
-	"Per": "per"
+	"Per": "per",
+	"Receive WASA hint": "Removing liquidity and receive WASA instead ASA could help you save gas fee."
 }

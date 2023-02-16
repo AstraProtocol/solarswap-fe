@@ -1,7 +1,8 @@
 import { Currency } from '@solarswap/sdk'
 import { useCallback, useState } from 'react'
 import AsaWasaNotice from './AsaWasaNotice'
-import { WASA_ADDRESS } from './constants'
+import { CHAIN_ID } from 'config/constants/networks'
+import { WASA_ADDRESS } from 'config/constants'
 import PriceChart from './PriceChart'
 import { getTokenAddress } from './utils'
 
@@ -40,7 +41,7 @@ const PriceChartContainer: React.FC<PriceChartContainerProps> = ({
 		return null
 	}
 
-	const isAsaWasa = token0Address === WASA_ADDRESS && token1Address === WASA_ADDRESS
+	const isAsaWasa = token0Address === WASA_ADDRESS[CHAIN_ID] && token1Address === WASA_ADDRESS[CHAIN_ID]
 
 	if (isAsaWasa) {
 		return <AsaWasaNotice isChartExpanded={isChartExpanded} />

@@ -56,23 +56,23 @@ export function useDerivedBurnInfo(
 	const totalSupply = useTotalSupply(pair?.liquidityToken)
 	const liquidityValueA =
 		pair &&
-		totalSupply &&
-		userLiquidity &&
-		tokenA &&
-		// this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
-		JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
+			totalSupply &&
+			userLiquidity &&
+			tokenA &&
+			// this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+			JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
 			? new TokenAmount(tokenA, pair.getLiquidityValue(tokenA, totalSupply, userLiquidity, false).raw)
 			: undefined
 	const liquidityValueB =
 		pair &&
-		totalSupply &&
-		userLiquidity &&
-		tokenB &&
-		// this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
-		JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
+			totalSupply &&
+			userLiquidity &&
+			tokenB &&
+			// this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+			JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
 			? new TokenAmount(tokenB, pair.getLiquidityValue(tokenB, totalSupply, userLiquidity, false).raw)
 			: undefined
-	const liquidityValues: { [Field.CURRENCY_A]?: TokenAmount; [Field.CURRENCY_B]?: TokenAmount } = {
+	const liquidityValues: { [Field.CURRENCY_A]?: TokenAmount;[Field.CURRENCY_B]?: TokenAmount } = {
 		[Field.CURRENCY_A]: liquidityValueA,
 		[Field.CURRENCY_B]: liquidityValueB,
 	}
@@ -223,28 +223,28 @@ export function useDerivedBurnSingleInfo(
 		[Field.LIQUIDITY_PERCENT]: percentToRemove,
 		[Field.LIQUIDITY]:
 			userLiquidity &&
-			percentToRemove &&
-			percentToRemove.greaterThan('0') &&
-			(percentToRemove.lessThan('1') || percentToRemove.equalTo('1'))
+				percentToRemove &&
+				percentToRemove.greaterThan('0') &&
+				(percentToRemove.lessThan('1') || percentToRemove.equalTo('1'))
 				? new TokenAmount(userLiquidity.token, userIn)
 				: undefined,
 		[Field.CURRENCY_A]:
 			tokenA &&
-			percentToRemove &&
-			percentToRemove.greaterThan('0') &&
-			(percentToRemove.lessThan('1') || percentToRemove.equalTo('1'))
+				percentToRemove &&
+				percentToRemove.greaterThan('0') &&
+				(percentToRemove.lessThan('1') || percentToRemove.equalTo('1'))
 				? new TokenAmount(tokenA, zapOutAmount)
 				: undefined,
 		[Field.CURRENCY_B]:
 			tokenB &&
-			percentToRemove &&
-			percentToRemove.greaterThan('0') &&
-			(percentToRemove.lessThan('1') || percentToRemove.equalTo('1'))
+				percentToRemove &&
+				percentToRemove.greaterThan('0') &&
+				(percentToRemove.lessThan('1') || percentToRemove.equalTo('1'))
 				? new TokenAmount(tokenB, percentToRemove.multiply(0).quotient)
 				: undefined,
 	}
 
-	const bestTradeExactOut = useTradeExactOut(currencyB, parsedAmounts[Field.CURRENCY_A])
+	const bestTradeExactOut = useTradeExactOut(currencyB, zapOutAmount ? parsedAmounts[Field.CURRENCY_A] : undefined)
 
 	const { priceImpactWithoutFee } = computeTradePriceBreakdown(bestTradeExactOut)
 	const priceImpactSeverity = priceImpactWithoutFee ? warningSeverity(priceImpactWithoutFee) : 0

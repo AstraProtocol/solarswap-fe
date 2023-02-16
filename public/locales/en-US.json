@@ -1554,8 +1554,11 @@
 	"Highest Price": "Highest Price",
 	"Highest": "Highest",
 	"Per": "per",
+	"Receive WASA hint": "Removing liquidity and receive WASA instead ASA could help you save gas fee.",
 	"Add Single Liquidity": "Add Single Liquidity",
 	"Remove Single Liquidity": "Remove Single Liquidity",
+	"Receive WASA": "Receive WASA",
+	"Receive ASA": "Receive ASA",
 	"Remove Anyway": "Remove Anyway",
 	"Supply Anyway": "Supply Anyway",
 	"Price Impact Without Fee": "Price Impact Without Fee",
@@ -1584,5 +1587,7 @@
 	"This transaction would fail": "This transaction would fail",
 	"You can swap WASA for ASA (and vice versa) with no trading fees.": "You can swap WASA for ASA (and vice versa) with no trading fees.",
 	"Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)": "Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)",
-	"User denied message signature.": "User denied message signature."
+	"User denied message signature.": "User denied message signature.",
+  "Wrap": "Wrap",
+	"Unwrap": "Unwrap"
 }

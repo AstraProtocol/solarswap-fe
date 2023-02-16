@@ -1550,5 +1550,6 @@
 	"Lowest Price": "Lowest Price",
 	"Highest Price": "Highest Price",
 	"Highest": "Highest",
-	"Per": "per"
+	"Per": "per",
+	"Receive WASA hint": "Removing liquidity and receive WASA instead ASA could help you save gas fee."
 }

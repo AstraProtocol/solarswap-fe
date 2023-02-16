@@ -43,6 +43,7 @@ import { logError } from '../../utils/sentry'
 import Page from 'components/Layout/Page'
 import Link from 'next/link'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
+import { useTooltip } from 'hooks/useTooltip'
 
 // const BorderCard = styled.div`
 //   border: solid 1px ${({ theme }) => theme.colors.cardBorder};
@@ -328,6 +329,11 @@ export default function RemoveLiquidity() {
 		}
 	}, [onUserInput, txHash])
 
+	const { targetRef, tooltip, tooltipVisible } = useTooltip(t('Receive WASA hint'), {
+		placement: 'top-end',
+		tooltipOffset: [20, 10],
+	})
+
 	const [innerLiquidityPercentage, setInnerLiquidityPercentage] = useDebouncedChangeHandler(
 		Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
 		liquidityPercentChangeCallback,
@@ -466,7 +472,7 @@ export default function RemoveLiquidity() {
 											>
 												{oneCurrencyIsETH ? (
 													<Link
-														href={`/remove/${
+														href={`/remove-single/${
 															currencyA === ETHER ? WETH[chainId].address : currencyIdA
 														}/${currencyB === ETHER ? WETH[chainId].address : currencyIdB}`}
 														passHref
@@ -476,17 +482,25 @@ export default function RemoveLiquidity() {
 															classes={{ color: 'secondary-color-normal' }}
 														>
 															{t('Receive WASA').toLocaleUpperCase(locale)}
+															<div
+																className="margin-left-2xs"
+																style={{ display: 'inline-block' }}
+																ref={targetRef}
+															>
+																<Icon icon={IconEnum.ICON_HELP} />
+															</div>
+															{tooltipVisible && tooltip}
 														</NormalButton>
 													</Link>
 												) : oneCurrencyIsWETH ? (
 													<Link
-														href={`/remove/${
+														href={`/remove-single/${
 															currencyA && currencyEquals(currencyA, WETH[chainId])
-																? 'BNB'
+																? 'ASA'
 																: currencyIdA
 														}/${
 															currencyB && currencyEquals(currencyB, WETH[chainId])
-																? 'BNB'
+																? 'ASA'
 																: currencyIdB
 														}`}
 														passHref
@@ -495,7 +509,15 @@ export default function RemoveLiquidity() {
 															variant="text"
 															classes={{ color: 'secondary-color-normal' }}
 														>
-															{t('Receive WASA').toLocaleUpperCase(locale)}
+															{t('Receive ASA').toLocaleUpperCase(locale)}
+															<div
+																className="margin-left-2xs"
+																style={{ display: 'inline-block' }}
+																ref={targetRef}
+															>
+																<Icon icon={IconEnum.ICON_HELP} />
+															</div>
+															{tooltipVisible && tooltip}
 														</NormalButton>
 													</Link>
 												) : null}
@@ -565,14 +587,14 @@ export default function RemoveLiquidity() {
 								</div>
 							</div>
 						)}
-						{priceImpactWithoutFee && (
-							<Row>
-								<span className="text text-sm" style={{ marginRight: 5 }}>
-									{t('Price Impact Without Fee')}:{' '}
-								</span>
-								<span className="text text-sm text-bold">{priceImpactWithoutFee.toFixed(3)}%</span>
-							</Row>
-						)}
+						<Row>
+							<span className="text text-sm" style={{ marginRight: 5 }}>
+								{t('Price Impact Without Fee')}:{' '}
+							</span>
+							<span className="text text-sm text-bold">
+								{priceImpactWithoutFee ? `${priceImpactWithoutFee.toFixed(3)}%` : ''}
+							</span>
+						</Row>
 						<div className="position-relative margin-top-xl">
 							{!account ? (
 								<ButtonConnect />
