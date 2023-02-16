@@ -1583,6 +1583,6 @@
 	"Attempting to confirm without approval or a signature": "Attempting to confirm without approval or a signature",
 	"This transaction would fail": "This transaction would fail",
 	"You can swap WASA for ASA (and vice versa) with no trading fees.": "You can swap WASA for ASA (and vice versa) with no trading fees.",
-	"Insufficient fee.  Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)": "Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)",
+	"Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)": "Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)",
 	"User denied message signature.": "User denied message signature."
 }
