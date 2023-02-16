@@ -84,7 +84,7 @@ export default function Pool() {
 			<div className="flex flex-justify-center">
 				<AppBody className="border border-base radius-lg">
 					<AppHeader title={t('Your Liquidity')} subtitle={t('Remove liquidity to receive tokens back')} />
-					<div className="text-center">
+					<div className="text-center margin-top-md">
 						{renderBody()}
 						{account && !v2IsLoading && (
 							<div className="flex flex-justify-center col md-margin-top-lg">
