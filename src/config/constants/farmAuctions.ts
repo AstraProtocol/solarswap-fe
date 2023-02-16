@@ -4,9 +4,6 @@ import { CHAIN_ID } from './networks'
 import tokens from './tokens'
 import { FarmAuctionBidderConfig } from './types'
 
-/**
- * @todo add token later
- */
 export const whitelistedBidders: FarmAuctionBidderConfig[] =
 	Number(CHAIN_ID) === ChainId.MAINNET
 		? [

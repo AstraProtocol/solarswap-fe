@@ -12,6 +12,11 @@ export const ZAP_ADDRESS = {
 	[ChainId.TESTNET]: '0xBE56dE92c45d48C35f4d313a0471F545FA59234d',
 }
 
+export const WASA_ADDRESS = {
+	[ChainId.MAINNET]: '0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+	[ChainId.TESTNET]: '0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+}
+
 // a list of tokens by chain
 type ChainTokenList = {
 	readonly [chainId in ChainId]: Token[]
@@ -84,26 +89,20 @@ export const PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN: Percent = new Percent(JSBI.Bi
 export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(1500), BIPS_BASE) // 15%
 
 /**
- * @description used to ensure the user doesn't send so much ASA so they end up with <.00000001.
+ * @description used to ensure the user doesn't send so much ASA so they end up with <.01.
  * Make sure enough gas for the transaction.
  * @author tiendn
  * 02/12/2022
  * @todo verified exact number later
  */
-export const MIN_ASA: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .00000001 ASA
+export const MIN_ASA: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ASA
 export const BETTER_TRADE_LESS_HOPS_THRESHOLD = new Percent(JSBI.BigInt(50), JSBI.BigInt(10000))
 
 export const ZERO_PERCENT = new Percent('0')
 export const ONE_HUNDRED_PERCENT = new Percent('1')
 
 // SDN OFAC addresses
-export const BLOCKED_ADDRESSES: string[] = [
-	'0x7F367cC41522cE07553e823bf3be79A889DEbe1B',
-	'0xd882cFc20F52f2599D84b8e8D58C7FB62cfE344b',
-	'0x901bb9583b24D97e995513C6778dc6888AB6870e',
-	'0xA7e5d5A720f06526557c513402f2e6B5fA20b008',
-	'0x8576aCC5C05D6Ce88f4e49bf65BdF0C62F91353C',
-]
+export const BLOCKED_ADDRESSES: string[] = []
 
 export { default as farmsConfig } from './farms'
 // export { default as poolsConfig } from './pools'

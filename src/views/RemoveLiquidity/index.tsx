@@ -592,11 +592,11 @@ export default function RemoveLiquidity() {
 													<Link
 														href={`/remove/${
 															currencyA && currencyEquals(currencyA, WETH[chainId])
-																? 'BNB'
+																? 'ASA'
 																: currencyIdA
 														}/${
 															currencyB && currencyEquals(currencyB, WETH[chainId])
-																? 'BNB'
+																? 'ASA'
 																: currencyIdB
 														}`}
 														passHref
