@@ -1586,5 +1586,7 @@
 	"You can swap WASA for ASA (and vice versa) with no trading fees.": "You can swap WASA for ASA (and vice versa) with no trading fees.",
 	"Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)": "Phí không đủ. Hãy xác nhận giao dịch và đảm bảo bạn chi đủ phí gas!",
 	"User denied message signature.": "Giao dịch đã huỷ bỏ.",
-	"Receive WASA hint": "Xóa thanh khoản và nhận WASA thay vì ASA sẽ giúp bạn tiết kiệm phí giao dịch."
+	"Receive WASA hint": "Xóa thanh khoản và nhận WASA thay vì ASA sẽ giúp bạn tiết kiệm phí giao dịch.",
+	"Wrap": "Wrap",
+	"Unwrap": "Unwrap"
 }
