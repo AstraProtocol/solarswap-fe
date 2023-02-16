@@ -1557,8 +1557,9 @@
 	"Add Single Liquidity": "Thêm thanh khoản một Token",
 	"Remove Single Liquidity": "Xóa thanh khoản một Token",
 	"Receive WASA": "Nhận WASA",
-	"Remove Anyway": "Remove Anyway",
-	"Supply Anyway": "Supply Anyway",
+	"Receive ASA": "Nhận ASA",
+	"Remove Anyway": "Xóa (ảnh hưởng giá cao)",
+	"Supply Anyway": "Cung cấp (ảnh hưởng giá cao)",
 	"Price Impact Without Fee": "Ảnh hưởng giá không kể phí giao dịch",
 	"About us": "Về Chúng Tôi",
 	"Explorer": "Explorer",
@@ -1585,5 +1586,6 @@
 	"This transaction would fail": "Giao dịch sẽ thất bại",
 	"You can swap WASA for ASA (and vice versa) with no trading fees.": "You can swap WASA for ASA (and vice versa) with no trading fees.",
 	"Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)": "Phí không đủ. Hãy xác nhận giao dịch và đảm bảo bạn chi đủ phí gas!",
-	"User denied message signature.": "Giao dịch đã huỷ bỏ."
+	"User denied message signature.": "Giao dịch đã huỷ bỏ.",
+	"Receive WASA hint": "Xóa thanh khoản và nhận WASA thay vì ASA sẽ giúp bạn tiết kiệm phí giao dịch."
 }

@@ -1554,6 +1554,7 @@
 	"Highest Price": "Highest Price",
 	"Highest": "Highest",
 	"Per": "per",
+	"Receive WASA hint": "Removing liquidity and receive WASA instead ASA could help you save gas fee.",
 	"Add Single Liquidity": "Add Single Liquidity",
 	"Remove Single Liquidity": "Remove Single Liquidity",
 	"Remove Anyway": "Remove Anyway",

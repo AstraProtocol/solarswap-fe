@@ -43,6 +43,7 @@ import Page from 'components/Layout/Page'
 import CircleLoader from 'components/Loader/CircleLoader'
 import Link from 'next/link'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
+import { useTooltip } from 'hooks/useTooltip'
 
 // import { Slider } from 'components/Slider'
 
@@ -422,6 +423,11 @@ export default function RemoveLiquidity() {
 		}
 	}, [onUserInput, txHash])
 
+	const { targetRef, tooltip, tooltipVisible } = useTooltip(
+		t('Receive WASA hint'),
+		{ placement: 'top-end', tooltipOffset: [20, 10] },
+	)
+
 	const [innerLiquidityPercentage, setInnerLiquidityPercentage] = useDebouncedChangeHandler(
 		Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
 		liquidityPercentChangeCallback,
@@ -586,6 +592,14 @@ export default function RemoveLiquidity() {
 															classes={{ color: 'secondary-color-normal' }}
 														>
 															{t('Receive WASA').toLocaleUpperCase(locale)}
+															<div
+																className="margin-left-2xs"
+																style={{ display: 'inline-block' }}
+																ref={targetRef}
+															>
+																<Icon icon={IconEnum.ICON_HELP} />
+															</div>
+															{tooltipVisible && tooltip}
 														</NormalButton>
 													</Link>
 												) : oneCurrencyIsWETH ? (
@@ -605,7 +619,15 @@ export default function RemoveLiquidity() {
 															variant="text"
 															classes={{ color: 'secondary-color-normal' }}
 														>
-															{t('Receive WASA').toLocaleUpperCase(locale)}
+															{t('Receive ASA').toLocaleUpperCase(locale)}
+															<div
+																className="margin-left-2xs"
+																style={{ display: 'inline-block' }}
+																ref={targetRef}
+															>
+																<Icon icon={IconEnum.ICON_HELP} />
+															</div>
+															{tooltipVisible && tooltip}
 														</NormalButton>
 													</Link>
 												) : null}

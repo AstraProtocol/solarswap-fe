@@ -299,7 +299,7 @@ export function useDerivedSingleMintInfo(
 
 	const bestTradeExactOut = useTradeExactOut(
 		currencyIn,
-		tokenOut ? new TokenAmount(tokenOut, tokenOutAmount || '') : undefined,
+		tokenOutAmount ? new TokenAmount(tokenOut, tokenOutAmount) : undefined,
 	)
 
 	const { priceImpactWithoutFee } = computeTradePriceBreakdown(bestTradeExactOut)

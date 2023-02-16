@@ -369,16 +369,14 @@ export default function AddLiquiditySingle() {
 								currencies[Field.CURRENCY_B] &&
 								pairState !== PairState.INVALID && (
 									<div className="border border-base radius-lg margin-bottom-xl margin-left-sm">
-										{priceImpactWithoutFee && (
-											<Row className="padding-md">
-												<span className="text text-sm" style={{ marginRight: 5 }}>
-													{t('Price Impact Without Fee')}:{' '}
-												</span>
-												<span className="text text-sm text-bold">
-													{priceImpactWithoutFee.toFixed(3)}%
-												</span>
-											</Row>
-										)}{' '}
+										<Row className="padding-md">
+											<span className="text text-sm" style={{ marginRight: 5 }}>
+												{t('Price Impact Without Fee')}:{' '}
+											</span>
+											<span className="text text-sm text-bold">
+												{priceImpactWithoutFee ? `${priceImpactWithoutFee.toFixed(3)}%` : ''}
+											</span>
+										</Row>
 										<div className="padding-md">
 											<span className="text text-sm">
 												{noLiquidity
