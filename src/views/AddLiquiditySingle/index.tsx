@@ -4,7 +4,7 @@ import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@solarswap/sdk'
 import useModal from 'components/Modal/useModal'
 import { NormalButton, Icon, Row, Message, IconEnum } from '@astraprotocol/astra-ui'
-import { logError } from 'utils/sentry'
+import { isUserRejected, logError } from 'utils/sentry'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import { useTranslation } from 'contexts/Localization'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
@@ -217,22 +217,21 @@ export default function AddLiquiditySingle() {
 				}),
 			)
 			.catch(err => {
-				if (err && err.code !== 4001) {
+				if (!isUserRejected(err)) {
 					logError(err)
-					console.error(`Add Liquidity failed`, err, args, value)
+					console.error(`Add Single Liquidity failed`, err, args, value)
 				}
 				setLiquidityState({
 					attemptingTxn: false,
-					liquidityErrorMessage:
-						err && err.code !== 4001
-							? err?.code === -32603
-								? t(`Add Liquidity failed: %message%`, {
-										message: t(
-											`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
-										),
-								  })
-								: t(`Add Liquidity failed: %message%`, { message: err.message })
-							: undefined,
+					liquidityErrorMessage: !isUserRejected(err)
+						? err?.code === -32603
+							? t(`Add Liquidity failed: %message%`, {
+									message: t(
+										`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
+									),
+							  })
+							: t(`Add Liquidity failed: %message%`, { message: err.message })
+						: t(`Add Liquidity failed: %message%`, { message: t('User denied message signature.') }),
 					txHash: undefined,
 				})
 			})

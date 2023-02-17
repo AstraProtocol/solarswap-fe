@@ -4,7 +4,7 @@ import { Trade, TokenAmount, CurrencyAmount, ETHER } from '@solarswap/sdk'
 import { CHAIN_ID } from 'config/constants/networks'
 import { useCallback, useMemo } from 'react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { logError } from 'utils/sentry'
+import { isUserRejected, logError } from 'utils/sentry'
 import { ROUTER_ADDRESS } from '../config/constants'
 import useTokenAllowance from './useTokenAllowance'
 import { Field } from '../state/swap/actions'
@@ -110,8 +110,8 @@ export function useApproveCallback(
 			})
 			.catch((error: any) => {
 				logError(error)
-				console.error('Failed to approve token', error)
-				if (error?.code !== 4001) {
+				// console.error('Failed to approve token', error)
+				if (!isUserRejected(error)) {
 					withToast(
 						{
 							title: t('Error'),
@@ -119,8 +119,16 @@ export function useApproveCallback(
 						},
 						{ type: 'error' },
 					)
+				} else {
+					withToast(
+						{
+							title: t('Error'),
+							moreInfo: t('User denied message signature.'),
+						},
+						{ type: 'error' },
+					)
 				}
-				throw error
+				// throw error
 			})
 	}, [approvalState, token, tokenContract, amountToApprove, spender, addTransaction, callWithGasPrice, t])
 
