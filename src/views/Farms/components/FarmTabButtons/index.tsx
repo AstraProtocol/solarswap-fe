@@ -2,6 +2,7 @@ import { ButtonMenu, ButtonMenuItem } from '@astraprotocol/astra-ui'
 import NotificationDot from 'components/NotificationDot'
 import { useTranslation } from 'contexts/Localization'
 import { useRouter } from 'next/router'
+import { useCallback } from 'react'
 import styles from './styles.module.scss'
 
 interface FarmTabButtonsProps {
@@ -28,14 +29,27 @@ const FarmTabButtons: React.FC<FarmTabButtonsProps> = ({ hasStakeInFinishedFarms
 			break
 	}
 
+	const onGo = (routeIndex: number) => {
+		switch (routeIndex) {
+			case 1:
+				router.push('/farms/history')
+				break
+			case 2:
+				router.push('/farms/archived')
+				break
+			case 0:
+			default:
+				router.push('/farms')
+				break
+		}
+	}
+
 	return (
 		<div className={styles.wrapper}>
-			<ButtonMenu activeIndex={activeIndex} size="xs">
-				<ButtonMenuItem to="/farms">{t('Live')}</ButtonMenuItem>
+			<ButtonMenu onItemClick={onGo} activeIndex={activeIndex} size="xs">
+				<ButtonMenuItem>{t('Live')}</ButtonMenuItem>
 				<NotificationDot show={hasStakeInFinishedFarms}>
-					<ButtonMenuItem to="/farms/history" id="finished-farms-button">
-						{t('Finished')}
-					</ButtonMenuItem>
+					<ButtonMenuItem id="finished-farms-button">{t('Finished')}</ButtonMenuItem>
 				</NotificationDot>
 			</ButtonMenu>
 		</div>

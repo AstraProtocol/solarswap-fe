@@ -19,7 +19,7 @@ import { ViewMode } from 'state/user/actions'
 import { useRouter } from 'next/router'
 // import PageHeader from 'components/PageHeader'
 import SearchInput from 'components/SearchInput'
-import { Select, Toggle, Spinner, Container } from '@astraprotocol/astra-ui'
+import { Select, Toggle, Spinner, Container, Typography } from '@astraprotocol/astra-ui'
 import ToggleView from 'components/ToggleView/ToggleView'
 import Table from './components/FarmTable/FarmTable'
 import FarmTabButtons from './components/FarmTabButtons'
@@ -243,7 +243,10 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 	})
 
 	const renderContent = (): JSX.Element => {
-		if (viewMode === ViewMode.TABLE && rowData.length) {
+		if (viewMode === ViewMode.TABLE) {
+			if (!rowData.length) {
+				return <Typography.Empty classes="margin-top-sm" text={t('No results')} />
+			}
 			const columnSchema = DesktopColumnSchema
 
 			const columns = columnSchema.map(column => ({

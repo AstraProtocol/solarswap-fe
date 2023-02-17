@@ -42,6 +42,7 @@ import PoolPriceBar from './PoolPriceBar'
 // import Page from '../Page'
 import ConfirmAddLiquidityModal from '../Swap/components/ConfirmAddLiquidityModal'
 import Page from 'components/Layout/Page'
+import { isUserRejected } from '../../utils/sentry'
 
 export default function AddLiquidity() {
 	const router = useRouter()
@@ -204,22 +205,21 @@ export default function AddLiquidity() {
 				}),
 			)
 			.catch(err => {
-				if (err && err.code !== 4001) {
+				if (!isUserRejected(err)) {
+					console.log(`Add Liquidity failed`, err, args, value)
 					logError(err)
-					console.error(`Add Liquidity failed`, err, args, value)
 				}
 				setLiquidityState({
 					attemptingTxn: false,
-					liquidityErrorMessage:
-						err && err.code !== 4001
-							? err?.code === -32603
-								? t(`Add Liquidity failed: %message%`, {
-										message: t(
-											`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
-										),
-								  })
-								: t(`Add Liquidity failed: %message%`, { message: err.message })
-							: undefined,
+					liquidityErrorMessage: !isUserRejected(err)
+						? err?.code === -32603
+							? t(`Add Liquidity failed: %message%`, {
+									message: t(
+										`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
+									),
+							  })
+							: t(`Add Liquidity failed: %message%`, { message: err.message })
+						: t(`Add Liquidity failed: %message%`, { message: t('User denied message signature.') }),
 					txHash: undefined,
 				})
 			})
