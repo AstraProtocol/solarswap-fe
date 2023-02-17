@@ -2,9 +2,12 @@ import { Token, Pair, ChainId } from '@solarswap/sdk'
 import { isAddress } from 'utils'
 import memoize from 'lodash/memoize'
 import { CHAIN_ID } from 'config/constants/networks'
+import { WASA_ADDRESS } from 'config/constants'
 
 const getLpAddress = memoize(
 	(token1: string | Token, token2: string | Token) => {
+		token1 = token1 == "asa" ? WASA_ADDRESS[CHAIN_ID] : token1
+		token2 = token2 == "asa" ? WASA_ADDRESS[CHAIN_ID] : token2
 		let token1AsTokenInstance = token1
 		let token2AsTokenInstance = token2
 		if (!token1 || !token2) {
