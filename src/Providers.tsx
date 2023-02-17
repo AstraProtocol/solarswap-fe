@@ -18,7 +18,7 @@ const Providers: React.FC<Props> = ({ children, store }: Props) => {
 	return (
 		<Web3ReactProvider getLibrary={getLibrary}>
 			<Provider store={store}>
-				<NextThemeProvider>
+				<NextThemeProvider defaultTheme="dark">
 					<LanguageProvider>
 						<SWRConfig
 							value={{
