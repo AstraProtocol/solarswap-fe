@@ -39,16 +39,15 @@ export type PairDayDatasResponse = {
 	pairDayDatas: {
 		id: string
 		date: number
+		pairAddress: string
 		reserve0: string
 		reserve1: string
 		reserveUSD: string
-		pairAddress: {
-			token0: {
-				id: string
-			}
-			token1: {
-				id: string
-			}
+		token0: {
+			id: string
+		}
+		token1: {
+			id: string
 		}
 	}[]
 }
