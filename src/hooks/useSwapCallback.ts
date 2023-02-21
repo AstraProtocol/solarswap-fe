@@ -5,6 +5,7 @@ import { TranslateFunction, useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useMemo } from 'react'
 import { useGasPrice } from 'state/user/hooks'
+import { isUserRejected } from 'utils/sentry'
 import truncateHash from 'utils/truncateHash'
 import { INITIAL_ALLOWED_SLIPPAGE } from '../config/constants'
 import { useTransactionAdder } from '../state/transactions/hooks'
@@ -158,8 +159,10 @@ export function useSwapCallback(
 					})
 					.catch((error: any) => {
 						// if the user rejected the tx, pass this along
-						if (error?.code === 4001) {
-							throw new Error('Transaction rejected.')
+						if (isUserRejected(error)) {
+							throw new Error(
+								t('Swap failed: %message%', { message: t('User denied message signature.') }),
+							)
 						} else {
 							// otherwise, the error was unexpected and we need to convey that
 							console.error(`Swap failed`, error, methodName, args, value)

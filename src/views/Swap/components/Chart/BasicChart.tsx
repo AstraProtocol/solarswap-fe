@@ -77,7 +77,12 @@ const BasicChart = ({
 						inputSymbol={inputCurrency?.symbol}
 						outputSymbol={outputCurrency?.symbol}
 					>
-						<span color={isChangePositive ? 'success' : 'failure'} className="text text-base text-bold">
+						<span
+							className={clsx(
+								'text text-base text-bold',
+								isChangePositive ? 'alert-color-success' : 'alert-color-error',
+							)}
+						>
 							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(3)} (${changePercentage}%)`}
 						</span>
 					</PairPriceDisplay>

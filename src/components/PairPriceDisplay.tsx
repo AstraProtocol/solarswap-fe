@@ -28,19 +28,19 @@ const PairPriceDisplay: FC<TokenDisplayProps> = ({
 	...props
 }) => {
 	return value ? (
-		<FlexGap alignItems="baseline" {...props}>
-			<div className="flex flex-align-inherits">
-				<span className="text text-sm text-bold">
+		<div className="row flex-align-end" {...props}>
+			<div className="">
+				<span className="money money-2xl text-bold">
 					{format
 						? formatAmount(typeof value === 'string' ? parseFloat(value) : value, formatOptions)
 						: value}
 				</span>
 				{inputSymbol && outputSymbol && (
-					<span className="text text-lg text-bold">{`${inputSymbol}/${outputSymbol}`}</span>
+					<span className="text text-lg text-bold margin-left-xs contrast-color-70">{`${inputSymbol}/${outputSymbol}`}</span>
 				)}
+				<span className="margin-left-xs">{children}</span>
 			</div>
-			{children}
-		</FlexGap>
+		</div>
 	) : (
 		<Skeleton height={36} width={128} baseColor="#312e39" />
 	)

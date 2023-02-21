@@ -71,7 +71,7 @@ const LineChart = ({ data, setHoverValue, setHoverDate, isChangePositive, timeWi
 		return <LineChartLoader />
 	}
 	return (
-		<ResponsiveContainer>
+		<ResponsiveContainer id="price-chart">
 			<AreaChart
 				data={data}
 				margin={{
