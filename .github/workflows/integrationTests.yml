@@ -21,7 +21,7 @@ jobs:
                   node-version: 18.x
                   registry-url: 'https://npm.pkg.github.com'
                   scope: '@astraprotocol'
-                  token: ${{ secrets.GITHUB_TOKEN }}
+                  token: ${{ secrets.GH_AUTH_TOKEN }}
                   # token: ${{ secrets.PAT_ASTRAPROTOCOL }}
 
             - name: Get yarn cache directory path
@@ -36,13 +36,13 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-yarn-
             - name: Setup npm token
-              run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.GITHUB_TOKEN}}"
+              run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.GH_AUTH_TOKEN}}"
               # run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.PAT_ASTRAPROTOCOL}}"
 
             - name: Cypress install
               run: yarn install --frozen-lockfile
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
                   # NODE_AUTH_TOKEN: ${{ secrets.PAT_ASTRAPROTOCOL }}
             - name: make env
               uses: canastro/copy-file-action@master
@@ -60,4 +60,4 @@ jobs:
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                   # Recommended: pass the GitHub token lets this action correctly
                   # determine the unique run id necessary to re-run the checks
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
