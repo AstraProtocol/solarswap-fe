@@ -27,7 +27,7 @@ jobs:
                   node-version: 18.x
                   registry-url: 'https://npm.pkg.github.com'
                   scope: '@astraprotocol'
-                  token: ${{ secrets.GITHUB_TOKEN }}
+                  # token: ${{ secrets.GITHUB_TOKEN }}
                   # token: ${{ secrets.PAT_ASTRAPROTOCOL }}
 
             - name: Get yarn cache directory path
@@ -42,8 +42,8 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-yarn-
 
-            - name: Setup npm token
-              run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.GITHUB_TOKEN}}"
+            # - name: Setup npm token
+            #   run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.GITHUB_TOKEN}}"
               # run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.PAT_ASTRAPROTOCOL}}"
 
             - name: Install dependencies
