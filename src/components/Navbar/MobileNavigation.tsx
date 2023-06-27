@@ -43,13 +43,36 @@ const LinkMenuItem = ({
 	</div>
 )
 
+const LinkMenuLocale = ({
+	onClick,
+	label,
+
+	classes,
+	prefix,
+}: {
+	onClick: Function
+	label?: React.ReactNode
+
+	classes?: string
+	prefix?: React.ReactNode
+}) => (
+	<div className={clsx('radius-base', 'padding-sm', styles.subItem)}>
+		<span className="block-center">
+			{!!prefix && prefix}
+			<a className={clsx('text text-base', styles.link, classes)} onClick={() => onClick()}>
+				{label}
+			</a>
+		</span>
+	</div>
+)
+
 const LinkMenuConnect = () => (
 	<div className={clsx('radius-base padding-sm', styles.subItem)}>
 		<NavigationConnect classes="width-100 " />
 	</div>
 )
 
-export default function MoibleNavigation({ items }: MobileNavigationProps) {
+export default function MobileNavigation({ items }: MobileNavigationProps) {
 	const router = useRouter()
 	const { currentLanguage } = useTranslation()
 	const { pathname, locale } = router
@@ -77,10 +100,9 @@ export default function MoibleNavigation({ items }: MobileNavigationProps) {
 						</div>
 					)
 					subCollapse = item.submenus.map(item => (
-						<LinkMenuItem
-							link={item.link}
+						<LinkMenuLocale
 							label={item.label}
-							pathname={pathname}
+							onClick={item.onClick}
 							classes={'padding-left-xs'}
 							key={`sub-${item.label}`}
 							prefix={

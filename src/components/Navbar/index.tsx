@@ -13,12 +13,9 @@ import { cloneDeep, isEmpty } from 'lodash'
 import { useTranslation } from 'contexts/Localization'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { WalletHelper } from 'utils/wallet'
-import LiveIcon from './LiveIcon'
 import MobileNavigation from './MobileNavigation'
 import Navigation, { MenuItem, SubMenuItem } from './Navigation'
 import styles from './style.module.scss'
-import SwitchTheme from './SwitchTheme'
-import ButtonConnect from 'components/ButtonConnect'
 import { VI, EN } from '../../config/localization/languages'
 import useAuth from 'hooks/useAuth'
 import { Modal, useModal } from 'components/Modal'
@@ -27,17 +24,17 @@ import NavigationConnect from 'components/ButtonConnect/NavigationConnect'
 export default function Navbar() {
 	const [shadow, setShadow] = useState(false)
 	const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
-	const [load, setLoad] = useState(false)
-	const { logout } = useAuth()
+	// const [load, setLoad] = useState(false)
+	// const { logout } = useAuth()
 	const _searchWrapperRef = useRef<HTMLDivElement>(null)
 	const [{ wallet }, connect] = useConnectWallet()
 
 	const { t, setLanguage, currentLanguage } = useTranslation()
 
 	const _hideMenu = () => {
-		setLoad(false)
+		// setLoad(false)
 		//time for animation
-		setTimeout(() => setShowHamburgerMenu(false), 500)
+		setShowHamburgerMenu(false)
 	}
 
 	useClickOutsideElement(_searchWrapperRef, _hideMenu)
@@ -57,9 +54,10 @@ export default function Navbar() {
 		}
 	}, [shadow])
 
-	useEffect(() => {
-		setTimeout(() => setLoad(showHamburgerMenu), 100)
-	}, [showHamburgerMenu])
+	// useEffect(() => {
+	// 	const timeout = setTimeout(() => setLoad(showHamburgerMenu), 100)
+	// 	return () => clearTimeout(timeout)
+	// }, [showHamburgerMenu])
 
 	const _setWalletFromLocalStorage = useCallback(async () => {
 		try {
@@ -88,7 +86,7 @@ export default function Navbar() {
 		}
 	}, [wallet])
 
-	const _changeMenu = useCallback(() => {
+	const _changeMenu = useMemo(() => {
 		const MENU_ITEMS: MenuItem[] = [
 			{
 				id: '1',
@@ -124,13 +122,19 @@ export default function Navbar() {
 						id: '4.1',
 						label: EN.language,
 						link: EN.code,
-						onClick: () => setLanguage(EN),
+						onClick: () => {
+							dismisMobileNav()
+							setLanguage(EN)
+						},
 					},
 					{
 						id: '4.2',
 						label: VI.language,
 						link: VI.code,
-						onClick: () => setLanguage(VI),
+						onClick: () => {
+							dismisMobileNav()
+							setLanguage(VI)
+						},
 					},
 				],
 			},
@@ -139,7 +143,7 @@ export default function Navbar() {
 		return MENU_ITEMS
 	}, [currentLanguage])
 
-	const menus = _changeMenu()
+	const menus = _changeMenu
 
 	const ModalMobileNav = () => (
 		<div
