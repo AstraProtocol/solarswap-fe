@@ -1,0 +1,23 @@
+name: Production deployment
+on:
+  push:
+    branches: ['main']
+ 
+jobs:
+  build-and-deploy:
+     uses: AstraProtocol/github-actions-workflows/.github/workflows/stella-deployment.yml@main
+     with:
+       ingressEnabled: "yes"
+       ingressHost: "defi.prod.astranet.services"
+       replicas: "1"
+       servicePort: "3000"
+       buildArgs: |-
+        ENV=prod
+        API=https://reward-api.astranaut.io
+        RPC=https://rpc.astranaut.io
+        EXPLORER=https://explorer.astranaut.io
+        CHAIN_ID=0x2B66
+        WEB3_CLIENT_ID=BE3UNkct8a0zPojRdlR_AxHd-Ag922XH9qaljgz5NoyWNJVBR49uy4pa6hrxWPLGwDIncdVG9vLmYAqxBj0XxEg
+        WEB3_AUTH_NETWORK=testnet
+        OPERATING_FEE_PERCENT=10
+        MAX_NUMBER=100000000

@@ -22,7 +22,7 @@ export const isUserRejected = err => {
 	return typeof err === 'object' && 'code' in err && (err.code === 4001 || err.code === 'ACTION_REJECTED')
 }
 
-const ENABLED_LOG = false
+const ENABLED_LOG = true
 
 export const logError = (error: Error | unknown) => {
 	if (ENABLED_LOG) {

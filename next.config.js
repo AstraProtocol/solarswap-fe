@@ -6,25 +6,28 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const sentryWebpackPluginOptions =
 	process.env.VERCEL_ENV === 'production'
 		? {
-				// Additional config options for the Sentry Webpack plugin. Keep in mind that
-				// the following options are set automatically, and overriding them is not
-				// recommended:
-				//   release, url, org, project, authToken, configFile, stripPrefix,
-				//   urlPrefix, include, ignore
-				silent: false, // Logging when deploying to check if there is any problem
-				validate: true,
-				dryRun: !process.env.SENTRY_AUTH_TOKEN,
-				// Set to env false will skip deploying release on Sentry except Production
-				// https://github.com/getsentry/sentry-webpack-plugin/blob/master/src/index.js#L522
-				deploy: {
-					env: process.env.VERCEL_ENV,
-				},
-				// For all available options, see:
-				// https://github.com/getsentry/sentry-webpack-plugin#options.
+			// Additional config options for the Sentry Webpack plugin. Keep in mind that
+			// the following options are set automatically, and overriding them is not
+			// recommended:
+			//   release, url, org, project, authToken, configFile, stripPrefix,
+			//   urlPrefix, include, ignore
+			silent: false, // Logging when deploying to check if there is any problem
+				// Suppresses source map uploading logs during build
+			org: "stella",
+			project: "solarswap-fe",
+			validate: true,
+			dryRun: !process.env.SENTRY_AUTH_TOKEN,
+			// Set to env false will skip deploying release on Sentry except Production
+			// https://github.com/getsentry/sentry-webpack-plugin/blob/master/src/index.js#L522
+			deploy: {
+				env: process.env.VERCEL_ENV,
+			},
+			// For all available options, see:
+			// https://github.com/getsentry/sentry-webpack-plugin#options.
 		  }
 		: {
-				silent: true, // Suppresses all logs
-				dryRun: !process.env.SENTRY_AUTH_TOKEN,
+			silent: true, // Suppresses all logs
+			dryRun: !process.env.SENTRY_AUTH_TOKEN,
 		  }
 
 /** @type {import('next').NextConfig} */
@@ -112,4 +115,26 @@ const config = {
 	},
 }
 
-module.exports = withBundleAnalyzer(withSentryConfig(config, sentryWebpackPluginOptions))
+module.exports = withBundleAnalyzer(withSentryConfig(config, sentryWebpackPluginOptions,  {
+    // For all available options, see:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+
+    // Upload a larger set of source maps for prettier stack traces (increases build time)
+    widenClientFileUpload: true,
+
+    // Transpiles SDK to be compatible with IE11 (increases bundle size)
+    transpileClientSDK: true,
+
+    // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
+    tunnelRoute: "/monitoring",
+
+    // Hides source maps from generated client bundles
+    hideSourceMaps: true,
+
+    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    disableLogger: true,
+  }))
+
+
+
+

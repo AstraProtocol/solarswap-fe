@@ -55,7 +55,7 @@
 		"@gelatonetwork/limit-orders-lib": "^4.1.0",
 		"@next/bundle-analyzer": "^12.0.7",
 		"@reduxjs/toolkit": "^1.5.0",
-		"@sentry/nextjs": "^6.17.9",
+		"@sentry/nextjs": "^7.56.0",
 		"@solarswap/sdk": "^1.0.7",
 		"@uniswap/token-lists": "^1.0.0-beta.19",
 		"@walletconnect/sign-client": "^2.1.4",
