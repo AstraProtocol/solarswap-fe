@@ -1,5 +1,5 @@
 import { Logo } from '@astraprotocol/astra-ui'
-import { ErrorBoundary as SentryErrorBoundary, Severity } from '@sentry/nextjs'
+import { ErrorBoundary as SentryErrorBoundary, SeverityLevel } from '@sentry/nextjs'
 import Page from 'components/Layout/Page'
 import { useTranslation } from 'contexts/Localization'
 import { useTheme } from 'next-themes'
@@ -13,7 +13,7 @@ export default function ErrorBoundary({ children }) {
 	return (
 		<SentryErrorBoundary
 			beforeCapture={scope => {
-				scope.setLevel(Severity.Fatal)
+				scope.setLevel('error' as SeverityLevel)
 			}}
 			fallback={({ eventId }) => {
 				return (

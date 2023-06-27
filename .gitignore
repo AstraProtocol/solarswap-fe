@@ -31,3 +31,5 @@ astraprotocol-astra-ui-*.tgz
 package-lock.json
 package
 .next
+# Sentry Auth Token
+.sentryclirc

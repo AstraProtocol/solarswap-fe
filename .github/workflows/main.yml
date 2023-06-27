@@ -1,0 +1,30 @@
+name: Production deployment
+on:
+  push:
+    tags: 
+      - '**'           #
+ 
+jobs:
+  build-and-deploy:
+     uses: AstraProtocol/github-actions-workflows/.github/workflows/stella-deployment.yml@main
+     with:
+       ingressEnabled: "yes"
+       ingressHost: "defi.prod.astranet.services"
+       replicas: "1"
+       servicePort: "3000"
+       buildArgs: |-
+        NEXT_PUBLIC_CHAIN_ID=11110
+        NEXT_PUBLIC_NODE_1=https://rpc.astranaut.io
+        NEXT_PUBLIC_NODE_2=https://rpc.astranaut.io
+        NEXT_PUBLIC_NODE_3=https://rpc.astranaut.io
+        NEXT_PUBLIC_NODE_PRODUCTION=https://rpc.astranaut.io
+        NEXT_PUBLIC_HOST=https://solarswap.io
+        NEXT_PUBLIC_EXPLORER=http://explorer.astranaut.io
+        NEXT_PUBLIC_GTAG='G-MK9VVY7GT5'
+        NEXT_PUBLIC_FEE=20
+        NEXT_PUBLIC_TITLE=SolarSwap
+        NEXT_PUBLIC_WALLET_CONNECT_RELAY=wc-relay.astranaut.io
+        NEXT_PUBLIC_SENTRY_DSN=https://204e8402a7684195a50ee186a5fec8d8@sentry.astranet.live/6
+        NEXT_PUBLIC_SENTRY_ENVIRONMENT=mainnet
+        SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+        GITHUB_TOKEN=${{ secrets.GH_AUTH_TOKEN }}
