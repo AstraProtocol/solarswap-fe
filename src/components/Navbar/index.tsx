@@ -86,7 +86,7 @@ export default function Navbar() {
 		}
 	}, [wallet])
 
-	const _changeMenu = useMemo(() => {
+	const menus = useMemo(() => {
 		const MENU_ITEMS: MenuItem[] = [
 			{
 				id: '1',
@@ -143,7 +143,6 @@ export default function Navbar() {
 		return MENU_ITEMS
 	}, [currentLanguage])
 
-	const menus = _changeMenu
 
 	const ModalMobileNav = () => (
 		<div
