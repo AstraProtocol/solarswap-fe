@@ -322,7 +322,7 @@ export default function Swap() {
 	)
 
 	const swapIsUnsupported = useIsTransactionUnsupported(currencies?.INPUT, currencies?.OUTPUT)
-
+	console.log('swapIsUnsupported', swapIsUnsupported, 'showWrap', showWrap)
 	const [onPresentImportTokenWarningModal] = useModal(
 		<ImportTokenWarningModal tokens={importTokensNotInDefault} onCancel={() => router.push('/swap')} />,
 	)
