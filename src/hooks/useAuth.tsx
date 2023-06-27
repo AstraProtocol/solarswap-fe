@@ -11,12 +11,12 @@ import { connectorLocalStorageKey, setupNetwork } from 'utils/wallet'
 import { useAppDispatch } from 'state'
 import { useTranslation } from 'contexts/Localization'
 import { clearUserStates } from '../utils/clearUserStates'
-import { withToast } from '@astraprotocol/astra-ui'
 import { ConnectorNames } from 'config/constants'
 
 const useAuth = () => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
+
 	const { chainId, activate, deactivate, setError } = useWeb3React()
 	// const { toastError } = useToast()
 	const login = useCallback(

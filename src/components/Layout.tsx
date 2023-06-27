@@ -7,10 +7,13 @@ import { useTheme } from 'next-themes'
 import Navbar from './Navbar'
 import useModal from './Modal/useModal'
 import WalletWrongNetworkModal from './Wallet/WalletWrongNetworkModal'
-import { useSetChain } from '@web3-onboard/react'
+import { useConnectWallet, useSetChain } from '@web3-onboard/react'
 import { useTranslation } from 'contexts/Localization'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import { CHAIN_ID } from 'config/constants/networks'
+import { useWeb3React } from '@web3-react/core'
+import { connectorsByName } from 'utils/web3React'
+import { ConnectorNames } from 'config/constants'
 
 type Props = {
 	children: ReactNode
@@ -19,8 +22,13 @@ type Props = {
 const Layout: React.FC<Props> = props => {
 	const { isMobile } = useMatchBreakpoints()
 	const [onPresentWalletWrongNetworkModal] = useModal(<WalletWrongNetworkModal />)
-	const [{ connectedChain }, setChain] = useSetChain()
+	const [{ connectedChain }] = useSetChain()
 	const _needToChangeNetwork = () => connectedChain && parseInt(connectedChain?.id, 16) !== parseInt(CHAIN_ID, 10)
+
+	const [{ wallet }] = useConnectWallet()
+	const account = wallet?.accounts[0].address
+
+	const { activate, active } = useWeb3React()
 
 	const { resolvedTheme } = useTheme()
 	const { t, currentLanguage } = useTranslation()
@@ -46,6 +54,14 @@ const Layout: React.FC<Props> = props => {
 		],
 		[currentLanguage],
 	)
+
+	useEffect(() => {
+		if (account) {
+			if (!active) {
+				activate(connectorsByName[ConnectorNames.Injected])
+			}
+		}
+	}, [account])
 
 	useEffect(() => {
 		if (_needToChangeNetwork()) {
