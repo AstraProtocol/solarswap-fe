@@ -13,7 +13,7 @@ jobs:
         strategy:
             fail-fast: true
             matrix:
-                node: [14]
+                node: [18]
 
         name: Lint
 
@@ -24,7 +24,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v2
               with:
-                  node-version: 16.x
+                  node-version: 18.x
                   registry-url: 'https://npm.pkg.github.com'
                   scope: '@astraprotocol'
                   token: ${{ secrets.GITHUB_TOKEN }}

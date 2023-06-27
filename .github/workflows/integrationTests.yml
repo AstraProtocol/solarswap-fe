@@ -2,9 +2,6 @@ name: Integration Tests
 
 on:
     pull_request:
-        branches:
-            - dev
-            - main
     push:
         branches:
             - dev
@@ -21,7 +18,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v2
               with:
-                  node-version: 16.x
+                  node-version: 18.x
                   registry-url: 'https://npm.pkg.github.com'
                   scope: '@astraprotocol'
                   token: ${{ secrets.GITHUB_TOKEN }}
