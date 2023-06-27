@@ -24,3 +24,4 @@ jobs:
         NEXT_PUBLIC_TITLE=SolarSwap
         NEXT_PUBLIC_WALLET_CONNECT_RELAY=wc-relay.astranaut.dev
         NEXT_PUBLIC_SENTRY_DSN=https://204e8402a7684195a50ee186a5fec8d8@sentry.astranet.live/6
+        NEXT_PUBLIC_SENTRY_ENVIRONMENT=testnet

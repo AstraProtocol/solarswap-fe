@@ -14,6 +14,8 @@ const isUserRejected = err => {
 Sentry.init({
 	dsn: SENTRY_DSN,
 
+	environment: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT,
+
 	// Adjust this value in production, or use tracesSampler for greater control
 	tracesSampleRate: 1,
 
