@@ -18,7 +18,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v2
               with:
-                  node-version: 18.x
+                  node-version: 16.x
                   registry-url: 'https://npm.pkg.github.com'
                   scope: '@astraprotocol'
                   token: ${{ secrets.GH_AUTH_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
                   source: '.env.sample'
                   target: '.env'
 
-            - uses: cypress-io/github-action@v5.0.7 # use the explicit version number
+            - uses: cypress-io/github-action@v5.8.3 # use the explicit version number
               with:
                   build: npm run build
                   start: npm run start
