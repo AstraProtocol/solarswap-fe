@@ -10,14 +10,14 @@ describe('Swap', () => {
 		cy.get('#swap-currency-input .token-amount-input')
 			.type('0.001', { delay })
 			// tip: use an assertion to print the extracted text
-			.and('equal', 0.001)
+			.should('equal', 0.001)
 	})
 
 	it('zero swap amount', () => {
 		cy.get('#swap-currency-input .token-amount-input')
 			.type('0.0', { delay })
 			// tip: use an assertion to print the extracted text
-			.and('equal', 0)
+			.should('equal', 0)
 	})
 
 	it('invalid swap amount', () => {
@@ -32,7 +32,7 @@ describe('Swap', () => {
 		cy.get('#swap-currency-output .token-amount-output')
 			.type('0.0', { delay })
 			// tip: use an assertion to print the extracted text
-			.and('equal', 0)
+			.should('equal', 0)
 	})
 
 	// This test requires account with some amount of ASA on it
