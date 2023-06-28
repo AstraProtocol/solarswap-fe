@@ -7,17 +7,11 @@ describe('Swap', () => {
 	const usdt = '0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2'
 	// const busd = '0x092d93f258ceea20c94ba01e8771115141dd7c20'
 	it('can enter an amount into input', () => {
-		cy.get('#swap-currency-input .token-amount-input')
-			.type('0.001', { delay })
-			// tip: use an assertion to print the extracted text
-			.should('equal', 0.001)
+		cy.get('#swap-currency-input .token-amount-input').type('0.001', { delay }).should('have.value', '0.001')
 	})
 
 	it('zero swap amount', () => {
-		cy.get('#swap-currency-input .token-amount-input')
-			.type('0.0', { delay })
-			// tip: use an assertion to print the extracted text
-			.should('equal', 0)
+		cy.get('#swap-currency-input .token-amount-input').type('0.0', { delay }).should('have.value', '0.0')
 	})
 
 	it('invalid swap amount', () => {
@@ -29,10 +23,7 @@ describe('Swap', () => {
 	})
 
 	it('zero output amount', () => {
-		cy.get('#swap-currency-output .token-amount-output')
-			.type('0.0', { delay })
-			// tip: use an assertion to print the extracted text
-			.should('equal', 0)
+		cy.get('#swap-currency-output .token-amount-output').type('0.0', { delay }).should('have.value', '0.0')
 	})
 
 	// This test requires account with some amount of ASA on it
