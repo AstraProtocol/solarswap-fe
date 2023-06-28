@@ -9,28 +9,19 @@ describe('Swap', () => {
 	it('can enter an amount into input', () => {
 		cy.get('#swap-currency-input .token-amount-input')
 			.type('0.001', { delay })
-			.type('0.0', { delay })
-			.invoke('text')
 			// tip: use an assertion to print the extracted text
 			.should('be.a', 'string')
 			// convert text to integer
-			.then(parseFloat)
-			// tip: make sure the conversion is successful
-			// compare the converted number to the expected value
-			.should('have.value', '0.001')
+			.and('equal', 0.001)
 	})
 
 	it('zero swap amount', () => {
 		cy.get('#swap-currency-input .token-amount-input')
 			.type('0.0', { delay })
-			.invoke('text')
 			// tip: use an assertion to print the extracted text
 			.should('be.a', 'string')
 			// convert text to integer
-			.then(parseFloat)
-			// tip: make sure the conversion is successful
-			// compare the converted number to the expected value
-			.should('have.value', '0.0')
+			.and('equal', 0)
 	})
 
 	it('invalid swap amount', () => {
@@ -44,14 +35,12 @@ describe('Swap', () => {
 	it('zero output amount', () => {
 		cy.get('#swap-currency-output .token-amount-output')
 			.type('0.0', { delay })
-			.invoke('text')
 			// tip: use an assertion to print the extracted text
 			.should('be.a', 'string')
 			// convert text to integer
-			.then(parseFloat)
 			// tip: make sure the conversion is successful
 			// compare the converted number to the expected value
-			.should('have.value', '0.0')
+			.and('equal', 0)
 	})
 
 	// This test requires account with some amount of ASA on it
