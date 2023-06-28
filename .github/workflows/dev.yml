@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-deploy:
-     uses: AstraProtocol/github-actions-workflows/.github/workflows/stella-deployment.yml@develop
+     uses: AstraProtocol/github-actions-workflows/.github/workflows/stella-deployment.yml@main
 
      secrets:
        secretBuildArgs: |
