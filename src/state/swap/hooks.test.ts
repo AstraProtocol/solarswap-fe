@@ -143,7 +143,7 @@ describe('#useDerivedSwapInfo', () => {
 			},
 			{ wrapper: createWrapper() },
 		)
-		expect(result.current.inputError).toBe('Kết nối Ví')
+		expect(result.current.inputError).toBe('Kết nối tài khoản')
 
 		mockUseActiveWeb3React.mockReturnValue({ account: '0x33edFBc4934baACc78f4d317bc07639119dd3e78' })
 		rerender()
