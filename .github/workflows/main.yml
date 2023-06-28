@@ -28,3 +28,6 @@ jobs:
         NEXT_PUBLIC_SENTRY_ENVIRONMENT=mainnet
         SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
         GITHUB_TOKEN=${{ secrets.GH_AUTH_TOKEN }}
+        NEXT_PUBLIC_DEFAULT_OUTPUT_CURRENCY=0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2
+        NEXT_PUBLIC_GN_INFO_CLIENT=http://167.172.80.21:8000/subgraphs/name/solarswap/exchange-v1
+        NEXT_PUBLIC_GN_BLOCK_CLIENT=http://167.172.80.21:8000/subgraphs/name/solarswap/blocks-v1
