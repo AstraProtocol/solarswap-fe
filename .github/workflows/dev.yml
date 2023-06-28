@@ -6,6 +6,7 @@ on:
 jobs:
   build-and-deploy:
      uses: AstraProtocol/github-actions-workflows/.github/workflows/stella-deployment.yml@develop
+
      secrets:
        secretBuildArgs: |
          SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
