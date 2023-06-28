@@ -10,8 +10,6 @@ describe('Swap', () => {
 		cy.get('#swap-currency-input .token-amount-input')
 			.type('0.001', { delay })
 			// tip: use an assertion to print the extracted text
-			.should('be.a', 'string')
-			// convert text to integer
 			.and('equal', 0.001)
 	})
 
@@ -19,8 +17,6 @@ describe('Swap', () => {
 		cy.get('#swap-currency-input .token-amount-input')
 			.type('0.0', { delay })
 			// tip: use an assertion to print the extracted text
-			.should('be.a', 'string')
-			// convert text to integer
 			.and('equal', 0)
 	})
 
@@ -36,10 +32,6 @@ describe('Swap', () => {
 		cy.get('#swap-currency-output .token-amount-output')
 			.type('0.0', { delay })
 			// tip: use an assertion to print the extracted text
-			.should('be.a', 'string')
-			// convert text to integer
-			// tip: make sure the conversion is successful
-			// compare the converted number to the expected value
 			.and('equal', 0)
 	})
 
