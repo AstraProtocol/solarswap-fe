@@ -6,6 +6,10 @@ on:
 jobs:
   build-and-deploy:
      uses: AstraProtocol/github-actions-workflows/.github/workflows/stella-deployment.yml@develop
+     secrets:
+       secretBuildArgs: |
+         SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+         GITHUB_TOKEN=${{ secrets.GH_AUTH_TOKEN }}
      with:
        ingressEnabled: "yes"
        ingressHost: "defi.dev.astranet.services"
@@ -25,7 +29,3 @@ jobs:
         NEXT_PUBLIC_WALLET_CONNECT_RELAY=wc-relay.astranaut.dev
         NEXT_PUBLIC_SENTRY_DSN=https://204e8402a7684195a50ee186a5fec8d8@sentry.astranet.live/6
         NEXT_PUBLIC_SENTRY_ENVIRONMENT=testnet
-    secrets:
-       secretBuildArgs: |
-         SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
-         GITHUB_TOKEN=${{ secrets.GH_AUTH_TOKEN }}
