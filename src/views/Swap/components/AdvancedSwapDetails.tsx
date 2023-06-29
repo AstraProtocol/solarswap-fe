@@ -32,7 +32,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 						)}
 					/>
 				</Row>
-				<span className="text text-base">
+				<span className="text text-sm">
 					{isExactIn
 						? `${slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4)} ${
 								trade.outputAmount.currency.symbol
@@ -68,7 +68,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 						/>
 					</span>
 				</Row>
-				<span className="text text-base">
+				<span className="text text-sm">
 					{realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
 				</span>
 			</Row>
@@ -95,7 +95,7 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
 						<>
 							<Row style={{ padding: '0 16px' }}>
 								<span style={{ display: 'flex', alignItems: 'center' }}>
-									<span className="text text-base">{t('Route')}</span>
+									<span className="text text-sm">{t('Route')}</span>
 									<QuestionHelper
 										text={t(
 											'Routing through these tokens resulted in the best price for your trade.',

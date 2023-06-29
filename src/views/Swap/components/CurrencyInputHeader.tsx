@@ -33,39 +33,40 @@ const CurrencyInputHeader: React.FC<Props> = ({
 	const [onPresentTransactionsModal] = useModal(<TransactionsModal />)
 
 	return (
-		<div className="flex col flex-align-center padding-md width-100 border border-bottom-base">
-			<div className="flex width-100 flex-align-center flex-justify-space-between position-relative">
-				<div className="position-absolute">
+		<div className="flex col  padding-md width-100 border border-bottom-base">
+			<div className="flex width-100 flex-align-start flex-justify-space-between position-relative">
+				<div className="position-absolute"></div>
+				<div className="flex flex-align-end flex-justify-start width-100">
+					<span className="text text-lg text-bold">{title}</span>
+				</div>
+			</div>
+			<div className="flex flex-align-start">
+				<span className="text text-sm contrast-color-70">{subtitle}</span>
+			</div>
+			<div className="row flex-justify-end margin-top-md">
+				<div className="padding-right-xs">
 					{setIsChartDisplayed && isChartDisplayed ? (
 						<IconButton size="lg" icon={IconEnum.ICON_CHART_BAR_OFF} onClick={toggleChartDisplayed} />
 					) : (
 						<IconButton size="lg" icon={IconEnum.ICON_CHART_BAR_ON} onClick={toggleChartDisplayed} />
 					)}
 				</div>
-				<div className="flex flex-align-end flex-justify-center width-100">
-					<span className="text text-lg text-bold">{title}</span>
-				</div>
-				<div className="row position-absolute" style={{ right: 0 }}>
-					<NotificationDot show={expertMode}>
-						<GlobalSettings />
-					</NotificationDot>
-					<IconButton
-						classes="padding-right-xs"
-						size="lg"
-						icon={IconEnum.ICON_RECENT}
-						onClick={onPresentTransactionsModal}
+				<NotificationDot show={expertMode}>
+					<GlobalSettings />
+				</NotificationDot>
+				<IconButton
+					classes="padding-right-xs"
+					size="lg"
+					icon={IconEnum.ICON_RECENT}
+					onClick={onPresentTransactionsModal}
+				/>
+				<a className="link" onClick={() => onRefreshPrice()}>
+					<RefreshIcon
+						disabled={!hasAmount}
+						color={resolvedTheme === 'dark' ? 'white' : 'black'}
+						width="23px"
 					/>
-					<a className="link" onClick={() => onRefreshPrice()}>
-						<RefreshIcon
-							disabled={!hasAmount}
-							color={resolvedTheme === 'dark' ? 'white' : 'black'}
-							width="23px"
-						/>
-					</a>
-				</div>
-			</div>
-			<div className="flex flex-align-center">
-				<span className="text text-sm contrast-color-70">{subtitle}</span>
+				</a>
 			</div>
 		</div>
 	)
