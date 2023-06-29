@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useTranslation } from 'contexts/Localization'
 import { escapeRegExp } from '../../utils'
-import { Form } from '@astraprotocol/astra-ui'
+import { Form, Typography } from '@astraprotocol/astra-ui'
 import styles from './styles.module.scss'
 import clsx from 'clsx'
 
@@ -49,7 +49,7 @@ export const Input = memo(function InnerInput({
 			spellCheck="false"
 			className={clsx(
 				styles.input,
-				'padding-left-sm padding-right-sm padding-top-md padding-bottom-md same-bg-color-20 border radius-lg',
+				'padding-left-sm padding-right-sm padding-top-md padding-bottom-md border radius-lg ',
 				rest.className,
 			)}
 		/>

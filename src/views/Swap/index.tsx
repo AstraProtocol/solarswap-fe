@@ -504,7 +504,7 @@ export default function Swap() {
 										) : null}
 
 										{showWrap ? null : (
-											<div className="flex col margin-left-xl">
+											<div className="flex col margin-left-md">
 												<Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
 													{Boolean(trade) && (
 														<>
@@ -527,7 +527,7 @@ export default function Swap() {
 													<span className="text text-sm contrast-color-70">
 														{t('Slippage Tolerance')}
 													</span>
-													<span className="text text-base">{allowedSlippage / 100}%</span>
+													<span className="text text-sm">{allowedSlippage / 100}%</span>
 												</Row>
 											</div>
 										)}

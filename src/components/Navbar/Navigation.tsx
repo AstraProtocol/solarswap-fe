@@ -50,6 +50,7 @@ export default function Navigation({ items }: NavigationProps) {
 	}, [items])
 
 	const _renderLink = (
+		isSubmenu: boolean,
 		link: string,
 		content: React.ReactNode,
 		index: number,
@@ -63,13 +64,16 @@ export default function Navigation({ items }: NavigationProps) {
 			<span
 				className={clsx(
 					'text-base text-center text-bold',
-					'contrast-color-70 padding-sm',
+					'padding-sm',
 					'flex pointer',
 					align || 'flex-justify-center flex-align-center',
 					hover,
 					{ 'radius-tl-sm radius-tr-sm': index === 0 },
 					{ 'radius-bl-sm radius-br-sm': index === len - 1 },
 				)}
+				style={{
+					color: isSubmenu ? '#0B0F1E' : 'var(--contrast-color-theme-70)',
+				}}
 				onClick={onClick as MouseEventHandler<HTMLSpanElement>}
 			>
 				{locale ? (
@@ -132,7 +136,7 @@ export default function Navigation({ items }: NavigationProps) {
 					) : (
 						<>
 							{prefixIcon && prefixIcon}
-							{_renderLink(link, label!, 1, 0)}
+							{_renderLink(false, link, label!, 1, 0)}
 						</>
 					)}
 
@@ -154,6 +158,7 @@ export default function Navigation({ items }: NavigationProps) {
 										// onClick={event => _showSubMenu(event, [id, menu.id])}
 									>
 										{_renderLink(
+											true,
 											menu?.link || '',
 											menu.label,
 											index,
@@ -165,13 +170,14 @@ export default function Navigation({ items }: NavigationProps) {
 										)}
 										{menu.submenus && (
 											<ul
-												className={clsx(styles.submenu2, 'contrast-bg-color-50', 'radius-xs', {
+												className={clsx(styles.submenu2, 'radius-xs', {
 													[styles.show]: menu.show,
 												})}
 											>
 												{menu.submenus.map(sub2 => (
 													<li key={sub2.id}>
 														{_renderLink(
+															true,
 															sub2.link,
 															sub2.label,
 															index,

@@ -105,6 +105,11 @@ export default function Navbar() {
 						label: t('Liquidity'),
 						link: '/liquidity',
 					},
+					// {
+					// 	id: '1.3',
+					// 	label: t('Bridge'),
+					// 	link: 'https://bridge.astranaut.io',
+					// },
 				],
 			},
 			{
@@ -143,7 +148,6 @@ export default function Navbar() {
 		return MENU_ITEMS
 	}, [currentLanguage])
 
-
 	const ModalMobileNav = () => (
 		<div
 			className={clsx(styles.hamburgerMenuContainer, 'padding-lg ', {
@@ -170,7 +174,7 @@ export default function Navbar() {
 		<>
 			<nav
 				className={clsx(styles.navbar, 'margin-bottom-sm', {
-					'shadow-xs': shadow,
+					[styles.navShadow]: shadow,
 					[styles.topBackground]: shadow,
 				})}
 			>

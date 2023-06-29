@@ -4,7 +4,7 @@
 	position: relative;
 	font-weight: 500;
 	outline: none;
-	border: none;
+	// border: none;
 	flex: 1 1 auto;
 	font-size: 16px;
 	text-align: right;
@@ -29,6 +29,16 @@
 
 	::placeholder {
 		color: var(--contrast-color-theme-70);
+	}
+
+	&:focus {
+		border-color: #2295FF;
+		border-width: 2px;
+	}
+
+	&:hover {
+		border-color: #ffffff2e;
+		background-color: rgb(255 255 255 / 12%);
 	}
 }
 
