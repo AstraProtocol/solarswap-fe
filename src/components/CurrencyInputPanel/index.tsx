@@ -12,6 +12,7 @@ import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo'
 import { Input as NumericalInput } from './NumericalInput'
 import { useModal } from 'components/Modal'
 import styles from './styles.module.scss'
+import numeral from 'numeral'
 
 interface CurrencyInputPanelProps {
 	value: string
@@ -61,6 +62,9 @@ export default function CurrencyInputPanel({
 			showCommonBases={showCommonBases}
 		/>,
 	)
+
+	const balance = selectedCurrencyBalance?.toSignificant(6)
+
 	return (
 		<div id={id}>
 			<div className="flex flex-justify-space-between flex-align-center">
@@ -121,16 +125,16 @@ export default function CurrencyInputPanel({
 					>
 						{!hideBalance && !!currency
 							? t('Balance: %balance%', {
-									balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading'),
+									balance: balance ? numeral(balance).format('0,0[.]0[0000]') : t('Loading'),
 							  })
 							: ' -'}
 					</span>
 				)}
 			</div>
-			<div className="border radius-lg same-bg-color-50 margin-bottom-md margin-left-sm">
+			<div className="border radius-lg same-bg-color-10 margin-bottom-md margin-left-sm">
 				<div className={styles.labelRow}>
 					<NumericalInput
-						className={`token-amount-${id.replace('swap-currency-', '')}`}
+						className={`border border-base token-amount-${id.replace('swap-currency-', '')}`}
 						value={value}
 						onUserInput={val => {
 							onUserInput(val)
@@ -139,7 +143,11 @@ export default function CurrencyInputPanel({
 				</div>
 				<div className={styles.inputRow}>
 					{account && currency && showMaxButton && label !== 'To' && (
-						<NormalButton variant="text" classes={{ color: 'secondary-color-normal' }} onClick={onMax}>
+						<NormalButton
+							variant="text"
+							classes={{ color: 'secondary-color-normal', other: 'text-bold' }}
+							onClick={onMax}
+						>
 							{t('Max').toLocaleUpperCase(locale)}
 						</NormalButton>
 					)}

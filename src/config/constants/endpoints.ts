@@ -1,3 +1,3 @@
-export const INFO_CLIENT = 'http://167.172.80.21:8000/subgraphs/name/solarswap/exchange-v1'
-export const BLOCKS_CLIENT = 'http://167.172.80.21:8000/subgraphs/name/solarswap/blocks-v1'
+export const INFO_CLIENT = process.env.NEXT_PUBLIC_GN_INFO_CLIENT
+export const BLOCKS_CLIENT = process.env.NEXT_PUBLIC_GN_BLOCK_CLIENT
 export const GRAPH_HEALTH = 'https://api.thegraph.com/index-node/graphql'

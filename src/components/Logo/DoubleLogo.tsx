@@ -1,7 +1,7 @@
 import { Currency } from '@solarswap/sdk'
 import clsx from 'clsx'
 
-import CurrencyLogo from './CurrencyLogo'
+import CurrencyLogo, { isETHER } from './CurrencyLogo'
 
 interface DoubleCurrencyLogoProps {
 	margin?: boolean
@@ -16,9 +16,10 @@ export default function DoubleCurrencyLogo({
 	size = 20,
 	margin = false,
 }: DoubleCurrencyLogoProps) {
+	const isASA = isETHER(currency0)
 	return (
 		<div className={clsx('flex flex-hor-center flex-col-center', margin && 'margin-right-2xs')}>
-			{currency0 && <CurrencyLogo currency={currency0} size={size} style={{ marginRight: 4 }} />}
+			{currency0 && <CurrencyLogo currency={currency0} size={isASA ? size + 1 : size} />}
 			{currency1 && <CurrencyLogo currency={currency1} size={size} />}
 		</div>
 	)

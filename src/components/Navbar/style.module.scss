@@ -27,7 +27,7 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 	left: 0;
 	width: 100%;
 	z-index: 2;
-	height: 80px;
+	height: 64px;
 	.container {
 		max-width: 1670px;
 		display: flex;
@@ -44,6 +44,10 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 	}
 }
 
+.navShadow {
+	box-shadow: 2px 4px 4px #000000;
+}
+
 .navigation {
 	display: flex;
 	.background {
@@ -53,7 +57,7 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 		display: inline-flex;
 		&::before {
 			font-size: 5px;
-			color: var(--contrast-color-theme-70);
+			// color: var(--contrast-color-theme-70);
 		}
 	}
 
@@ -88,13 +92,14 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 			visibility: hidden;
 			opacity: 0;
 			transition: opacity 0.5s;
-			box-shadow: 2px 4px 4px rgba(var(--shadow-color), 0.1);
-			background: rgba(255, 255, 255, 0.1);
+			// box-shadow: 2px 4px 4px rgba(var(--shadow-color), 0.1);
+			background: var(--contrast-color-theme-100);
 			/* White Color/100 */
 			border: 1px solid rgba(255, 255, 255, 0.1);
-			box-shadow: 2px 12px 16px rgba(0, 0, 0, 0.12);
-			backdrop-filter: blur(12px);
+			// box-shadow: 2px 12px 16px rgba(0, 0, 0, 0.12);
+			// backdrop-filter: blur(12px);
 			a {
+				
 				text-decoration: none;
 				font-weight: bold;
 				&:hover {
@@ -102,6 +107,7 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 				}
 			}
 			> li {
+				
 				position: relative;
 				> span[class*='hover'] {
 					width: 100%;

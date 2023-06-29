@@ -9,7 +9,7 @@
 
 # jobs:
 #     updateLPsAPRs:
-#         runs-on: ubuntu-latest
+#         runs-on: [self-hosted, linux]
 #         steps:
 #             - name: Checkout code
 #               uses: actions/checkout@v2
