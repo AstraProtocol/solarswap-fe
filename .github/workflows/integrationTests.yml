@@ -42,7 +42,7 @@ jobs:
               # run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.PAT_ASTRAPROTOCOL}}"
 
             - name: Setup for cypress
-              run: sudo apt-get install xvfb -y
+              run: sudo apt-get update -y && sudo apt-get install xvfb -y
 
             - name: Cypress install
               run: yarn install --frozen-lockfile
