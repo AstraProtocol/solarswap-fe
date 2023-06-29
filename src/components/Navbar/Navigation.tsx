@@ -73,6 +73,7 @@ export default function Navigation({ items }: NavigationProps) {
 				)}
 				style={{
 					color: isSubmenu ? '#0B0F1E' : 'var(--contrast-color-theme-70)',
+					borderBottom: isSubmenu ? '1px solid #0000000D' : '',
 				}}
 				onClick={onClick as MouseEventHandler<HTMLSpanElement>}
 			>

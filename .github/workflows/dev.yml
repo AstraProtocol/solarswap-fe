@@ -29,7 +29,7 @@ jobs:
         NEXT_PUBLIC_FEE=20
         NEXT_PUBLIC_TITLE=SolarSwap
         NEXT_PUBLIC_WALLET_CONNECT_RELAY=wc-relay.astranaut.dev
-        NEXT_PUBLIC_SENTRY_DSN=https://204e8402a7684195a50ee186a5fec8d8@sentry.astranet.live/6
+        NEXT_PUBLIC_SENTRY_DSN=https://3440367258bb4aa39f6798ce548c98c8@sentry.astranet.live/5
         NEXT_PUBLIC_SENTRY_ENVIRONMENT=testnet
         NEXT_PUBLIC_DEFAULT_OUTPUT_CURRENCY=0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2
         NEXT_PUBLIC_GN_INFO_CLIENT=http://167.172.80.21:8000/subgraphs/name/solarswap/exchange-v1
