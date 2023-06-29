@@ -12,8 +12,9 @@ import { useTranslation } from 'contexts/Localization'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import { CHAIN_ID } from 'config/constants/networks'
 import { useWeb3React } from '@web3-react/core'
-import { connectorsByName } from 'utils/web3React'
+import { connectorsByName, getConnectorByLabel } from 'utils/web3React'
 import { ConnectorNames } from 'config/constants'
+import { isAstraApp } from 'utils'
 
 type Props = {
 	children: ReactNode
@@ -25,7 +26,7 @@ const Layout: React.FC<Props> = props => {
 	const [{ connectedChain }] = useSetChain()
 	const _needToChangeNetwork = () => connectedChain && parseInt(connectedChain?.id, 16) !== parseInt(CHAIN_ID, 10)
 
-	const [{ wallet }] = useConnectWallet()
+	const [{ wallet }, connect] = useConnectWallet()
 	const account = wallet?.accounts[0].address
 
 	const { activate, active } = useWeb3React()
@@ -56,12 +57,22 @@ const Layout: React.FC<Props> = props => {
 	)
 
 	useEffect(() => {
-		if (account) {
-			if (!active) {
-				activate(connectorsByName[ConnectorNames.Injected])
+		(async () => {
+			if (account) {
+				if (!active) {
+					const connector = await getConnectorByLabel(wallet.label);
+					activate(connector )
+				}
+			} else if(isAstraApp()) {
+				connect({
+					autoSelect: {
+						label: 'Astra Inject',
+						disableModals: true,
+					}
+				})
 			}
-		}
-	}, [account])
+		})()
+	}, [account, wallet])
 
 	useEffect(() => {
 		if (_needToChangeNetwork()) {

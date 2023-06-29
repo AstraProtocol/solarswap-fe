@@ -39,7 +39,7 @@
 		]
 	},
 	"dependencies": {
-		"@astra-sdk/connector": "^1.1.5",
+		"@astra-sdk/connector": "^2.0.0",
 		"@astra-sdk/wallet-connect": "^1.0.4",
 		"@astra-sdk/walletconnect-connector": "^1.0.3",
 		"@astraprotocol/astra-ui": "^1.0.39",

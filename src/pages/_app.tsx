@@ -17,6 +17,7 @@ import { useStore, persistor } from 'state'
 import { usePollBlockNumber } from 'state/block/hooks'
 import { usePollCoreFarmData } from 'state/farms/hooks'
 import astraConnectModule from 'libs/astrawallet'
+import astraInjectedModule from 'libs/astrainjected'
 import '@astraprotocol/astra-ui/lib/shared/style.css'
 import { Blocklist, Updaters } from '..'
 import ErrorBoundary from '../components/ErrorBoundary'
@@ -32,6 +33,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import useEagerConnect from 'hooks/useEagerConnect'
 import { AppState } from '../state'
 import { PageLoader } from '@astraprotocol/astra-ui'
+import { isAstraApp } from 'utils'
 // const EasterEgg = dynamic(() => import('components/EasterEgg'), { ssr: false })
 
 // This config is required for number formatting
@@ -71,7 +73,24 @@ const astraWallet = astraConnectModule({
 		icons: [''],
 	},
 })
+
+const astraInjected = astraInjectedModule({
+	icon: '/images/logo/asa.svg',
+	chainId,
+	rpcUrl: getNodeUrl(),
+	onAppDisconnect: () => WalletHelper.removeCacheConnect(),
+	metadata: {
+		description: process.env.NEXT_PUBLIC_TITLE,
+		name: process.env.NEXT_PUBLIC_TITLE,
+		location: typeof window !== 'undefined' ? window.location.origin : '',
+		icon: `${process.env.NEXT_PUBLIC_HOST}/images/logo/transparent_logo.svg`,
+	},
+})
 const wallets = [injectedModule(), walletConnect, astraWallet]
+
+if(isAstraApp()) {
+	wallets.push(astraInjected)
+}
 
 const web3Onboard = init({
 	wallets,

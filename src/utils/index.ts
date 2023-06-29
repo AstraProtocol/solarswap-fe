@@ -102,6 +102,13 @@ export function getRouterContract(_: number, library: Web3Provider, account?: st
 		getProviderOrSigner(library, account),
 	) as ISolardexRouter02
 }
+export const isAstraApp = () => {
+	if (typeof window === 'undefined') return false;
+	return /Astra(?:Dev|Staging)?\/\d+\.\d+\.\d+/g.test(
+	  window.navigator.userAgent
+	);
+};
+  
 
 export function getZapInContract(_: number, library: Web3Provider, account?: string) {
 	return getContract(ZAP_ADDRESS[CHAIN_ID], ZapInContract, getProviderOrSigner(library, account)) as ZapIn

@@ -38,8 +38,20 @@ export const connectorsByName = {
 		})
 		return walletconnector
 	},
-	[ConnectorNames.AstraWallet]: () => {
+	[ConnectorNames.AstraConnect]: () => {
 		return AstraWalletConnector.create({ chainId, url: rpcUrl })
+	},
+	[ConnectorNames.AstraInjected]: async () => {
+		return AstraWalletConnector.create({
+			chainId,
+			url: rpcUrl,
+			metadata: {
+				description: process.env.NEXT_PUBLIC_TITLE,
+				name: process.env.NEXT_PUBLIC_TITLE,
+				location: typeof window !== 'undefined' ? window.location.origin : '',
+				icon: 'https://salt.tikicdn.com/ts/ta/8e/80/26/80c694f8ce25376dd97aa55d251a459f.png',
+			},
+		})
 	},
 	// [ConnectorNames.BSC]: bscConnector,
 	// [ConnectorNames.Blocto]: async () => {
@@ -89,4 +101,16 @@ export const signMessage = async (
 	}
 
 	return provider.getSigner(account).signMessage(message)
+}
+
+export const getConnectorByLabel = async label => {
+	if(label === "MetaMask") {
+		return connectorsByName[ConnectorNames.Injected];
+	}
+	
+	if(label === "Astra Inject") {
+		return connectorsByName[ConnectorNames.AstraInjected]();
+	}
+
+	return connectorsByName[ConnectorNames.Injected];
 }
