@@ -70,7 +70,7 @@ const astraWallet = astraConnectModule({
 		description: process.env.NEXT_PUBLIC_TITLE,
 		name: process.env.NEXT_PUBLIC_TITLE,
 		url: typeof window !== 'undefined' ? window.location.origin : '',
-		icons: [''],
+		icons: ['https://salt.tikicdn.com/ts/ta/8e/80/26/80c694f8ce25376dd97aa55d251a459f.png'],
 	},
 })
 

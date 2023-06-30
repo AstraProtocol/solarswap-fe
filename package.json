@@ -40,8 +40,8 @@
 	},
 	"dependencies": {
 		"@astra-sdk/connector": "^2.0.0",
-		"@astra-sdk/wallet-connect": "^1.0.4",
-		"@astra-sdk/walletconnect-connector": "^1.0.3",
+		"@astra-sdk/wallet-connect": "^2.0.0",
+		"@astra-sdk/walletconnect-connector": "^2.0.0",
 		"@astraprotocol/astra-ui": "^1.0.39",
 		"@ethersproject/abi": "^5.5.0",
 		"@ethersproject/address": "^5.5.0",

@@ -28,20 +28,18 @@ export const connectorsByName = {
 	[ConnectorNames.Injected]: injected,
 	[ConnectorNames.AstraConnect]: async () => {
 		await walletconnector.setup({
-			relayUrl: `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${WALLET_CONNECT_RELAY}`,
+			relayUrl: `${window.location.protocol === 'https:' ? 'wss' : 'wss'}://${process.env.NEXT_PUBLIC_WALLET_CONNECT_RELAY}`,
+			projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
 			metadata: {
-				name: 'Solar Swap',
-				description: 'Swap, earn and win ASA through yield farming on the first DEFI exchange for Astra token.',
-				url: window.location.origin,
+				description: process.env.NEXT_PUBLIC_TITLE,
+				name: process.env.NEXT_PUBLIC_TITLE,
+				url: typeof window !== 'undefined' ? window.location.origin : '',
 				icons: ['https://salt.tikicdn.com/ts/ta/8e/80/26/80c694f8ce25376dd97aa55d251a459f.png'],
 			},
 		})
 		return walletconnector
 	},
-	[ConnectorNames.AstraConnect]: () => {
-		return AstraWalletConnector.create({ chainId, url: rpcUrl })
-	},
-	[ConnectorNames.AstraInjected]: async () => {
+	[ConnectorNames.AstraInjected]: () => {
 		return AstraWalletConnector.create({
 			chainId,
 			url: rpcUrl,
@@ -110,6 +108,10 @@ export const getConnectorByLabel = async label => {
 	
 	if(label === "Astra Inject") {
 		return connectorsByName[ConnectorNames.AstraInjected]();
+	}
+
+	if(label === "Astra Wallet") {
+		return connectorsByName[ConnectorNames.AstraConnect]();
 	}
 
 	return connectorsByName[ConnectorNames.Injected];

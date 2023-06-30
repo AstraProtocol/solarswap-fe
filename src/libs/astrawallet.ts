@@ -35,14 +35,13 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 			getInterface: async ({ EventEmitter }: { chains: Chain[]; EventEmitter: any }) => {
 				const { ProviderRpcError, ProviderRpcErrorCode } = await import('@web3-onboard/common')
 				// const { default: WalletConnect } = await import('@walletconnect/client')
-				const { RELAY_URL } = await require('@astra-sdk/wallet-connect')
-				console.log(rpcUrl, chainId, ' aaa')
 				const connector = new WalletConnectConnector({
 					url: rpcUrl,
 					chainId: chainId,
 				})
 				await connector.setup({
-					relayUrl: `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${RELAY_URL}`,
+					relayUrl: `${window.location.protocol === 'https:' ? 'wss' : 'wss'}://${process.env.NEXT_PUBLIC_WALLET_CONNECT_RELAY}`,
+					projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
 					metadata,
 				})
 
