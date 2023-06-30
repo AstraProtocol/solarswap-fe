@@ -125,6 +125,6 @@ export enum ConnectorNames {
 	BSC = 'bsc',
 	Blocto = 'blocto',
 	WalletLink = 'walletlink',
-	AstraWallet = 'astrawallet',
+	AstraInjected = 'astrainjected',
 	AstraConnect = 'astraconnect',
 }
