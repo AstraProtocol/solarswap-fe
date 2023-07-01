@@ -85,6 +85,8 @@ function CurrencyRow({
 		<div
 			style={style}
 			className={clsx(
+				'radius-base',
+				'padding-left-sm ',
 				`token-item-${key}`,
 				styles.currencyMenuItem,
 				(isSelected || otherSelected) && styles.currencyMenuItemDisabled,
@@ -117,6 +119,7 @@ export default function CurrencyList({
 	showImportView,
 	setImportToken,
 	breakIndex,
+	style,
 }: {
 	height: number
 	currencies: Currency[]
@@ -129,6 +132,7 @@ export default function CurrencyList({
 	showImportView: () => void
 	setImportToken: (token: Token) => void
 	breakIndex: number | undefined
+	style: CSSProperties
 }) {
 	const itemData: (Currency | undefined)[] = useMemo(() => {
 		let formatted: (Currency | undefined)[] = showETH

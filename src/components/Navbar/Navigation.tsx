@@ -19,6 +19,7 @@ export type SubMenuItem = {
 	show?: boolean
 	submenus?: { id: string; label: string; link: string; show?: boolean }[]
 	onClick?: Function
+	isExternal?: boolean
 }
 export type MenuItem = {
 	id: string
