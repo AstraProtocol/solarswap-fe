@@ -74,13 +74,13 @@ const Layout: React.FC<Props> = props => {
 			<div className={clsx(`${resolvedTheme}--mode`, styles.layoutContainer)}>
 				<Navbar />
 				<div className={styles.layout}>{props.children}</div>
-				{!isMobile && (
-					<Footer
-						footerSocialTitle={t('Connect with us')}
-						footerLinks={footerLinks}
-						logoTitle={process.env.NEXT_PUBLIC_TITLE}
-					/>
-				)}
+				{/* {!isMobile && ( */}
+				<Footer
+					footerSocialTitle={t('Connect with us')}
+					footerLinks={footerLinks}
+					logoTitle={process.env.NEXT_PUBLIC_TITLE}
+				/>
+				{/* )} */}
 				<div id="modal-root"></div>
 				<ToastWrapper />
 			</div>

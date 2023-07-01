@@ -230,3 +230,12 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 	transform: translateX(-20%);
 	transition: transform 0.3s ease-in;
 }
+
+.linkSubItem {
+	&:hover {
+		background-color: #E8E7EA;
+	}
+	&:active {
+		background-color: #BABCC2;
+	}
+}
