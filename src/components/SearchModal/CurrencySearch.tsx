@@ -205,6 +205,7 @@ function CurrencySearch({
 							fixedListRef={fixedList}
 							showImportView={showImportView}
 							setImportToken={setImportToken}
+							style={{ gap: 8 }}
 						/>
 					</div>
 				) : (

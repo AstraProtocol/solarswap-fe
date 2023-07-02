@@ -125,7 +125,7 @@ export default function SwapModalFooter({
 
 			<Row>
 				<NormalButton
-					classes={{ other: 'text text-base width-100' }}
+					classes={{ other: 'text text-base font-700 width-100' }}
 					onClick={onConfirm}
 					disabled={disabledConfirm}
 					id="confirm-swap-or-send"

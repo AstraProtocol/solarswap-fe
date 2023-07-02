@@ -105,11 +105,12 @@ export default function Navbar() {
 						label: t('Liquidity'),
 						link: '/liquidity',
 					},
-					// {
-					// 	id: '1.3',
-					// 	label: t('Bridge'),
-					// 	link: 'https://bridge.astranaut.io',
-					// },
+					{
+						id: '1.3',
+						label: t('Bridge'),
+						link: 'https://bridge.astranaut.io',
+						isExternal: true,
+					},
 				],
 			},
 			{

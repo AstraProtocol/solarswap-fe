@@ -575,7 +575,7 @@ export default function Swap() {
 													disabled={
 														approval !== ApprovalState.NOT_APPROVED || approvalSubmitted
 													}
-													classes={{ other: 'width-100 text-base' }}
+													classes={{ other: 'width-100 text-base font-700' }}
 													// width="48%"
 												>
 													{approval === ApprovalState.PENDING ? (
@@ -606,7 +606,7 @@ export default function Swap() {
 														}
 													}}
 													// width="48%"
-													classes={{ other: 'width-100 text-base' }}
+													classes={{ other: 'width-100 text-base font-700' }}
 													id="swap-button"
 													disabled={
 														!isValid ||
@@ -641,7 +641,7 @@ export default function Swap() {
 														onPresentConfirmModal()
 													}
 												}}
-												classes={{ other: 'width-100 text-base' }}
+												classes={{ other: 'width-100 text-base font-700' }}
 												id="swap-button"
 												// width="100%"
 												disabled={

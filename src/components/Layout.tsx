@@ -40,11 +40,11 @@ const Layout: React.FC<Props> = props => {
 				{ label: t('About us'), link: 'https://astranaut.io' },
 				{ label: t('Explorer'), link: 'https://explorer.astranaut.io' },
 				{ label: t('Bridge'), link: 'https://bridge.astranaut.io' },
-				{ label: t('DEX'), link: 'https://solarswap.io' },
+				// { label: t('DEX'), link: 'https://solarswap.io' },
 			],
 			[
 				{ label: t('Documents'), link: 'https://docs.astranaut.io' },
-				{ label: t('Whitepaper'), link: 'https://astranaut.io' },
+				{ label: t('Whitepaper'), link: 'https://astranaut.io/whitepaper' },
 			],
 			[
 				{ label: t('Privacy and Policy'), link: 'https://astranaut.io/' },
@@ -85,13 +85,13 @@ const Layout: React.FC<Props> = props => {
 			<div className={clsx(`${resolvedTheme}--mode`, styles.layoutContainer)}>
 				<Navbar />
 				<div className={styles.layout}>{props.children}</div>
-				{!isMobile && (
-					<Footer
-						footerSocialTitle={t('Connect with us')}
-						footerLinks={footerLinks}
-						logoTitle={process.env.NEXT_PUBLIC_TITLE}
-					/>
-				)}
+				{/* {!isMobile && ( */}
+				<Footer
+					footerSocialTitle={t('Connect with us')}
+					footerLinks={footerLinks}
+					logoTitle={process.env.NEXT_PUBLIC_TITLE}
+				/>
+				{/* )} */}
 				<div id="modal-root"></div>
 				<ToastWrapper />
 			</div>
