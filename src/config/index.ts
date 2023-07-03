@@ -17,7 +17,7 @@ export const BASE_ASTRA_EXPLORER_URLS = {
 
 // ASA_PER_BLOCK details
 // 0.5 ASA is minted per block
-export const ASA_PER_BLOCK = 0.5
+export const ASA_PER_BLOCK = 0.4
 export const BLOCKS_PER_YEAR = (60 / ASA_BLOCK_TIME) * 60 * 24 * 365 // 10512000
 export const ASA_PER_YEAR = ASA_PER_BLOCK * BLOCKS_PER_YEAR // 5.256.000
 export const BASE_URL = process.env.NEXT_PUBLIC_HOST

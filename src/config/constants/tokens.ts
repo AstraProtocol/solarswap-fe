@@ -14,7 +14,7 @@ const defineTokens = <T extends TokenList>(t: T) => t
 export const mainnetTokens = defineTokens({
 	wasa: new Token(
 		MAINNET,
-		'0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+		'0xA625BF1c3565775B1859B579DF980Fef324E7315',
 		18,
 		'WASA',
 		'Wrapped ASA',
@@ -30,7 +30,7 @@ export const mainnetTokens = defineTokens({
 	),
 	usdt: new Token(
 		MAINNET,
-		'0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2',
+		'0x2039A56173fDac411975Bce6F756059Ac33d0d79',
 		18,
 		'USDT',
 		'Tether USD',
@@ -51,7 +51,7 @@ export const mainnetTokens = defineTokens({
 export const testnetTokens = defineTokens({
 	wasa: new Token(
 		TESTNET,
-		'0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+		'0xA625BF1c3565775B1859B579DF980Fef324E7315',
 		18,
 		'WASA', // must exactly the same with contract
 		'Wrapped ASA',
@@ -60,7 +60,7 @@ export const testnetTokens = defineTokens({
 
 	usdt: new Token(
 		TESTNET,
-		'0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2',
+		'0x2039A56173fDac411975Bce6F756059Ac33d0d79',
 		18,
 		'USDT',
 		'Tether USD',

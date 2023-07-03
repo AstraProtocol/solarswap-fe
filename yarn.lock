@@ -2306,10 +2306,10 @@
     rpc-websockets "^7.5.1"
     superstruct "^0.14.2"
 
-"@solarswap/sdk@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@solarswap/sdk/-/sdk-1.0.7.tgz#cb7345bfc4bb6d4e2c42aa4187228a5303b69008"
-  integrity sha512-z0HoBUHI2kS044IIhklB1qNCdAidkGXHnpZBHRx42wB+fDit0t5ePrwdzP+sHaAhGTKrPxipMVvt8OhMO5tT1w==
+"@solarswap/sdk@1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@solarswap/sdk/-/sdk-1.0.8.tgz#0f7a3e64730a2761d06802c0de3be55b3024e4ba"
+  integrity sha512-Ikl5sfEv6nh1p8QUzyhof9L6mBzXRGH0QQVg+xZmm9lE5kN/q4rQfkqdh974nPeQUVNwZQDYoWmeOivuukL8oQ==
   dependencies:
     big.js "^5.2.2"
     decimal.js-light "^2.5.0"
