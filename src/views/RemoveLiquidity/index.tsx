@@ -345,9 +345,12 @@ export default function RemoveLiquidity() {
 				.then((response: TransactionResponse) => {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 					addTransaction(response, {
-						summary: `Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-							currencyA?.symbol
-						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
+						summary: t(`Remove %amountA% %symbolA% and %amountB% %symbolB%`, {
+							amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(3),
+							symbolA: currencyA?.symbol,
+							amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(3),
+							symbolB: currencyB?.symbol,
+						}),
 					})
 				})
 				.catch(err => {

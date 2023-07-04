@@ -141,11 +141,16 @@ export function useSwapCallback(
 						const inputAmount = trade.inputAmount.toSignificant(3)
 						const outputAmount = trade.outputAmount.toSignificant(3)
 
-						const base = `Swaps ${inputAmount} ${inputSymbol} for ${outputAmount} ${outputSymbol}`
+						const base = t('Swaps %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%', {
+							inputAmount,
+							inputSymbol,
+							outputAmount,
+							outputSymbol,
+						})
 						const withRecipient =
 							recipient === account
 								? base
-								: `${base} to ${
+								: `${base} ${t('To')} ${
 										recipientAddressOrName && isAddress(recipientAddressOrName)
 											? truncateHash(recipientAddressOrName)
 											: recipientAddressOrName

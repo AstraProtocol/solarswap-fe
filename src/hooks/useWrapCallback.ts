@@ -51,7 +51,9 @@ export default function useWrapCallback(
 										value: `0x${inputAmount.raw.toString(16)}`,
 									})
 									addTransaction(txReceipt, {
-										summary: `Wrap ${inputAmount.toSignificant(6)} ASA to WASA`,
+										summary: t(`Wrap %amount% ASA to WASA`, {
+											amount: inputAmount.toSignificant(6),
+										}),
 									})
 								} catch (error) {
 									console.error('Could not deposit', error)
@@ -72,7 +74,9 @@ export default function useWrapCallback(
 										`0x${inputAmount.raw.toString(16)}`,
 									])
 									addTransaction(txReceipt, {
-										summary: `Unwrap ${inputAmount.toSignificant(6)} WASA to ASA`,
+										summary: t(`Unwrap %amount% WASA to ASA`, {
+											amount: inputAmount.toSignificant(6),
+										}),
 									})
 								} catch (error) {
 									console.error('Could not withdraw', error)

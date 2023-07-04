@@ -208,11 +208,12 @@ export default function AddLiquiditySingle() {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 
 					addTransaction(response, {
-						summary: `Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3) || 0} ${
-							currencies[Field.CURRENCY_A]?.symbol
-						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) || 0} ${
-							currencies[Field.CURRENCY_B]?.symbol
-						}`,
+						summary: t(`Add %amountA% %symbolA% and %amountB% %symbolB%`, {
+							amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(3) || 0,
+							symbolA: currencies[Field.CURRENCY_A]?.symbol,
+							amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) || 0,
+							symbolB: currencies[Field.CURRENCY_B]?.symbol,
+						}),
 					})
 				}),
 			)
