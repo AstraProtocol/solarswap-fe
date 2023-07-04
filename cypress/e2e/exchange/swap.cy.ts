@@ -4,7 +4,7 @@ describe('Swap', () => {
 		cy.visit(`${HOST}/swap`)
 	})
 	const delay = 200
-	const usdt = '0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2'
+	const usdt = '0x2039A56173fDac411975Bce6F756059Ac33d0d79'
 	// const busd = '0x092d93f258ceea20c94ba01e8771115141dd7c20'
 	// it('can enter an amount into input', () => {
 	// 	cy.get('#swap-currency-input .token-amount-input').type('0.001', { delay }).should('have.value', '0.001')

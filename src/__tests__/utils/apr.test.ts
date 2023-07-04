@@ -4,7 +4,7 @@ import { getPoolApr, getFarmApr } from 'utils/apr'
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
 
 jest.mock('../../config/constants/lpAprs.json', () => ({
-	'0xfcb81CBBB8d74030A9C5BF24e0f61d6C4a734f2f': 0,
+	'0xecd38fcda1e283d6344bf6a5970979c68da5064f': 0,
 }))
 
 // describe('getPoolApr', () => {
@@ -35,7 +35,7 @@ describe('getFarmApr', () => {
 	})
 	it(`get the correct pool APR`, () => {
 		const { asaRewardsApr, lpRewardsApr } = getFarmApr(BIG_TEN, new BigNumber(1), new BigNumber(100000), '')
-		expect(asaRewardsApr).toEqual(52560)
+		expect(asaRewardsApr).toEqual(42048)
 		expect(lpRewardsApr).toEqual(0)
 	})
 	it(`get the correct pool APR combined with LP APR`, () => {
@@ -43,9 +43,9 @@ describe('getFarmApr', () => {
 			BIG_TEN,
 			new BigNumber(1),
 			new BigNumber(100000),
-			'0xfcb81CBBB8d74030A9C5BF24e0f61d6C4a734f2f',
+			'0xecd38fcda1e283d6344bf6a5970979c68da5064f',
 		)
-		expect(asaRewardsApr).toEqual(52560)
-		expect(lpRewardsApr).toEqual(lpAprs['0xfcb81CBBB8d74030A9C5BF24e0f61d6C4a734f2f'])
+		expect(asaRewardsApr).toEqual(42048)
+		expect(lpRewardsApr).toEqual(lpAprs['0xecd38fcda1e283d6344bf6a5970979c68da5064f'])
 	})
 })
