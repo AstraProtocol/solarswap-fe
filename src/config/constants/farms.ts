@@ -15,7 +15,7 @@ const farms: SerializedFarmConfig[] = [
 			11115: '0xA625BF1c3565775B1859B579DF980Fef324E7315',
 			56: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
 		},
-		token: serializedTokens.syrup,
+		token: serializedTokens.wasa,
 		quoteToken: serializedTokens.wasa,
 	},
 	{
