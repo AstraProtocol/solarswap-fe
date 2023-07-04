@@ -66,6 +66,7 @@ const Layout: React.FC<Props> = props => {
 					type="audit"
 					i18n={t}
 					isVerifyByCertik={false}
+					className={styles.footerBg}
 				/>
 				<div id="modal-root"></div>
 				<ToastWrapper />
