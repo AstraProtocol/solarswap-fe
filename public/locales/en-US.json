@@ -1568,7 +1568,9 @@
 	"DEX": "DEX",
 	"Documents": "Documents",
 	"Whitepaper": "Whitepaper",
+	"Privacy": "Privacy",
 	"Privacy and Policy": "Privacy and Policy",
+	"Security audits": "Security audits",
 	"Term and Services": "Term and Services",
 	"Live Support": "Live Support",
 	"Connect with us": "Connect with us",
@@ -1588,6 +1590,7 @@
 	"You can swap WASA for ASA (and vice versa) with no trading fees.": "You can swap WASA for ASA (and vice versa) with no trading fees.",
 	"Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)": "Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)",
 	"User denied message signature.": "User denied message signature.",
-  "Wrap": "Wrap",
-	"Unwrap": "Unwrap"
+	"Wrap": "Wrap",
+	"Unwrap": "Unwrap",
+	"Learn more": "Learn more"
 }
