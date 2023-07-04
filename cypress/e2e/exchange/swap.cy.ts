@@ -42,7 +42,7 @@ describe('Swap', () => {
 		cy.get('#swap-currency-input .token-amount-input').type('0.001', { force: true, delay })
 		cy.get('#swap-currency-output').should('not.equal', '')
 		cy.get('#swap-button').click()
-		cy.get('#confirm-swap-or-send').should('contain', 'Xác nhận Hoán đổi')
+		cy.get('#confirm-swap-or-send').should('contain', 'Xác nhận đổi điểm')
 	})
 
 	it('add a recipient does not exist unless in expert mode', () => {
