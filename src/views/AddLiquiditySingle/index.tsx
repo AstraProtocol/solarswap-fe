@@ -412,7 +412,7 @@ export default function AddLiquiditySingle() {
 												{approvalA !== ApprovalState.APPROVED &&
 													parseFloat(formattedAmounts[Field.CURRENCY_A]) > 0 && (
 														<NormalButton
-															classes={{ other: 'width-100 text-base' }}
+															classes={{ other: 'width-100 text-base font-700' }}
 															onClick={approveACallback}
 															disabled={approvalA === ApprovalState.PENDING}
 														>
@@ -432,7 +432,7 @@ export default function AddLiquiditySingle() {
 												{approvalB !== ApprovalState.APPROVED &&
 													parseFloat(formattedAmounts[Field.CURRENCY_B]) > 0 && (
 														<NormalButton
-															classes={{ other: 'width-100 text-base' }}
+															classes={{ other: 'width-100 text-base font-700' }}
 															onClick={approveBCallback}
 															disabled={approvalB === ApprovalState.PENDING}
 														>
@@ -453,7 +453,7 @@ export default function AddLiquiditySingle() {
 										)}
 
 									<NormalButton
-										classes={{ other: 'width-100 text-base' }}
+										classes={{ other: 'width-100 text-base font-700' }}
 										variant="primary"
 										onClick={() => {
 											if (expertMode) {
