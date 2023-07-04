@@ -1,5 +1,8 @@
 .layoutContainer {
+	align-content: space-between;
+    display: grid;
 	min-height: 100vh;
+	background: radial-gradient(76.11% 126.33% at 120% 110%, rgb(126 80 226 / 18%) 20%, rgb(157 133 255 / 1%) 80%), radial-gradient(92.29% 95.94% at 1% -9%, rgb(82 95 255 / 12%) -35.79%, rgba(23, 31, 60, 0.10) 100%), #060615;
 	.layout {
 		min-height: 52vh;
 	}

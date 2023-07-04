@@ -11,7 +11,7 @@ import { useTranslation } from 'contexts/Localization'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import { CHAIN_ID } from 'config/constants/networks'
 import { useWeb3React } from '@web3-react/core'
-import {  getConnectorByLabel } from 'utils/web3React'
+import { getConnectorByLabel } from 'utils/web3React'
 import { isAstraApp } from 'utils'
 
 type Props = {
@@ -36,15 +36,15 @@ const Layout: React.FC<Props> = props => {
 		(async () => {
 			if (account) {
 				if (!active) {
-					const connector = await getConnectorByLabel(wallet.label);
-					activate(connector )
+					const connector = await getConnectorByLabel(wallet.label)
+					activate(connector)
 				}
-			} else if(isAstraApp()) {
+			} else if (isAstraApp()) {
 				connect({
 					autoSelect: {
 						label: 'Astra Inject',
 						disableModals: true,
-					}
+					},
 				})
 			}
 		})()
@@ -58,17 +58,25 @@ const Layout: React.FC<Props> = props => {
 
 	return (
 		<Suspense fallback={<PageLoader />}>
-			<div className={clsx(`${resolvedTheme}--mode`, styles.layoutContainer)}>
-				<Navbar />
-				<div className={styles.layout}>{props.children}</div>
-				<Footer
-					logoTitle={process.env.NEXT_PUBLIC_TITLE}
-					type="audit"
-					i18n={t}
-					isVerifyByCertik={false}
-				/>
-				<div id="modal-root"></div>
-				<ToastWrapper />
+			<div
+				className={clsx(`${resolvedTheme}--mode`, styles.layoutContainer)}
+				style={{ alignContent: 'space-between' }}
+			>
+				<div>
+					<Navbar />
+					<div className={styles.layout}>{props.children}</div>
+				</div>
+				<div>
+					<Footer
+						logoTitle={process.env.NEXT_PUBLIC_TITLE}
+						type="audit"
+						i18n={t}
+						isVerifyByCertik={false}
+						className={styles.footerBg}
+					/>
+					<div id="modal-root"></div>
+					<ToastWrapper />
+				</div>
 			</div>
 		</Suspense>
 	)
