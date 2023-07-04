@@ -299,7 +299,6 @@ export function useDefaultsFromURLSearch():
 		if (!chainId) return
 		const parsed = queryParametersToSwapState(query)
 
-		console.log('huh')
 		dispatch(
 			replaceSwapState({
 				typedValue: parsed.typedValue,
