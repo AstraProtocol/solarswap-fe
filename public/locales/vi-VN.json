@@ -1564,9 +1564,11 @@
 	"Explorer": "Explorer",
 	"Bridge": "Cầu nối xuyên chuỗi",
 	"DEX": "DEX",
-	"Documents": "Tài Liệu Kỹ Thuật",
+	"Documents": "Tài Liệu",
+	"Privacy": "Chính Sách",
 	"Whitepaper": "Sách Trắng",
 	"Privacy and Policy": "Chính Sách và Quyền Riêng Tư",
+	"Security audits": "Đánh giá bảo mật",
 	"Term and Services": "Điều khoản và Dịch vụ",
 	"Live Support": "Hỗ trợ trực tuyến",
 	"Connect with us": "Kết nối với chúng tôi",
@@ -1588,5 +1590,6 @@
 	"User denied message signature.": "Giao dịch đã huỷ bỏ.",
 	"Receive WASA hint": "Rút thanh khoản và nhận WASA thay vì ASA sẽ giúp bạn tiết kiệm phí giao dịch.",
 	"Wrap": "Wrap",
-	"Unwrap": "Unwrap"
+	"Unwrap": "Unwrap",
+	"Learn more": "Tìm hiểu thêm"
 }

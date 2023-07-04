@@ -1568,6 +1568,8 @@
 	"Whitepaper": "Sách Trắng",
 	"Privacy and Policy": "Chính Sách và Quyền Riêng Tư",
 	"Term and Services": "Điều khoản và Dịch vụ",
+	"Security audits": "Đánh giá bảo mật",
+	"Privacy": "Chính Sách",
 	"Live Support": "Hỗ trợ trực tuyến",
 	"Connect with us": "Kết nối với chúng tôi",
 	"Failed": "Thất bại",
@@ -1588,5 +1590,6 @@
 	"User denied message signature.": "Giao dịch đã huỷ bỏ.",
 	"Receive WASA hint": "Rút thanh khoản và nhận WASA thay vì ASA sẽ giúp bạn tiết kiệm phí giao dịch.",
 	"Wrap": "Wrap",
-	"Unwrap": "Unwrap"
+	"Unwrap": "Unwrap",
+	"Learn more": "Tìm hiểu thêm"
 }
