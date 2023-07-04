@@ -1592,5 +1592,11 @@
 	"User denied message signature.": "User denied message signature.",
 	"Wrap": "Wrap",
 	"Unwrap": "Unwrap",
-	"Learn more": "Learn more"
+	"Learn more": "Learn more",
+	"Swaps %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%": "Swaps %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%",
+	"Approve %symbol%": "Approve %symbol%",
+	"Wrap %amount% ASA to WASA": "Wrap %amount% ASA to WASA",
+	"Unwrap %amount% WASA to ASA": "Unwrap %amount% WASA to ASA",
+	"Add %amountA% %symbolA% and %amountB% %symbolB%": "Add %amountA% %symbolA% and %amountB% %symbolB%",
+	"Remove %amountA% %symbolA% and %amountB% %symbolB%": "Remove %amountA% %symbolA% and %amountB% %symbolB%"
 }
