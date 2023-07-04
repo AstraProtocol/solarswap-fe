@@ -776,6 +776,7 @@
 	"Price": "Giá",
 	"Prices": "Giá",
 	"Remove liquidity": "Rút thanh khoản",
+	"Remove %assetA%-%assetB% liquidity": "Xóa thanh khoản %assetA%-%assetB%",
 	"Amount": "Số điểm",
 	"Simple": "Đơn giản",
 	"Detailed": "Chi tiết",
