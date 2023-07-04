@@ -93,7 +93,11 @@ export default function Pool() {
 								</span>
 								<div className="text-center padding-md">
 									<Link href="/find" passHref>
-										<NormalButton id="import-pool-link" variant="default">
+										<NormalButton
+											id="import-pool-link"
+											variant="default"
+											classes={{ other: 'text-base font-700' }}
+										>
 											<span className="text-bold">{t('Find other LP tokens')}</span>
 										</NormalButton>
 									</Link>
@@ -103,7 +107,7 @@ export default function Pool() {
 					</div>
 					<div className="text-center padding-md">
 						<Link href="/add" passHref>
-							<NormalButton classes={{ other: 'width-100 text-base' }} id="join-pool-button">
+							<NormalButton classes={{ other: 'width-100 text-base font-700' }} id="join-pool-button">
 								<div>
 									<Icon className="padding-xs" icon={IconEnum.ICON_PLUS} />
 									{t('Add Liquidity')}
@@ -113,7 +117,10 @@ export default function Pool() {
 					</div>
 					<div className="text-center padding-md">
 						<Link href="/add-single" passHref>
-							<NormalButton classes={{ other: 'width-100 text-base' }} id="join-pool-single-button">
+							<NormalButton
+								classes={{ other: 'width-100 text-base font-700' }}
+								id="join-pool-single-button"
+							>
 								<div>
 									<Icon className="padding-xs" icon={IconEnum.ICON_PLUS} />
 									{t('Add Single Liquidity')}

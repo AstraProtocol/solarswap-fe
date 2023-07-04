@@ -26,7 +26,7 @@ jobs:
         NEXT_PUBLIC_HOST=https://solarswap.io
         NEXT_PUBLIC_EXPLORER=http://explorer.astranaut.io
         NEXT_PUBLIC_GTAG=G-MK9VVY7GT5
-        NEXT_PUBLIC_FEE=20
+        NEXT_PUBLIC_FEE=100
         NEXT_PUBLIC_TITLE=SolarSwap
         NEXT_PUBLIC_WALLET_CONNECT_RELAY=wc-relay.astranaut.io
         NEXT_PUBLIC_SENTRY_DSN=https://3440367258bb4aa39f6798ce548c98c8@sentry.astranet.live/5

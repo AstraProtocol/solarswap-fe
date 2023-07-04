@@ -89,7 +89,9 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
 					}}
 					// classes={{ other: 'padding-left-xs' }}
 				>
-					<span className="text text-base">{pendingTx ? <Dots>{t('Harvesting')}</Dots> : t('Harvest')}</span>
+					<span className="text text-base font-700">
+						{pendingTx ? <Dots>{t('Harvesting')}</Dots> : t('Harvest')}
+					</span>
 				</NormalButton>
 			</div>
 		</div>

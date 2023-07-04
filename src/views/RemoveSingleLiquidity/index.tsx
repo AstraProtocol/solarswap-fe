@@ -601,7 +601,7 @@ export default function RemoveLiquidity() {
 							) : showApproveFlow ? (
 								<Row className="flex-justify-space-between">
 									<NormalButton
-										classes={{ other: 'width-100 text-base margin-right-sm' }}
+										classes={{ other: 'width-100 text-base margin-right-sm font-700' }}
 										variant={
 											approval === ApprovalState.APPROVED || signatureData !== null
 												? 'primary'
@@ -621,7 +621,7 @@ export default function RemoveLiquidity() {
 										)}
 									</NormalButton>
 									<NormalButton
-										classes={{ other: 'width-100 text-base' }}
+										classes={{ other: 'width-100 text-base font-700' }}
 										variant={
 											!isValid &&
 											!!parsedAmounts[Field.CURRENCY_A] &&
@@ -657,7 +657,7 @@ export default function RemoveLiquidity() {
 								</Row>
 							) : (
 								<NormalButton
-									classes={{ other: 'width-100 text-base' }}
+									classes={{ other: 'width-100 text-base font-700' }}
 									variant={
 										!isValid &&
 										!!parsedAmounts[Field.CURRENCY_A] &&

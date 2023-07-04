@@ -395,7 +395,7 @@ export default function AddLiquidity() {
 											<Row className="flex-justify-space-between padding-bottom-md">
 												{approvalA !== ApprovalState.APPROVED && (
 													<NormalButton
-														classes={{ other: 'width-100 text-base' }}
+														classes={{ other: 'width-100 text-base font-700' }}
 														onClick={approveACallback}
 														disabled={approvalA === ApprovalState.PENDING}
 														style={{
@@ -418,7 +418,7 @@ export default function AddLiquidity() {
 												)}
 												{approvalB !== ApprovalState.APPROVED && (
 													<NormalButton
-														classes={{ other: 'width-100 text-base' }}
+														classes={{ other: 'width-100 text-base font-700' }}
 														onClick={approveBCallback}
 														disabled={approvalB === ApprovalState.PENDING}
 														style={{
@@ -442,7 +442,7 @@ export default function AddLiquidity() {
 											</Row>
 										)}
 									<NormalButton
-										classes={{ other: 'width-100 text-base' }}
+										classes={{ other: 'width-100 text-base font-700' }}
 										variant={
 											!isValid &&
 											!!parsedAmounts[Field.CURRENCY_A] &&

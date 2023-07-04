@@ -1,6 +1,7 @@
 import { CryptoIcon, ellipseBetweenText, Icon, IconEnum, Row } from '@astraprotocol/astra-ui'
 import { useConnectWallet } from '@web3-onboard/react'
 import clsx from 'clsx'
+import * as Sentry from '@sentry/nextjs'
 
 import { useTranslation } from 'contexts/Localization'
 import useAuth from 'hooks/useAuth'
@@ -18,9 +19,13 @@ export default function NavigationConnect({ classes = '' }) {
 	const { isMobile } = useMatchBreakpoints()
 
 	const onDisconnect = useCallback(() => {
-		disconnect(wallet)
-		logout()
-		WalletHelper.removeCacheConnect()
+		try {
+			logout()
+			WalletHelper.removeCacheConnect()
+			disconnect(wallet)
+		} catch (err) {
+			Sentry.captureException(err)
+		}
 	}, [wallet])
 
 	if (wallet) {
