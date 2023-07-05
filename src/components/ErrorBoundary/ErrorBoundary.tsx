@@ -19,7 +19,7 @@ export default function ErrorBoundary({ children }) {
 				return (
 					<div className={`${resolvedTheme}--mode`}>
 						<Page>
-							<Logo type="transparent" hasText={false} />
+							<Logo type="swap" hasText={false} />
 							<span className="text text-lg">{t('Oops, something wrong.')}</span>
 							{/* {eventId && (
 							<div>

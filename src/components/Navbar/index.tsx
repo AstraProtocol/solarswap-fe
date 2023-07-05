@@ -189,7 +189,7 @@ export default function Navbar() {
 						</div>
 					</div>
 					<div className={clsx(styles.left, 'link')}>
-						<Logo type="transparent" text={process.env.NEXT_PUBLIC_TITLE} />
+						<Logo type="swap" size='small' text={process.env.NEXT_PUBLIC_TITLE} />
 					</div>
 					<div className={styles.right}>
 						<Navigation items={menus} />
