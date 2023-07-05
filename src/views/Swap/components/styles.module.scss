@@ -95,8 +95,9 @@
 
 // ------------ ProgressSteps.tsx ---------------------
 .circle {
-	min-width: 20px;
-	min-height: 20px;
+	min-width: 24px;
+	min-height: 24px;
+	
 	// background-color: ${({ theme, confirmed, disabled }) =>
 	// 	disabled ? theme.colors.backgroundDisabled : confirmed ? theme.colors.success : theme.colors.primary};
 	border-radius: 50%;
@@ -105,7 +106,6 @@
 	align-items: center;
 	justify-content: center;
 	line-height: 8px;
-	font-size: 12px;
 }
 
 .circleRow {

@@ -576,10 +576,10 @@ export default function Swap() {
 														approval !== ApprovalState.NOT_APPROVED || approvalSubmitted
 													}
 													classes={{ other: 'width-100 text-base font-700' }}
-													// width="48%"
+													style={{ width: '48%' }}
 												>
 													{approval === ApprovalState.PENDING ? (
-														<Row style={{ justifyContent: 'center' }}>
+														<Row style={{ alignItems: 'center' }}>
 															{t('Enabling')} <CircleLoader stroke="white" />
 														</Row>
 													) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
@@ -605,7 +605,7 @@ export default function Swap() {
 															onPresentConfirmModal()
 														}
 													}}
-													// width="48%"
+													style={{ width: '48%' }}
 													classes={{ other: 'width-100 text-base font-700' }}
 													id="swap-button"
 													disabled={
