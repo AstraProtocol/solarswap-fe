@@ -12,9 +12,11 @@ import SwapRoute from './SwapRoute'
 import { Row } from '@astraprotocol/astra-ui'
 import QuestionHelper from 'components/QuestionHelper'
 import { LP_HOLDERS_FEE, TOTAL_FEE, TREASURY_FEE } from 'config/constants/info'
+import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
 	const { t } = useTranslation()
+	const { isMobile } = useMatchBreakpoints()
 	const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade)
 	const isExactIn = trade.tradeType === TradeType.EXACT_INPUT
 	const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage)
@@ -63,7 +65,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 							${t('%amount% to LP token holders', { amount: `${LP_HOLDERS_FEE * 100}%` })},
 							${t('%amount% to the Treasury', { amount: `${TREASURY_FEE * 100}%` })}
 							`}
-						placement="right"
+						placement={isMobile ? 'top-start' : 'right'}
 						// - ${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
 						// - ${t('%amount% to the Treasury', { amount: '0.03%' })}
 						// - ${t('%amount% towards ASTRA buyback', { amount: '0.05%' })}
