@@ -19,7 +19,7 @@ import { Icon, IconEnum, NormalButton, Row } from '@astraprotocol/astra-ui'
 import styles from './styles.module.scss'
 import QuestionHelper from 'components/QuestionHelper'
 import { SwapCallbackError } from './SwapCallbackError'
-import { TOTAL_FEE } from 'config/constants/info'
+import { LP_HOLDERS_FEE, TOTAL_FEE, TREASURY_FEE } from 'config/constants/info'
 // const SwapModalFooterContainer = styled(AutoColumn)`
 //   margin-top: 24px;
 //   padding: 16px;
@@ -111,7 +111,8 @@ export default function SwapModalFooter({
 						<QuestionHelper
 							text={`
 									${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })}
-									${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
+									${t('%amount% to LP token holders', { amount: `${LP_HOLDERS_FEE * 100}%` })}
+									${t('%amount% to the Treasury', { amount: `${TREASURY_FEE * 100}%` })}
 									`}
 						/>
 					</Row>

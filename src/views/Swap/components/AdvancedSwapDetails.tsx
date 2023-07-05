@@ -11,10 +11,12 @@ import FormattedPriceImpact from './FormattedPriceImpact'
 import SwapRoute from './SwapRoute'
 import { Row } from '@astraprotocol/astra-ui'
 import QuestionHelper from 'components/QuestionHelper'
-import { TOTAL_FEE } from 'config/constants/info'
+import { LP_HOLDERS_FEE, TOTAL_FEE, TREASURY_FEE } from 'config/constants/info'
+import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
 	const { t } = useTranslation()
+	const { isMobile } = useMatchBreakpoints()
 	const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade)
 	const isExactIn = trade.tradeType === TradeType.EXACT_INPUT
 	const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage)
@@ -56,17 +58,19 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 				<Row className="flex flex-align-center">
 					<span className="text text-sm contrast-color-70 margin-right-2xs">
 						{t('Liquidity Provider Fee')}
-						<QuestionHelper
-							text={`
-							${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })}
-							`}
-							placement="right"
-							// - ${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
-							// - ${t('%amount% to the Treasury', { amount: '0.03%' })}
-							// - ${t('%amount% towards ASTRA buyback', { amount: '0.05%' })}
-							// placement="top-start"
-						/>
 					</span>
+					<QuestionHelper
+						text={`
+							${t('For each trade a %amount% fee is paid', { amount: `${TOTAL_FEE * 100}%` })},
+							${t('%amount% to LP token holders', { amount: `${LP_HOLDERS_FEE * 100}%` })},
+							${t('%amount% to the Treasury', { amount: `${TREASURY_FEE * 100}%` })}
+							`}
+						placement={isMobile ? 'top-start' : 'right'}
+						// - ${t('%amount% to LP token holders', { amount: `${TOTAL_FEE * 100}%` })}
+						// - ${t('%amount% to the Treasury', { amount: '0.03%' })}
+						// - ${t('%amount% towards ASTRA buyback', { amount: '0.05%' })}
+						// placement="top-start"
+					/>
 				</Row>
 				<span className="text text-sm">
 					{realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}

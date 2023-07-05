@@ -110,6 +110,7 @@ export default function Navbar() {
 						label: t('Bridge'),
 						link: 'https://bridge.astranaut.io',
 						isExternal: true,
+						hideOnMobile: true,
 					},
 				],
 			},

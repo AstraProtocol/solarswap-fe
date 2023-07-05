@@ -3,7 +3,6 @@ import { formatAmount, formatAmountNotation } from 'utils/formatInfoNumbers'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-import { Flex, FlexGap } from './Layout/Flex'
 
 const formatOptions = {
 	notation: 'standard' as formatAmountNotation,
