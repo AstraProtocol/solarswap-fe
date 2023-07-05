@@ -1,5 +1,6 @@
 .input {
 	color: var(--contrast-color-theme-100);
+	background-color: rgb(255 255 255 / 10%);
 	width: 0;
 	position: relative;
 	font-weight: 500;
@@ -31,14 +32,13 @@
 		color: var(--contrast-color-theme-70);
 	}
 
-	&:focus {
+	&:focus, &:active {
 		border-color: #2295FF;
 		border-width: 2px;
 	}
 
 	&:hover {
-		border-color: #ffffff2e;
-		background-color: rgb(255 255 255 / 12%);
+		border-width: 2px;
 	}
 }
 
