@@ -20,11 +20,11 @@ const PriceChart = ({
 	token1Address,
 	currentSwapPrice,
 }) => {
-	const { isDesktop } = useMatchBreakpoints()
-	const toggleExpanded = () => setIsChartExpanded(currentIsExpanded => !currentIsExpanded)
-	const [chartView, setChartView] = useExchangeChartViewManager()
-	// const [twChartSymbol, setTwChartSymbol] = useState('')
-	const { t } = useTranslation()
+	// const { isDesktop } = useMatchBreakpoints()
+	// const toggleExpanded = () => setIsChartExpanded(currentIsExpanded => !currentIsExpanded)
+	// const [chartView, setChartView] = useExchangeChartViewManager()
+	// // const [twChartSymbol, setTwChartSymbol] = useState('')
+	// const { t } = useTranslation()
 
 	// const handleTwChartSymbol = useCallback((symbol) => {
 	//   setTwChartSymbol(symbol)
@@ -32,9 +32,9 @@ const PriceChart = ({
 
 	return (
 		<StyledPriceChart
+			isMobile={isMobile}
 			style={{
-				// height: isMobile ? '100%' : '70%',
-				height: isMobile ? '100%' : 'auto',
+				height: isMobile ? '75%' : '100%',
 				overflow: 'unset',
 			}}
 			isExpanded={isChartExpanded}

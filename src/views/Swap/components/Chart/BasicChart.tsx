@@ -74,8 +74,8 @@ const BasicChart = ({
 				<div className="flex col">
 					<PairPriceDisplay
 						value={pairPrices?.length > 0 && valueToDisplay}
-						inputSymbol={inputCurrency?.symbol}
-						outputSymbol={outputCurrency?.symbol}
+						// inputSymbol={inputCurrency?.symbol}
+						// outputSymbol={outputCurrency?.symbol}
 					>
 						<span
 							className={clsx(
@@ -83,7 +83,7 @@ const BasicChart = ({
 								isChangePositive ? 'alert-color-success' : 'alert-color-error',
 							)}
 						>
-							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(3)} (${changePercentage}%)`}
+							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(4)} (${changePercentage}%)`}
 						</span>
 					</PairPriceDisplay>
 					<span className="text text-sm contrast-color-70">{hoverDate || currentDate}</span>
