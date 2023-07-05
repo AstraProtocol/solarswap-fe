@@ -12,6 +12,7 @@ import clsx from 'clsx'
 import ModalInput from './Modal/ModalInput'
 import ModalActions from './Modal/ModalActions'
 import Dots from '../../../components/Loader/Dots'
+import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 
 interface DepositModalProps {
 	max: BigNumber
@@ -49,6 +50,8 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	const fullBalance = useMemo(() => {
 		return getFullDisplayBalance(max)
 	}, [max])
+
+	const { isMobile } = useMatchBreakpoints()
 
 	const lpTokensToStake = new BigNumber(val)
 	const fullBalanceNumber = new BigNumber(fullBalance)
@@ -98,7 +101,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	}
 
 	return (
-		<Modal title={t('Stake LP tokens')} style={{ minWidth: 470 }} onDismiss={onDismiss}>
+		<Modal title={t('Stake LP tokens')} style={{ minWidth: isMobile ? 350 : 470 }} onDismiss={onDismiss}>
 			<ModalInput
 				value={val}
 				onSelectMax={handleSelectMax}
