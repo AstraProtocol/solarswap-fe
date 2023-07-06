@@ -47,9 +47,10 @@ export default function NavigationConnect({ classes = '' }) {
 					<div
 						onClick={onDisconnect}
 						className="flex link row flex-align-center width-100 padding-top-sm padding-bottom-sm flex-justify-center"
+						style={{color: 'rgb(11, 15, 30)'}}
 					>
 						<Icon icon={IconEnum.ICON_SETTING} className="icon-setting text-xl" />
-						<span className="text text-base margin-left-sm">{t('Disconnect Wallet')}</span>
+						<span className="text text-base margin-left-sm" style={{color: 'rgb(11, 15, 30)'}}>{t('Disconnect Wallet')}</span>
 					</div>
 				</div>
 			</div>
