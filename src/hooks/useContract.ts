@@ -65,8 +65,8 @@ export const useERC20 = (address: string, withSignerIfPossible = true) => {
  * @see https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
  */
 export const useERC721 = (address: string) => {
-	const { library } = useActiveWeb3React()
-	return useMemo(() => getErc721Contract(address, library.getSigner()), [address, library])
+	const { library, account } = useActiveWeb3React()
+	return useMemo(() => getErc721Contract(address, library.getSigner(account)), [account, address, library])
 }
 
 // export const useCake = (): { reader: Cake; signer: Cake } => {
@@ -104,18 +104,19 @@ export const useERC721 = (address: string) => {
 // }
 
 export const useMasterchef = () => {
-	const { library } = useActiveWeb3React()
-	return useMemo(() => getMasterchefContract(library.getSigner()), [library])
+	const { library, account } = useActiveWeb3React()
+	return useMemo(() => getMasterchefContract(library.getSigner(account)), [library, account])
 }
 
 export const useSousChef = id => {
-	const { library } = useActiveWeb3React()
-	return useMemo(() => getSouschefContract(id, library.getSigner()), [id, library])
+	const { library, account } = useActiveWeb3React()
+	return useMemo(() => getSouschefContract(id, library.getSigner(account)), [account, id, library])
 }
 
 export const usePointCenterIfoContract = () => {
-	const { library } = useActiveWeb3React()
-	return useMemo(() => getPointCenterIfoContract(library.getSigner()), [library])
+	const { library, account } = useActiveWeb3React()
+	
+	return useMemo(() => getPointCenterIfoContract(library.getSigner(account)), [account, library])
 }
 
 // export const useBunnySpecialContract = () => {
@@ -124,8 +125,8 @@ export const usePointCenterIfoContract = () => {
 // }
 
 export const useClaimRefundContract = () => {
-	const { library } = useActiveWeb3React()
-	return useMemo(() => getClaimRefundContract(library.getSigner()), [library])
+	const { library, account } = useActiveWeb3React()
+	return useMemo(() => getClaimRefundContract(library.getSigner(account)), [account, library])
 }
 
 // export const useTradingCompetitionContract = () => {
