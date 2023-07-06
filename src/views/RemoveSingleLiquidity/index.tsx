@@ -39,7 +39,7 @@ import { useBurnActionHandlers, useDerivedBurnSingleInfo, useBurnState } from '.
 import { Field } from '../../state/burn/actions'
 import { useExpertModeManager, useGasPrice, useUserSlippageTolerance } from '../../state/user/hooks'
 import ConfirmSingleLiquidityModal from '../Swap/components/ConfirmRemoveSingleLiquidityModal'
-import { logError } from '../../utils/sentry'
+import { isUserRejected, logError } from '../../utils/sentry'
 import Page from 'components/Layout/Page'
 import Link from 'next/link'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
@@ -274,18 +274,20 @@ export default function RemoveLiquidity() {
 						logError(err)
 						console.error(`Remove Single Liquidity failed`, err, args)
 					}
+
 					setLiquidityState({
 						attemptingTxn: false,
-						liquidityErrorMessage:
-							err && err?.code !== 4001
-								? err?.code === -32603
-									? t(`Remove Liquidity failed: %message%`, {
-											message: t(
-												`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
-											),
-									  })
-									: t(`Remove Liquidity failed: %message%`, { message: err.message })
-								: undefined,
+						liquidityErrorMessage: isUserRejected(err)
+							? t(`User denied message signature.`)
+							: err?.code !== 4001
+							? err?.code === -32603
+								? t(`Remove Liquidity failed: %message%`, {
+										message: t(
+											`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
+										),
+								  })
+								: t(`Remove Liquidity failed: %message%`, { message: err.message })
+							: undefined,
 						txHash: undefined,
 					})
 				})
