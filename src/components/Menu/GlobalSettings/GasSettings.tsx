@@ -30,7 +30,7 @@ const GasSettings = () => {
 					variant={gasPrice === GAS_PRICE_GWEI.default ? 'primary' : 'default'}
 				>
 					<span className="text text-sm font-700">
-						{t('Standard (%gasPrice%)', { gasPrice: Number(GAS_PRICE.default) })}
+						{t('Standard', { gasPrice: Number(GAS_PRICE.default) })}
 					</span>
 				</NormalButton>
 				<NormalButton
@@ -41,7 +41,7 @@ const GasSettings = () => {
 					variant={gasPrice === GAS_PRICE_GWEI.fast ? 'primary' : 'default'}
 				>
 					<span className="text text-sm font-700">
-						{t('Fast (%gasPrice%)', { gasPrice: Number(GAS_PRICE.fast) })}
+						{t('Fast', { gasPrice: Number(GAS_PRICE.fast) })}
 					</span>
 				</NormalButton>
 				<NormalButton
@@ -52,7 +52,7 @@ const GasSettings = () => {
 					variant={gasPrice === GAS_PRICE_GWEI.instant ? 'primary' : 'default'}
 				>
 					<span className="text text-sm font-700">
-						{t('Instant (%gasPrice%)', { gasPrice: Number(GAS_PRICE.instant) })}
+						{t('Instant', { gasPrice: Number(GAS_PRICE.instant) })}
 					</span>
 				</NormalButton>
 			</div>
