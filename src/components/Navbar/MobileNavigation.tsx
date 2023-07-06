@@ -15,8 +15,6 @@ type MobileNavigationProps = {
 }
 
 
-
-
 export default function MobileNavigation({ items }: MobileNavigationProps) {
 	const router = useRouter()
 	const { currentLanguage } = useTranslation()
@@ -64,16 +62,19 @@ export default function MobileNavigation({ items }: MobileNavigationProps) {
 							<Icon icon={IconEnum.ICON_DROPDOWN} classes="margin-left-xs" />
 						</span>
 					)
-					subCollapse = item.submenus.map(item => (
-						<LinkMenuItem
-							link={item.link}
-							label={item.label}
-							key={item.id}
-							pathname={pathname}
-							classes={'padding-left-md'}
-							prefix={item.prefix}
-						/>
-					))
+					subCollapse = item.submenus.map(item => {
+						if (item.hideOnMobile) return null
+						return (
+							<LinkMenuItem
+								link={item.link}
+								label={item.label}
+								key={item.id}
+								pathname={pathname}
+								classes={'padding-left-md'}
+								prefix={item.prefix}
+							/>
+						)
+					})
 				}
 				const collapse: CollapseProps = {
 					title: titleElement,

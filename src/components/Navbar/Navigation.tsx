@@ -21,6 +21,7 @@ export type SubMenuItem = {
 	submenus?: { id: string; label: string; link: string; show?: boolean }[]
 	onClick?: Function
 	isExternal?: boolean
+	hideOnMobile?: boolean
 }
 export type MenuItem = {
 	id: string

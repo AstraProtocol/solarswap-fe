@@ -45,7 +45,7 @@ export const formatAmount = (
 
 	let precision = 2
 	if (tokenPrecision) {
-		precision = amount < 1 ? 3 : 2
+		precision = amount < 1 ? 5 : 2 
 	}
 
 	let format = `0.${'0'.repeat(precision)}a`

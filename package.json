@@ -97,7 +97,7 @@
 		"react-toastify": "^9.1.1",
 		"react-transition-group": "^4.4.1",
 		"react-window": "^1.8.6",
-		"recharts": "2.0.6",
+		"recharts": "2.7.2",
 		"redux-persist": "^6.0.0",
 		"sharp": "^0.31.3",
 		"swr": "^1.2.2",
