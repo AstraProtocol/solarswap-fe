@@ -72,7 +72,7 @@ const ModalInput: React.FC<ModalInputProps> = ({
 									<div style={{ width: 50 }}>
 										<a
 											onClick={onSelectMax}
-											className="text text-sm secondary-color-normal font-700"
+											className="text text-sm secondary-color-normal font-700 pointer"
 										>
 											{t('Max')}
 										</a>
@@ -97,7 +97,10 @@ const ModalInput: React.FC<ModalInputProps> = ({
 							value={value}
 							suffixElement={
 								<div style={{ width: 50 }}>
-									<a onClick={onSelectMax} className="text text-sm secondary-color-normal font-700">
+									<a
+										onClick={onSelectMax}
+										className="text text-sm secondary-color-normal font-700 pointer"
+									>
 										{t('Max')}
 									</a>
 								</div>
