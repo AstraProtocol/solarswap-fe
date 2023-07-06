@@ -48,6 +48,7 @@ Sentry.init({
 	ignoreErrors: [
 		'User denied transaction signature',
 		'Non-Error promise rejection captured',
+		'user rejected transaction',
 		'User rejected the transaction',
 		'cancelled',
 		'PollingBlockTracker',
