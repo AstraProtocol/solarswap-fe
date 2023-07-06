@@ -3,7 +3,7 @@ export const FooterLinks = [
     [
       {
         label: "Liquidity",
-        link: "https://solarsawp.io/liquidity",
+        link: "https://solarswap.io/liquidity",
         color: "#FEFBF8",
       },
       {
