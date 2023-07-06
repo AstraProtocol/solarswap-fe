@@ -12,11 +12,11 @@ const GasSettings = () => {
 		<div className="flex col">
 			<div className="flex flex-align-center margin-bottom-sm">
 				<span className="text text-base text-bold">
-					{t('Default Transaction Speed (%gasUnit%)', { gasUnit: 'GWEI' })}
+					{t('Default Transaction Speed')}
 				</span>
 				<QuestionHelper
 					text={t(
-						'Adjusts the gas price (transaction fee) for your transaction. Higher GWEI = higher speed = higher fees',
+						'Adjusts the gas price (transaction fee) for your transaction',
 					)}
 					placement="top"
 				/>
