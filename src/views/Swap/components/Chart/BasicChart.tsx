@@ -33,7 +33,7 @@ const BasicChart = ({
 	const [hoverValue, setHoverValue] = useState<number | undefined>()
 	const [hoverDate, setHoverDate] = useState<string | undefined>()
 	const valueToDisplay = hoverValue || pairPrices[pairPrices.length - 1]?.value
-	const { changePercentage, changeValue } = getTimeWindowChange(pairPrices)
+	const { changePercentage, changeValue } = getTimeWindowChange(pairPrices, hoverValue)
 	const isChangePositive = changeValue >= 0
 	const chartHeight = isChartExpanded ? 'calc(100% - 120px)' : '378px'
 	const {
@@ -83,7 +83,7 @@ const BasicChart = ({
 								isChangePositive ? 'alert-color-success' : 'alert-color-error',
 							)}
 						>
-							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(4)} (${changePercentage}%)`}
+							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(5)} (${changePercentage}%)`}
 						</span>
 					</PairPriceDisplay>
 					<span className="text text-sm contrast-color-70">{hoverDate || currentDate}</span>

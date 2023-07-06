@@ -1,13 +1,13 @@
 import { WASA_ADDRESS } from 'config/constants'
 import { CHAIN_ID } from 'config/constants/networks'
 
-const MIN_VALUE_DISPLAYED = 0.001
+const MIN_VALUE_DISPLAYED = 0.00001
 
-export const getTimeWindowChange = lineChartData => {
+export const getTimeWindowChange = (lineChartData, hoverValue) => {
 	if (lineChartData.length > 0) {
 		const firstValue = lineChartData.find(({ value }) => !!value && value > 0)?.value ?? 0
 		const lastValue = lineChartData[lineChartData.length - 1].value
-		const changeValue = lastValue - firstValue
+		const changeValue = (hoverValue || lastValue) - firstValue
 
 		return {
 			changeValue:
