@@ -108,7 +108,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						}}
 					/>
 				</div>
-				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
+				{/* <div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
 					<div className="flex flex-align-center">
 						<span className="text text-base text-bold margin-right-xs">
 							{t('Subgraph Health Indicator')}
@@ -128,7 +128,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 							setSubgraphHealth(!subgraphHealth)
 						}}
 					/>
-				</div>
+				</div> */}
 				{/* <div className="flex flex-justify-space-between flex-align-center">
 					<div className="flex flex-align-center">
 						<span>{t('Flippy sounds')}</span>
