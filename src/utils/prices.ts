@@ -18,16 +18,21 @@ export function computeTradePriceBreakdown(trade?: Trade | null): {
 	priceImpactWithoutFee: Percent | undefined
 	realizedLPFee: CurrencyAmount | undefined | null
 } {
+	if (!trade) {
+		return {
+			priceImpactWithoutFee: undefined,
+			realizedLPFee: undefined,
+		}
+	}
+	// suppose baseFee is 0.2%
 	// for each hop in our trade, take away the x*y=k price impact from 0.2% fees
 	// e.g. for 3 tokens/2 hops: 1 - ((1 - .02) * (1-.02))
-	const realizedLPFee = !trade
-		? undefined
-		: ONE_HUNDRED_PERCENT.subtract(
-			trade.route.pairs.reduce<Fraction>(
-				(currentFee: Fraction): Fraction => currentFee.multiply(INPUT_FRACTION_AFTER_FEE),
-				ONE_HUNDRED_PERCENT,
-			),
-		)
+	const realizedLPFee = ONE_HUNDRED_PERCENT.subtract(
+		trade.route.pairs.reduce<Fraction>(
+			(currentFee: Fraction): Fraction => currentFee.multiply(INPUT_FRACTION_AFTER_FEE),
+			ONE_HUNDRED_PERCENT,
+		),
+	)
 
 	// remove lp fees from price impact
 	const priceImpactWithoutFeeFraction = trade && realizedLPFee ? trade.priceImpact.subtract(realizedLPFee) : undefined
@@ -37,7 +42,6 @@ export function computeTradePriceBreakdown(trade?: Trade | null): {
 		? new Percent(priceImpactWithoutFeeFraction?.numerator, priceImpactWithoutFeeFraction?.denominator)
 		: undefined
 
-	// the amount of the input that accrues to LPs
 	const realizedLPFeeAmount =
 		realizedLPFee &&
 		trade &&
@@ -76,10 +80,12 @@ export function formatExecutionPrice(trade?: Trade, inverted?: boolean): string 
 		return ''
 	}
 	return inverted
-		? `${trade.executionPrice.invert().toSignificant(6)} ${trade.inputAmount.currency.symbol} / ${trade.outputAmount.currency.symbol
-		}`
-		: `${trade.executionPrice.toSignificant(6)} ${trade.outputAmount.currency.symbol} / ${trade.inputAmount.currency.symbol
-		}`
+		? `${trade.executionPrice.invert().toSignificant(6)} ${trade.outputAmount.currency.symbol} / ${
+				trade.inputAmount.currency.symbol
+		  }`
+		: `${trade.executionPrice.toSignificant(6)} ${trade.inputAmount.currency.symbol} / ${
+				trade.outputAmount.currency.symbol
+		  }`
 }
 
 /**
