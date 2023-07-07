@@ -80,15 +80,20 @@ export default function MobileNavigation({ items }: MobileNavigationProps) {
 					title: titleElement,
 					content: <>{subCollapse}</>,
 				}
-				menus.push(
-					<Collapse
-						key={`collapse-${item.label}`}
-						{...collapse}
-						classes={{ wrapper: 'border border-bottom-base' }}
-					/>,
-				)
+				
+					menus.push(
+						<Collapse
+							key={`collapse-${item.label}`}
+							{...collapse}
+							classes={{ wrapper: 'border border-bottom-base' }}
+						/>,
+					)
+				
 			} else {
-				menus.push(<LinkMenuItem key={item.label} link={item.link} label={item.label} pathname={pathname} />)
+				if (!item.hideOnMobile)
+					menus.push(
+						<LinkMenuItem key={item.label} link={item.link} label={item.label} pathname={pathname} />,
+					)
 			}
 		}
 
