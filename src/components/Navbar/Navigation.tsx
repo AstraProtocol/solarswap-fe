@@ -33,6 +33,8 @@ export type MenuItem = {
 	submenus?: SubMenuItem[]
 	type?: MenuType
 	onClick?: Function
+	isExternal?: boolean
+	hideOnMobile?: boolean
 }
 
 export type NavigationProps = {
