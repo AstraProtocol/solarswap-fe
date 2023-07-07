@@ -93,6 +93,6 @@ export const useBUSDCakeAmount = (amount: number): number | undefined => {
 }
 
 export const useBNBBusdPrice = (): Price | undefined => {
-	const bnbBusdPrice = useBUSDPrice(tokens.wbnb)
+	const bnbBusdPrice = useBUSDPrice(tokens.wasa)
 	return bnbBusdPrice
 }

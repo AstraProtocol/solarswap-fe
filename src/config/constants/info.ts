@@ -2,8 +2,9 @@ export const MINIMUM_SEARCH_CHARACTERS = 2
 
 export const WEEKS_IN_YEAR = 52.1429
 
-export const TOTAL_FEE = 0.002
-export const LP_HOLDERS_FEE = 0.002
+export const TOTAL_FEE = parseInt(process.env.NEXT_PUBLIC_FEE) / 10000
+export const LP_HOLDERS_FEE = TOTAL_FEE * 0.7
+export const TREASURY_FEE = TOTAL_FEE * 0.3
 
 /**
  * @todo update solarswap start_time below

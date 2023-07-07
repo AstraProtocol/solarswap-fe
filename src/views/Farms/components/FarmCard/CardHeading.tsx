@@ -27,10 +27,10 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, is
 			/>
 			<div className="flex col flex-align-end">
 				<span className="text text-2xl">{lpLabel.split(' ')[0]}</span>
-				<div className="flex flex-justify-center">
+				{/* <div className="flex flex-justify-center">
 					{isCommunityFarm ? <FarmAuctionTag /> : <CoreTag />}
 					{multiplier ? <Tag className="margin-left-xs">{multiplier}</Tag> : <Skeleton />}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

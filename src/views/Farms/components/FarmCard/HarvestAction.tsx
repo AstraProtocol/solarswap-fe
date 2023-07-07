@@ -69,7 +69,9 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
 					}
 				}}
 			>
-				<span className="text text-base">{pendingTx ? <Dots>{t('Harvesting')}</Dots> : t('Harvest')}</span>
+				<span className="text text-base font-700">
+					{pendingTx ? <Dots>{t('Harvesting')}</Dots> : t('Harvest')}
+				</span>
 			</NormalButton>
 		</div>
 	)

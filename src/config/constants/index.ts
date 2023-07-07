@@ -4,17 +4,17 @@ import { mainnetTokens, testnetTokens } from './tokens'
 
 export const ROUTER_ADDRESS = {
 	[ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-	[ChainId.TESTNET]: '0x3410255e7E6d2e33D85aC07796048713fAdFEcf3',
+	[ChainId.TESTNET]: '0xfc9ecc743695f9BFfC8c33e5DB6e51356032Ef59',
 }
 
 export const ZAP_ADDRESS = {
 	[ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-	[ChainId.TESTNET]: '0xBE56dE92c45d48C35f4d313a0471F545FA59234d',
+	[ChainId.TESTNET]: '0xE32e8e00Ba3D1A1D1dE0442d9879DFB636a98A87',
 }
 
 export const WASA_ADDRESS = {
-	[ChainId.MAINNET]: '0xC60F8AF409Eac14d4926e641170382f313749Fdc',
-	[ChainId.TESTNET]: '0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+	[ChainId.MAINNET]: '0x019bc9222d60b8a42Fb58246b5880617Ad429766',
+	[ChainId.TESTNET]: '0xA625BF1c3565775B1859B579DF980Fef324E7315',
 }
 
 // a list of tokens by chain
@@ -24,7 +24,7 @@ type ChainTokenList = {
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-	[ChainId.MAINNET]: [mainnetTokens.wbnb],
+	[ChainId.MAINNET]: [mainnetTokens.wasa],
 	[ChainId.TESTNET]: [testnetTokens.wasa, testnetTokens.usdt],
 }
 
@@ -57,7 +57,7 @@ export const SUGGESTED_BASES: ChainTokenList = {
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-	[ChainId.MAINNET]: [mainnetTokens.wbnb, mainnetTokens.usdt],
+	[ChainId.MAINNET]: [mainnetTokens.wasa, mainnetTokens.usdt],
 	[ChainId.TESTNET]: [testnetTokens.wasa, testnetTokens.usdt],
 }
 

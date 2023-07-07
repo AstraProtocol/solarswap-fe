@@ -68,14 +68,14 @@ export function TransactionSubmittedContent({
 							variant="default"
 							onClick={() => registerToken(token.address, token.symbol, token.decimals)}
 						>
-							<span className="text text-sm contrast-color-70 margin-right-xs">
+							<span className="text text-sm contrast-color-70 font-700 margin-right-xs">
 								{t('Add %asset% to Metamask', { asset: token.symbol })}
 							</span>
 							<CryptoIcon name="metamask" size="sm" />
 						</NormalButton>
 					)}
 					<NormalButton
-						classes={{ padding: 'padding-top-md padding-bottom-md padding-left-lg padding-right-lg' }}
+						classes={{ padding: 'padding-top-xs padding-bottom-xs padding-left-lg padding-right-lg' }}
 						onClick={onDismiss}
 					>
 						<span className="text text-base">{t('Close')}</span>

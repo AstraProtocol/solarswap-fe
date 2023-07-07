@@ -14,35 +14,19 @@ const defineTokens = <T extends TokenList>(t: T) => t
 export const mainnetTokens = defineTokens({
 	wasa: new Token(
 		MAINNET,
-		'0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+		'0xA625BF1c3565775B1859B579DF980Fef324E7315',
 		18,
 		'WASA',
 		'Wrapped ASA',
 		'https://www.astranaut.io/',
 	),
-	wbnb: new Token(
-		MAINNET,
-		'0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-		18,
-		'WBNB',
-		'Wrapped BNB',
-		'https://www.binance.com/',
-	),
 	usdt: new Token(
 		MAINNET,
-		'0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2',
+		'0x2039A56173fDac411975Bce6F756059Ac33d0d79',
 		18,
 		'USDT',
 		'Tether USD',
 		'https://tether.to/',
-	),
-	syrup: new Token(
-		MAINNET,
-		'0x009cF7bC57584b7998236eff51b98A168DceA9B0',
-		18,
-		'SYRUP',
-		'SyrupBar Token',
-		'https://solarswap.io/',
 	),
 	// bnb here points to the wbnb contract. Wherever the currency BNB is required, conditional checks for the symbol 'BNB' can be used
 	// bnb: new Token(MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'BNB', 'BNB', 'https://www.binance.com/')
@@ -51,7 +35,7 @@ export const mainnetTokens = defineTokens({
 export const testnetTokens = defineTokens({
 	wasa: new Token(
 		TESTNET,
-		'0xC60F8AF409Eac14d4926e641170382f313749Fdc',
+		'0xA625BF1c3565775B1859B579DF980Fef324E7315',
 		18,
 		'WASA', // must exactly the same with contract
 		'Wrapped ASA',
@@ -60,19 +44,11 @@ export const testnetTokens = defineTokens({
 
 	usdt: new Token(
 		TESTNET,
-		'0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2',
+		'0x2039A56173fDac411975Bce6F756059Ac33d0d79',
 		18,
 		'USDT',
 		'Tether USD',
 		'https://tether.to/',
-	),
-	syrup: new Token(
-		TESTNET,
-		'0x860cdE74b376940dA84680AfD24cCFE3F89d0178',
-		18,
-		'SYRUP',
-		'SyrupBar Token',
-		'https://solarswap.io/',
 	),
 } as const)
 

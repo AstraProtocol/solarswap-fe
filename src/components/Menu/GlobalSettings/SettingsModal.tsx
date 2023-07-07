@@ -65,10 +65,10 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 			<div style={{ height: isMobile ? 400 : 600 }}>
 				<div className="flex col border border-bottom-base padding-bottom-md">
 					<span className="text text-lg text-bold text-uppercase secondary-color-normal">{t('Global')}</span>
-					<div className="flex flex-justify-space-between flex-align-center margin-bottom-sm">
+					{/* <div className="flex flex-justify-space-between flex-align-center margin-bottom-sm">
 						<span className="text text-base text-bold">{t('Dark mode')}</span>
 						<ThemeSwitcher />
-					</div>
+					</div> */}
 					<GasSettings />
 				</div>
 				<div className="flex col border-bottom-base padding-bottom-md">
@@ -108,7 +108,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 						}}
 					/>
 				</div>
-				<div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
+				{/* <div className="flex flex-justify-space-between flex-align-center border-bottom-base padding-bottom-md">
 					<div className="flex flex-align-center">
 						<span className="text text-base text-bold margin-right-xs">
 							{t('Subgraph Health Indicator')}
@@ -128,7 +128,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
 							setSubgraphHealth(!subgraphHealth)
 						}}
 					/>
-				</div>
+				</div> */}
 				{/* <div className="flex flex-justify-space-between flex-align-center">
 					<div className="flex flex-align-center">
 						<span>{t('Flippy sounds')}</span>

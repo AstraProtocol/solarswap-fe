@@ -1,11 +1,11 @@
 import { Token, ChainId } from '@solarswap/sdk'
 import getLpAddress from 'utils/getLpAddress'
 
-const WASA_AS_STRING = '0xC60F8AF409Eac14d4926e641170382f313749Fdc'
-const USDT_AS_STRING = '0x6f74f5511ba144990A8aeBaF20AFBD3B56EedCb2'
+const WASA_AS_STRING = '0xA625BF1c3565775B1859B579DF980Fef324E7315'
+const USDT_AS_STRING = '0x2039A56173fDac411975Bce6F756059Ac33d0d79'
 const WASA_AS_TOKEN = new Token(ChainId.TESTNET, WASA_AS_STRING, 18)
 const USDT_AS_TOKEN = new Token(ChainId.TESTNET, USDT_AS_STRING, 18)
-const WASA_USDT_LP = '0xfcb81CBBB8d74030A9C5BF24e0f61d6C4a734f2f'
+const WASA_USDT_LP = '0xEcd38FcDA1e283d6344BF6A5970979C68dA5064F'
 
 describe('getLpAddress', () => {
 	it('returns correct LP address, both tokens are strings', () => {

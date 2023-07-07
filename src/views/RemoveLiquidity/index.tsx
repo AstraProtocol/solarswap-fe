@@ -38,7 +38,7 @@ import { useBurnActionHandlers, useDerivedBurnInfo, useBurnState } from '../../s
 import { Field } from '../../state/burn/actions'
 import { useGasPrice, useUserSlippageTolerance } from '../../state/user/hooks'
 import ConfirmLiquidityModal from '../Swap/components/ConfirmRemoveLiquidityModal'
-import { logError } from '../../utils/sentry'
+import { isUserRejected, logError } from '../../utils/sentry'
 import Page from 'components/Layout/Page'
 import CircleLoader from 'components/Loader/CircleLoader'
 import Link from 'next/link'
@@ -345,9 +345,12 @@ export default function RemoveLiquidity() {
 				.then((response: TransactionResponse) => {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 					addTransaction(response, {
-						summary: `Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-							currencyA?.symbol
-						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
+						summary: t(`Remove %amountA% %symbolA% and %amountB% %symbolB%`, {
+							amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(3),
+							symbolA: currencyA?.symbol,
+							amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(3),
+							symbolB: currencyB?.symbol,
+						}),
 					})
 				})
 				.catch(err => {
@@ -355,18 +358,20 @@ export default function RemoveLiquidity() {
 						logError(err)
 						console.error(`Remove Liquidity failed`, err, args)
 					}
+
 					setLiquidityState({
 						attemptingTxn: false,
-						liquidityErrorMessage:
-							err && err?.code !== 4001
-								? err?.code === -32603
-									? t(`Remove Liquidity failed: %message%`, {
-											message: t(
-												`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
-											),
-									  })
-									: t(`Remove Liquidity failed: %message%`, { message: err.message })
-								: undefined,
+						liquidityErrorMessage: isUserRejected(err)
+							? t(`User denied message signature.`)
+							: err?.code !== 4001
+							? err?.code === -32603
+								? t(`Remove Liquidity failed: %message%`, {
+										message: t(
+											`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
+										),
+								  })
+								: t(`Remove Liquidity failed: %message%`, { message: err.message })
+							: undefined,
 						txHash: undefined,
 					})
 				})
@@ -423,10 +428,10 @@ export default function RemoveLiquidity() {
 		}
 	}, [onUserInput, txHash])
 
-	const { targetRef, tooltip, tooltipVisible } = useTooltip(
-		t('Receive WASA hint'),
-		{ placement: 'top-end', tooltipOffset: [20, 10] },
-	)
+	const { targetRef, tooltip, tooltipVisible } = useTooltip(t('Receive WASA hint'), {
+		placement: 'top-end',
+		tooltipOffset: [20, 10],
+	})
 
 	const [innerLiquidityPercentage, setInnerLiquidityPercentage] = useDebouncedChangeHandler(
 		Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
@@ -717,7 +722,7 @@ export default function RemoveLiquidity() {
 							) : (
 								<Row className="flex-justify-space-between">
 									<NormalButton
-										classes={{ other: 'width-100 text-base margin-right-sm' }}
+										classes={{ other: 'width-100 text-base margin-right-sm font-700' }}
 										variant={
 											approval === ApprovalState.APPROVED || signatureData !== null
 												? 'primary'
@@ -737,7 +742,7 @@ export default function RemoveLiquidity() {
 										)}
 									</NormalButton>
 									<NormalButton
-										classes={{ other: 'width-100 text-base' }}
+										classes={{ other: 'width-100 text-base font-700' }}
 										variant={
 											!isValid &&
 											!!parsedAmounts[Field.CURRENCY_A] &&

@@ -33,7 +33,7 @@ const BasicChart = ({
 	const [hoverValue, setHoverValue] = useState<number | undefined>()
 	const [hoverDate, setHoverDate] = useState<string | undefined>()
 	const valueToDisplay = hoverValue || pairPrices[pairPrices.length - 1]?.value
-	const { changePercentage, changeValue } = getTimeWindowChange(pairPrices)
+	const { changePercentage, changeValue } = getTimeWindowChange(pairPrices, hoverValue)
 	const isChangePositive = changeValue >= 0
 	const chartHeight = isChartExpanded ? 'calc(100% - 120px)' : '378px'
 	const {
@@ -74,8 +74,8 @@ const BasicChart = ({
 				<div className="flex col">
 					<PairPriceDisplay
 						value={pairPrices?.length > 0 && valueToDisplay}
-						inputSymbol={inputCurrency?.symbol}
-						outputSymbol={outputCurrency?.symbol}
+						// inputSymbol={inputCurrency?.symbol}
+						// outputSymbol={outputCurrency?.symbol}
 					>
 						<span
 							className={clsx(
@@ -83,7 +83,7 @@ const BasicChart = ({
 								isChangePositive ? 'alert-color-success' : 'alert-color-error',
 							)}
 						>
-							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(3)} (${changePercentage}%)`}
+							{`${isChangePositive ? '+' : ''}${changeValue.toFixed(5)} (${changePercentage}%)`}
 						</span>
 					</PairPriceDisplay>
 					<span className="text text-sm contrast-color-70">{hoverDate || currentDate}</span>

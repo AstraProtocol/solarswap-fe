@@ -43,7 +43,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
 	})
 	const lpAddress = getAddress(farm.lpAddresses)
 	const bsc = getAstraExplorerLink(lpAddress, 'address')
-	const info = `/info/pool/${lpAddress}`
+	// const info = `/info/pool/${lpAddress}`
 
 	return (
 		<div className={clsx(styles.actionPanelContainer, { [styles.expanded]: expanded })}>
@@ -60,15 +60,15 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
 					{t('View Contract')}
 					<Icon icon={IconEnum.ICON_EXTERNAL_LINK} classes="margin-left-xs link-color-useful" />
 				</Typography.Link>
-				<br />
-				<Typography.Link classes="font-400" href={info}>
+				{/* <br /> */}
+				{/* <Typography.Link classes="font-400" href={info}>
 					{t('See Pair Info')}
 					<Icon icon={IconEnum.ICON_EXTERNAL_LINK} classes="margin-left-xs link-color-useful" />
-				</Typography.Link>
-				<div className={styles.tagContainer}>
+				</Typography.Link> */}
+				{/* <div className={styles.tagContainer}>
 					{farm.isCommunity ? <FarmAuctionTag /> : <CoreTag />}
 					{dual ? <DualTag /> : null}
-				</div>
+				</div> */}
 			</div>
 			<div className={styles.valueContainer}>
 				<div className="flex flex-justify-space-between flex-align-center margin-top-xs margin-bottom-xs">

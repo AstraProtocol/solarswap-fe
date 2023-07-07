@@ -86,11 +86,11 @@ export function useSwapCallback(
 								}
 							})
 							.catch(gasError => {
-								console.error('Gas estimate failed, trying eth_call to extract error', call)
+								console.log('Gas estimate failed, trying eth_call to extract error', call)
 
 								return contract.callStatic[methodName](...args, options)
 									.then(result => {
-										console.error(
+										console.log(
 											'Unexpected successful call after failed estimate gas',
 											call,
 											gasError,
@@ -102,7 +102,7 @@ export function useSwapCallback(
 										}
 									})
 									.catch(callError => {
-										console.error('Call threw error', call, callError)
+										console.log('Call threw error', call, callError)
 
 										return { call, error: swapErrorToUserReadableMessage(callError, t) }
 									})
@@ -141,11 +141,16 @@ export function useSwapCallback(
 						const inputAmount = trade.inputAmount.toSignificant(3)
 						const outputAmount = trade.outputAmount.toSignificant(3)
 
-						const base = `Swaps ${inputAmount} ${inputSymbol} for ${outputAmount} ${outputSymbol}`
+						const base = t('Swaps %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%', {
+							inputAmount,
+							inputSymbol,
+							outputAmount,
+							outputSymbol,
+						})
 						const withRecipient =
 							recipient === account
 								? base
-								: `${base} to ${
+								: `${base} ${t('To')} ${
 										recipientAddressOrName && isAddress(recipientAddressOrName)
 											? truncateHash(recipientAddressOrName)
 											: recipientAddressOrName

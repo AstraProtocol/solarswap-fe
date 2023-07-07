@@ -1,6 +1,7 @@
 import { CryptoIcon, ellipseBetweenText, Icon, IconEnum, Row } from '@astraprotocol/astra-ui'
 import { useConnectWallet } from '@web3-onboard/react'
 import clsx from 'clsx'
+import * as Sentry from '@sentry/nextjs'
 
 import { useTranslation } from 'contexts/Localization'
 import useAuth from 'hooks/useAuth'
@@ -18,9 +19,13 @@ export default function NavigationConnect({ classes = '' }) {
 	const { isMobile } = useMatchBreakpoints()
 
 	const onDisconnect = useCallback(() => {
-		disconnect(wallet)
-		logout()
-		WalletHelper.removeCacheConnect()
+		try {
+			logout()
+			WalletHelper.removeCacheConnect()
+			disconnect(wallet)
+		} catch (err) {
+			Sentry.captureException(err)
+		}
 	}, [wallet])
 
 	if (wallet) {
@@ -42,9 +47,10 @@ export default function NavigationConnect({ classes = '' }) {
 					<div
 						onClick={onDisconnect}
 						className="flex link row flex-align-center width-100 padding-top-sm padding-bottom-sm flex-justify-center"
+						style={{color: 'rgb(11, 15, 30)'}}
 					>
-						<Icon icon={IconEnum.ICON_SETTING} className="icon-setting text-xl" />
-						<span className="text text-base margin-left-sm">{t('Disconnect Wallet')}</span>
+						<Icon icon={IconEnum.ICON_SETTING} className="icon-setting text-xl" style={{color: 'rgb(11, 15, 30)'}} />
+						<span className="text text-base margin-left-sm" style={{color: 'rgb(11, 15, 30)'}}>{t('Disconnect Wallet')}</span>
 					</div>
 				</div>
 			</div>

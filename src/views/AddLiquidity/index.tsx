@@ -196,11 +196,12 @@ export default function AddLiquidity() {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 
 					addTransaction(response, {
-						summary: `Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-							currencies[Field.CURRENCY_A]?.symbol
-						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${
-							currencies[Field.CURRENCY_B]?.symbol
-						}`,
+						summary: t(`Add %amountA% %symbolA% and %amountB% %symbolB%`, {
+							amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(3),
+							symbolA: currencies[Field.CURRENCY_A]?.symbol,
+							amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(3),
+							symbolB: currencies[Field.CURRENCY_B]?.symbol,
+						}),
 					})
 				}),
 			)
@@ -395,7 +396,7 @@ export default function AddLiquidity() {
 											<Row className="flex-justify-space-between padding-bottom-md">
 												{approvalA !== ApprovalState.APPROVED && (
 													<NormalButton
-														classes={{ other: 'width-100 text-base' }}
+														classes={{ other: 'width-100 text-base font-700' }}
 														onClick={approveACallback}
 														disabled={approvalA === ApprovalState.PENDING}
 														style={{
@@ -418,7 +419,7 @@ export default function AddLiquidity() {
 												)}
 												{approvalB !== ApprovalState.APPROVED && (
 													<NormalButton
-														classes={{ other: 'width-100 text-base' }}
+														classes={{ other: 'width-100 text-base font-700' }}
 														onClick={approveBCallback}
 														disabled={approvalB === ApprovalState.PENDING}
 														style={{
@@ -442,7 +443,7 @@ export default function AddLiquidity() {
 											</Row>
 										)}
 									<NormalButton
-										classes={{ other: 'width-100 text-base' }}
+										classes={{ other: 'width-100 text-base font-700' }}
 										variant={
 											!isValid &&
 											!!parsedAmounts[Field.CURRENCY_A] &&

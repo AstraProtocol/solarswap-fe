@@ -39,7 +39,7 @@ import { useBurnActionHandlers, useDerivedBurnSingleInfo, useBurnState } from '.
 import { Field } from '../../state/burn/actions'
 import { useExpertModeManager, useGasPrice, useUserSlippageTolerance } from '../../state/user/hooks'
 import ConfirmSingleLiquidityModal from '../Swap/components/ConfirmRemoveSingleLiquidityModal'
-import { logError } from '../../utils/sentry'
+import { isUserRejected, logError } from '../../utils/sentry'
 import Page from 'components/Layout/Page'
 import Link from 'next/link'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
@@ -261,9 +261,12 @@ export default function RemoveLiquidity() {
 				.then((response: TransactionResponse) => {
 					setLiquidityState({ attemptingTxn: false, liquidityErrorMessage: undefined, txHash: response.hash })
 					addTransaction(response, {
-						summary: `Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-							currencyA?.symbol
-						} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
+						summary: t(`Remove %amountA% %symbolA% and %amountB% %symbolB%`, {
+							amountA: parsedAmounts[Field.CURRENCY_A]?.toSignificant(3),
+							symbolA: currencyA?.symbol,
+							amountB: parsedAmounts[Field.CURRENCY_B]?.toSignificant(3),
+							symbolB: currencyB?.symbol,
+						}),
 					})
 				})
 				.catch(err => {
@@ -271,18 +274,20 @@ export default function RemoveLiquidity() {
 						logError(err)
 						console.error(`Remove Single Liquidity failed`, err, args)
 					}
+
 					setLiquidityState({
 						attemptingTxn: false,
-						liquidityErrorMessage:
-							err && err?.code !== 4001
-								? err?.code === -32603
-									? t(`Remove Liquidity failed: %message%`, {
-											message: t(
-												`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
-											),
-									  })
-									: t(`Remove Liquidity failed: %message%`, { message: err.message })
-								: undefined,
+						liquidityErrorMessage: isUserRejected(err)
+							? t(`User denied message signature.`)
+							: err?.code !== 4001
+							? err?.code === -32603
+								? t(`Remove Liquidity failed: %message%`, {
+										message: t(
+											`Insufficient fee. Please increase the priority tip (for EIP-1559 txs) or the gas prices (for access list or legacy txs)`,
+										),
+								  })
+								: t(`Remove Liquidity failed: %message%`, { message: err.message })
+							: undefined,
 						txHash: undefined,
 					})
 				})
@@ -601,7 +606,7 @@ export default function RemoveLiquidity() {
 							) : showApproveFlow ? (
 								<Row className="flex-justify-space-between">
 									<NormalButton
-										classes={{ other: 'width-100 text-base margin-right-sm' }}
+										classes={{ other: 'width-100 text-base margin-right-sm font-700' }}
 										variant={
 											approval === ApprovalState.APPROVED || signatureData !== null
 												? 'primary'
@@ -621,7 +626,7 @@ export default function RemoveLiquidity() {
 										)}
 									</NormalButton>
 									<NormalButton
-										classes={{ other: 'width-100 text-base' }}
+										classes={{ other: 'width-100 text-base font-700' }}
 										variant={
 											!isValid &&
 											!!parsedAmounts[Field.CURRENCY_A] &&
@@ -657,7 +662,7 @@ export default function RemoveLiquidity() {
 								</Row>
 							) : (
 								<NormalButton
-									classes={{ other: 'width-100 text-base' }}
+									classes={{ other: 'width-100 text-base font-700' }}
 									variant={
 										!isValid &&
 										!!parsedAmounts[Field.CURRENCY_A] &&
