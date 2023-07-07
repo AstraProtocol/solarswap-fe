@@ -1,8 +1,7 @@
 name: Production deployment
 on:
   push:
-    tags: 
-      - '**'           #
+    branches: ['main']        #
  
 jobs:
   build-and-deploy:
