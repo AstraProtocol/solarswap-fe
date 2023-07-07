@@ -18,6 +18,7 @@ import ImportRow from './ImportRow'
 import styles from './styles.module.scss'
 import QuestionHelper from 'components/QuestionHelper'
 import clsx from 'clsx'
+import numeral from 'numeral'
 
 function currencyKey(currency: Currency): string {
 	return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : ''
@@ -41,7 +42,7 @@ function currencyKey(currency: Currency): string {
 function Balance({ balance }: { balance: CurrencyAmount }) {
 	return (
 		<span className={styles.balanceText} title={balance.toExact()}>
-			{balance.toSignificant(4)}
+			{numeral(balance.toSignificant(4)).format('0,0.[0000]')}
 		</span>
 	)
 }
@@ -73,6 +74,7 @@ function CurrencyRow({
 	otherSelected: boolean
 	style: CSSProperties
 }) {
+	const { t } = useTranslation()
 	const { account } = useActiveWeb3React()
 	const key = currencyKey(currency)
 	const selectedTokenList = useCombinedActiveList()
@@ -97,7 +99,7 @@ function CurrencyRow({
 			<div className="flex col">
 				<span className="text text-base text-bold">{currency.symbol}</span>
 				<span className="text text-sm text-ellipsis">
-					{!isOnSelectedList && customAdded && 'Added by user •'} {currency.name}
+					{!isOnSelectedList && customAdded && `${t('Added by user')} •`} {currency.name}
 				</span>
 			</div>
 			<Row style={{ justifySelf: 'flex-end', alignItems: 'center' }}>

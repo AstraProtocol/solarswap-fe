@@ -776,6 +776,7 @@
 	"Price": "Giá",
 	"Prices": "Giá",
 	"Remove liquidity": "Rút thanh khoản",
+	"Remove single liquidity": "Rút thanh khoản 1 phía",
 	"Remove %assetA%-%assetB% liquidity": "Rút thanh khoản %assetA%-%assetB%",
 	"Amount": "Số điểm",
 	"Simple": "Đơn giản",
@@ -1117,6 +1118,7 @@
 	"This swap has a price impact of at least %amount%%. Please type the word \"%word%\" to continue with this swap.": "Giao dịch đổi điểm này có ảnh hưởng tỷ giá tối thiểu là %amount%%. Vui lòng nhập từ \"%word%\" để tiếp tục với giao dịch này.",
 	"This swap has a price impact of at least %amount%%. Please confirm that you would like to continue with this swap.": "Giao dịch đổi điểm này có ảnh hưởng tỷ giá tối thiểu là %amount%%. Vui lòng xác nhận rằng bạn muốn tiếp tục với giao dịch này.",
 	"To receive %assetA% and %assetB%": "Để nhận %assetA% và %assetB%",
+	"To receive %assetA% or %assetB%": "Để nhận %assetA% hoặc %assetB%",
 	"Price Impact Too High": "Ảnh hưởng Tỷ Giá quá cao",
 	"About": "Giới thiệu",
 	"Online Store": "Cửa hàng trực tuyến",
@@ -1597,5 +1599,6 @@
 	"Wrap %amount% ASA to WASA": "Chuyển đổi %amount% ASA thành WASA",
 	"Unwrap %amount% WASA to ASA": "Chuyển đổi %amount% WASA thành ASA",
 	"Add %amountA% %symbolA% and %amountB% %symbolB%": "Thêm %amountA% %symbolA% và %amountB% %symbolB%",
-	"Remove %amountA% %symbolA% and %amountB% %symbolB%": "Xoá %amountA% %symbolA% và %amountB% %symbolB%"
+	"Remove %amountA% %symbolA% and %amountB% %symbolB%": "Xoá %amountA% %symbolA% và %amountB% %symbolB%",
+	"Added by user": "Thêm bởi bạn"
 }
