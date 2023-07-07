@@ -375,13 +375,13 @@ export default function RemoveLiquidity() {
 						backTo="/liquidity"
 						title={
 							isMobile
-								? t('Remove liquidity')
+								? t('Remove single liquidity')
 								: t('Remove %assetA%-%assetB% liquidity', {
 										assetA: currencyA?.symbol ?? '',
 										assetB: currencyB?.symbol ?? '',
 								  })
 						}
-						subtitle={t('To receive %assetA% and %assetB%', {
+						subtitle={t('To receive %assetA% or %assetB%', {
 							assetA: currencyA?.symbol ?? '',
 							assetB: currencyB?.symbol ?? '',
 						})}

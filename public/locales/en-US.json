@@ -1095,6 +1095,7 @@
 	"You had %amount% tickets this round": "You had %amount% tickets this round",
 	"You had %amount% ticket this round": "You had %amount% ticket this round",
 	"Remove Liquidity": "Remove Liquidity",
+	"Remove single liquidity": "Remove single liquidity",
 	"Minimum received": "Minimum received",
 	"Maximum sold": "Maximum sold",
 	"The difference between the market price and estimated price due to trade size.": "The difference between the market price and estimated price due to trade size.",
@@ -1117,6 +1118,7 @@
 	"This swap has a price impact of at least %amount%%. Please type the word \"%word%\" to continue with this swap.": "This swap has a price impact of at least %amount%%. Please type the word \"%word%\" to continue with this swap.",
 	"This swap has a price impact of at least %amount%%. Please confirm that you would like to continue with this swap.": "This swap has a price impact of at least %amount%%. Please confirm that you would like to continue with this swap.",
 	"To receive %assetA% and %assetB%": "To receive %assetA% and %assetB%",
+	"To receive %assetA% or %assetB%": "To receive %assetA% or %assetB%",
 	"Price Impact Too High": "Price Impact Too High",
 	"About": "About",
 	"Online Store": "Online Store",
@@ -1597,5 +1599,6 @@
 	"Wrap %amount% ASA to WASA": "Wrap %amount% ASA to WASA",
 	"Unwrap %amount% WASA to ASA": "Unwrap %amount% WASA to ASA",
 	"Add %amountA% %symbolA% and %amountB% %symbolB%": "Add %amountA% %symbolA% and %amountB% %symbolB%",
-	"Remove %amountA% %symbolA% and %amountB% %symbolB%": "Remove %amountA% %symbolA% and %amountB% %symbolB%"
+	"Remove %amountA% %symbolA% and %amountB% %symbolB%": "Remove %amountA% %symbolA% and %amountB% %symbolB%",
+	"Added by user": "Added by user"
 }
