@@ -101,9 +101,9 @@ export default function Navigation({ items }: NavigationProps) {
 	}
 	useClickOutsideElement(wrapperRef, hideMenu)
 
-	// useEffect(() => {
-	// 	setMenuItems(items)
-	// }, [items])
+	useEffect(() => {
+		setMenuItems(items)
+	}, [items])
 
 	/**
 	 *
