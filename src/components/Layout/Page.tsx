@@ -26,7 +26,7 @@ export const PageMeta: React.FC<{ symbol?: string }> = ({ symbol }) => {
 	const { pathname } = useRouter()
 	const astraPriceUsd = useAstraBusdPrice()
 
-	const asaPriceUsdDisplay = astraPriceUsd ? `$${astraPriceUsd.toFixed(3)}` : ''
+	const asaPriceUsdDisplay = astraPriceUsd ? `$${astraPriceUsd.toFixed(5)}` : ''
 
 	const pageMeta = getCustomMeta(pathname, t) || {}
 	const { title, description, image } = { ...DEFAULT_META, ...pageMeta }
