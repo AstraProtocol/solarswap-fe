@@ -48,6 +48,7 @@ interface Props {
 	children?: JSX.Element | JSX.Element[] | string | string[]
 }
 export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
+	const [initialized,  setInitialized] = useState(false);
 	const [state, setState] = useState<ProviderState>(() => {
 		const codeFromStorage = getLanguageCodeFromLS()
 
@@ -78,6 +79,7 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 				...prevState,
 				isFetching: false,
 			}))
+			setInitialized(true);
 		}
 
 		fetchInitialLocales()
@@ -120,25 +122,28 @@ export const LanguageProvider: React.FC<any> = ({ children }: Props) => {
 
 	const translate: TranslateFunction = useCallback(
 		(key, data) => {
-			const translationSet = languageMap.get(currentLanguage.locale) ?? languageMap.get(VI.locale)
-			const { translatedText, includesVariable } = translationSet[key] || {
-				translatedText: key,
-				includesVariable: translatedTextIncludesVariable(key),
+			if(initialized){
+				const translationSet = languageMap.get(currentLanguage.locale) ?? languageMap.get(VI.locale)
+				const { translatedText, includesVariable } = translationSet[key] || {
+					translatedText: key,
+					includesVariable: translatedTextIncludesVariable(key),
+				}
+
+				if (includesVariable && data) {
+					let interpolatedText = translatedText
+					Object.keys(data).forEach(dataKey => {
+						const templateKey = new RegExp(`%${dataKey}%`, 'g')
+						interpolatedText = interpolatedText.replace(templateKey, data[dataKey].toString())
+					})
+
+					return interpolatedText
+				}
+
+				return translatedText
 			}
-
-			if (includesVariable && data) {
-				let interpolatedText = translatedText
-				Object.keys(data).forEach(dataKey => {
-					const templateKey = new RegExp(`%${dataKey}%`, 'g')
-					interpolatedText = interpolatedText.replace(templateKey, data[dataKey].toString())
-				})
-
-				return interpolatedText
-			}
-
-			return translatedText
+			return key
 		},
-		[currentLanguage],
+		[currentLanguage, initialized],
 	)
 
 	return (
