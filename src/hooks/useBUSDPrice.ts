@@ -23,7 +23,7 @@ export default function useUSDTPrice(currency?: Currency): Price | undefined {
 		],
 		[chainId, currency, wrapped],
 	)
-	const [[ethPairState, ethPair], [usdtPairState, usdtPair], [busdEthPairState, busdEthPair]] = usePairs(tokenPairs)
+	const [[ethPairState, ethPair], [usdtPairState, usdtPair], [usdtEthPairState, usdtEthPair]] = usePairs(tokenPairs)
 
 	return useMemo(() => {
 		if (!currency || !wrapped || !chainId) {
@@ -44,7 +44,7 @@ export default function useUSDTPrice(currency?: Currency): Price | undefined {
 
 		const ethPairETHAmount = ethPair?.reserveOf(WASA)
 		const ethPairETHBUSDValue: JSBI =
-			ethPairETHAmount && busdEthPair ? busdEthPair.priceOf(WASA).quote(ethPairETHAmount).raw : JSBI.BigInt(0)
+			ethPairETHAmount && usdtEthPair ? usdtEthPair.priceOf(WASA).quote(ethPairETHAmount).raw : JSBI.BigInt(0)
 
 		// all other tokens
 		// first try the usdt pair
@@ -56,22 +56,22 @@ export default function useUSDTPrice(currency?: Currency): Price | undefined {
 			const price = usdtPair.priceOf(wrapped)
 			return new Price(currency, usdt, price.denominator, price.numerator)
 		}
-		if (ethPairState === PairState.EXISTS && ethPair && busdEthPairState === PairState.EXISTS && busdEthPair) {
-			if (busdEthPair.reserveOf(usdt).greaterThan('0') && ethPair.reserveOf(WASA).greaterThan('0')) {
-				const ethBusdPrice = busdEthPair.priceOf(usdt)
+		if (ethPairState === PairState.EXISTS && ethPair && usdtEthPairState === PairState.EXISTS && usdtEthPair) {
+			if (usdtEthPair.reserveOf(usdt).greaterThan('0') && ethPair.reserveOf(WASA).greaterThan('0')) {
+				const ethUsdtPrice = usdtEthPair.priceOf(usdt)
 				const currencyEthPrice = ethPair.priceOf(WASA)
-				const busdPrice = ethBusdPrice.multiply(currencyEthPrice).invert()
-				return new Price(currency, usdt, busdPrice.denominator, busdPrice.numerator)
+				const usdtPrice = ethUsdtPrice.multiply(currencyEthPrice).invert()
+				return new Price(currency, usdt, usdtPrice.denominator, usdtPrice.numerator)
 			}
 		}
 
 		return undefined
-	}, [chainId, currency, ethPair, ethPairState, busdEthPair, busdEthPairState, usdtPair, usdtPairState, wrapped])
+	}, [chainId, currency, ethPair, ethPairState, usdtEthPair, usdtEthPairState, usdtPair, usdtPairState, wrapped])
 }
 
-export const useAstraBusdPrice = (): Price | undefined => {
-	const asaBusdPrice = useUSDTPrice(tokens.wasa)
-	return asaBusdPrice
+export const useAstraUsdtPrice = (): Price | undefined => {
+	const asaUsdtPrice = useUSDTPrice(tokens.wasa)
+	return asaUsdtPrice
 }
 
 export const useBUSDCurrencyAmount = (currency: Currency, amount: number): number | undefined => {
@@ -84,15 +84,4 @@ export const useBUSDCurrencyAmount = (currency: Currency, amount: number): numbe
 	return undefined
 }
 
-export const useBUSDCakeAmount = (amount: number): number | undefined => {
-	const asaBusdPrice = useAstraBusdPrice()
-	if (asaBusdPrice) {
-		return multiplyPriceByAmount(asaBusdPrice, amount)
-	}
-	return undefined
-}
 
-export const useBNBBusdPrice = (): Price | undefined => {
-	const bnbBusdPrice = useUSDTPrice(tokens.wasa)
-	return bnbBusdPrice
-}

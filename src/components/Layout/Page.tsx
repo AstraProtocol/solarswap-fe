@@ -2,7 +2,7 @@ import { useTranslation } from 'contexts/Localization'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { DEFAULT_META, getCustomMeta } from 'config/constants/meta'
-import { useAstraBusdPrice } from 'hooks/useBUSDPrice'
+import { useAstraUsdtPrice } from 'hooks/useBUSDPrice'
 import { Container } from '@astraprotocol/astra-ui'
 
 // const StyledPage = styled(Container)`
@@ -24,9 +24,9 @@ import { Container } from '@astraprotocol/astra-ui'
 export const PageMeta: React.FC<{ symbol?: string }> = ({ symbol }) => {
 	const { t } = useTranslation()
 	const { pathname } = useRouter()
-	const astraPriceUsd = useAstraBusdPrice()
+	const astraPriceUsd = useAstraUsdtPrice()
 
-	const asaPriceUsdDisplay = astraPriceUsd ? `$${astraPriceUsd.toFixed(5)}` : ''
+	const asaPriceUsdDisplay = astraPriceUsd ? `$${astraPriceUsd.toFixed(3)}` : ''
 
 	const pageMeta = getCustomMeta(pathname, t) || {}
 	const { title, description, image } = { ...DEFAULT_META, ...pageMeta }
