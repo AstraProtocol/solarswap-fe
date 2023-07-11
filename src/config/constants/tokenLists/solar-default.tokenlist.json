@@ -129,6 +129,14 @@
 			"chainId": 11115,
 			"decimals": 18,
 			"logoURI": ""
+		},
+		{
+			"name": "Tether USD",
+			"symbol": "USDT",
+			"address": "0xa0161089652A33eeA83168dCd74287E58b390910",
+			"chainId": 11110,
+			"decimals": 18,
+			"logoURI": ""
 		}
 	]
 }
