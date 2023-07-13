@@ -46,6 +46,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 	tokenAmountTotal,
 	quoteTokenAmountTotal,
 }) => {
+	// console.log('pid', pid)
 	const { t } = useTranslation()
 	const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
 	const { account } = useWeb3React()
@@ -56,14 +57,14 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 	const lpPrice = useLpTokenPrice(lpSymbol)
 	const astraPrice = usePriceAstraBusd()
 
-	const isApproved = account && allowance && allowance.isGreaterThan(0)
+	const needApprove = allowance?.eq(0) && stakedBalance?.eq(0)
 
 	const lpAddress = getAddress(lpAddresses)
 	const liquidityUrlPathParts = getLiquidityUrlPathParts({
 		quoteTokenAddress: quoteToken.address,
 		tokenAddress: token.address,
 	})
-	const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
+	const addLiquidityUrl = `add/${liquidityUrlPathParts}`
 
 	const handleStake = async (amount: string) => {
 		const receipt = await fetchWithCatchTxError(() => {
@@ -105,24 +106,6 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 		}
 	}
 
-	const [onPresentDeposit] = useModal(
-		<DepositModal
-			max={tokenBalance}
-			lpPrice={lpPrice}
-			lpLabel={lpLabel}
-			apr={apr}
-			displayApr={displayApr}
-			stakedBalance={stakedBalance}
-			onConfirm={handleStake}
-			tokenName={lpSymbol}
-			multiplier={multiplier}
-			addLiquidityUrl={addLiquidityUrl}
-			astraPrice={astraPrice}
-		/>,
-	)
-	const [onPresentWithdraw] = useModal(
-		<WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
-	)
 	const lpContract = useERC20(lpAddress)
 	const dispatch = useAppDispatch()
 	const { onApprove } = useApproveFarm(lpContract)
@@ -140,6 +123,27 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 		}
 	}, [onApprove, dispatch, account, pid, t, fetchWithCatchTxError])
 
+	const [onPresentDeposit] = useModal(
+		<DepositModal
+			handleApprove={handleApprove}
+			max={tokenBalance}
+			lpPrice={lpPrice}
+			lpLabel={lpLabel}
+			apr={apr}
+			displayApr={displayApr}
+			stakedBalance={stakedBalance}
+			onConfirm={handleStake}
+			tokenName={lpSymbol}
+			pid={pid}
+			multiplier={multiplier}
+			addLiquidityUrl={addLiquidityUrl}
+			astraPrice={astraPrice}
+		/>,
+	)
+	const [onPresentWithdraw] = useModal(
+		<WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
+	)
+
 	if (!account) {
 		return (
 			<div className={styles.actionContainer}>
@@ -148,63 +152,31 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 						{t('Start Farming')}
 					</span>
 				</div>
-				<div className="flex flex-justify-space-between flex-align-center">
+				<div className="flex flex-justify-space-between flex-align-center margin-top-xs">
 					<ButtonConnect classes="width-100" />
 				</div>
 			</div>
 		)
 	}
 
-	if (isApproved) {
-		if (stakedBalance.gt(0)) {
-			return (
-				<div className={styles.actionContainer}>
-					<div className="flex">
-						<span className="text text-sm text-uppercase text-bold padding-right-xs">{lpSymbol}</span>
-						<span className="text text-sm text-bold text-uppercase contrast-color-70">{t('Staked')}</span>
-					</div>
-					<div className="flex flex-justify-space-between flex-align-center">
-						<StakedLP
-							stakedBalance={stakedBalance}
-							lpSymbol={lpSymbol}
-							quoteTokenSymbol={quoteToken.symbol}
-							tokenSymbol={token.symbol}
-							lpTotalSupply={lpTotalSupply}
-							tokenAmountTotal={tokenAmountTotal}
-							quoteTokenAmountTotal={quoteTokenAmountTotal}
-						/>
-						<div className="flex">
-							<div className="padding-sm border border-base radius-lg margin-right-xs alert-bd-color-info">
-								<IconButton icon={IconEnum.ICON_SUBTRACTION} classes="" onClick={onPresentWithdraw} />
-							</div>
-							<div className="padding-sm border border-base radius-lg margin-right-xs alert-bd-color-info">
-								<IconButton
-									icon={IconEnum.ICON_PLUS}
-									onClick={onPresentDeposit}
-									disabled={['history', 'archived'].some(item => router.pathname.includes(item))}
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-			)
-		}
-
+	if (needApprove) {
 		return (
 			<div className={styles.actionContainer}>
 				<div className="flex">
-					<span className="text text-sm text-bold text-uppercase padding-right-xs contrast-color-70">
-						{t('Stake')}
+					<span className="text text-sm text-bold text-uppercase contrast-color-70 margin-bottom-xs">
+						{t('Enable Farm')}
 					</span>
-					<span className="text text-sm text-bold text-uppercase secondary-color-normal">{lpSymbol}</span>
 				</div>
 				<div className="flex flex-justify-space-between flex-align-center">
 					<NormalButton
-						classes={{ other: 'width-100' }}
-						onClick={onPresentDeposit}
-						disabled={['history', 'archived'].some(item => router.pathname.includes(item))}
+						classes={{ other: 'width-100 row flex-justify-center' }}
+						disabled={pendingTx}
+						onClick={handleApprove}
 					>
-						<span className="text text-base">{t('Stake LP')}</span>
+						<span className="text text-base text-bold margin-right-sm">
+							{t('Approve %symbol%', { symbol: lpLabel })}
+						</span>
+						{pendingTx && <Spinner />}
 					</NormalButton>
 				</div>
 			</div>
@@ -226,21 +198,55 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 		)
 	}
 
+	if (stakedBalance.gt(0)) {
+		return (
+			<div className={styles.actionContainer}>
+				<div className="flex">
+					<span className="text text-sm text-uppercase text-bold padding-right-xs">{lpSymbol}</span>
+					<span className="text text-sm text-bold text-uppercase contrast-color-70">{t('Staked')}</span>
+				</div>
+				<div className="flex flex-justify-space-between flex-align-center">
+					<StakedLP
+						stakedBalance={stakedBalance}
+						lpSymbol={lpSymbol}
+						quoteTokenSymbol={quoteToken.symbol}
+						tokenSymbol={token.symbol}
+						lpTotalSupply={lpTotalSupply}
+						tokenAmountTotal={tokenAmountTotal}
+						quoteTokenAmountTotal={quoteTokenAmountTotal}
+					/>
+					<div className="flex">
+						<div className="padding-sm border border-base radius-lg margin-right-xs alert-bd-color-info">
+							<IconButton icon={IconEnum.ICON_SUBTRACTION} classes="" onClick={onPresentWithdraw} />
+						</div>
+						<div className="padding-sm border border-base radius-lg margin-right-xs alert-bd-color-info">
+							<IconButton
+								icon={IconEnum.ICON_PLUS}
+								onClick={onPresentDeposit}
+								disabled={['history', 'archived'].some(item => router.pathname.includes(item))}
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
 	return (
 		<div className={styles.actionContainer}>
 			<div className="flex">
-				<span className="text text-sm text-bold text-uppercase contrast-color-70 margin-bottom-xs">
-					{t('Enable Farm')}
+				<span className="text text-sm text-bold text-uppercase padding-right-xs contrast-color-70">
+					{t('Stake')}
 				</span>
+				<span className="text text-sm text-bold text-uppercase secondary-color-normal">{lpSymbol}</span>
 			</div>
 			<div className="flex flex-justify-space-between flex-align-center">
 				<NormalButton
-					classes={{ other: 'width-100 row flex-justify-center' }}
-					disabled={pendingTx}
-					onClick={handleApprove}
+					classes={{ other: 'width-100 margin-top-xs' }}
+					onClick={onPresentDeposit}
+					disabled={['history', 'archived'].some(item => router.pathname.includes(item))}
 				>
-					<span className="text text-base  margin-right-sm">{t('Enable')}</span>
-					{pendingTx && <Spinner />}
+					<span className="text text-base text-bold">{t('Stake LP')}</span>
 				</NormalButton>
 			</div>
 		</div>

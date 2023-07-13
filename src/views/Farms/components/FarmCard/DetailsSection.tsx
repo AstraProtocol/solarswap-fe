@@ -53,10 +53,10 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
 					<Icon icon={IconEnum.ICON_EXTERNAL_LINK} classes="margin-left-xs link-color-useful" />
 				</Typography.Link>
 				<br />
-				<Typography.Link target="_blank" href={infoAddress}>
+				{/* <Typography.Link target="_blank" href={infoAddress}>
 					{t('See Pair Info')}
 					<Icon icon={IconEnum.ICON_EXTERNAL_LINK} classes="margin-left-xs link-color-useful" />
-				</Typography.Link>
+				</Typography.Link> */}
 			</div>
 		</div>
 	)

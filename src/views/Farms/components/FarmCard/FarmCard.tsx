@@ -56,14 +56,14 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, astraPri
 		quoteTokenAddress: farm.quoteToken.address,
 		tokenAddress: farm.token.address,
 	})
-	const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
+	const addLiquidityUrl = `add/${liquidityUrlPathParts}`
 	const lpAddress = getAddress(farm.lpAddresses)
 	const isPromotedFarm = farm.token.symbol === 'WASA'
 
 	return (
 		<div
 			className="border border-base border-bottom-lg radius-lg same-bg-color-20"
-			style={{ alignSelf: 'baseline', minWidth: 320 }}
+			style={{ alignSelf: 'baseline', minWidth: 360 }}
 		>
 			<div className="flex col flex-justify-space-around padding-lg">
 				<CardHeading

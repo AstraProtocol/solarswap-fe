@@ -1596,9 +1596,13 @@
 	"Learn more": "Tìm hiểu thêm",
 	"Swaps %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%": "Đổi %inputAmount% %inputSymbol% thành %outputAmount% %outputSymbol%",
 	"Approve %symbol%": "Phê duyệt %symbol%",
+	"Approve more %symbol%": "Phê duyệt thêm %symbol%",
 	"Wrap %amount% ASA to WASA": "Chuyển đổi %amount% ASA thành WASA",
 	"Unwrap %amount% WASA to ASA": "Chuyển đổi %amount% WASA thành ASA",
 	"Add %amountA% %symbolA% and %amountB% %symbolB%": "Thêm %amountA% %symbolA% và %amountB% %symbolB%",
 	"Remove %amountA% %symbolA% and %amountB% %symbolB%": "Xoá %amountA% %symbolA% và %amountB% %symbolB%",
-	"Added by user": "Thêm bởi bạn"
+	"Added by user": "Thêm bởi bạn",
+	"Approved": "Đã duyệt",
+	"Infinity": "Vô tận",
+	"Your approve current is not enough": "Hiện tại phê duyệt của bạn không đủ"
 }

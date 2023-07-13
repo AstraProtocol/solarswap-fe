@@ -72,7 +72,7 @@ const Farms: React.FC<Props> = ({ children }: Props) => {
 
 	const [stakedOnly, setStakedOnly] = useUserFarmStakedOnly(isActive)
 
-	console.log('farmsLP :>> ', farmsLP)
+	// console.log('farmsLP :>> ', farmsLP)
 
 	const activeFarms = farmsLP.filter(
 		farm =>
