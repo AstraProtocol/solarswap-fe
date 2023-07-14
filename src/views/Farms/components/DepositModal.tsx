@@ -59,7 +59,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	}, [max])
 	const allowanceString = allowance ? formatEther(allowance?.toString()) : '0'
 	const isMax = val > formatEther(max.toString())
-	const isOverAllowance = val && allowance && val > allowanceString
+	const isOverAllowance = val && allowance && parseFloat(val) > parseFloat(allowanceString)
 
 	const { isMobile } = useMatchBreakpoints()
 

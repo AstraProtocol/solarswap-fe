@@ -35,7 +35,7 @@ const ModalInput: React.FC<ModalInputProps> = ({
 	const { t } = useTranslation()
 	const { isMobile } = useMatchBreakpoints()
 	const allowanceString = allowance ? formatEther(allowance.toString()) : '0'
-	const isOverAllowance = value && allowance && value > allowanceString
+	const isOverAllowance = value && allowance && parseFloat(value) > parseFloat(allowanceString)
 	const isBalanceZero = max === '0' || !max
 
 	const displayBalance = (balance: string) => {
