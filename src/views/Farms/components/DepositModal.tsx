@@ -88,7 +88,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	)
 
 	const handleSelectMax = useCallback(() => {
-		const max = Math.min(parseInt(formatEther(allowance.toString()).toString()), parseInt(fullBalance))
+		const max = Math.min(parseFloat(formatEther(allowance.toString()).toString()), parseFloat(fullBalance))
 		setVal(max.toString())
 	}, [fullBalance, allowance, setVal])
 
