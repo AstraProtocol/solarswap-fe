@@ -15,6 +15,7 @@ import Dots from '../../../components/Loader/Dots'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import { formatEther, parseEther } from '@ethersproject/units'
 import { useFarmUser } from 'state/farms/hooks'
+import { bigIntMinAndMax } from 'utils/bigNumber'
 
 interface DepositModalProps {
 	max: BigNumber
@@ -63,8 +64,8 @@ const DepositModal: React.FC<DepositModalProps> = ({
 
 	const { isMobile } = useMatchBreakpoints()
 
-	const lpTokensToStake = new BigNumber(val)
-	const fullBalanceNumber = new BigNumber(fullBalance)
+	const lpTokensToStake = useMemo(() => new BigNumber(val), [val])
+	const fullBalanceNumber = useMemo(() => new BigNumber(fullBalance), [fullBalance])
 
 	const usdToStake = lpTokensToStake.times(lpPrice)
 
@@ -88,9 +89,9 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	)
 
 	const handleSelectMax = useCallback(() => {
-		const max = Math.min(parseFloat(formatEther(allowance.toString()).toString()), parseFloat(fullBalance))
-		setVal(max.toString())
-	}, [fullBalance, allowance, setVal])
+		const [min, max] = bigIntMinAndMax(allowance, fullBalanceNumber)
+		setVal(min.toString())
+	}, [fullBalanceNumber, allowance, setVal])
 
 	if (showRoiCalculator) {
 		return (
