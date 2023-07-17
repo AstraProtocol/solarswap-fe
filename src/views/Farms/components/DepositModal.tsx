@@ -4,7 +4,7 @@ import RoiCalculatorModal from 'components/RoiCalculatorModal'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance, formatNumber } from 'utils/formatBalance'
 import { getInterestBreakdown } from 'utils/compoundApyHelpers'
-import { Icon, IconButton, IconEnum, NormalButton, Typography } from '@astraprotocol/astra-ui'
+import { Icon, IconButton, IconEnum, NormalButton, Row, Spinner, Typography, withToast } from '@astraprotocol/astra-ui'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from 'components/Modal'
 import styles from './styles.module.scss'
@@ -13,6 +13,9 @@ import ModalInput from './Modal/ModalInput'
 import ModalActions from './Modal/ModalActions'
 import Dots from '../../../components/Loader/Dots'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
+import { formatEther, parseEther } from '@ethersproject/units'
+import { useFarmUser } from 'state/farms/hooks'
+import { bigIntMinAndMax } from 'utils/bigNumber'
 
 interface DepositModalProps {
 	max: BigNumber
@@ -22,8 +25,10 @@ interface DepositModalProps {
 	lpLabel?: string
 	onConfirm: (amount: string) => void
 	onDismiss?: () => void
+	handleApprove?: () => void
 	tokenName?: string
 	apr?: number
+	pid?: number
 	displayApr?: string
 	addLiquidityUrl?: string
 	astraPrice?: BigNumber
@@ -34,27 +39,33 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	stakedBalance,
 	onConfirm,
 	onDismiss,
+	handleApprove,
 	tokenName = '',
 	multiplier,
 	displayApr,
 	lpPrice,
 	lpLabel,
 	apr,
+	pid,
 	addLiquidityUrl,
 	astraPrice,
 }) => {
 	const [val, setVal] = useState('')
+	const { allowance } = useFarmUser(pid)
 	const [pendingTx, setPendingTx] = useState(false)
 	const [showRoiCalculator, setShowRoiCalculator] = useState(false)
 	const { t } = useTranslation()
 	const fullBalance = useMemo(() => {
 		return getFullDisplayBalance(max)
 	}, [max])
+	const allowanceString = allowance ? formatEther(allowance?.toString()) : '0'
+	const isMax = val > formatEther(max.toString())
+	const isOverAllowance = val && allowance && parseFloat(val) > parseFloat(allowanceString)
 
 	const { isMobile } = useMatchBreakpoints()
 
-	const lpTokensToStake = new BigNumber(val)
-	const fullBalanceNumber = new BigNumber(fullBalance)
+	const lpTokensToStake = useMemo(() => new BigNumber(val), [val])
+	const fullBalanceNumber = useMemo(() => new BigNumber(fullBalance), [fullBalance])
 
 	const usdToStake = lpTokensToStake.times(lpPrice)
 
@@ -78,8 +89,9 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	)
 
 	const handleSelectMax = useCallback(() => {
-		setVal(fullBalance)
-	}, [fullBalance, setVal])
+		const [min, max] = bigIntMinAndMax(allowance, fullBalanceNumber)
+		setVal(min.toString())
+	}, [fullBalanceNumber, allowance, setVal])
 
 	if (showRoiCalculator) {
 		return (
@@ -109,6 +121,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 				max={fullBalance}
 				symbol={tokenName}
 				addLiquidityUrl={addLiquidityUrl}
+				allowance={allowance}
 				inputTitle={t('Stake')}
 			/>
 			<div className="flex flex-align-center flex-justify-space-between margin-top-lg margin-bottom-lg">
@@ -138,25 +151,43 @@ const DepositModal: React.FC<DepositModalProps> = ({
 					classes={{ other: 'width-100' }}
 					disabled={pendingTx}
 				>
-					<span className="text text-base">{t('Cancel')}</span>
+					<span className="text text-base text-bold">{t('Cancel')}</span>
 				</NormalButton>
-				<NormalButton
-					classes={{ other: 'width-100' }}
-					disabled={
-						pendingTx ||
-						!lpTokensToStake.isFinite() ||
-						lpTokensToStake.eq(0) ||
-						lpTokensToStake.gt(fullBalanceNumber)
-					}
-					onClick={async () => {
-						setPendingTx(true)
-						await onConfirm(val)
-						onDismiss?.()
-						setPendingTx(false)
-					}}
-				>
-					<span className="text text-base">{pendingTx ? <Dots>{t('Confirming')}</Dots> : t('Confirm')}</span>
-				</NormalButton>
+				{!isMax && isOverAllowance ? (
+					<NormalButton
+						variant="primary"
+						onClick={handleApprove}
+						classes={{ other: 'width-100' }}
+						disabled={pendingTx}
+					>
+						<Row>
+							<span className="text text-base text-bold">
+								{t('Approve more %symbol%', { symbol: lpLabel })}
+							</span>
+							{/* {loadingTx && <Spinner />} */}
+						</Row>
+					</NormalButton>
+				) : (
+					<NormalButton
+						classes={{ other: 'width-100' }}
+						disabled={
+							pendingTx ||
+							!lpTokensToStake.isFinite() ||
+							lpTokensToStake.eq(0) ||
+							lpTokensToStake.gt(fullBalanceNumber)
+						}
+						onClick={async () => {
+							setPendingTx(true)
+							await onConfirm(val)
+							onDismiss?.()
+							setPendingTx(false)
+						}}
+					>
+						<span className="text text-base text-bold">
+							{pendingTx ? <Dots>{t('Confirming')}</Dots> : t('Confirm')}
+						</span>
+					</NormalButton>
+				)}
 			</ModalActions>
 			<Typography.Link href={addLiquidityUrl} classes="margin-top-md text-center">
 				{t('Get %symbol%', { symbol: tokenName })}

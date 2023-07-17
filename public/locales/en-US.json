@@ -1596,9 +1596,13 @@
 	"Learn more": "Learn more",
 	"Swaps %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%": "Swaps %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%",
 	"Approve %symbol%": "Approve %symbol%",
+	"Approve more %symbol%": "Approve more %symbol%",
 	"Wrap %amount% ASA to WASA": "Wrap %amount% ASA to WASA",
 	"Unwrap %amount% WASA to ASA": "Unwrap %amount% WASA to ASA",
 	"Add %amountA% %symbolA% and %amountB% %symbolB%": "Add %amountA% %symbolA% and %amountB% %symbolB%",
 	"Remove %amountA% %symbolA% and %amountB% %symbolB%": "Remove %amountA% %symbolA% and %amountB% %symbolB%",
-	"Added by user": "Added by user"
+	"Added by user": "Added by user",
+	"Approved": "Approved",
+	"Infinity": "Infinity",
+	"Your approve current is not enough": "Your approve current is not enough"
 }

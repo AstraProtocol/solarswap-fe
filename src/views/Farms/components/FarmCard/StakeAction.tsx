@@ -15,11 +15,13 @@ import ToastDescriptionWithTx from 'components/ToastDescriptionWithTx'
 import { IconButton, IconEnum, NormalButton, withToast } from '@astraprotocol/astra-ui'
 import { useModal } from 'components/Modal'
 import styles from './styles.module.scss'
+import BigNumber from 'bignumber.js'
 
 interface FarmCardActionsProps extends FarmWithStakedValue {
 	lpLabel?: string
 	addLiquidityUrl?: string
 	displayApr?: string
+	handleApprove: () => Promise<void>
 }
 
 const StakeAction: React.FC<FarmCardActionsProps> = ({
@@ -34,6 +36,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 	lpLabel,
 	lpTotalSupply,
 	tokenAmountTotal,
+	handleApprove,
 	quoteTokenAmountTotal,
 }) => {
 	const { t } = useTranslation()
@@ -90,7 +93,9 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 
 	const [onPresentDeposit] = useModal(
 		<DepositModal
+			handleApprove={handleApprove}
 			max={tokenBalance}
+			pid={pid}
 			stakedBalance={stakedBalance}
 			onConfirm={handleStake}
 			tokenName={lpSymbol}
@@ -111,7 +116,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 		const disabled = ['history', 'archived'].some(item => router.pathname.includes(item))
 		return stakedBalance.eq(0) ? (
 			<NormalButton onClick={onPresentDeposit} disabled={disabled}>
-				{t('Stake LP')}
+				<span className="text text-sm text-bold">{t('Stake LP')}</span>
 			</NormalButton>
 		) : (
 			<div className={styles.iconButtonWrapper}>
