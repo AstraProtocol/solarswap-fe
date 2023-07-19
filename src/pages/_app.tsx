@@ -96,12 +96,18 @@ const web3Onboard = init({
 	wallets,
 	chains: [
 		{
-			id: `0x${chainId.toString(16)}`,
+			id: '0x2B6B',
 			token: 'ASA',
-			label: 'Astra',
-			rpcUrl: getNodeUrl(),
-			icon: '/images/logo/transparent_logo.svg',
-			blockExplorerUrl: process.env.NEXT_PUBLIC_EXPLORER,
+			label: 'Astra Testnet',
+			rpcUrl: 'https://rpc.astranaut.dev/',
+			namespace: 'evm',
+		},
+		{
+			id: '0x2B66',
+			token: 'ASA',
+			label: 'Astra Mainnet',
+			rpcUrl: 'https://rpc.astranaut.io/',
+			namespace: 'evm',
 		},
 	],
 	appMetadata: {
