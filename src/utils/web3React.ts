@@ -110,8 +110,8 @@ export const getConnectorByLabel = async label => {
 		return connectorsByName[ConnectorNames.AstraInjected]();
 	}
 
-	if(label === "Astra Wallet") {
-		return connectorsByName[ConnectorNames.AstraConnect]();
+	if (label === 'Astra Rewards') {
+		return connectorsByName[ConnectorNames.AstraConnect]()
 	}
 
 	return connectorsByName[ConnectorNames.Injected];
