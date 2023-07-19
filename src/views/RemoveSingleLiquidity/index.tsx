@@ -474,7 +474,7 @@ export default function RemoveLiquidity() {
 											</span>
 										</div>
 
-										{chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
+										{/* {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
 											<Row
 												className="flex-justify-space-between text"
 												style={{ justifyContent: 'flex-end', fontSize: '14px' }}
@@ -533,7 +533,7 @@ export default function RemoveLiquidity() {
 													</Link>
 												) : null}
 											</Row>
-										) : null}
+										) : null} */}
 									</div>
 								</div>
 							</>
