@@ -26,7 +26,9 @@ const WalletWrongNetworkModal: React.FC<InjectedProps> = ({ onDismiss }) => {
 
 	return (
 		<Modal title={t('You’re connected to the wrong network.')} onDismiss={onDismiss}>
-			<NormalButton onClick={_changeChain}>{t('Switch Network')}</NormalButton>
+			<NormalButton classes={{ other: 'text text-base text-bold' }} onClick={_changeChain}>
+				{t('Switch Network')}
+			</NormalButton>
 		</Modal>
 	)
 }

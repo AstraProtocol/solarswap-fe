@@ -312,7 +312,7 @@ export default function AddLiquiditySingle() {
 			<div className="flex col block-center">
 				<AppBody className="border border-base radius-lg">
 					<AppHeader
-						title={t('Add Liquidity')}
+						title={t('Add Single Liquidity')}
 						subtitle={t('Add liquidity to receive LP tokens')}
 						helper={t(
 							'Liquidity providers earn a 0.2% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.',
