@@ -8,16 +8,16 @@ const farms: SerializedFarmConfig[] = [
 	/**
 	 * These 2 farms (PID 0, 1) should always be at the top of the file.
 	 */
-	{
-		pid: 0,
-		lpSymbol: 'WASA',
-		lpAddresses: {
-			11115: '0xA625BF1c3565775B1859B579DF980Fef324E7315',
-			11110: '0xEAd8b0094072CAAa333DD2Ca72E5856f808e83Cf',
-		},
-		token: serializedTokens.wasa,
-		quoteToken: serializedTokens.wasa,
-	},
+	// {
+	// 	pid: 0,
+	// 	lpSymbol: 'WASA',
+	// 	lpAddresses: {
+	// 		11115: '0xA625BF1c3565775B1859B579DF980Fef324E7315',
+	// 		11110: '0xEAd8b0094072CAAa333DD2Ca72E5856f808e83Cf',
+	// 	},
+	// 	token: serializedTokens.wasa,
+	// 	quoteToken: serializedTokens.wasa,
+	// },
 	{
 		pid: 1,
 		lpSymbol: 'USDT-ASA LP',

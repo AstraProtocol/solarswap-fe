@@ -28,8 +28,6 @@ export const mainnetTokens = defineTokens({
 		'Tether USD',
 		'https://tether.to/',
 	),
-	// bnb here points to the wbnb contract. Wherever the currency BNB is required, conditional checks for the symbol 'BNB' can be used
-	// bnb: new Token(MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'BNB', 'BNB', 'https://www.binance.com/')
 } as const)
 
 export const testnetTokens = defineTokens({
