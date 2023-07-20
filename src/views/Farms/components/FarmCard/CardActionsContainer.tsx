@@ -56,7 +56,6 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
 	const renderApprovalOrStakeButton = () => {
 		return isApproved ? (
 			<StakeAction
-				allowance={allowance}
 				handleApprove={handleApprove}
 				{...farm}
 				lpLabel={lpLabel}
