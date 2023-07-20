@@ -627,14 +627,14 @@ export default function RemoveLiquidity() {
 															}}
 														>
 															{t('Receive ASA').toLocaleUpperCase(locale)}
-															{/* <div
+															<div
 																className="margin-left-2xs"
 																style={{ display: 'inline-block' }}
 																ref={targetRef}
 															>
 																<Icon icon={IconEnum.ICON_HELP} />
-															</div> */}
-															{/* {tooltipVisible && tooltip} */}
+															</div> 
+															{tooltipVisible && tooltip} 
 														</NormalButton>
 													</Link>
 												) : null}

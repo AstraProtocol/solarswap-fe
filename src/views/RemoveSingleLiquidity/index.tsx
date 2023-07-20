@@ -491,14 +491,14 @@ export default function RemoveLiquidity() {
 															classes={{ color: 'secondary-color-normal text-bold' }}
 														>
 															{t('Receive WASA').toLocaleUpperCase(locale)}
-															{/* <div
+															<div
 																className="margin-left-2xs"
 																style={{ display: 'inline-block' }}
 																ref={targetRef}
 															>
 																<Icon icon={IconEnum.ICON_HELP} />
 															</div>
-															{tooltipVisible && tooltip} */}
+															{tooltipVisible && tooltip} 
 														</NormalButton>
 													</Link>
 												) : oneCurrencyIsWETH ? (
@@ -521,14 +521,14 @@ export default function RemoveLiquidity() {
 															}}
 														>
 															{t('Receive ASA').toLocaleUpperCase(locale)}
-															{/* <div
+															<div
 																className="margin-left-2xs"
 																style={{ display: 'inline-block' }}
 																ref={targetRef}
 															>
 																<Icon icon={IconEnum.ICON_HELP} />
-															</div> */}
-															{/* {tooltipVisible && tooltip} */}
+															</div> 
+															{tooltipVisible && tooltip}
 														</NormalButton>
 													</Link>
 												) : null}
