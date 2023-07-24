@@ -416,24 +416,28 @@ export default function RemoveLiquidity() {
 										<NormalButton
 											variant="default"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '25')}
+											classes={{ other: 'text text-base text-bold' }}
 										>
 											25%
 										</NormalButton>
 										<NormalButton
 											variant="default"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '50')}
+											classes={{ other: 'text text-base text-bold' }}
 										>
 											50%
 										</NormalButton>
 										<NormalButton
 											variant="default"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '75')}
+											classes={{ other: 'text text-base text-bold' }}
 										>
 											75%
 										</NormalButton>
 										<NormalButton
 											variant="default"
 											onClick={() => onUserInput(Field.LIQUIDITY_PERCENT, '100')}
+											classes={{ other: 'text text-base text-bold' }}
 										>
 											Max
 										</NormalButton>
@@ -458,7 +462,7 @@ export default function RemoveLiquidity() {
 											<div className="flex">
 												<CurrencyLogo currency={currencyA} />
 												<span
-													className="text text-sm margin-left-2xs"
+													className="text text-sm text-bold margin-left-2xs"
 													color="textSubtle"
 													id="remove-liquidity-tokena-symbol"
 												>
@@ -470,7 +474,7 @@ export default function RemoveLiquidity() {
 											</span>
 										</div>
 
-										{chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
+										{/* {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
 											<Row
 												className="flex-justify-space-between text"
 												style={{ justifyContent: 'flex-end', fontSize: '14px' }}
@@ -484,7 +488,7 @@ export default function RemoveLiquidity() {
 													>
 														<NormalButton
 															variant="text"
-															classes={{ color: 'secondary-color-normal' }}
+															classes={{ color: 'secondary-color-normal text-bold' }}
 														>
 															{t('Receive WASA').toLocaleUpperCase(locale)}
 															<div
@@ -494,7 +498,7 @@ export default function RemoveLiquidity() {
 															>
 																<Icon icon={IconEnum.ICON_HELP} />
 															</div>
-															{tooltipVisible && tooltip}
+															{tooltipVisible && tooltip} 
 														</NormalButton>
 													</Link>
 												) : oneCurrencyIsWETH ? (
@@ -512,7 +516,9 @@ export default function RemoveLiquidity() {
 													>
 														<NormalButton
 															variant="text"
-															classes={{ color: 'secondary-color-normal' }}
+															classes={{
+																color: 'secondary-color-normal text text-sm text-bold',
+															}}
 														>
 															{t('Receive ASA').toLocaleUpperCase(locale)}
 															<div
@@ -521,13 +527,13 @@ export default function RemoveLiquidity() {
 																ref={targetRef}
 															>
 																<Icon icon={IconEnum.ICON_HELP} />
-															</div>
+															</div> 
 															{tooltipVisible && tooltip}
 														</NormalButton>
 													</Link>
 												) : null}
 											</Row>
-										) : null}
+										) : null} */}
 									</div>
 								</div>
 							</>
@@ -573,6 +579,14 @@ export default function RemoveLiquidity() {
 									{t('Prices')}
 								</span>
 								<div className="width-100 padding-md border border-base radius-lg margin-bottom-md">
+									{oneCurrencyIsWETH && (
+										<div className="flex flex-justify-space-between">
+											<span className="text text-sm" color="textSubtle">
+												1 WASA =
+											</span>
+											<span className="text text-sm text-bold">1 ASA</span>
+										</div>
+									)}
 									<div className="flex flex-justify-space-between">
 										<span className="text text-sm" color="textSubtle">
 											1 {currencyA?.symbol} =

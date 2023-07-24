@@ -72,6 +72,6 @@ export const fetchFarmUserEarnings = async (account: string, farmsToFetch: Seria
 	const parsedEarnings = rawEarnings.map(earnings => {
 		return new BigNumber(earnings).toJSON()
 	})
-	console.log('parsedEarnings :>> ', parsedEarnings)
+	// console.log('parsedEarnings :>> ', parsedEarnings)
 	return parsedEarnings
 }

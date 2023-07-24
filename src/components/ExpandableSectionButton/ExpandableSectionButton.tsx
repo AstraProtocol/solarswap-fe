@@ -18,7 +18,9 @@ const ExpandableSectionButton: React.FC<ExpandableSectionButtonProps> = ({ onCli
 			role="button"
 			onClick={() => onClick()}
 		>
-			<span className="text text-base secondary-color-normal">{expanded ? t('Hide') : t('Details')}</span>
+			<span className="text text-base text-bold secondary-color-normal">
+				{expanded ? t('Hide') : t('Details')}
+			</span>
 			<Icon
 				icon={IconEnum.ICON_ARROW_DOWN}
 				className={clsx(styles.iconArrow, { [styles.toggled]: expanded })}

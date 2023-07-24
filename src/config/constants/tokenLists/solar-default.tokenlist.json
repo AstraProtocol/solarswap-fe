@@ -1,12 +1,11 @@
 {
-	"name": "SolarSwap Default List",
-	"timestamp": "2022-01-26T11:45:09Z",
+	"name": "solarswap Default",
+	"timestamp": "2023-07-21T04:37:53.044Z",
 	"version": {
-		"major": 4,
+		"major": 1,
 		"minor": 0,
-		"patch": 0
+		"patch": 1
 	},
-	"tags": {},
 	"logoURI": "https://solarswap.io/logo.png",
 	"keywords": ["solarswap", "default"],
 	"tokens": [
@@ -24,7 +23,7 @@
 			"address": "0xa0161089652A33eeA83168dCd74287E58b390910",
 			"chainId": 11110,
 			"decimals": 18,
-			"logoURI": ""
+			"logoURI": "https://tokens.solarswap.io/images/0x5fC4435AcA131f1F541D2fc67DC3A6a20d10a99d.png"
 		}
 	]
 }

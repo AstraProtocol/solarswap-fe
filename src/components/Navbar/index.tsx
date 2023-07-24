@@ -147,7 +147,7 @@ export default function Navbar() {
 		]
 
 		return MENU_ITEMS
-	}, [currentLanguage])
+	}, [currentLanguage, t])
 
 	const ModalMobileNav = () => (
 		<div
