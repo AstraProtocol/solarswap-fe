@@ -1,10 +1,16 @@
+import { ChainId } from '@solarswap/sdk'
+
 describe('Swap', () => {
+	const CHAIN_ID = Cypress.env('NEXT_PUBLIC_CHAIN_ID');
 	const HOST = 'http://localhost:3000'
 	beforeEach(() => {
 		cy.visit(`${HOST}/swap`)
 	})
 	const delay = 200
-	const usdt = '0x2039A56173fDac411975Bce6F756059Ac33d0d79'
+	const usdt =
+		CHAIN_ID === ChainId.MAINNET.toString()
+			? '0xa0161089652A33eeA83168dCd74287E58b390910'
+			: '0x2039A56173fDac411975Bce6F756059Ac33d0d79'
 	// const busd = '0x092d93f258ceea20c94ba01e8771115141dd7c20'
 	// it('can enter an amount into input', () => {
 	// 	cy.get('#swap-currency-input .token-amount-input').type('0.001', { delay }).should('have.value', '0.001')

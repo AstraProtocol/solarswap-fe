@@ -13,22 +13,22 @@ describe('utils', () => {
 	describe('#getAstraExplorerLink', () => {
 		it('correct for tx', () => {
 			expect(getAstraExplorerLink('abc', 'transaction', ChainId.TESTNET)).toEqual(
-				'https://explorer.astranaut.dev/tx/abc',
+				`${process.env.NEXT_PUBLIC_EXPLORER}/tx/abc`,
 			)
 		})
 		it('correct for token', () => {
 			expect(getAstraExplorerLink('abc', 'token', ChainId.TESTNET)).toEqual(
-				'https://explorer.astranaut.dev/token/abc',
+				`${process.env.NEXT_PUBLIC_EXPLORER}/token/abc`,
 			)
 		})
 		it('correct for address', () => {
 			expect(getAstraExplorerLink('abc', 'address', ChainId.TESTNET)).toEqual(
-				'https://explorer.astranaut.dev/address/abc',
+				`${process.env.NEXT_PUBLIC_EXPLORER}/address/abc`,
 			)
 		})
 		it('enum', () => {
 			expect(getAstraExplorerLink('abc', 'address', ChainId.TESTNET)).toEqual(
-				'https://explorer.astranaut.dev/address/abc',
+				`${process.env.NEXT_PUBLIC_EXPLORER}/address/abc`,
 			)
 		})
 	})

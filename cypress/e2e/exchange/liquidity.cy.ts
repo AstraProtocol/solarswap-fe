@@ -1,5 +1,5 @@
 describe('Pool', () => {
-	const HOST = 'http://localHOST:3000'
+	const HOST = 'http://localhost:3000'
 
 	beforeEach(() => cy.visit(`${HOST}/liquidity`))
 	it('add liquidity links to /add/', () => {

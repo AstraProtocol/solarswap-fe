@@ -38,8 +38,8 @@ describe('Config farms', () => {
 	})
 
 	// The first pid using the new factory
-	const START_PID = CHAIN_ID === ChainId.TESTNET.toString() ? 1 : 1
-	const FACTORY_ADDRESS = CHAIN_ID === ChainId.TESTNET.toString() ? '0xc60c28ca2e8bff20b551c2614460d4bc0e443180' : '0x5A17e483E819aE57202cb0CA5d87a8236bb003C7'
+	const START_PID = CHAIN_ID === ChainId.MAINNET.toString() ? 1 : 1
+	const FACTORY_ADDRESS = CHAIN_ID === ChainId.MAINNET.toString() ? '0x5a17e483e819ae57202cb0ca5d87a8236bb003c7' : '0xc60c28ca2e8bff20b551c2614460d4bc0e443180'
 	const newFarmsToTest = farmsToTest.filter(farmSet => farmSet[0] >= START_PID)
 
 	it.each(newFarmsToTest)('farm %d is using correct factory address', async (pid, farm) => {

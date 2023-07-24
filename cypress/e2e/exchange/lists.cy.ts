@@ -1,6 +1,11 @@
+import { ChainId } from '@solarswap/sdk'
+
 describe('Lists', () => {
+	const CHAIN_ID = Cypress.env('NEXT_PUBLIC_CHAIN_ID');
 	const HOST = 'http://localhost:3000'
-	const busd = '0x092d93f258ceea20c94ba01e8771115141dd7c20'
+	const busd = CHAIN_ID === ChainId.MAINNET.toString()
+		? '0xAc948B5E841Ba4207a681331d646577240c7fcA8'
+		: '0x092d93f258ceea20c94ba01e8771115141dd7c20'
 	beforeEach(() => {
 		cy.visit(`${HOST}/swap`)
 	})
