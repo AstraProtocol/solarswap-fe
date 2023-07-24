@@ -1,10 +1,10 @@
 import { ChainId } from '@solarswap/sdk'
 import addresses from 'config/constants/contracts'
-import { CHAIN_ID } from 'config/constants/networks'
 import { Address } from 'config/constants/types'
 import { VaultKey } from 'state/types'
 
 export const getAddress = (address: Address): string => {
+	const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID;
 	return address[CHAIN_ID] ? address[CHAIN_ID] : address[ChainId.MAINNET]
 }
 

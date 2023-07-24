@@ -14,7 +14,7 @@ const defineTokens = <T extends TokenList>(t: T) => t
 export const mainnetTokens = defineTokens({
 	wasa: new Token(
 		MAINNET,
-		'0xA625BF1c3565775B1859B579DF980Fef324E7315',
+		'0xEAd8b0094072CAAa333DD2Ca72E5856f808e83Cf',
 		18,
 		'WASA',
 		'Wrapped ASA',
@@ -22,14 +22,12 @@ export const mainnetTokens = defineTokens({
 	),
 	usdt: new Token(
 		MAINNET,
-		'0x2039A56173fDac411975Bce6F756059Ac33d0d79',
+		'0xa0161089652A33eeA83168dCd74287E58b390910',
 		18,
 		'USDT',
 		'Tether USD',
 		'https://tether.to/',
 	),
-	// bnb here points to the wbnb contract. Wherever the currency BNB is required, conditional checks for the symbol 'BNB' can be used
-	// bnb: new Token(MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'BNB', 'BNB', 'https://www.binance.com/')
 } as const)
 
 export const testnetTokens = defineTokens({

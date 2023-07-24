@@ -29,7 +29,11 @@ const Logo: React.FC<LogoProps> = ({ srcs, alt, ...rest }) => {
 		)
 	}
 
-	return <Icon icon={IconEnum.ICON_HELP} style={{ fontSize: rest.height }} />
+	return (
+		<div className="flex flex-align-center">
+			<Icon icon={IconEnum.ICON_HELP} style={{ fontSize: Number(rest.height) + 2 }} />
+		</div>
+	)
 }
 
 export default Logo

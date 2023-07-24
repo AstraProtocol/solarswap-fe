@@ -7,10 +7,13 @@
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { Wallet } from '@ethersproject/wallet'
 import { Eip1193Bridge } from '@ethersproject/experimental/lib/eip1193-bridge'
+import { ChainId } from '@solarswap/sdk'
+
+const CHAIN_ID = Cypress.env('NEXT_PUBLIC_CHAIN_ID')
 
 /**
  * This is random key from https://asecuritysite.com/encryption/ethadd
- * One test in swap.test.ts requires to have some BNB amount available to test swap confirmation modal
+ * One test in swap.test.ts requires to have some ASA amount available to test swap confirmation modal
  * Seems that there are some problems with usying Cypress.env('INTEGRATION_TEST_PRIVATE_KEY') in CI
  * And sharing some key here is not safe as somebody can empty it and test will fail
  * For now that test is skipped
@@ -52,9 +55,9 @@ class CustomizedBridge extends Eip1193Bridge {
 		}
 		if (method === 'eth_chainId') {
 			if (isCallbackForm) {
-				return callback(null, { result: '0x2b6b' })
+				return callback(null, { result: CHAIN_ID === ChainId.MAINNET.toString() ? '0x2b66' : '0x2b6b' })
 			}
-			return Promise.resolve('0x2b6b')
+			return Promise.resolve(CHAIN_ID === ChainId.MAINNET.toString() ? '0x2b66' : '0x2b6b')
 		}
 		try {
 			const result = await super.send(method, params)
@@ -81,7 +84,9 @@ Cypress.Commands.overwrite('visit', (original, url, options) => {
 				options.onBeforeLoad(win)
 			}
 			win.localStorage.clear()
-			const provider = new JsonRpcProvider('https://rpc.astranaut.dev', 11115)
+			const rpc =
+				CHAIN_ID === ChainId.MAINNET.toString() ? 'https://rpc.astranaut.io' : 'https://rpc.astranaut.dev'
+			const provider = new JsonRpcProvider(rpc, parseInt(CHAIN_ID))
 			const signer = new Wallet(TEST_PRIVATE_KEY, provider)
 			// eslint-disable-next-line no-param-reassign
 			win.ethereum = new CustomizedBridge(signer, provider)

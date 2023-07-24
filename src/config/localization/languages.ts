@@ -8,7 +8,7 @@ export const AR: Language = {
 export const BN: Language = { locale: 'bn-BD', language: 'বাংলা', code: 'bn' }
 export const EN: Language = {
 	locale: 'en-US',
-	language: 'English',
+	language: 'Eng',
 	code: 'en',
 }
 export const DE: Language = {
@@ -91,7 +91,7 @@ export const UK: Language = {
 }
 export const VI: Language = {
 	locale: 'vi-VN',
-	language: 'Tiếng Việt',
+	language: 'VIE',
 	code: 'vi',
 }
 export const ZHCN: Language = {

@@ -75,10 +75,10 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
 					<span className="text text-sm">{t('APR')}</span>
 					<Apr {...apr} />
 				</div>
-				<div className="flex flex-justify-space-between flex-align-center margin-top-xs margin-bottom-xs">
+				{/* <div className="flex flex-justify-space-between flex-align-center margin-top-xs margin-bottom-xs">
 					<span className="text text-sm">{t('Multiplier')}</span>
 					<Multiplier {...multiplier} />
-				</div>
+				</div> */}
 				<div className="flex flex-justify-space-between flex-align-center margin-top-xs margin-bottom-xs">
 					<span className="text text-sm">{t('Liquidity')}</span>
 					<Liquidity {...liquidity} />

@@ -16,9 +16,6 @@ const getTokenDerivedBnbPrices = async (tokenAddress: string, blocks: Block[]) =
 		200,
 	)
 
-	// console.log('getTokenDerivedBnbPrices tokenAddress :>> ', tokenAddress);
-	// console.log('getTokenDerivedBnbPrices blocks :>> ', blocks);
-
 	if (!prices) {
 		console.error('Price data failed to load')
 		return null

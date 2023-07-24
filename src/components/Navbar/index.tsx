@@ -31,6 +31,7 @@ export default function Navbar() {
 
 	const { t, setLanguage, currentLanguage } = useTranslation()
 
+
 	const _hideMenu = () => {
 		// setLoad(false)
 		//time for animation
@@ -91,31 +92,20 @@ export default function Navbar() {
 			{
 				id: '1',
 				type: 'static',
-				label: t('Trade'),
+				label: t('Swap'),
 				link: '/swap',
-				submenus: [
-					{
-						id: '1.1',
-						label: t('Swap'),
-						link: '/swap',
-					},
-
-					{
-						id: '1.2',
-						label: t('Liquidity'),
-						link: '/liquidity',
-					},
-					{
-						id: '1.3',
-						label: t('Bridge'),
-						link: 'https://bridge.astranaut.io',
-						isExternal: true,
-						hideOnMobile: true,
-					},
-				],
+				submenus: [],
 			},
 			{
 				id: '2',
+				type: 'static',
+				label: t('Liquidity'),
+				link: '/liquidity',
+				submenus: [],
+			},
+
+			{
+				id: '3',
 				type: 'static',
 				label: t('Farm'),
 				link: '/farms',
@@ -123,6 +113,15 @@ export default function Navbar() {
 			},
 			{
 				id: '4',
+				type: 'static',
+				label: t('Bridge'),
+				link: 'https://bridge.astranaut.io',
+				submenus: [],
+				isExternal: true,
+				hideOnMobile: true,
+			},
+			{
+				id: '5',
 				type: 'locale',
 				submenus: [
 					{
@@ -148,7 +147,7 @@ export default function Navbar() {
 		]
 
 		return MENU_ITEMS
-	}, [currentLanguage])
+	}, [currentLanguage, t])
 
 	const ModalMobileNav = () => (
 		<div

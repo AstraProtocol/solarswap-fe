@@ -1,10 +1,12 @@
+import { ChainId } from '@solarswap/sdk'
+
 describe('Swap', () => {
 	const HOST = 'http://localhost:3000'
 	beforeEach(() => {
 		cy.visit(`${HOST}/swap`)
 	})
 	const delay = 200
-	const usdt = '0x2039A56173fDac411975Bce6F756059Ac33d0d79'
+	const USDT = Cypress.env('USDT')
 	// const busd = '0x092d93f258ceea20c94ba01e8771115141dd7c20'
 	// it('can enter an amount into input', () => {
 	// 	cy.get('#swap-currency-input .token-amount-input').type('0.001', { delay }).should('have.value', '0.001')
@@ -34,8 +36,8 @@ describe('Swap', () => {
 	it('can swap ASA for USDT', () => {
 		// cy.visit(`http://localhost/swap?inputCurrency=${busd}&outputCurrency=ASA`)
 		// cy.get('#swap-currency-output .open-currency-select-button').click()
-		// cy.get(`.token-item-${usdt}`).should('be.visible')
-		// cy.get(`.token-item-${usdt}`).click({
+		// cy.get(`.token-item-${USDT}`).should('be.visible')
+		// cy.get(`.token-item-${USDT}`).click({
 		// 	force: true
 		// })
 		cy.get('#swap-currency-input').should('be.visible')
@@ -50,7 +52,7 @@ describe('Swap', () => {
 	})
 
 	it('should get input and output currency from url params', () => {
-		cy.visit(`${HOST}/swap?inputCurrency=${usdt}&outputCurrency=ASA`)
+		cy.visit(`${HOST}/swap?inputCurrency=${USDT}&outputCurrency=ASA`)
 		cy.get('#swap-currency-input #pair').should('contain', 'USDT')
 		cy.get('#swap-currency-output #pair').should('contain', 'ASA')
 	})

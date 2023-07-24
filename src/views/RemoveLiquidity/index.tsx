@@ -554,7 +554,7 @@ export default function RemoveLiquidity() {
 											<div className="flex">
 												<CurrencyLogo currency={currencyA} />
 												<span
-													className="text text-sm margin-left-2xs"
+													className="text text-sm text-bold margin-left-2xs"
 													color="textSubtle"
 													id="remove-liquidity-tokena-symbol"
 												>
@@ -569,7 +569,7 @@ export default function RemoveLiquidity() {
 											<div className="flex">
 												<CurrencyLogo currency={currencyB} />
 												<span
-													className="text text-sm margin-left-2xs"
+													className="text text-sm text-bold margin-left-2xs"
 													color="textSubtle"
 													id="remove-liquidity-tokenb-symbol"
 												>
@@ -580,7 +580,7 @@ export default function RemoveLiquidity() {
 												{formattedAmounts[Field.CURRENCY_B] || '-'}
 											</span>
 										</div>
-										{chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
+										{/* {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
 											<Row
 												className="flex-justify-space-between text"
 												style={{ justifyContent: 'flex-end', fontSize: '14px' }}
@@ -594,7 +594,7 @@ export default function RemoveLiquidity() {
 													>
 														<NormalButton
 															variant="text"
-															classes={{ color: 'secondary-color-normal' }}
+															classes={{ color: 'secondary-color-normal text-bold' }}
 														>
 															{t('Receive WASA').toLocaleUpperCase(locale)}
 															<div
@@ -622,7 +622,9 @@ export default function RemoveLiquidity() {
 													>
 														<NormalButton
 															variant="text"
-															classes={{ color: 'secondary-color-normal' }}
+															classes={{
+																color: 'secondary-color-normal text text-sm text-bold',
+															}}
 														>
 															{t('Receive ASA').toLocaleUpperCase(locale)}
 															<div
@@ -631,13 +633,13 @@ export default function RemoveLiquidity() {
 																ref={targetRef}
 															>
 																<Icon icon={IconEnum.ICON_HELP} />
-															</div>
-															{tooltipVisible && tooltip}
+															</div> 
+															{tooltipVisible && tooltip} 
 														</NormalButton>
 													</Link>
 												) : null}
 											</Row>
-										) : null}
+										) : null} */}
 									</div>
 								</div>
 							</>

@@ -11,9 +11,10 @@ import { FarmWithStakedValue } from '../types'
 import useApproveFarm from '../../hooks/useApproveFarm'
 import HarvestAction from './HarvestAction'
 import StakeAction from './StakeAction'
-import { NormalButton, withToast } from '@astraprotocol/astra-ui'
+import { NormalButton, Row, withToast } from '@astraprotocol/astra-ui'
 import ToastDescriptionWithTx from 'components/ToastDescriptionWithTx'
 import ButtonConnect from 'components/ButtonConnect'
+import Spinner from 'components/Loader/Spinner'
 
 interface FarmCardActionsProps {
 	farm: FarmWithStakedValue
@@ -54,10 +55,19 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
 
 	const renderApprovalOrStakeButton = () => {
 		return isApproved ? (
-			<StakeAction {...farm} lpLabel={lpLabel} addLiquidityUrl={addLiquidityUrl} displayApr={displayApr} />
+			<StakeAction
+				handleApprove={handleApprove}
+				{...farm}
+				lpLabel={lpLabel}
+				addLiquidityUrl={addLiquidityUrl}
+				displayApr={displayApr}
+			/>
 		) : (
 			<NormalButton classes={{ other: 'margint-op-xs width-100' }} disabled={pendingTx} onClick={handleApprove}>
-				{t('Enable Contract')}
+				<Row style={{ justifyContent: 'center', gap: 8 }}>
+					<span className="text text-sm text-bold">{t('Enable Contract')}</span>
+					{pendingTx && <Spinner size={56} />}
+				</Row>
 			</NormalButton>
 		)
 	}
