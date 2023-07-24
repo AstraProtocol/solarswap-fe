@@ -2,7 +2,7 @@ import farms from 'config/constants/farms'
 import { SerializedFarm } from 'state/types'
 import { getLpContract } from 'utils/contractHelpers'
 import { CHAIN_ID } from 'config/constants/networks'
-import { ChainId } from '@solarswap/sdk'
+import { ChainId, FACTORY_ADDRESS_MAP } from '@solarswap/sdk'
 
 // Test only against the last 10 farms, for performance concern
 const farmsToTest: [number, SerializedFarm][] = farms
@@ -38,8 +38,9 @@ describe('Config farms', () => {
 	})
 
 	// The first pid using the new factory
+	// In the future: mainnet and testnet farm list will be different
 	const START_PID = CHAIN_ID === ChainId.MAINNET.toString() ? 1 : 1
-	const FACTORY_ADDRESS = CHAIN_ID === ChainId.MAINNET.toString() ? '0x5a17e483e819ae57202cb0ca5d87a8236bb003c7' : '0xc60c28ca2e8bff20b551c2614460d4bc0e443180'
+	const FACTORY_ADDRESS = FACTORY_ADDRESS_MAP[parseInt(CHAIN_ID)].toLowerCase()
 	const newFarmsToTest = farmsToTest.filter(farmSet => farmSet[0] >= START_PID)
 
 	it.each(newFarmsToTest)('farm %d is using correct factory address', async (pid, farm) => {
