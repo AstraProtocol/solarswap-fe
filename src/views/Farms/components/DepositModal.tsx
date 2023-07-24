@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import RoiCalculatorModal from 'components/RoiCalculatorModal'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance, formatNumber } from 'utils/formatBalance'
@@ -53,8 +53,10 @@ const DepositModal: React.FC<DepositModalProps> = ({
 	const [val, setVal] = useState('')
 	const { allowance } = useFarmUser(pid)
 	const [pendingTx, setPendingTx] = useState(false)
+	const [loadingApprove, setLoadingApprove] = useState(false)
 	const [showRoiCalculator, setShowRoiCalculator] = useState(false)
 	const { t } = useTranslation()
+	const allowanceRef = useRef(allowance)
 	const fullBalance = useMemo(() => {
 		return getFullDisplayBalance(max)
 	}, [max])
@@ -87,6 +89,21 @@ const DepositModal: React.FC<DepositModalProps> = ({
 		},
 		[setVal],
 	)
+
+	/**
+	 * @description this is tricky, auto hide loading token approval after 1m
+	 */
+	useEffect(() => {
+		if (!allowanceRef.current?.eq(allowance)) {
+			allowanceRef.current = allowance
+			setLoadingApprove(false)
+		}
+		const timeout = setTimeout(() => {
+			setLoadingApprove(false)
+		}, 60000)
+
+		return () => clearTimeout(timeout)
+	}, [allowance])
 
 	const handleSelectMax = useCallback(() => {
 		const [min, max] = bigIntMinAndMax(allowance, fullBalanceNumber)
@@ -156,15 +173,18 @@ const DepositModal: React.FC<DepositModalProps> = ({
 				{!isMax && isOverAllowance ? (
 					<NormalButton
 						variant="primary"
-						onClick={handleApprove}
+						onClick={() => {
+							handleApprove()
+							setLoadingApprove(true)
+						}}
 						classes={{ other: 'width-100' }}
 						disabled={pendingTx}
 					>
-						<Row>
+						<Row style={{ justifyContent: 'center', gap: 8 }}>
 							<span className="text text-base text-bold">
 								{t('Approve more %symbol%', { symbol: lpLabel })}
 							</span>
-							{/* {loadingTx && <Spinner />} */}
+							{loadingApprove && <Spinner />}
 						</Row>
 					</NormalButton>
 				) : (
