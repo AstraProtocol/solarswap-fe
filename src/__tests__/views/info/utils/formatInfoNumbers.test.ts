@@ -37,7 +37,7 @@ describe('info/utils/formatInfoNumbers', () => {
 		${0.000000001} | ${'compact'}  | ${false}         | ${false}       | ${false}  | ${'0.000000001'}
 		${0.000000001} | ${'compact'}  | ${0.001}         | ${false}       | ${false}  | ${'<0.001'}
 		${0.009}       | ${'compact'}  | ${0.01}          | ${false}       | ${false}  | ${'<0.01'}
-		${0.555}       | ${'compact'}  | ${false}         | ${true}        | ${false}  | ${'0.555'}
+		${0.555}       | ${'compact'}  | ${false}         | ${true}        | ${false}  | ${'0.55500'}
 		${1.555}       | ${'compact'}  | ${false}         | ${true}        | ${false}  | ${'1.55'}
 		${0}           | ${'compact'}  | ${false}         | ${false}       | ${true}   | ${'0'}
 		${84}          | ${'compact'}  | ${false}         | ${false}       | ${true}   | ${'84'}

@@ -20,7 +20,7 @@
 		{
 			"name": "Tether USD",
 			"symbol": "USDT",
-			"address": "0x5fC4435AcA131f1F541D2fc67DC3A6a20d10a99d",
+			"address": "0xa0161089652A33eeA83168dCd74287E58b390910",
 			"chainId": 11110,
 			"decimals": 18,
 			"logoURI": "https://tokens.solarswap.io/images/0x5fC4435AcA131f1F541D2fc67DC3A6a20d10a99d.png"

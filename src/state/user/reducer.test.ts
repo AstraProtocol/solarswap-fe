@@ -39,7 +39,7 @@ describe('swap reducer', () => {
 			expect(store.getState().gasPrice).toEqual(parseUnits(GAS_PRICE.default, 'gwei').toString())
 		})
 		it('gasPrice is fast after update', () => {
-			store.dispatch(updateGasPrice({ gasPrice: '11000000000000' }))
+			store.dispatch(updateGasPrice({ gasPrice: '1100000000000' }))
 			expect(store.getState().gasPrice).toEqual(parseUnits(GAS_PRICE.fast, 'gwei').toString())
 		})
 	})

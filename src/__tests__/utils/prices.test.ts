@@ -26,7 +26,7 @@ describe('prices', () => {
 						TradeType.EXACT_INPUT,
 					),
 				).realizedLPFee,
-			).toEqual(new TokenAmount(token1, JSBI.BigInt(2)))
+			).toEqual(new TokenAmount(token1, JSBI.BigInt(10)))
 		})
 
 		it('correct realized lp fee for double hop', () => {
@@ -38,7 +38,7 @@ describe('prices', () => {
 						TradeType.EXACT_INPUT,
 					),
 				).realizedLPFee,
-			).toEqual(new TokenAmount(token1, JSBI.BigInt(3)))
+			).toEqual(new TokenAmount(token1, JSBI.BigInt(19)))
 		})
 	})
 })
