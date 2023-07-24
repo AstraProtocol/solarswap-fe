@@ -30,7 +30,7 @@ interface Props {
 function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect = () => {} }: Props): WalletInit {
 	return () => {
 		return {
-			label: 'Astra Wallet',
+			label: 'Astra Rewards',
 			getIcon: async () => icon || '',
 			getInterface: async ({ EventEmitter }: { chains: Chain[]; EventEmitter: any }) => {
 				const { ProviderRpcError, ProviderRpcErrorCode } = await import('@web3-onboard/common')
@@ -40,7 +40,9 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 					chainId: chainId,
 				})
 				await connector.setup({
-					relayUrl: `${window.location.protocol === 'https:' ? 'wss' : 'wss'}://${process.env.NEXT_PUBLIC_WALLET_CONNECT_RELAY}`,
+					relayUrl: `${window.location.protocol === 'https:' ? 'wss' : 'wss'}://${
+						process.env.NEXT_PUBLIC_WALLET_CONNECT_RELAY
+					}`,
 					projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
 					metadata,
 				})
@@ -55,9 +57,9 @@ function astraConnectModule({ icon, rpcUrl, chainId, metadata, onAppDisconnect =
 					public connector: Connector
 					public addresses?: ProviderAccounts
 					public disconnect: EIP1193Provider['disconnect']
-					public emit: typeof EventEmitter['emit']
-					public on: typeof EventEmitter['on']
-					public removeListener: typeof EventEmitter['removeListener']
+					public emit: (typeof EventEmitter)['emit']
+					public on: (typeof EventEmitter)['on']
+					public removeListener: (typeof EventEmitter)['removeListener']
 
 					private disconnected$: InstanceType<typeof Subject>
 
