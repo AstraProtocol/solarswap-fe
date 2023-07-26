@@ -1604,5 +1604,7 @@
 	"Added by user": "Added by user",
 	"Approved": "Approved",
 	"Infinity": "Infinity",
-	"Your approve current is not enough": "Your approve current is not enough"
+	"Your approve current is not enough": "Your approve current is not enough",
+	"Error importing list": "Error importing list",
+	"Enter valid list location": "Enter valid list location"
 }

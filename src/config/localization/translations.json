@@ -1604,5 +1604,7 @@
 	"Added by user": "Thêm bởi bạn",
 	"Approved": "Đã duyệt",
 	"Infinity": "Vô tận",
-	"Your approve current is not enough": "Hiện tại phê duyệt của bạn không đủ"
+	"Your approve current is not enough": "Hiện tại phê duyệt của bạn không đủ",
+	"Error importing list": "Error importing list",
+	"Enter valid list location": "Nhập địa chỉ danh sách không hợp lệ"
 }
