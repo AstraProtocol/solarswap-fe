@@ -15,7 +15,7 @@
 			"address": "0x6637D8275DC58983Cb3A2fa64b705EC11f6EC670",
 			"chainId": 11110,
 			"decimals": 18,
-			"logoURI": "https://tokens.solarswap.io/images/0xEAd8b0094072CAAa333DD2Ca72E5856f808e83Cf.png"
+			"logoURI": "https://tokens.solarswap.io/images/0x6637D8275DC58983Cb3A2fa64b705EC11f6EC670.png"
 		},
 		{
 			"name": "Tether USD",
@@ -31,7 +31,7 @@
 			"address": "0xA625BF1c3565775B1859B579DF980Fef324E7315",
 			"chainId": 11115,
 			"decimals": 18,
-			"logoURI": "https://tokens.solarswap.io/images/0xEAd8b0094072CAAa333DD2Ca72E5856f808e83Cf.png"
+			"logoURI": "https://tokens.solarswap.io/images/0x6637D8275DC58983Cb3A2fa64b705EC11f6EC670.png"
 		},
 		{
 			"name": "Tether USD",
