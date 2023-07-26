@@ -1606,5 +1606,7 @@
 	"Infinity": "Infinity",
 	"Your approve current is not enough": "Your approve current is not enough",
 	"Error importing list": "Error importing list",
-	"Enter valid list location": "Enter valid list location"
+	"Enter valid list location": "Enter valid list location",
+	"Phishing warning: Please make sure you’re visiting": "Phishing warning: Please make sure you’re visiting",
+	"Check the URL carefully": "Check the URL carefully"
 }
