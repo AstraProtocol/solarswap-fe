@@ -103,14 +103,13 @@ export default function Navbar() {
 				link: '/liquidity',
 				submenus: [],
 			},
-
-			{
-				id: '3',
-				type: 'static',
-				label: t('Farm'),
-				link: '/farms',
-				submenus: [],
-			},
+			// {
+			// 	id: '3',
+			// 	type: 'static',
+			// 	label: t('Farm'),
+			// 	link: '/farms',
+			// 	submenus: [],
+			// },
 			{
 				id: '4',
 				type: 'static',
