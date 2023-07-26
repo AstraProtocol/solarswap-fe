@@ -76,11 +76,11 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 
 	return (
 		<div className={styles.rowWrapper} key={listUrl} id={listUrlRowHTMLId(listUrl)}>
-			{tooltipVisible && tooltip}
+			{/* {tooltipVisible && tooltip} */}
 
 			{list.logoURI ? (
 				<ListLogo
-					size="40px"
+					size={'40'}
 					style={{ marginRight: '1rem' }}
 					logoURI={list.logoURI}
 					alt={`${list.name} list logo`}
@@ -88,16 +88,11 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 			) : (
 				<div style={{ width: '24px', height: '24px', marginRight: '1rem' }} />
 			)}
-			<div className="flex flex-1">
-				<Row>
-					<span className="text text-bold">{list.name}</span>
-				</Row>
-				<Row style={{ marginTop: 4 }}>
-					<span className="text text-sm text-lowercase">
-						{list.tokens.length} {t('Tokens')}
-					</span>
-					<span ref={targetRef}>{/* <CogIcon color="text" width="12px" /> */}</span>
-				</Row>
+			<div className="col margin-left-md">
+				<span className="text text-bold">{list.name}</span>
+				<span className="text text-sm text-lowercase">
+					{list.tokens.length} {t('Tokens')}
+				</span>
 			</div>
 			<Toggle
 				checked={isActive}
@@ -193,7 +188,7 @@ function ManageLists({
 		async function fetchTempList() {
 			fetchList(listUrlInput, false)
 				.then(list => setTempList(list))
-				.catch(() => setAddError('Error importing list'))
+				.catch(() => setAddError(t('Error importing list')))
 		}
 		// if valid url, fetch details for card
 		if (validUrl) {
@@ -201,7 +196,7 @@ function ManageLists({
 		} else {
 			setTempList(undefined)
 			if (listUrlInput !== '') {
-				setAddError('Enter valid list location')
+				setAddError(t('Enter valid list location'))
 			}
 		}
 
@@ -209,7 +204,7 @@ function ManageLists({
 		if (listUrlInput === '') {
 			setAddError(undefined)
 		}
-	}, [fetchList, listUrlInput, validUrl])
+	}, [fetchList, listUrlInput, validUrl, t])
 
 	// check if list is already imported
 	const isImported = Object.keys(lists).includes(listUrlInput)
@@ -267,7 +262,7 @@ function ManageLists({
 				</div>
 			)}
 			<div>
-				<div className="flex col">
+				<div className="flex col" style={{ gap: 12 }}>
 					{sortedLists.map(listUrl => (
 						<ListRow key={listUrl} listUrl={listUrl} />
 					))}
