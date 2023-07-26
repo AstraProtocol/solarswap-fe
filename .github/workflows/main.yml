@@ -30,6 +30,6 @@ jobs:
         NEXT_PUBLIC_WALLET_CONNECT_RELAY=wc-relay.astranaut.io
         NEXT_PUBLIC_SENTRY_DSN=https://3440367258bb4aa39f6798ce548c98c8@sentry.astranet.live/5
         NEXT_PUBLIC_SENTRY_ENVIRONMENT=mainnet
-        NEXT_PUBLIC_DEFAULT_OUTPUT_CURRENCY=0x2039A56173fDac411975Bce6F756059Ac33d0d79
+        NEXT_PUBLIC_DEFAULT_OUTPUT_CURRENCY=0x5fC4435AcA131f1F541D2fc67DC3A6a20d10a99d
         NEXT_PUBLIC_GN_INFO_CLIENT=https://graph-node.astranaut.io/subgraphs/name/solarswap/exchange-v1
         NEXT_PUBLIC_GN_BLOCK_CLIENT=https://graph-node.astranaut.io/subgraphs/name/solarswap/blocks-v1
