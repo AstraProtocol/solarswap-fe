@@ -13,7 +13,7 @@ const farms: SerializedFarmConfig[] = [
 	// 	lpSymbol: 'WASA',
 	// 	lpAddresses: {
 	// 		11115: '0xA625BF1c3565775B1859B579DF980Fef324E7315',
-	// 		11110: '0xEAd8b0094072CAAa333DD2Ca72E5856f808e83Cf',
+	// 		11110: '0x6637D8275DC58983Cb3A2fa64b705EC11f6EC670',
 	// 	},
 	// 	token: serializedTokens.wasa,
 	// 	quoteToken: serializedTokens.wasa,
@@ -23,7 +23,7 @@ const farms: SerializedFarmConfig[] = [
 		lpSymbol: 'USDT-ASA LP',
 		lpAddresses: {
 			11115: '0xecd38fcda1e283d6344bf6a5970979c68da5064f',
-			11110: '0x654272f07aa573ca5775f7aadb28388754619ba9',
+			11110: '0x09194e6605443d56fD3Cc2f95919af68adde5e66',
 		},
 		token: serializedTokens.usdt,
 		quoteToken: serializedTokens.wasa,
