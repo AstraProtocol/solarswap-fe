@@ -10,28 +10,12 @@
 	"keywords": ["solarswap", "default"],
 	"tokens": [
 		{
-			"name": "WASA Token",
-			"symbol": "WASA",
-			"address": "0x6637D8275DC58983Cb3A2fa64b705EC11f6EC670",
-			"chainId": 11110,
-			"decimals": 18,
-			"logoURI": "https://tokens.solarswap.io/images/0x6637D8275DC58983Cb3A2fa64b705EC11f6EC670.png"
-		},
-		{
 			"name": "Tether USD",
 			"symbol": "USDT",
 			"address": "0x5fC4435AcA131f1F541D2fc67DC3A6a20d10a99d",
 			"chainId": 11110,
 			"decimals": 18,
 			"logoURI": "https://tokens.solarswap.io/images/0x5fC4435AcA131f1F541D2fc67DC3A6a20d10a99d.png"
-		},
-		{
-			"name": "WASA Token",
-			"symbol": "WASA",
-			"address": "0xA625BF1c3565775B1859B579DF980Fef324E7315",
-			"chainId": 11115,
-			"decimals": 18,
-			"logoURI": "https://tokens.solarswap.io/images/0x6637D8275DC58983Cb3A2fa64b705EC11f6EC670.png"
 		},
 		{
 			"name": "Tether USD",
