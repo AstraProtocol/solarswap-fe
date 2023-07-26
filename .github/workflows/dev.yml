@@ -10,7 +10,7 @@ jobs:
      secrets:
        secretBuildArgs: |
          SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
-         GITHUB_TOKEN=${{ secrets.GH_AUTH_TOKEN }}
+         GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
      with:
        namespace: "solarswap-dev"
        ingressEnabled: "yes"
