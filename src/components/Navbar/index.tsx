@@ -20,6 +20,7 @@ import { VI, EN } from '../../config/localization/languages'
 import useAuth from 'hooks/useAuth'
 import { Modal, useModal } from 'components/Modal'
 import NavigationConnect from 'components/ButtonConnect/NavigationConnect'
+import PhisingBanner from 'components/PhisingBanner'
 
 export default function Navbar() {
 	const [shadow, setShadow] = useState(false)
@@ -30,7 +31,6 @@ export default function Navbar() {
 	const [{ wallet }, connect] = useConnectWallet()
 
 	const { t, setLanguage, currentLanguage } = useTranslation()
-
 
 	const _hideMenu = () => {
 		// setLoad(false)
@@ -172,6 +172,7 @@ export default function Navbar() {
 
 	return (
 		<>
+			<PhisingBanner />
 			<nav
 				className={clsx(styles.navbar, 'margin-bottom-sm', {
 					[styles.navShadow]: shadow,
@@ -188,7 +189,7 @@ export default function Navbar() {
 						</div>
 					</div>
 					<div className={clsx(styles.left, 'link')}>
-						<Logo type="swap" size='small' text={process.env.NEXT_PUBLIC_TITLE} />
+						<Logo type="swap" size="small" text={process.env.NEXT_PUBLIC_TITLE} />
 					</div>
 					<div className={styles.right}>
 						<Navigation items={menus} />
