@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { DEFAULT_META, getCustomMeta } from 'config/constants/meta'
 import { useAstraUsdtPrice } from 'hooks/useUSDTPrice'
 import { Container } from '@astraprotocol/astra-ui'
+import styles from './styles.module.scss'
 
 // const StyledPage = styled(Container)`
 //   min-height: calc(100vh - 64px);
@@ -53,7 +54,9 @@ const Page: React.FC<PageProps> = ({ children, symbol, ...props }) => {
 	return (
 		<>
 			<PageMeta symbol={symbol} />
-			<Container {...props}>{children}</Container>
+			<Container className={styles.container} {...props}>
+				{children}
+			</Container>
 		</>
 	)
 }
