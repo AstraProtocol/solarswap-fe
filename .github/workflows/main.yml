@@ -24,7 +24,7 @@ jobs:
         NEXT_PUBLIC_NODE_PRODUCTION=https://rpc.astranaut.io
         NEXT_PUBLIC_HOST=https://solarswap.io
         NEXT_PUBLIC_EXPLORER=http://explorer.astranaut.io
-        NEXT_PUBLIC_GTAG=G-MK9VVY7GT5
+        NEXT_PUBLIC_GA_MEASUREMENT_ID=G-MK9VVY7GT5
         NEXT_PUBLIC_FEE=100
         NEXT_PUBLIC_TITLE=SolarSwap
         NEXT_PUBLIC_WALLET_CONNECT_RELAY=wc-relay.astranaut.io
