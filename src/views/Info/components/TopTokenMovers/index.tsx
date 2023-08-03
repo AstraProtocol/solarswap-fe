@@ -12,7 +12,7 @@ import { CurrencyLogo } from 'components/Logo'
 import { Row } from '@astraprotocol/astra-ui'
 import { Token } from '@solarswap/sdk'
 import { CHAIN_ID } from 'config/constants/networks'
-import { Address } from 'viem'
+import { EthereumAddress } from 'config/constants/types'
 
 const CardWrapper = ({ children, to }: { children: React.ReactNode; to: string }) => (
 	<NextLinkFromReactRouter className={style.cardWrapper} to={to}>
@@ -31,7 +31,7 @@ export const ScrollableRow = ({ children, ref }: { ref: LegacyRef<HTMLDivElement
 )
 
 const DataCard = ({ tokenData }: { tokenData: TokenData }) => {
-	const token = new Token(parseInt(CHAIN_ID), tokenData.address as Address, 18, '')
+	const token = new Token(parseInt(CHAIN_ID), tokenData.address as EthereumAddress, 18, '')
 	return (
 		<CardWrapper to={`/info/tokens/${tokenData.address}`}>
 			<TopMoverCard>

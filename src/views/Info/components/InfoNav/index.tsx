@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Search from 'views/Info/components/InfoSearch'
 // import { chains } from 'utils/wagmi'
 // import { ChainLogo } from 'components/Logo/ChainLogo'
-import { bsc, mainnet, polygonZkEvm } from 'wagmi/chains'
+// import { bsc, mainnet, polygonZkEvm } from 'wagmi/chains'
 // import { ASSET_CDN } from 'config/constants/endpoints'
 import { useTranslation } from 'contexts/Localization'
 
@@ -77,7 +77,7 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
 	// )
 }
 
-const targetChains = [mainnet, bsc, polygonZkEvm]
+// const targetChains = [mainnet, bsc, polygonZkEvm]
 
 // export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex }) => {
 //   const { t } = useTranslation()

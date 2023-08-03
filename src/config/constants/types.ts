@@ -232,3 +232,5 @@ export enum FetchStatus {
 	Fetched = 'FETCHED',
 	Failed = 'FAILED',
 }
+
+export type EthereumAddress = `0x${string}`

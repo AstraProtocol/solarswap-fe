@@ -9,7 +9,7 @@ import { getAstraExplorerLink } from 'utils'
 import { subgraphTokenSymbol } from 'state/info/constant'
 
 import { formatAmount } from 'utils/formatInfoNumbers'
-import { useDomainNameForAddress } from 'hooks/useDomain'
+// import { useDomainNameForAddress } from 'hooks/useDomain'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from './shared'
 import { useTranslation } from 'contexts/Localization'
 
@@ -98,7 +98,7 @@ const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> =
 	const abs0 = Math.abs(transaction.amountToken0)
 	const abs1 = Math.abs(transaction.amountToken1)
 	// const chainName = useChainNameByQuery()
-	const { domainName } = useDomainNameForAddress(transaction.sender)
+	// const { domainName } = useDomainNameForAddress(transaction.sender)
 	const token0Symbol = subgraphTokenSymbol[transaction.token0Address.toLowerCase()] ?? transaction.token0Symbol
 	const token1Symbol = subgraphTokenSymbol[transaction.token1Address.toLowerCase()] ?? transaction.token1Symbol
 	const outputTokenSymbol = transaction.amountToken0 < 0 ? token0Symbol : token1Symbol

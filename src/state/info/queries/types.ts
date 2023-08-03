@@ -1,5 +1,4 @@
 import { Token } from '@solarswap/sdk'
-import { Address } from 'viem'
 
 interface PairResponse {
 	token0: {
@@ -103,7 +102,7 @@ export type TokenData = {
 export type ComputedFarmConfigV3 = {
 	pid: number
 	lpSymbol: string
-	lpAddress: Address
+	lpAddress: `0x${string}`
 	boosted?: boolean
 
 	token: Token
