@@ -24,7 +24,7 @@ interface OverviewResponse {
 const getOverviewData = async (block?: number): Promise<{ data?: OverviewResponse; error: boolean }> => {
 	try {
 		const query = gql`query overview {
-      solarFactories(
+		pancakeFactories(
         ${block ? `block: { number: ${block}}` : ``}
         first: 1) {
         totalTransactions

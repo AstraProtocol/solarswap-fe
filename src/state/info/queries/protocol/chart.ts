@@ -12,7 +12,7 @@ import { SolarDayDatasResponse } from '../types'
  */
 const SOLAR_DAY_DATAS = gql`
 	query overviewCharts($startTime: Int!, $skip: Int!) {
-		solarDayDatas(first: 1000, skip: $skip, where: { date_gt: $startTime }, orderBy: date, orderDirection: asc) {
+		pancakeDayDatas(first: 1000, skip: $skip, where: { date_gt: $startTime }, orderBy: date, orderDirection: asc) {
 			date
 			dailyVolumeUSD
 			totalLiquidityUSD
@@ -22,11 +22,11 @@ const SOLAR_DAY_DATAS = gql`
 
 const getOverviewChartData = async (skip: number): Promise<{ data?: ChartEntry[]; error: boolean }> => {
 	try {
-		const { solarDayDatas } = await infoClient.request<SolarDayDatasResponse>(SOLAR_DAY_DATAS, {
+		const { pancakeDayDatas } = await infoClient.request<SolarDayDatasResponse>(SOLAR_DAY_DATAS, {
 			startTime: SS_START,
 			skip,
 		})
-		const data = solarDayDatas.map(mapDayData)
+		const data = pancakeDayDatas.map(mapDayData)
 		return { data, error: false }
 	} catch (error) {
 		console.error('Failed to fetch overview chart data', error)
