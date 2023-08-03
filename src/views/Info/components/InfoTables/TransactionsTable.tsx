@@ -218,47 +218,32 @@ const TransactionTable: React.FC<
 				<ResponsiveGrid>
 					<span className="text text-xs text-bold text-uppercase secondary-color-normal">{t('Action')}</span>
 					<ClickableColumnHeader
-						color="secondary"
-						fontSize="12px"
-						bold
+						className="text text-bold text-xs secondary-color-normal text-uppercase"
 						onClick={() => handleSort(SORT_FIELD.amountUSD)}
-						textTransform="uppercase"
 					>
 						{t('Total Value')} {arrow(SORT_FIELD.amountUSD)}
 					</ClickableColumnHeader>
 					<ClickableColumnHeader
-						color="secondary"
-						fontSize="12px"
-						bold
+						className="text text-bold text-xs secondary-color-normal text-uppercase"
 						onClick={() => handleSort(SORT_FIELD.amountToken0)}
-						textTransform="uppercase"
 					>
 						{t('Token Amount')} {arrow(SORT_FIELD.amountToken0)}
 					</ClickableColumnHeader>
 					<ClickableColumnHeader
-						color="secondary"
-						fontSize="12px"
-						bold
+						className="text text-bold text-xs secondary-color-normal text-uppercase"
 						onClick={() => handleSort(SORT_FIELD.amountToken1)}
-						textTransform="uppercase"
 					>
 						{t('Token Amount')} {arrow(SORT_FIELD.amountToken1)}
 					</ClickableColumnHeader>
 					<ClickableColumnHeader
-						color="secondary"
-						fontSize="12px"
-						bold
+						className="text text-bold text-xs secondary-color-normal text-uppercase"
 						onClick={() => handleSort(SORT_FIELD.sender)}
-						textTransform="uppercase"
 					>
 						{t('Account')} {arrow(SORT_FIELD.sender)}
 					</ClickableColumnHeader>
 					<ClickableColumnHeader
-						color="secondary"
-						fontSize="12px"
-						bold
+						className="text text-bold text-xs secondary-color-normal text-uppercase"
 						onClick={() => handleSort(SORT_FIELD.timestamp)}
-						textTransform="uppercase"
 					>
 						{t('Time')} {arrow(SORT_FIELD.timestamp)}
 					</ClickableColumnHeader>

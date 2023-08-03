@@ -154,47 +154,32 @@ const PoolTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ poolData
 					{t('Pair')}
 				</span>
 				<ClickableColumnHeader
-					color="secondary"
-					fontSize="12px"
-					bold
+					className="text text-bold text-xs secondary-color-normal text-uppercase"
 					onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-					textTransform="uppercase"
 				>
 					{t('Volume 24H')} {arrow(SORT_FIELD.volumeUSD)}
 				</ClickableColumnHeader>
 				<ClickableColumnHeader
-					color="secondary"
-					fontSize="12px"
-					bold
+					className="text text-bold text-xs secondary-color-normal text-uppercase"
 					onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-					textTransform="uppercase"
 				>
 					{t('Volume 7D')} {arrow(SORT_FIELD.volumeUSDWeek)}
 				</ClickableColumnHeader>
 				<ClickableColumnHeader
-					color="secondary"
-					fontSize="12px"
-					bold
+					className="text text-bold text-xs secondary-color-normal text-uppercase"
 					onClick={() => handleSort(SORT_FIELD.lpFees24h)}
-					textTransform="uppercase"
 				>
 					{t('LP reward fees 24H')} {arrow(SORT_FIELD.lpFees24h)}
 				</ClickableColumnHeader>
 				<ClickableColumnHeader
-					color="secondary"
-					fontSize="12px"
-					bold
+					className="text text-bold text-xs secondary-color-normal text-uppercase"
 					onClick={() => handleSort(SORT_FIELD.lpApr7d)}
-					textTransform="uppercase"
 				>
 					{t('LP reward APR')} {arrow(SORT_FIELD.lpApr7d)}
 				</ClickableColumnHeader>
 				<ClickableColumnHeader
-					color="secondary"
-					fontSize="12px"
-					bold
+					className="text text-bold text-xs secondary-color-normal text-uppercase"
 					onClick={() => handleSort(SORT_FIELD.liquidityUSD)}
-					textTransform="uppercase"
 				>
 					{t('Liquidity')} {arrow(SORT_FIELD.liquidityUSD)}
 				</ClickableColumnHeader>
