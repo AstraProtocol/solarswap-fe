@@ -1,11 +1,18 @@
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
-import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
+import { Fragment, cloneElement, useCallback, useEffect, useMemo, useState } from 'react'
 import { useStableSwapPath } from 'state/info/hooks'
 import { PoolData } from 'state/info/types'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from './shared'
 import Skeleton from 'react-loading-skeleton'
 import { useTranslation } from 'contexts/Localization'
+import styles from './styles.module.scss'
+import { NextLinkFromReactRouter } from 'components/NextLink'
+import { DoubleCurrencyLogo } from 'components/Logo'
+import { Icon, IconEnum, Row } from '@astraprotocol/astra-ui'
+import { isArray } from 'lodash'
+import { Token } from '@solarswap/sdk'
+import { CHAIN_ID } from 'config/constants/networks'
 
 /**
  *  Columns on different layouts
@@ -14,44 +21,20 @@ import { useTranslation } from 'contexts/Localization'
  *  3 = | # | Pool |     | Volume 24H |           |
  *  2 = |   | Pool |     | Volume 24H |           |
  */
-// const ResponsiveGrid = styled.div`
-// 	display: grid;
-// 	grid-gap: 1em;
-// 	align-items: center;
-// 	grid-template-columns: 20px 3.5fr repeat(5, 1fr);
-
-// 	padding: 0 24px;
-// 	@media screen and (max-width: 900px) {
-// 		grid-template-columns: 20px 1.5fr repeat(3, 1fr);
-// 		& :nth-child(4),
-// 		& :nth-child(5) {
-// 			display: none;
-// 		}
-// 	}
-// 	@media screen and (max-width: 500px) {
-// 		grid-template-columns: 20px 1.5fr repeat(1, 1fr);
-// 		& :nth-child(4),
-// 		& :nth-child(5),
-// 		& :nth-child(6),
-// 		& :nth-child(7) {
-// 			display: none;
-// 		}
-// 	}
-// 	@media screen and (max-width: 480px) {
-// 		grid-template-columns: 2.5fr repeat(1, 1fr);
-// 		> *:nth-child(1) {
-// 			display: none;
-// 		}
-// 	}
-// `
-
-// const LinkWrapper = styled(NextLinkFromReactRouter)`
-// 	text-decoration: none;
-// 	:hover {
-// 		cursor: pointer;
-// 		opacity: 0.7;
-// 	}
-// `
+const ResponsiveGrid = ({ children }) => {
+	if (isArray(children))
+		return (
+			<div className={styles.responsiveGrid}>{children.map((c, index) => cloneElement(c, { key: index }))}</div>
+		)
+	return <div className={styles.responsiveGrid}>{children}</div>
+}
+const LinkWrapper = ({ children, to }) => {
+	return (
+		<NextLinkFromReactRouter to={to} className={styles.linkWrapper}>
+			{isArray(children) ? children.map((c, index) => cloneElement(c, { key: index })) : children}
+		</NextLinkFromReactRouter>
+	)
+}
 
 const SORT_FIELD = {
 	volumeUSD: 'volumeUSD',
@@ -83,29 +66,28 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => (
 
 const DataRow = ({ poolData, index }: { poolData: PoolData; index: number }) => {
 	const stableSwapPath = useStableSwapPath()
-	return null
-	// return (
-	// 	<LinkWrapper to={`/info${chainPath}/pairs/${poolData.address}${stableSwapPath}`}>
-	// 		<ResponsiveGrid>
-	// 			<Text>{index + 1}</Text>
-	// 			<Flex>
-	// 				<DoubleCurrencyLogo
-	// 					address0={poolData.token0.address}
-	// 					address1={poolData.token1.address}
-	// 					chainName={chainName}
-	// 				/>
-	// 				<Text ml="8px">
-	// 					{poolData.token0.symbol}/{poolData.token1.symbol}
-	// 				</Text>
-	// 			</Flex>
-	// 			<Text>${formatAmount(poolData.volumeUSD)}</Text>
-	// 			<Text>${formatAmount(poolData.volumeUSDWeek)}</Text>
-	// 			<Text>${formatAmount(poolData.lpFees24h)}</Text>
-	// 			<Text>{formatAmount(poolData.lpApr7d)}%</Text>
-	// 			<Text>${formatAmount(poolData.liquidityUSD)}</Text>
-	// 		</ResponsiveGrid>
-	// 	</LinkWrapper>
-	// )
+
+	const token0 = new Token(parseInt(CHAIN_ID), poolData.token0.address, 18, '')
+	const token1 = new Token(parseInt(CHAIN_ID), poolData.token1.address, 18, '')
+
+	return (
+		<LinkWrapper to={`/info/pairs/${poolData.address}${stableSwapPath}`}>
+			<ResponsiveGrid>
+				<span className="text text-base">{index + 1}</span>
+				<Row>
+					<DoubleCurrencyLogo currency0={token0} currency1={token1} />
+					<span className="margin-left-xs">
+						{poolData.token0.symbol}/{poolData.token1.symbol}
+					</span>
+				</Row>
+				<span className="money money-sm">${formatAmount(poolData.volumeUSD)}</span>
+				<span className="money money-sm">${formatAmount(poolData.volumeUSDWeek)}</span>
+				<span className="money money-sm">${formatAmount(poolData.lpFees24h)}</span>
+				<span className="money money-sm">{formatAmount(poolData.lpApr7d)}%</span>
+				<span className="money money-sm">${formatAmount(poolData.liquidityUSD)}</span>
+			</ResponsiveGrid>
+		</LinkWrapper>
+	)
 }
 
 interface PoolTableProps {
@@ -160,106 +142,108 @@ const PoolTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ poolData
 		[sortDirection, sortField],
 	)
 
-	return null
-	// return (
-	// 	<TableWrapper>
-	// 		<ResponsiveGrid>
-	// 			<Text color="secondary" fontSize="12px" bold>
-	// 				#
-	// 			</Text>
-	// 			<Text color="secondary" fontSize="12px" bold textTransform="uppercase">
-	// 				{t('Pair')}
-	// 			</Text>
-	// 			<ClickableColumnHeader
-	// 				color="secondary"
-	// 				fontSize="12px"
-	// 				bold
-	// 				onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-	// 				textTransform="uppercase"
-	// 			>
-	// 				{t('Volume 24H')} {arrow(SORT_FIELD.volumeUSD)}
-	// 			</ClickableColumnHeader>
-	// 			<ClickableColumnHeader
-	// 				color="secondary"
-	// 				fontSize="12px"
-	// 				bold
-	// 				onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-	// 				textTransform="uppercase"
-	// 			>
-	// 				{t('Volume 7D')} {arrow(SORT_FIELD.volumeUSDWeek)}
-	// 			</ClickableColumnHeader>
-	// 			<ClickableColumnHeader
-	// 				color="secondary"
-	// 				fontSize="12px"
-	// 				bold
-	// 				onClick={() => handleSort(SORT_FIELD.lpFees24h)}
-	// 				textTransform="uppercase"
-	// 			>
-	// 				{t('LP reward fees 24H')} {arrow(SORT_FIELD.lpFees24h)}
-	// 			</ClickableColumnHeader>
-	// 			<ClickableColumnHeader
-	// 				color="secondary"
-	// 				fontSize="12px"
-	// 				bold
-	// 				onClick={() => handleSort(SORT_FIELD.lpApr7d)}
-	// 				textTransform="uppercase"
-	// 			>
-	// 				{t('LP reward APR')} {arrow(SORT_FIELD.lpApr7d)}
-	// 			</ClickableColumnHeader>
-	// 			<ClickableColumnHeader
-	// 				color="secondary"
-	// 				fontSize="12px"
-	// 				bold
-	// 				onClick={() => handleSort(SORT_FIELD.liquidityUSD)}
-	// 				textTransform="uppercase"
-	// 			>
-	// 				{t('Liquidity')} {arrow(SORT_FIELD.liquidityUSD)}
-	// 			</ClickableColumnHeader>
-	// 		</ResponsiveGrid>
-	// 		<Break />
-	// 		{sortedPools.length > 0 ? (
-	// 			<>
-	// 				{sortedPools.map((poolData, i) => {
-	// 					if (poolData) {
-	// 						return (
-	// 							<Fragment key={poolData.address}>
-	// 								<DataRow index={(page - 1) * ITEMS_PER_INFO_TABLE_PAGE + i} poolData={poolData} />
-	// 								<Break />
-	// 							</Fragment>
-	// 						)
-	// 					}
-	// 					return null
-	// 				})}
-	// 				{loading && <LoadingRow />}
-	// 				<PageButtons>
-	// 					<Arrow
-	// 						onClick={() => {
-	// 							setPage(page === 1 ? page : page - 1)
-	// 						}}
-	// 					>
-	// 						<ArrowBackIcon color={page === 1 ? 'textDisabled' : 'primary'} />
-	// 					</Arrow>
+	return (
+		<TableWrapper>
+			<ResponsiveGrid>
+				<span color="secondary" className="text text-sm text-bold secondary-color-normal">
+					#
+				</span>
+				<span color="secondary" className="text text-sm text-bold secondary-color-normal text-uppercase">
+					{t('Pair')}
+				</span>
+				<ClickableColumnHeader
+					color="secondary"
+					fontSize="12px"
+					bold
+					onClick={() => handleSort(SORT_FIELD.volumeUSD)}
+					textTransform="uppercase"
+				>
+					{t('Volume 24H')} {arrow(SORT_FIELD.volumeUSD)}
+				</ClickableColumnHeader>
+				<ClickableColumnHeader
+					color="secondary"
+					fontSize="12px"
+					bold
+					onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+					textTransform="uppercase"
+				>
+					{t('Volume 7D')} {arrow(SORT_FIELD.volumeUSDWeek)}
+				</ClickableColumnHeader>
+				<ClickableColumnHeader
+					color="secondary"
+					fontSize="12px"
+					bold
+					onClick={() => handleSort(SORT_FIELD.lpFees24h)}
+					textTransform="uppercase"
+				>
+					{t('LP reward fees 24H')} {arrow(SORT_FIELD.lpFees24h)}
+				</ClickableColumnHeader>
+				<ClickableColumnHeader
+					color="secondary"
+					fontSize="12px"
+					bold
+					onClick={() => handleSort(SORT_FIELD.lpApr7d)}
+					textTransform="uppercase"
+				>
+					{t('LP reward APR')} {arrow(SORT_FIELD.lpApr7d)}
+				</ClickableColumnHeader>
+				<ClickableColumnHeader
+					color="secondary"
+					fontSize="12px"
+					bold
+					onClick={() => handleSort(SORT_FIELD.liquidityUSD)}
+					textTransform="uppercase"
+				>
+					{t('Liquidity')} {arrow(SORT_FIELD.liquidityUSD)}
+				</ClickableColumnHeader>
+			</ResponsiveGrid>
+			<Break />
+			{sortedPools.length > 0 ? (
+				<>
+					{sortedPools.map((poolData, i) => {
+						if (poolData) {
+							return (
+								<Fragment key={poolData.address}>
+									<DataRow index={(page - 1) * ITEMS_PER_INFO_TABLE_PAGE + i} poolData={poolData} />
+									<Break />
+								</Fragment>
+							)
+						}
+						return null
+					})}
+					{loading && <LoadingRow />}
+					<PageButtons>
+						<Arrow
+							onClick={() => {
+								setPage(page === 1 ? page : page - 1)
+							}}
+						>
+							<Icon icon={IconEnum.ICON_ARROW_LEFT} color={page === 1 ? 'textDisabled' : 'primary'} />
+						</Arrow>
 
-	// 					<Text>{t('Page %page% of %maxPage%', { page, maxPage })}</Text>
+						<span className="text text-base">{t('Page %page% of %maxPage%', { page, maxPage })}</span>
 
-	// 					<Arrow
-	// 						onClick={() => {
-	// 							setPage(page === maxPage ? page : page + 1)
-	// 						}}
-	// 					>
-	// 						<ArrowForwardIcon color={page === maxPage ? 'textDisabled' : 'primary'} />
-	// 					</Arrow>
-	// 				</PageButtons>
-	// 			</>
-	// 		) : (
-	// 			<>
-	// 				<TableLoader />
-	// 				{/* spacer */}
-	// 				<Box />
-	// 			</>
-	// 		)}
-	// 	</TableWrapper>
-	// )
+						<Arrow
+							onClick={() => {
+								setPage(page === maxPage ? page : page + 1)
+							}}
+						>
+							<Icon
+								icon={IconEnum.ICON_ARROW_RIGHT}
+								color={page === maxPage ? 'textDisabled' : 'primary'}
+							/>
+						</Arrow>
+					</PageButtons>
+				</>
+			) : (
+				<>
+					<TableLoader />
+					{/* spacer */}
+					<div />
+				</>
+			)}
+		</TableWrapper>
+	)
 }
 
 export default PoolTable

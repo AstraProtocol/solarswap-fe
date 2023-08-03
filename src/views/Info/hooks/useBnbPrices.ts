@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
+import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import { infoClient } from 'utils/graphql'
 import { useBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
-import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
 
 export interface BnbPrices {
 	current: number
@@ -11,9 +11,6 @@ export interface BnbPrices {
 	week: number
 }
 
-/**
- * @todo in Astra Blockchain, native token is ASA. Need change st here.
- */
 const BNB_PRICES = gql`
 	query prices($block24: Int!, $block48: Int!, $blockWeek: Int!) {
 		current: bundle(id: "1") {

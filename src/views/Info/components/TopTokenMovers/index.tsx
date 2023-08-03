@@ -1,59 +1,56 @@
-import { useEffect, useMemo, useRef } from 'react'
+import Card from 'components/Card'
+import { useTranslation } from 'contexts/Localization'
+import { LegacyRef, MutableRefObject, forwardRef, useEffect, useMemo, useRef } from 'react'
 import { useAllTokenDataSWR } from 'state/info/hooks'
 import { TokenData } from 'state/info/types'
 import { formatAmount } from 'utils/formatInfoNumbers'
 // import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import Percent from 'views/Info/components/Percent'
+import style from './style.module.scss'
+import { NextLinkFromReactRouter } from 'components/NextLink'
+import { CurrencyLogo } from 'components/Logo'
+import { Row } from '@astraprotocol/astra-ui'
+import { Token } from '@solarswap/sdk'
+import { CHAIN_ID } from 'config/constants/networks'
+import { Address } from 'viem'
 
-// const CardWrapper = styled(NextLinkFromReactRouter)`
-// 	display: inline-block;
-// 	min-width: 190px;
-// 	margin-left: 16px;
-// 	:hover {
-// 		cursor: pointer;
-// 		opacity: 0.6;
-// 	}
-// `
+const CardWrapper = ({ children, to }: { children: React.ReactNode; to: string }) => (
+	<NextLinkFromReactRouter className={style.cardWrapper} to={to}>
+		{children}
+	</NextLinkFromReactRouter>
+)
 
-// const TopMoverCard = styled(Box)`
-// 	border: 1px solid ${({ theme }) => theme.colors.cardBorder};
-// 	border-radius: ${({ theme }) => theme.radii.card};
-// 	padding: 16px;
-// `
+const TopMoverCard = ({ children }: { children: React.ReactNode }) => (
+	<div className={style.topMoverCard}>{children}</div>
+)
 
-// export const ScrollableRow = styled.div`
-// 	width: 100%;
-// 	overflow-x: auto;
-// 	padding: 16px 0;
-// 	white-space: nowrap;
-// 	::-webkit-scrollbar {
-// 		display: none;
-// 	}
-// `
+export const ScrollableRow = ({ children, ref }: { ref: LegacyRef<HTMLDivElement>; children: React.ReactNode }) => (
+	<div className={style.scrollableRow} ref={ref}>
+		{children}
+	</div>
+)
 
 const DataCard = ({ tokenData }: { tokenData: TokenData }) => {
-	return null
-	// return (
-	// 	<CardWrapper to={`/info${chainPath}/tokens/${tokenData.address}`}>
-	// 		<TopMoverCard>
-	// 			<Flex>
-	// 				<Box width="32px" height="32px">
-	// 					{/* wrapped in a box because of alignment issues between img and svg */}
-	// 					<CurrencyLogo address={tokenData.address} size="32px" chainName={chainName} />
-	// 				</Box>
-	// 				<Box ml="16px">
-	// 					<Text>{tokenData.symbol}</Text>
-	// 					<Flex alignItems="center">
-	// 						<Text fontSize="14px" mr="6px" lineHeight="16px">
-	// 							${formatAmount(tokenData.priceUSD)}
-	// 						</Text>
-	// 						<Percent fontSize="14px" value={tokenData.priceUSDChange} />
-	// 					</Flex>
-	// 				</Box>
-	// 			</Flex>
-	// 		</TopMoverCard>
-	// 	</CardWrapper>
-	// )
+	const token = new Token(parseInt(CHAIN_ID), tokenData.address as Address, 18, '')
+	return (
+		<CardWrapper to={`/info/tokens/${tokenData.address}`}>
+			<TopMoverCard>
+				<Row>
+					<div style={{ width: 32, height: 32 }}>
+						{/* wrapped in a box because of alignment issues between img and svg */}
+						<CurrencyLogo currency={token} size={32} />
+					</div>
+					<div className="margin-left-md">
+						<span>{tokenData.symbol}</span>
+						<Row className="flex-align-center">
+							<span className="text text-sm margin-right-xs">${formatAmount(tokenData.priceUSD)}</span>
+							<Percent value={tokenData.priceUSDChange} />
+						</Row>
+					</div>
+				</Row>
+			</TopMoverCard>
+		</CardWrapper>
+	)
 }
 
 const TopTokenMovers: React.FC<React.PropsWithChildren> = () => {
@@ -101,10 +98,8 @@ const TopTokenMovers: React.FC<React.PropsWithChildren> = () => {
 	}
 
 	return (
-		<Card my="16px">
-			<Text ml="16px" mt="8px">
-				{t('Top Movers')}
-			</Text>
+		<Card>
+			<span className="text text-base margin-left-md margin-top-sm">{t('Top Movers')}</span>
 			<ScrollableRow ref={increaseRef}>
 				{topPriceIncrease.map(entry =>
 					entry.data ? (

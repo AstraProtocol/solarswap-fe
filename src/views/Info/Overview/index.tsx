@@ -1,5 +1,5 @@
 import Page from 'components/Layout/Page'
-import { useMemo } from 'react'
+import { cloneElement, useMemo } from 'react'
 import {
 	useAllTokenDataSWR,
 	useProtocolChartDataSWR,
@@ -14,22 +14,21 @@ import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable
 import HoverableChart from '../components/InfoCharts/HoverableChart'
 import { usePoolsData } from '../hooks/usePoolsData'
 import { useTranslation } from 'contexts/Localization'
+import clsx from 'clsx'
+import styles from './styles.module.scss'
+import Heading from 'components/Heading'
+import Card from 'components/Card'
+import { isArray } from 'lodash'
 
-// export const ChartCardsContainer = styled(Flex)`
-//   justify-content: space-between;
-//   flex-direction: column;
-//   width: 100%;
-//   padding: 0;
-//   gap: 1em;
-
-//   & > * {
-//     width: 100%;
-//   }
-
-//   ${({ theme }) => theme.mediaQueries.md} {
-//     flex-direction: row;
-//   }
-// `
+export const ChartCardsContainer = ({ children }) => {
+	if (isArray(children))
+		return (
+			<div className={clsx('flex row', styles.chartCardsContainer)}>
+				{children.map((c, index) => cloneElement(c, { key: index }))}
+			</div>
+		)
+	return <div className={clsx('flex row', styles.chartCardsContainer)}>{children}</div>
+}
 
 const Overview: React.FC<React.PropsWithChildren> = () => {
 	const {
@@ -62,42 +61,42 @@ const Overview: React.FC<React.PropsWithChildren> = () => {
 
 	return (
 		<Page>
-			{/* <Heading scale="lg" mb="16px" id="info-overview-title">
-				{t('PancakeSwap Info & Analytics')}
+			<Heading scale="lg" className="margin-left-md" id="info-overview-title">
+				{t('Solarswap Info & Analytics')}
 			</Heading>
 			<ChartCardsContainer>
-			<Card>
-				<HoverableChart
-					chartData={chartData}
-					protocolData={protocolData}
-					currentDate={currentDate}
-					valueProperty="liquidityUSD"
-					title={t('Liquidity')}
-					ChartComponent={LineChart}
-				/>
-			</Card>
-			<Card>
-				<HoverableChart
-					chartData={chartData}
-					protocolData={protocolData}
-					currentDate={currentDate}
-					valueProperty="volumeUSD"
-					title={t('Volume 24H')}
-					ChartComponent={BarChart}
-				/>
-			</Card>
+				<Card>
+					<HoverableChart
+						chartData={chartData}
+						protocolData={protocolData}
+						currentDate={currentDate}
+						valueProperty="liquidityUSD"
+						title={t('Liquidity')}
+						ChartComponent={LineChart}
+					/>
+				</Card>
+				<Card>
+					<HoverableChart
+						chartData={chartData}
+						protocolData={protocolData}
+						currentDate={currentDate}
+						valueProperty="volumeUSD"
+						title={t('Volume 24H')}
+						ChartComponent={BarChart}
+					/>
+				</Card>
 			</ChartCardsContainer>
-			<Heading scale="lg" mt="40px" mb="16px">
+			<Heading scale="lg" className="margin-left-md margin-top-xl">
 				{t('Top Tokens')}
 			</Heading>
 			<TokenTable tokenDatas={formattedTokens} />
-			<Heading scale="lg" mt="40px" mb="16px">
+			<Heading scale="lg" className="margin-left-md margin-top-xl">
 				{t('Top Pairs')}
 			</Heading>
 			<PoolTable poolDatas={poolsData} loading={somePoolsAreLoading} />
-			<Heading scale="lg" mt="40px" mb="16px">
+			<Heading scale="lg" className="margin-left-md margin-top-xl">
 				{t('Transactions')}
-			</Heading> */}
+			</Heading>
 			<TransactionTable transactions={transactions} />
 		</Page>
 	)

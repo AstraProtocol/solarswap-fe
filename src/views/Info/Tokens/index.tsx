@@ -1,3 +1,5 @@
+import Card from 'components/Card'
+import Heading from 'components/Heading'
 import Page from 'components/Layout/Page'
 import { CHAIN_ID } from 'config/constants/networks'
 import { useTranslation } from 'contexts/Localization'
@@ -23,22 +25,20 @@ const TokensOverview: React.FC<React.PropsWithChildren> = () => {
 
 	return (
 		<Page>
-			{/* <Heading scale="lg" mb="16px">
+			<Heading scale="lg" className="margin-bottom-md">
 				{t('Your Watchlist')}
 			</Heading>
 			{watchListTokens.length > 0 ? (
 				<TokenTable tokenDatas={watchListTokens} />
 			) : (
 				<Card>
-					<Text py="16px" px="24px">
-						{t('Saved tokens will appear here')}
-					</Text>
+					<span className="text text-base">{t('Saved tokens will appear here')}</span>
 				</Card>
 			)}
 			<TopTokenMovers />
-			<Heading scale="lg" mt="40px" mb="16px" id="info-tokens-title">
+			<Heading scale="lg" className="margin-bottom-md margin-top-xl" id="info-tokens-title">
 				{t('All Tokens')}
-			</Heading> */}
+			</Heading>
 			<TokenTable tokenDatas={formattedTokens} />
 		</Page>
 	)

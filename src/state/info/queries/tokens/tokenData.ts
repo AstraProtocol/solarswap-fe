@@ -5,7 +5,9 @@ import { TokenData } from 'state/info/types'
 import { infoClient } from 'utils/graphql'
 import { useBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
 import { getAmountChange, getChangeForPeriod, getPercentChange } from 'views/Info/utils/infoDataHelpers'
-import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
+import { fetchTokenAddresses } from './topTokens'
+import { Block } from '../types'
+import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 
 interface TokenFields {
 	id: string
@@ -197,5 +199,85 @@ const useFetchedTokenDatas = (tokenAddresses: string[]): TokenDatas => {
 
 	return fetchState
 }
+
+export const fetchAllTokenDataByAddresses = async (blocks: Block[], tokenAddresses: string[]) => {
+	const [block24h, block48h, block7d, block14d] = blocks ?? []
+
+	const { data } = await fetchTokenData(
+		block24h.number,
+		block48h.number,
+		block7d.number,
+		block14d.number,
+		tokenAddresses,
+	)
+
+	const parsed = parseTokenData(data?.now)
+	const parsed24 = parseTokenData(data?.oneDayAgo)
+	const parsed48 = parseTokenData(data?.twoDaysAgo)
+	const parsed7d = parseTokenData(data?.oneWeekAgo)
+	const parsed14d = parseTokenData(data?.twoWeeksAgo)
+
+	// Calculate data and format
+	const formatted = tokenAddresses.reduce((accum: { [address: string]: { data: TokenData } }, address) => {
+		const current: FormattedTokenFields | undefined = parsed[address]
+		const oneDay: FormattedTokenFields | undefined = parsed24[address]
+		const twoDays: FormattedTokenFields | undefined = parsed48[address]
+		const week: FormattedTokenFields | undefined = parsed7d[address]
+		const twoWeeks: FormattedTokenFields | undefined = parsed14d[address]
+
+		const [volumeUSD, volumeUSDChange] = getChangeForPeriod(
+			current?.tradeVolumeUSD,
+			oneDay?.tradeVolumeUSD,
+			twoDays?.tradeVolumeUSD,
+		)
+		const [volumeUSDWeek] = getChangeForPeriod(
+			current?.tradeVolumeUSD,
+			week?.tradeVolumeUSD,
+			twoWeeks?.tradeVolumeUSD,
+		)
+		const liquidityUSD = current ? current.totalLiquidity * current.derivedUSD : 0
+		const liquidityUSDOneDayAgo = oneDay ? oneDay.totalLiquidity * oneDay.derivedUSD : 0
+		const liquidityUSDChange = getPercentChange(liquidityUSD, liquidityUSDOneDayAgo)
+		const liquidityToken = current ? current.totalLiquidity : 0
+		// Prices of tokens for now, 24h ago and 7d ago
+		const priceUSD = current ? current.derivedUSD : 0
+		// const decimals = current ? current.decimals : 0
+		const priceUSDOneDay = oneDay ? oneDay.derivedUSD : 0
+		const priceUSDWeek = week ? week.derivedUSD : 0
+		const priceUSDChange = getPercentChange(priceUSD, priceUSDOneDay)
+		const priceUSDChangeWeek = getPercentChange(priceUSD, priceUSDWeek)
+		const txCount = getAmountChange(current?.totalTransactions, oneDay?.totalTransactions)
+
+		accum[address] = {
+			data: {
+				exists: !!current,
+				address,
+				name: current ? current.name : '',
+				symbol: current ? current.symbol : '',
+				volumeUSD,
+				volumeUSDChange,
+				volumeUSDWeek,
+				txCount,
+				liquidityUSD,
+				liquidityUSDChange,
+				liquidityToken,
+				priceUSD,
+				priceUSDChange,
+				priceUSDChangeWeek,
+				// decimals,
+			},
+		}
+		return accum
+	}, {})
+
+	return formatted
+}
+
+export const fetchAllTokenData = async (blocks: Block[]) => {
+	const tokenAddresses = await fetchTokenAddresses()
+	const data = await fetchAllTokenDataByAddresses(blocks, tokenAddresses)
+	return data
+}
+  
 
 export default useFetchedTokenDatas

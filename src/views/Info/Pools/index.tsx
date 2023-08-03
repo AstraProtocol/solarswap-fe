@@ -6,6 +6,8 @@ import { useTranslation } from 'contexts/Localization'
 import { CHAIN_ID } from 'config/constants/networks'
 import useInfoUserSavedTokensAndPools from 'hooks/useInfoUserSavedTokensAndPoolsList'
 import { usePoolDatasSWR } from 'state/info/hooks'
+import Heading from 'components/Heading'
+import Card from 'components/Card'
 
 const PoolsOverview: React.FC<React.PropsWithChildren> = () => {
 	const { t } = useTranslation()
@@ -22,21 +24,19 @@ const PoolsOverview: React.FC<React.PropsWithChildren> = () => {
 
 	return (
 		<Page>
-			{/* <Heading scale="lg" mb="16px">
+			<Heading scale="lg" className="margin-bottom-md">
 				{t('Your Watchlist')}
 			</Heading>
 			<Card>
 				{watchlistPools.length > 0 ? (
 					<PoolTable poolDatas={watchlistPoolsData} />
 				) : (
-					<Text px="24px" py="16px">
-						{t('Saved pairs will appear here')}
-					</Text>
+					<span className="text text-base">{t('Saved pairs will appear here')}</span>
 				)}
 			</Card>
-			<Heading scale="lg" mt="40px" mb="16px" id="info-pools-title">
+			<Heading scale="lg" style={{ marginTop: 40, marginBottom: 16 }} id="info-pools-title">
 				{t('All Pairs')}
-			</Heading> */}
+			</Heading>
 			<PoolTable poolDatas={poolsData} />
 		</Page>
 	)

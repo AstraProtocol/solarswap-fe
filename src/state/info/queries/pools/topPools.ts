@@ -1,8 +1,8 @@
 import { TOKEN_BLACKLIST } from 'config/constants/info'
 import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
+import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import { infoClient } from 'utils/graphql'
-import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
 
 interface TopPoolsResponse {
 	pairDayDatas: {
@@ -59,6 +59,13 @@ const useTopPoolAddresses = (): string[] => {
 	}, [topPoolAddresses, timestamp24hAgo])
 
 	return topPoolAddresses
+}
+
+export const fetchTopPoolAddresses = async () => {
+	const [timestamp24hAgo] = getDeltaTimestamps()
+
+	const addresses = await fetchTopPools(timestamp24hAgo)
+	return addresses
 }
 
 export default useTopPoolAddresses

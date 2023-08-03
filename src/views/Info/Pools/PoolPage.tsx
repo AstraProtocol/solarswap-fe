@@ -9,7 +9,7 @@ import { NextSeo } from 'next-seo'
 import { useMemo, useState } from 'react'
 import { checkIsStableSwap } from 'state/info/constant'
 import { usePoolChartDataSWR, usePoolDatasSWR, usePoolTransactionsSWR, useStableSwapPath } from 'state/info/hooks'
-// import styled from 'styled-components'
+// import styled from 'sufwmtyled-components'
 import useSWRImmutable from 'swr/immutable'
 import { getAstraExplorerLink } from 'utils'
 import { formatAmount } from 'utils/formatInfoNumbers'
@@ -17,37 +17,27 @@ import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
 import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
 import Percent from 'views/Info/components/Percent'
 import SaveIcon from 'views/Info/components/SaveIcon'
+import style from './style.module.scss'
+import { Breadcrumbs } from 'components/Breadcrumbs'
+import { NextLinkFromReactRouter } from 'components/NextLink'
+import { ButtonMenu, ButtonMenuItem, Icon, IconEnum, NormalButton, Row, Typography } from '@astraprotocol/astra-ui'
+import { CurrencyLogo, DoubleCurrencyLogo } from 'components/Logo'
+import Heading from 'components/Heading'
+import Spinner from 'components/Loader/Spinner'
+import { Token } from '@solarswap/sdk'
+import clsx from 'clsx'
+import Card from 'components/Card'
+import { isArray } from 'lodash'
 
-// const ContentLayout = styled.div`
-// 	display: grid;
-// 	grid-template-columns: 300px 1fr;
-// 	grid-gap: 1em;
-// 	margin-top: 16px;
-// 	@media screen and (max-width: 800px) {
-// 		grid-template-columns: 1fr;
-// 		grid-template-rows: 1fr 1fr;
-// 	}
-// `
+const ContentLayout = ({ children }) => <div className={style.contentLayout}>{children}</div>
 
-// const TokenButton = styled(Flex)`
-// 	padding: 8px 0px;
-// 	margin-right: 16px;
-// 	:hover {
-// 		cursor: pointer;
-// 		opacity: 0.6;
-// 	}
-// `
+const TokenButton = ({ children }) => (
+	<div className={style.tokenButton}>
+		{isArray(children) ? children.map((child, index) => <div key={index}>{child}</div>) : children}
+	</div>
+)
 
-// const LockedTokensContainer = styled(Flex)`
-// 	border: 1px solid ${({ theme }) => theme.colors.cardBorder};
-// 	background-color: ${({ theme }) => theme.colors.background};
-// 	padding: 16px;
-// 	flex-direction: column;
-// 	gap: 8px;
-// 	margin-top: 8px;
-// 	border-radius: 16px;
-// 	max-width: 280px;
-// `
+const LockedTokensContainer = ({ children }) => <div className={style.lockedTokensContainer}>{children}</div>
 
 const getFarmConfig = async (chainId: number) => {
 	const config = await import(`@pancakeswap/farms/constants/${chainId}`)
@@ -73,6 +63,7 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 
 	const infoTypeParam = useStableSwapPath()
 	const isStableSwap = checkIsStableSwap()
+	const stableAPR = 0
 	const { data: farmConfig } = useSWRImmutable(isStableSwap && `info/gerFarmConfig/`, () =>
 		getFarmConfig(parseInt(CHAIN_ID)),
 	)
@@ -96,201 +87,178 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 		return poolData ? Math.abs(poolData.token1Price - poolData.token0Price) < 1 : false
 	}, [poolData])
 
+	const token0 = useMemo(
+		() => new Token(parseInt(CHAIN_ID), poolData?.token0.address, 18, ''),
+		[poolData?.token0.address],
+	)
+	const token1 = useMemo(
+		() => new Token(parseInt(CHAIN_ID), poolData?.token1.address, 18, ''),
+		[poolData?.token1.address],
+	)
 	return (
 		<Page>
 			<NextSeo title={poolData ? `${poolData?.token0.symbol} / ${poolData?.token1.symbol}` : null} />
-			{/* {poolData ? (
+			{poolData ? (
 				<>
-					<Flex justifyContent="space-between" mb="16px" flexDirection={['column', 'column', 'row']}>
-						<Breadcrumbs mb="32px">
+					<Row className="flex-justify-space-between margin-bottom-md">
+						<Breadcrumbs className="margin-bottom-lg">
 							<NextLinkFromReactRouter to={`/info${infoTypeParam}`}>
-								<Text color="primary">{t('Info')}</Text>
+								<span color="primary">{t('Info')}</span>
 							</NextLinkFromReactRouter>
 							<NextLinkFromReactRouter to={`/info/pairs${infoTypeParam}`}>
-								<Text color="primary">{t('Pairs')}</Text>
+								<span color="primary">{t('Pairs')}</span>
 							</NextLinkFromReactRouter>
-							<Flex>
-								<Text mr="8px">{`${poolData.token0.symbol} / ${poolData.token1.symbol}`}</Text>
-							</Flex>
+							<Row>
+								<span className="margin-right-xs text text-base">{`${poolData.token0.symbol} / ${poolData.token1.symbol}`}</span>
+							</Row>
 						</Breadcrumbs>
-						<Flex justifyContent={[null, null, 'flex-end']} mt={['8px', '8px', 0]}>
-							<ScanLink
-								chainId={multiChainId[chainName]}
-								mr="8px"
-								href={getBlockExploreLink(address, 'address', multiChainId[chainName])}
-							>
-								{t('View on %site%', { site: multiChainScan[chainName] })}
-							</ScanLink>
+						<Row>
+							<Typography.Link target="_blank" href={getAstraExplorerLink(address, 'address')}>
+								({t('View on AstraExplorer')})
+							</Typography.Link>
+
 							<SaveIcon fill={savedPools.includes(address)} onClick={() => addPool(address)} />
-						</Flex>
-					</Flex>
-					<Flex flexDirection="column">
-						<Flex alignItems="center" mb={['8px', null]}>
-							<DoubleCurrencyLogo
-								address0={poolData.token0.address}
-								address1={poolData.token1.address}
-								size={32}
-								chainName={chainName}
-							/>
-							<Text
-								ml="38px"
-								bold
-								fontSize={isXs || isSm ? '24px' : '40px'}
+						</Row>
+					</Row>
+					<Row className="flex col">
+						<Row className="flex-align-center margin-bottom-xs">
+							<DoubleCurrencyLogo currency0={token0} currency1={token1} size={32} />
+							<span
+								className={clsx('margin-left-xl text text-bold text-2xl', {
+									['text-lg']: isXs || isSm,
+								})}
 								id="info-pool-pair-title"
-							>{`${poolData.token0.symbol} / ${poolData.token1.symbol}`}</Text>
-						</Flex>
-						<Flex justifyContent="space-between" flexDirection={['column', 'column', 'column', 'row']}>
-							<Flex flexDirection={['column', 'column', 'row']} mb={['8px', '8px', null]}>
-								<NextLinkFromReactRouter
-									to={`/info/tokens/${poolData.token0.address}${infoTypeParam}`}
-								>
+							>{`${poolData.token0.symbol} / ${poolData.token1.symbol}`}</span>
+						</Row>
+						<Row className="flex-justify-space-between">
+							<Row>
+								<NextLinkFromReactRouter to={`/info/tokens/${poolData.token0.address}${infoTypeParam}`}>
 									<TokenButton>
-										<CurrencyLogo
-											address={poolData.token0.address}
-											size="24px"
-											chainName={chainName}
-										/>
-										<Text
-											fontSize="16px"
-											ml="4px"
+										<CurrencyLogo currency={token0} size={24} />
+										<span
+											className="text text-base margin-left-2xs"
 											style={{ whiteSpace: 'nowrap' }}
-											width="fit-content"
 										>
 											{`1 ${poolData.token0.symbol} =  ${formatAmount(poolData.token1Price, {
 												notation: 'standard',
 												displayThreshold: 0.001,
 												tokenPrecision: hasSmallDifference ? 'enhanced' : 'normal',
 											})} ${poolData.token1.symbol}`}
-										</Text>
+										</span>
 									</TokenButton>
 								</NextLinkFromReactRouter>
-								<NextLinkFromReactRouter
-									to={`/info/tokens/${poolData.token1.address}${infoTypeParam}`}
-								>
-									<TokenButton ml={[null, null, '10px']}>
-										<CurrencyLogo
-											address={poolData.token1.address}
-											size="24px"
-											chainName={chainName}
-										/>
-										<Text
-											fontSize="16px"
-											ml="4px"
+								<NextLinkFromReactRouter to={`/info/tokens/${poolData.token1.address}${infoTypeParam}`}>
+									<TokenButton>
+										<CurrencyLogo currency={token1} size={24} />
+										<span
+											className="text text-base margin-left-2xs"
 											style={{ whiteSpace: 'nowrap' }}
-											width="fit-content"
 										>
 											{`1 ${poolData.token1.symbol} =  ${formatAmount(poolData.token0Price, {
 												notation: 'standard',
 												displayThreshold: 0.001,
 												tokenPrecision: hasSmallDifference ? 'enhanced' : 'normal',
 											})} ${poolData.token0.symbol}`}
-										</Text>
+										</span>
 									</TokenButton>
 								</NextLinkFromReactRouter>
-							</Flex>
-							<Flex>
+							</Row>
+							<Row>
 								<NextLinkFromReactRouter
-									to={`/add/${poolData.token0.address}/${poolData.token1.address}?chain=${CHAIN_QUERY_NAME[chainId]}`}
+									to={`/add/${poolData.token0.address}/${poolData.token1.address}`}
 								>
-									<Button mr="8px" variant="secondary">
-										{t('Add Liquidity')}
-									</Button>
+									<NormalButton className="margin-right-xs">{t('Add Liquidity')}</NormalButton>
 								</NextLinkFromReactRouter>
 								<NextLinkFromReactRouter
-									to={`/swap?inputCurrency=${poolData.token0.address}&outputCurrency=${poolData.token1.address}&chainId=${multiChainId[chainName]}`}
+									to={`/swap?inputCurrency=${poolData.token0.address}&outputCurrency=${poolData.token1.address}`}
 								>
-									<Button>{t('Trade')}</Button>
+									<NormalButton>{t('Trade')}</NormalButton>
 								</NextLinkFromReactRouter>
-							</Flex>
-						</Flex>
-					</Flex>
+							</Row>
+						</Row>
+					</Row>
 					<ContentLayout>
-						<Box>
+						<div>
 							<Card>
-								<Box p="24px">
-									<Flex justifyContent="space-between">
-										<Flex flex="1" flexDirection="column">
-											<Text color="secondary" bold fontSize="12px" textTransform="uppercase">
+								<div p="24px">
+									<Row className="flex-justify-space-between">
+										<div>
+											<span className="text text-bold secondary-color-theme text-xs text-uppercase">
 												{t('Liquidity')}
-											</Text>
-											<Text fontSize="24px" bold>
+											</span>
+											<span className="money money-bold money-md">
 												${formatAmount(poolData.liquidityUSD)}
-											</Text>
+											</span>
 											<Percent value={poolData.liquidityUSDChange} />
-										</Flex>
-										<Flex flex="1" flexDirection="column">
-											<Text color="secondary" bold fontSize="12px" textTransform="uppercase">
+										</div>
+										<div>
+											<span className="text text-xs text-bold secondary-color-theme text-uppercase">
 												{t('LP reward APR')}
-											</Text>
-											<Text fontSize="24px" bold>
+											</span>
+											<span className="text text-bold text-lg">
 												{formatAmount(isStableSwap ? stableAPR : poolData.lpApr7d)}%
-											</Text>
-											<Flex alignItems="center">
-												<Text mr="4px" fontSize="12px" color="textSubtle">
+											</span>
+											<Row className="flex-align-center">
+												<span className="text text-sm margin-right-2xs">
 													{t('7D performance')}
-												</Text>
+												</span>
 												<span ref={targetRef}>
-													<HelpIcon color="textSubtle" />
+													<Icon icon={IconEnum.ICON_HELP} />
 												</span>
 												{tooltipVisible && tooltip}
-											</Flex>
-										</Flex>
-									</Flex>
-									<Text color="secondary" bold mt="24px" fontSize="12px" textTransform="uppercase">
+											</Row>
+										</div>
+									</Row>
+									<span className="text text-sm text-bold text-uppercase secondary-color-theme">
 										{t('Total Tokens Locked')}
-									</Text>
+									</span>
 									<LockedTokensContainer>
-										<Flex justifyContent="space-between">
-											<Flex>
-												<CurrencyLogo
-													address={poolData.token0.address}
-													size="24px"
-													chainName={chainName}
-												/>
-												<Text small color="textSubtle" ml="8px">
+										<Row className="flex-justify-space-between">
+											<Row>
+												<CurrencyLogo currency={token0} size={24} />
+												<span className="margin-left-xs text text-sm">
 													{poolData.token0.symbol}
-												</Text>
-											</Flex>
-											<Text small>{formatAmount(poolData.liquidityToken0)}</Text>
-										</Flex>
-										<Flex justifyContent="space-between">
-											<Flex>
-												<CurrencyLogo
-													address={poolData.token1.address}
-													size="24px"
-													chainName={chainName}
-												/>
-												<Text small color="textSubtle" ml="8px">
+												</span>
+											</Row>
+											<span className="text text-sm">
+												{formatAmount(poolData.liquidityToken0)}
+											</span>
+										</Row>
+										<Row className="flex-justify-space-between">
+											<Row>
+												<CurrencyLogo currency={token1} size={24} />
+												<span className="margin-left-xs text text-sm">
 													{poolData.token1.symbol}
-												</Text>
-											</Flex>
-											<Text small>{formatAmount(poolData.liquidityToken1)}</Text>
-										</Flex>
+												</span>
+											</Row>
+											<span className="text text-sm">
+												{formatAmount(poolData.liquidityToken1)}
+											</span>
+										</Row>
 									</LockedTokensContainer>
-								</Box>
+								</div>
 							</Card>
-							<Card mt="16px">
-								<Flex flexDirection="column" p="24px">
+							<Card className="margin-left-md">
+								<Row className="padding-lg">
 									<ButtonMenu
 										activeIndex={showWeeklyData}
 										onItemClick={index => setShowWeeklyData(index)}
-										scale="sm"
-										variant="subtle"
+										size="sm"
 									>
 										<ButtonMenuItem width="100%">{t('24H')}</ButtonMenuItem>
 										<ButtonMenuItem width="100%">{t('7D')}</ButtonMenuItem>
 									</ButtonMenu>
-									<Flex mt="24px">
-										<Flex flex="1" flexDirection="column">
-											<Text color="secondary" fontSize="12px" bold textTransform="uppercase">
+									<Row className="margin-top-lg">
+										<div>
+											<span className="text text-xs text-bold text-uppercase secondary-color-theme">
 												{showWeeklyData ? t('Volume 7D') : t('Volume 24H')}
-											</Text>
-											<Text fontSize="24px" bold>
+											</span>
+											<span className="money money-md money-bold">
 												$
 												{showWeeklyData
 													? formatAmount(poolData.volumeUSDWeek)
 													: formatAmount(poolData.volumeUSD)}
-											</Text>
+											</span>
 											<Percent
 												value={
 													showWeeklyData
@@ -298,15 +266,15 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 														: poolData.volumeUSDChange
 												}
 											/>
-										</Flex>
-										<Flex flex="1" flexDirection="column">
-											<Text color="secondary" fontSize="12px" bold textTransform="uppercase">
+										</div>
+										<div>
+											<span className="secondary-color-theme text text-xs text-bold text-uppercase">
 												{showWeeklyData ? t('LP reward fees 7D') : t('LP reward fees 24H')}
-											</Text>
-											<Text fontSize="24px" bold>
+											</span>
+											<span className="money money-md money-bold">
 												${formatAmount(feeDisplay)}
-											</Text>
-											<Text color="textSubtle" fontSize="12px">
+											</span>
+											<span color="textSubtle" className="text text-xs">
 												{t('out of $%totalFees% total fees', {
 													totalFees: isStableSwap
 														? formatAmount(stableTotalFee)
@@ -314,24 +282,24 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 														? formatAmount(poolData.totalFees7d)
 														: formatAmount(poolData.totalFees24h),
 												})}
-											</Text>
-										</Flex>
-									</Flex>
-								</Flex>
+											</span>
+										</div>
+									</Row>
+								</Row>
 							</Card>
-						</Box>
+						</div>
 						<ChartCard variant="pool" chartData={chartData} />
 					</ContentLayout>
-					<Heading mb="16px" mt="40px" scale="lg">
+					<Heading className="margin-bottom-md margin-top-2xl" scale="lg">
 						{t('Transactions')}
 					</Heading>
 					<TransactionTable transactions={transactions} />
 				</>
 			) : (
-				<Flex mt="80px" justifyContent="center">
+				<Row style={{ marginTop: 80, justifyContent: 'center' }}>
 					<Spinner />
-				</Flex>
-			)} */}
+				</Row>
+			)}
 		</Page>
 	)
 }

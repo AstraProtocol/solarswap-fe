@@ -43,16 +43,7 @@ import { ISolarPair } from '../config/abi/types/ISolarPair'
  * Helper hooks to get specific contracts (by ABI)
  */
 
-// export const useIfoV1Contract = (address: string) => {
-// 	const { library } = useActiveWeb3React()
-// 	return useMemo(() => getIfoV1Contract(address, library.getSigner()), [address, library])
-// }
-
-// export const useIfoV2Contract = (address: string) => {
-// 	const { library } = useActiveWeb3React()
-// 	return useMemo(() => getIfoV2Contract(address, library.getSigner()), [address, library])
-// }
-
+  
 export const useERC20 = (address: string, withSignerIfPossible = true) => {
 	const { library, account } = useActiveWeb3React()
 	return useMemo(

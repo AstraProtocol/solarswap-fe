@@ -3,10 +3,10 @@ import { INFO_CLIENT } from 'config/constants/endpoints'
 import { ONE_DAY_UNIX, ONE_HOUR_SECONDS } from 'config/constants/info'
 import { getUnixTime, startOfHour, sub } from 'date-fns'
 import { Block } from 'state/info/types'
-import { getBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
-import { multiQuery } from 'views/Info/utils/infoQueryHelpers'
 import { getDerivedPrices, getDerivedPricesQueryConstructor } from '../queries/getDerivedPrices'
 import { PairDataTimeWindowEnum } from '../types'
+import { multiQuery } from 'views/Info/utils/infoQueryHelpers'
+import { getBlocksFromTimestamps } from 'utils/getBlocksFromTimestamps'
 
 const getTokenDerivedBnbPrices = async (tokenAddress: string, blocks: Block[]) => {
 	const prices: any | undefined = await multiQuery(

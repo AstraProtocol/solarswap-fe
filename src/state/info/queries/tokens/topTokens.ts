@@ -1,8 +1,8 @@
 import { TOKEN_BLACKLIST } from 'config/constants/info'
 import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
+import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import { infoClient } from 'utils/graphql'
-import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
 
 interface TopTokensResponse {
 	tokenDayDatas: {
@@ -38,6 +38,14 @@ const fetchTopTokens = async (timestamp24hAgo: number): Promise<string[]> => {
 	}
 }
 
+export const fetchTokenAddresses = async () => {
+	const [timestamp24hAgo] = getDeltaTimestamps()
+
+	const addresses = await fetchTopTokens(timestamp24hAgo)
+
+	return addresses
+}
+
 /**
  * Fetch top addresses by volume
  */
@@ -57,5 +65,7 @@ const useTopTokenAddresses = (): string[] => {
 
 	return topTokenAddresses
 }
+
+
 
 export default useTopTokenAddresses

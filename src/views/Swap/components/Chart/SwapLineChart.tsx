@@ -1,9 +1,9 @@
 import { useEffect, Dispatch, SetStateAction } from 'react'
 import { ResponsiveContainer, XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts'
 
-import { LineChartLoader } from 'views/Info/components/ChartLoaders'
 import { PairDataTimeWindowEnum } from 'state/swap/types'
 import { useTranslation } from 'contexts/Localization'
+import { LineChartLoader } from 'components/ChartLoaders'
 
 export type SwapLineChartProps = {
 	data: any[]

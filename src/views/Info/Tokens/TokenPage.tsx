@@ -15,7 +15,6 @@ import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable
 import Percent from 'views/Info/components/Percent'
 import SaveIcon from 'views/Info/components/SaveIcon'
 import useCMCLink from 'views/Info/hooks/useCMCLink'
-import { useTranslation } from 'contexts/Localization'
 import {
 	usePoolDatasSWR,
 	usePoolsForTokenSWR,
@@ -29,27 +28,22 @@ import {
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import { CHAIN_ID } from 'config/constants/networks'
 import useInfoUserSavedTokensAndPools from 'hooks/useInfoUserSavedTokensAndPoolsList'
+import style from './style.module.scss'
+import Card from 'components/Card'
+import { NextLinkFromReactRouter } from 'components/NextLink'
+import { NormalButton, Row, Typography } from '@astraprotocol/astra-ui'
+import truncateHash from 'utils/truncateHash'
+import { subgraphTokenName, subgraphTokenSymbol } from 'state/info/constant'
+import Heading from 'components/Heading'
+import clsx from 'clsx'
+import { useTranslation } from 'contexts/Localization'
+import { CurrencyLogo } from 'components/Logo'
+import { Breadcrumbs } from 'components/Breadcrumbs'
+import { Token } from '@solarswap/sdk'
+import Spinner from 'components/Loader/Spinner'
 
-// const ContentLayout = styled.div`
-// 	margin-top: 16px;
-// 	display: grid;
-// 	grid-template-columns: 260px 1fr;
-// 	grid-gap: 1em;
-// 	@media screen and (max-width: 800px) {
-// 		grid-template-columns: 1fr;
-// 		grid-template-rows: 1fr 1fr;
-// 	}
-// `
+const ContentLayout = ({ children }) => <div className={style.contentLayout}>{children}</div>
 
-// const StyledCMCLink = styled(UIKitLink)`
-// 	width: 24px;
-// 	height: 24px;
-// 	margin-right: 8px;
-
-// 	& :hover {
-// 		opacity: 0.8;
-// 	}
-// `
 const DEFAULT_TIME_WINDOW: Duration = { weeks: 1 }
 
 const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = ({ routeAddress }) => {
@@ -60,8 +54,6 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 
 	// In case somebody pastes checksummed address into url (since GraphQL expects lowercase address)
 	const address = routeAddress.toLowerCase()
-
-	const cmcLink = useCMCLink(address)
 
 	const tokenData = useTokenDataSWR(address)
 	const poolsForToken = usePoolsForTokenSWR(address)
@@ -88,175 +80,152 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 		return undefined
 	}, [priceData, tokenData])
 
-	// const chainPath = useMultiChainPath()
-	// const chainName = useChainNameByQuery()
 	const infoTypeParam = useStableSwapPath()
 
-	return null
-	// return (
-	// 	<Page>
-	// 		<NextSeo title={tokenData?.symbol} />
-	// 		{tokenData ? (
-	// 			!tokenData.exists ? (
-	// 				<Card>
-	// 					<Box p="16px">
-	// 						<Text>
-	// 							{t('No pair has been created with this token yet. Create one')}
-	// 							<NextLinkFromReactRouter
-	// 								style={{ display: 'inline', marginLeft: '6px' }}
-	// 								to={`/add/${address}`}
-	// 							>
-	// 								{t('here.')}
-	// 							</NextLinkFromReactRouter>
-	// 						</Text>
-	// 					</Box>
-	// 				</Card>
-	// 			) : (
-	// 				<>
-	// 					{/* Stuff on top */}
-	// 					<Flex justifyContent="space-between" mb="24px" flexDirection={['column', 'column', 'row']}>
-	// 						<Breadcrumbs mb="32px">
-	// 							<NextLinkFromReactRouter to={`/info${infoTypeParam}`}>
-	// 								<Text color="primary">{t('Info')}</Text>
-	// 							</NextLinkFromReactRouter>
-	// 							<NextLinkFromReactRouter to={`/info/tokens${infoTypeParam}`}>
-	// 								<Text color="primary">{t('Tokens')}</Text>
-	// 							</NextLinkFromReactRouter>
-	// 							<Flex>
-	// 								<Text mr="8px">{tokenData.symbol}</Text>
-	// 								<Text>{`(${truncateHash(address)})`}</Text>
-	// 							</Flex>
-	// 						</Breadcrumbs>
-	// 						<Flex justifyContent={[null, null, 'flex-end']} mt={['8px', '8px', 0]}>
-	// 							<ScanLink
-	// 								mr="8px"
-	// 								color="primary"
-	// 								chainId={multiChainId[chainName]}
-	// 								href={getAstraExplorerLink(address, 'address')}
-	// 							>
-	// 								{t('View on %site%', { site: multiChainScan[chainName] })}
-	// 							</ScanLink>
-	// 							{cmcLink && (
-	// 								<StyledCMCLink href={cmcLink} rel="noopener noreferrer nofollow" target="_blank">
-	// 									<Image
-	// 										src="/images/CMC-logo.svg"
-	// 										height={22}
-	// 										width={22}
-	// 										alt={t('View token on CoinMarketCap')}
-	// 									/>
-	// 								</StyledCMCLink>
-	// 							)}
-	// 							<SaveIcon fill={savedTokens.includes(address)} onClick={() => addToken(address)} />
-	// 						</Flex>
-	// 					</Flex>
-	// 					<Flex justifyContent="space-between" flexDirection={['column', 'column', 'column', 'row']}>
-	// 						<Flex flexDirection="column" mb={['8px', null]}>
-	// 							<Flex alignItems="center">
-	// 								<CurrencyLogo size="32px" address={address} chainName={chainName} />
-	// 								<Text
-	// 									ml="12px"
-	// 									bold
-	// 									lineHeight="0.7"
-	// 									fontSize={isXs || isSm ? '24px' : '40px'}
-	// 									id="info-token-name-title"
-	// 								>
-	// 									{subgraphTokenName[tokenData.address] ?? tokenData.name}
-	// 								</Text>
-	// 								<Text
-	// 									ml="12px"
-	// 									lineHeight="1"
-	// 									color="textSubtle"
-	// 									fontSize={isXs || isSm ? '14px' : '20px'}
-	// 								>
-	// 									({subgraphTokenSymbol[tokenData.address] ?? tokenData.symbol})
-	// 								</Text>
-	// 							</Flex>
-	// 							<Flex mt="8px" ml="46px" alignItems="center">
-	// 								<Text mr="16px" bold fontSize="24px">
-	// 									${formatAmount(tokenData.priceUSD, { notation: 'standard' })}
-	// 								</Text>
-	// 								{/* <Percent value={tokenData.priceUSDChange} fontWeight={600} /> */}
-	// 							</Flex>
-	// 						</Flex>
-	// 						<Flex>
-	// 							<NextLinkFromReactRouter to={`/add/${address}`}>
-	// 								<Button mr="8px" variant="secondary">
-	// 									{t('Add Liquidity')}
-	// 								</Button>
-	// 							</NextLinkFromReactRouter>
-	// 							<NextLinkFromReactRouter
-	// 								to={`/swap?outputCurrency=${address}&chainId=${multiChainId[chainName]}`}
-	// 							>
-	// 								<Button>{t('Trade')}</Button>
-	// 							</NextLinkFromReactRouter>
-	// 						</Flex>
-	// 					</Flex>
+	const token = new Token(parseInt(CHAIN_ID), address, 18, '')
+	return (
+		<Page>
+			<NextSeo title={tokenData?.symbol} />
+			{tokenData ? (
+				!tokenData.exists ? (
+					<Card>
+						<div className="padding-md">
+							<span>
+								{t('No pair has been created with this token yet. Create one')}
+								<NextLinkFromReactRouter
+									style={{ display: 'inline', marginLeft: '6px' }}
+									to={`/add/${address}`}
+								>
+									{t('here.')}
+								</NextLinkFromReactRouter>
+							</span>
+						</div>
+					</Card>
+				) : (
+					<>
+						{/* Stuff on top */}
+						<Row className="flex-justify-center margin-bottom-lg">
+							<Breadcrumbs className="margin-bottom-lg">
+								<NextLinkFromReactRouter to={`/info${infoTypeParam}`}>
+									<span className="text text-base">{t('Info')}</span>
+								</NextLinkFromReactRouter>
+								<NextLinkFromReactRouter to={`/info/tokens${infoTypeParam}`}>
+									<span className="text text-base">{t('Tokens')}</span>
+								</NextLinkFromReactRouter>
+								<Row>
+									<span className="text text-base margin-right-sm">{tokenData.symbol}</span>
+									<span>{`(${truncateHash(address)})`}</span>
+								</Row>
+							</Breadcrumbs>
+							<Row className="margin-top-sm">
+								<Typography.Link target="_blank" href={getAstraExplorerLink(address, 'address')}>
+									({t('View on AstraExplorer')})
+								</Typography.Link>
+								<SaveIcon fill={savedTokens.includes(address)} onClick={() => addToken(address)} />
+							</Row>
+						</Row>
+						<Row className="flex-justify-center">
+							<div className="margin-bottom-sm">
+								<Row className="flex-align-center">
+									<CurrencyLogo size={32} currency={token} />
+									<span
+										className={clsx('text text-bold margin-left-sm text-2xl', {
+											['text-lg']: isXs || isSm,
+										})}
+										id="info-token-name-title"
+									>
+										{subgraphTokenName[tokenData.address] ?? tokenData.name}
+									</span>
+									<span
+										className={clsx('text text-bold margin-left-sm text-lg', {
+											['text-sm']: isXs || isSm,
+										})}
+									>
+										({subgraphTokenSymbol[tokenData.address] ?? tokenData.symbol})
+									</span>
+								</Row>
+								<Row className="margin-top-sm margin-left-2xl flex-align-center">
+									<span className="margin-right-md text text-bold text-lg">
+										${formatAmount(tokenData.priceUSD, { notation: 'standard' })}
+									</span>
+									{/* <Percent value={tokenData.priceUSDChange} fontWeight={600} /> */}
+								</Row>
+							</div>
+							<Row>
+								<NextLinkFromReactRouter to={`/add/${address}`}>
+									<NormalButton className="margin-right-sm">{t('Add Liquidity')}</NormalButton>
+								</NextLinkFromReactRouter>
+								<NextLinkFromReactRouter to={`/swap?outputCurrency=${address}`}>
+									<button>{t('Trade')}</button>
+								</NextLinkFromReactRouter>
+							</Row>
+						</Row>
 
-	// 					{/* data on the right side of chart */}
-	// 					<ContentLayout>
-	// 						<Card>
-	// 							<Box p="24px">
-	// 								<Text bold small color="secondary" fontSize="12px" textTransform="uppercase">
-	// 									{t('Liquidity')}
-	// 								</Text>
-	// 								<Text bold fontSize="24px">
-	// 									${formatAmount(tokenData.liquidityUSD)}
-	// 								</Text>
-	// 								<Percent value={tokenData.liquidityUSDChange} />
+						{/* data on the right side of chart */}
+						<ContentLayout>
+							<Card>
+								<div className="padding-lg">
+									<span className="text text-sm text-bold secondary-color-normal text-uppercase">
+										{t('Liquidity')}
+									</span>
+									<span className="money money-md money-bold">
+										${formatAmount(tokenData.liquidityUSD)}
+									</span>
+									<Percent value={tokenData.liquidityUSDChange} />
 
-	// 								<Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
-	// 									{t('Volume 24H')}
-	// 								</Text>
-	// 								<Text bold fontSize="24px" textTransform="uppercase">
-	// 									${formatAmount(tokenData.volumeUSD)}
-	// 								</Text>
-	// 								<Percent value={tokenData.volumeUSDChange} />
+									<span className="margin-top-lg text text-xs secondary-color-normal text-uppercase">
+										{t('Volume 24H')}
+									</span>
+									<span className="money money-md money-bold money-uppercase">
+										${formatAmount(tokenData.volumeUSD)}
+									</span>
+									<Percent value={tokenData.volumeUSDChange} />
 
-	// 								<Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
-	// 									{t('Volume 7D')}
-	// 								</Text>
-	// 								<Text bold fontSize="24px">
-	// 									${formatAmount(tokenData.volumeUSDWeek)}
-	// 								</Text>
+									<span className="margin-top-lg text text-bold text-xs text-uppercase">
+										{t('Volume 7D')}
+									</span>
+									<span className="money money-md money-bold">
+										${formatAmount(tokenData.volumeUSDWeek)}
+									</span>
 
-	// 								<Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
-	// 									{t('Transactions 24H')}
-	// 								</Text>
-	// 								<Text bold fontSize="24px">
-	// 									{formatAmount(tokenData.txCount, { isInteger: true })}
-	// 								</Text>
-	// 							</Box>
-	// 						</Card>
-	// 						{/* charts card */}
-	// 						<ChartCard
-	// 							variant="token"
-	// 							chartData={chartData}
-	// 							tokenData={tokenData}
-	// 							tokenPriceData={adjustedPriceData}
-	// 						/>
-	// 					</ContentLayout>
+									<span className="text text-xs text-bold secondary-color-normal text-uppercase margin-top-lg">
+										{t('Transactions 24H')}
+									</span>
+									<span className="money money-md money-bold">
+										{formatAmount(tokenData.txCount, { isInteger: true })}
+									</span>
+								</div>
+							</Card>
+							{/* charts card */}
+							<ChartCard
+								variant="token"
+								chartData={chartData}
+								tokenData={tokenData}
+								tokenPriceData={adjustedPriceData}
+							/>
+						</ContentLayout>
 
-	// 					{/* pools and transaction tables */}
-	// 					<Heading scale="lg" mb="16px" mt="40px">
-	// 						{t('Pairs')}
-	// 					</Heading>
+						{/* pools and transaction tables */}
+						<Heading scale="lg" style={{ marginBottom: 16, marginTop: 40 }}>
+							{t('Pairs')}
+						</Heading>
 
-	// 					<PoolTable poolDatas={poolDatas} />
+						<PoolTable poolDatas={poolDatas} />
 
-	// 					<Heading scale="lg" mb="16px" mt="40px">
-	// 						{t('Transactions')}
-	// 					</Heading>
+						<Heading scale="lg" style={{ marginBottom: 16, marginTop: 40 }}>
+							{t('Transactions')}
+						</Heading>
 
-	// 					<TransactionTable transactions={transactions} />
-	// 				</>
-	// 			)
-	// 		) : (
-	// 			<Flex mt="80px" justifyContent="center">
-	// 				<Spinner />
-	// 			</Flex>
-	// 		)}
-	// 	</Page>
-	// )
+						<TransactionTable transactions={transactions} />
+					</>
+				)
+			) : (
+				<Row style={{ justifyContent: 'center', marginTop: 80 }}>
+					<Spinner />
+				</Row>
+			)}
+		</Page>
+	)
 }
 
 export default TokenPage

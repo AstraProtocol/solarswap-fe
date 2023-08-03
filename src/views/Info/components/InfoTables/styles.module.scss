@@ -41,3 +41,34 @@
 	// background-color: ${({ theme }) => theme.colors.cardBorder};
 	width: 100%;
 }
+
+.responsiveGrid {
+	display: grid;
+	grid-gap: 1em;
+	align-items: center;
+	grid-template-columns: 20px 3.5fr repeat(5, 1fr);
+
+	padding: 0 24px;
+	@media screen and (max-width: 900px) {
+		grid-template-columns: 20px 1.5fr repeat(3, 1fr);
+		& :nth-child(4),
+		& :nth-child(5) {
+			display: none;
+		}
+	}
+	@media screen and (max-width: 500px) {
+		grid-template-columns: 20px 1.5fr repeat(1, 1fr);
+		& :nth-child(4),
+		& :nth-child(5),
+		& :nth-child(6),
+		& :nth-child(7) {
+			display: none;
+		}
+	}
+	@media screen and (max-width: 480px) {
+		grid-template-columns: 2.5fr repeat(1, 1fr);
+		> *:nth-child(1) {
+			display: none;
+		}
+	}
+}

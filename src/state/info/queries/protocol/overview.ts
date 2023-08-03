@@ -2,9 +2,10 @@ import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
 import { ProtocolData } from 'state/info/types'
 import { infoClient } from 'utils/graphql'
+import { Block } from '../types'
+import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import { useBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
 import { getChangeForPeriod, getPercentChange } from 'views/Info/utils/infoDataHelpers'
-import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
 
 interface SolarFactory {
 	totalTransactions: string
@@ -14,6 +15,7 @@ interface SolarFactory {
 
 interface OverviewResponse {
 	solarFactories: SolarFactory[]
+	factories?: SolarFactory[]
 }
 
 /**
@@ -38,13 +40,26 @@ const getOverviewData = async (block?: number): Promise<{ data?: OverviewRespons
 	}
 }
 
-const formatSolarFactoryResponse = (rawSolarFactory?: SolarFactory) => {
+const formatSolarFactoryResponse = (rawSolarFactory?: SolarFactory[]) => {
 	if (rawSolarFactory) {
-		return {
-			totalTransactions: parseFloat(rawSolarFactory.totalTransactions),
-			totalVolumeUSD: parseFloat(rawSolarFactory.totalVolumeUSD),
-			totalLiquidityUSD: parseFloat(rawSolarFactory.totalLiquidityUSD),
-		}
+		return rawSolarFactory.reduce(
+			(acc, cur) => {
+				acc.totalLiquidityUSD += parseFloat(cur.totalLiquidityUSD)
+				acc.totalTransactions += parseFloat(cur.totalTransactions)
+				acc.totalVolumeUSD += parseFloat(cur.totalVolumeUSD)
+				return acc
+			},
+			{
+				totalLiquidityUSD: 0,
+				totalTransactions: 0,
+				totalVolumeUSD: 0,
+			},
+		)
+		// return {
+		// 	totalTransactions: parseFloat(rawSolarFactory.totalTransactions),
+		// 	totalVolumeUSD: parseFloat(rawSolarFactory.totalVolumeUSD),
+		// 	totalLiquidityUSD: parseFloat(rawSolarFactory.totalLiquidityUSD),
+		// }
 	}
 	return null
 }
@@ -68,9 +83,9 @@ const useFetchProtocolData = (): ProtocolFetchState => {
 			const { error: error24, data: data24 } = await getOverviewData(block24?.number ?? undefined)
 			const { error: error48, data: data48 } = await getOverviewData(block48?.number ?? undefined)
 			const anyError = error || error24 || error48
-			const overviewData = formatSolarFactoryResponse(data?.solarFactories?.[0])
-			const overviewData24 = formatSolarFactoryResponse(data24?.solarFactories?.[0])
-			const overviewData48 = formatSolarFactoryResponse(data48?.solarFactories?.[0])
+			const overviewData = formatSolarFactoryResponse(data?.solarFactories)
+			const overviewData24 = formatSolarFactoryResponse(data24?.solarFactories)
+			const overviewData48 = formatSolarFactoryResponse(data48?.solarFactories)
 			const allDataAvailable = overviewData && overviewData24 && overviewData48
 			if (anyError || !allDataAvailable) {
 				setFetchState({
@@ -113,6 +128,45 @@ const useFetchProtocolData = (): ProtocolFetchState => {
 	}, [block24, block48, blockError, fetchState])
 
 	return fetchState
+}
+
+export const fetchProtocolData = async (block24: Block, block48: Block) => {
+	const [{ data }, { data: data24 }, { data: data48 }] = await Promise.all([
+		getOverviewData(),
+		getOverviewData(block24?.number ?? undefined),
+		getOverviewData(block48?.number ?? undefined),
+	])
+	if (data.factories && data.factories.length > 0) data.solarFactories = data.factories
+	if (data24.factories && data24.factories.length > 0) data24.solarFactories = data24.factories
+	if (data48.factories && data48.factories.length > 0) data48.solarFactories = data48.factories
+
+	// const anyError = error || error24 || error48
+	const overviewData = formatSolarFactoryResponse(data?.solarFactories)
+	const overviewData24 = formatSolarFactoryResponse(data24?.solarFactories)
+	const overviewData48 = formatSolarFactoryResponse(data48?.solarFactories)
+	// const allDataAvailable = overviewData && overviewData24 && overviewData48
+
+	const [volumeUSD, volumeUSDChange] = getChangeForPeriod(
+		overviewData.totalVolumeUSD,
+		overviewData24.totalVolumeUSD,
+		overviewData48.totalVolumeUSD,
+	)
+	const liquidityUSDChange = getPercentChange(overviewData.totalLiquidityUSD, overviewData24.totalLiquidityUSD)
+	// 24H transactions
+	const [txCount, txCountChange] = getChangeForPeriod(
+		overviewData.totalTransactions,
+		overviewData24.totalTransactions,
+		overviewData48.totalTransactions,
+	)
+	const protocolData: ProtocolData = {
+		volumeUSD,
+		volumeUSDChange: typeof volumeUSDChange === 'number' ? volumeUSDChange : 0,
+		liquidityUSD: overviewData.totalLiquidityUSD,
+		liquidityUSDChange,
+		txCount,
+		txCountChange,
+	}
+	return protocolData
 }
 
 export default useFetchProtocolData

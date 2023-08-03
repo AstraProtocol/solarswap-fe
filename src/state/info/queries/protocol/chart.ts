@@ -64,4 +64,9 @@ const useFetchGlobalChartData = (): {
 	}
 }
 
+export const fetchGlobalChartData = async () => {
+	const { data } = await fetchChartData(getOverviewChartData)
+	return data
+}
+
 export default useFetchGlobalChartData

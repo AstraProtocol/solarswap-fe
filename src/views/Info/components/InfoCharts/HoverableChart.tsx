@@ -49,25 +49,20 @@ const HoverableChart = ({
 		return []
 	}, [chartData, valueProperty])
 
-	return null
-	// return (
-	//   <Box p={['16px', '16px', '24px']}>
-	//     <Text bold color="secondary">
-	//       {title}
-	//     </Text>
-	//     {hover > -1 ? ( // sometimes data is 0
-	//       <Text bold fontSize="24px">
-	//         ${formatAmount(hover)}
-	//       </Text>
-	//     ) : (
-	//       <Skeleton width="128px" height="36px" />
-	//     )}
-	//     <Text>{dateHover ?? currentDate}</Text>
-	//     <Box height="250px">
-	//       <ChartComponent data={formattedData} setHoverValue={setHover} setHoverDate={setDateHover} />
-	//     </Box>
-	//   </Box>
-	// )
+	return (
+		<div className="padding-top-md padding-right-md padding-bottom-lg">
+			<span className="text text-base text-bold secondary-color-theme">{title}</span>
+			{hover > -1 ? ( // sometimes data is 0
+				<span className="money money-md">${formatAmount(hover)}</span>
+			) : (
+				<Skeleton width="128px" height="36px" />
+			)}
+			<span className="text text-base">{dateHover ?? currentDate}</span>
+			<div style={{ height: 250 }}>
+				<ChartComponent data={formattedData} setHoverValue={setHover} setHoverDate={setDateHover} />
+			</div>
+		</div>
+	)
 }
 
 export default memo(HoverableChart)
