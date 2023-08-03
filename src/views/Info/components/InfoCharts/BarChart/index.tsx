@@ -40,7 +40,7 @@ const Chart = ({ data, setHoverValue, setHoverDate }: LineChartProps) => {
 		const chart = createChart(chartRef?.current, {
 			layout: {
 				background: { color: 'transparent' },
-				textColor: '', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
+				textColor: 'red', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
 			},
 			autoSize: true,
 			handleScale: false,
@@ -79,7 +79,7 @@ const Chart = ({ data, setHoverValue, setHoverDate }: LineChartProps) => {
 					labelVisible: false,
 					style: 3,
 					width: 1,
-					color: '', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
+					color: 'red', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
 				},
 			},
 		})
@@ -91,7 +91,7 @@ const Chart = ({ data, setHoverValue, setHoverDate }: LineChartProps) => {
 		})
 
 		const newSeries = chart.addHistogramSeries({
-			color: '', // isDark ? darkColors.primary : lightColors.primary,
+			color: 'red', // isDark ? darkColors.primary : lightColors.primary,
 		})
 		setChart(chart)
 		newSeries.setData(transformedData)

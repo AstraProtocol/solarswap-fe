@@ -6,18 +6,12 @@ import Search from 'views/Info/components/InfoSearch'
 // import { bsc, mainnet, polygonZkEvm } from 'wagmi/chains'
 // import { ASSET_CDN } from 'config/constants/endpoints'
 import { useTranslation } from 'contexts/Localization'
+import style from './style.module.scss'
+import { ButtonMenu, ButtonMenuItem } from '@astraprotocol/astra-ui'
+import { NextLinkFromReactRouter } from 'components/NextLink'
 
-// const NavWrapper = styled(Flex)`
-//   background: ${({ theme }) => theme.colors.gradientCardHeader};
-//   justify-content: space-between;
-//   padding: 20px 16px;
-//   flex-direction: column;
-//   gap: 8px;
-//   ${({ theme }) => theme.mediaQueries.sm} {
-//     padding: 20px 40px;
-//     flex-direction: row;
-//   }
-// `
+const NavWrapper = ({ children }: { children: React.ReactNode }) => <div className={style.navWrapper}>{children}</div>
+
 
 const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
 	const { t } = useTranslation()
@@ -33,48 +27,42 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
 		return 0
 	}, [router.pathname])
 
-	return null
-	// return (
-	//   <>
-	//     <NavWrapper>
-	//       <Flex>
-	//         <Box>
-	//           <ButtonMenu activeIndex={activeIndex} scale="sm" variant="subtle">
-	//             <ButtonMenuItem as={NextLinkFromReactRouter} to={`/info${chainPath}${stableSwapQuery}`}>
-	//               {t('Overview')}
-	//             </ButtonMenuItem>
-	//             <ButtonMenuItem as={NextLinkFromReactRouter} to={`/info${chainPath}/pairs${stableSwapQuery}`}>
-	//               {t('Pairs')}
-	//             </ButtonMenuItem>
-	//             <ButtonMenuItem as={NextLinkFromReactRouter} to={`/info${chainPath}/tokens${stableSwapQuery}`}>
-	//               {t('Tokens')}
-	//             </ButtonMenuItem>
-	//           </ButtonMenu>
-	//         </Box>
-	//         <NetworkSwitcher activeIndex={activeIndex} />
-	//       </Flex>
-	//       <Box width={['100%', '100%', '250px']}>
-	//         <Search />
-	//       </Box>
-	//     </NavWrapper>
-	//     {chainId === ChainId.BSC && !isStableSwap && (
-	//       <Box maxWidth="1200px" m="0 auto">
-	//         <Message my="24px" mx="24px" variant="warning">
-	//           <MessageText fontSize="17px">
-	//             <Text color="warning" as="span">
-	//               {t(
-	//                 'The markets for some of the newer and low-cap tokens displayed on the v2 info page are highly volatile, and as a result, token information may not be accurate.',
-	//               )}
-	//             </Text>
-	//             <Text color="warning" ml="4px" bold as="span">
-	//               {t('Before trading any token, please DYOR, and pay attention to the risk scanner.')}
-	//             </Text>
-	//           </MessageText>
-	//         </Message>
-	//       </Box>
-	//     )}
-	//   </>
-	// )
+	return (
+		<>
+			<NavWrapper>
+				<div>
+					<ButtonMenu activeIndex={activeIndex} size="sm">
+						<ButtonMenuItem as={NextLinkFromReactRouter} to={`/info${stableSwapQuery}`}>
+							{t('Overview')}
+						</ButtonMenuItem>
+						<ButtonMenuItem as={NextLinkFromReactRouter} to={`/info/pairs${stableSwapQuery}`}>
+							{t('Pairs')}
+						</ButtonMenuItem>
+						<ButtonMenuItem as={NextLinkFromReactRouter} to={`/info/tokens${stableSwapQuery}`}>
+							{t('Tokens')}
+						</ButtonMenuItem>
+					</ButtonMenu>
+				</div>
+				<Search />
+			</NavWrapper>
+			{/* {!isStableSwap && (
+				<div style={{maxWidth: 1200}}>
+					<Message my="24px" mx="24px" variant="warning">
+						<MessageText fontSize="17px">
+							<Text color="warning" as="span">
+								{t(
+									'The markets for some of the newer and low-cap tokens displayed on the v2 info page are highly volatile, and as a result, token information may not be accurate.',
+								)}
+							</Text>
+							<Text color="warning" ml="4px" bold as="span">
+								{t('Before trading any token, please DYOR, and pay attention to the risk scanner.')}
+							</Text>
+						</MessageText>
+					</Message>
+				</div>
+			)} */}
+		</>
+	)
 }
 
 // const targetChains = [mainnet, bsc, polygonZkEvm]
@@ -87,9 +75,9 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
 //   const switchNetwork = useCallback(
 //     (chianId: number) => {
 //       const chainPath = multiChainPaths[chianId]
-//       if (activeIndex === 0) router.push(`/info${chainPath}`)
-//       if (activeIndex === 1) router.push(`/info${chainPath}/pairs`)
-//       if (activeIndex === 2) router.push(`/info${chainPath}/tokens`)
+//       if (activeIndex === 0) router.push(`/info`)
+//       if (activeIndex === 1) router.push(`/info/pairs`)
+//       if (activeIndex === 2) router.push(`/info/tokens`)
 //     },
 //     [router, activeIndex],
 //   )

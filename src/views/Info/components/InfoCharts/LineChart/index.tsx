@@ -41,7 +41,7 @@ const LineChart = ({ data, setHoverValue, setHoverDate }: LineChartProps) => {
 		const chart = createChart(chartRef?.current, {
 			layout: {
 				background: { color: 'transparent' },
-				textColor: '', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
+				textColor: 'red', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
 			},
 			autoSize: true,
 			handleScale: false,
@@ -80,7 +80,7 @@ const LineChart = ({ data, setHoverValue, setHoverDate }: LineChartProps) => {
 					labelVisible: false,
 					style: 3,
 					width: 1,
-					color: '', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
+					color: 'red', // isDark ? darkColors.textSubtle : lightColors.textSubtle,
 				},
 			},
 		})
@@ -93,9 +93,9 @@ const LineChart = ({ data, setHoverValue, setHoverDate }: LineChartProps) => {
 
 		const newSeries = chart.addAreaSeries({
 			lineWidth: 2,
-			lineColor: '', // isDark ? darkColors.secondary : lightColors.secondary,
-			topColor: '', //darken(0.01, isDark ? darkColors.secondary : lightColors.secondary),
-			bottomColor: '', //isDark ? darkColors.backgroundDisabled : lightColors.backgroundDisabled,
+			lineColor: 'red', // isDark ? darkColors.secondary : lightColors.secondary,
+			topColor: 'red', //darken(0.01, isDark ? darkColors.secondary : lightColors.secondary),
+			bottomColor: 'red', //isDark ? darkColors.backgroundDisabled : lightColors.backgroundDisabled,
 			priceFormat: {
 				type: 'price',
 				precision: 4,

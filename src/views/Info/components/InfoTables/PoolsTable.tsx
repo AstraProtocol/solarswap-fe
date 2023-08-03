@@ -24,9 +24,11 @@ import { CHAIN_ID } from 'config/constants/networks'
 const ResponsiveGrid = ({ children }) => {
 	if (isArray(children))
 		return (
-			<div className={styles.responsiveGrid}>{children.map((c, index) => cloneElement(c, { key: index }))}</div>
+			<div className={styles.poolTableResponsiveGrid}>
+				{children.map((c, index) => cloneElement(c, { key: index }))}
+			</div>
 		)
-	return <div className={styles.responsiveGrid}>{children}</div>
+	return <div className={styles.poolTableResponsiveGrid}>{children}</div>
 }
 const LinkWrapper = ({ children, to }) => {
 	return (
