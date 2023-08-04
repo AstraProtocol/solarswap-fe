@@ -2,7 +2,7 @@
 /* eslint-disable no-nested-ternary */
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
 import { formatDistanceToNowStrict } from 'date-fns'
-import { Fragment, cloneElement, useCallback, useEffect, useMemo, useState } from 'react'
+import { Fragment, HtmlHTMLAttributes, cloneElement, useCallback, useEffect, useMemo, useState } from 'react'
 // import { useChainNameByQuery } from 'state/info/hooks'
 import { Transaction, TransactionType } from 'state/info/types'
 import { getAstraExplorerLink } from 'utils'
@@ -15,7 +15,7 @@ import { useTranslation } from 'contexts/Localization'
 import style from './styles.module.scss'
 import { isArray } from 'lodash'
 import Skeleton from 'react-loading-skeleton'
-import { Icon, IconEnum, Typography } from '@astraprotocol/astra-ui'
+import { Icon, IconEnum, RadioButton, Row, Typography } from '@astraprotocol/astra-ui'
 import truncateHash from 'utils/truncateHash'
 import { useDomainNameForAddress } from 'hooks/useDomain'
 
@@ -25,9 +25,9 @@ const ResponsiveGrid = ({ children }) => (
 	</div>
 )
 
-const RadioGroup = ({ children }) => (
-	<div className={style.transactionsTableRadioGroup}>
-		{isArray(children) ? children.map((c, index) => cloneElement(c, { key: index })) : children}
+const RadioGroup = (props: HtmlHTMLAttributes<HTMLDivElement>) => (
+	<div className={style.transactionsTableRadioGroup} {...props}>
+		{isArray(props.children) ? props.children.map((c, index) => cloneElement(c, { key: index })) : props.children}
 	</div>
 )
 
@@ -72,27 +72,22 @@ const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> =
 
 	return (
 		<ResponsiveGrid>
-			{/* <ScanLink
-	      chainId={multiChainId[chainName]}
-	      href={getAstraExplorerLink(transaction.hash, 'transaction', multiChainId[chainName])}
-	    >
-	      <Text>
-	        {transaction.type === TransactionType.MINT
-	          ? t('Add %token0% and %token1%', {
-	              token0: token0Symbol,
-	              token1: token1Symbol,
-	            })
-	          : transaction.type === TransactionType.SWAP
-	          ? t('Swap %token0% for %token1%', {
-	              token0: inputTokenSymbol,
-	              token1: outputTokenSymbol,
-	            })
-	          : t('Remove %token0% and %token1%', {
-	              token0: token0Symbol,
-	              token1: token1Symbol,
-	            })}
-	      </Text>
-	    </ScanLink> */}
+			<Typography.Link target="_blank" href={getAstraExplorerLink(transaction.hash, 'transaction')}>
+				{transaction.type === TransactionType.MINT
+					? t('Add %token0% and %token1%', {
+							token0: token0Symbol,
+							token1: token1Symbol,
+					  })
+					: transaction.type === TransactionType.SWAP
+					? t('Swap %token0% for %token1%', {
+							token0: inputTokenSymbol,
+							token1: outputTokenSymbol,
+					  })
+					: t('Remove %token0% and %token1%', {
+							token0: token0Symbol,
+							token1: token1Symbol,
+					  })}
+			</Typography.Link>
 			<span className="text text-base">${formatAmount(transaction.amountUSD)}</span>
 			<span className="text text-base">
 				<span>{`${formatAmount(abs0)} ${transaction.token0Symbol}`}</span>
@@ -188,32 +183,44 @@ const TransactionTable: React.FC<
 		[sortDirection, sortField],
 	)
 	return (
-		<div className="flex width-100">
-			{/* <div className='margin-bottom-md'>
-				<div>
-					<RadioButton onClick={() => handleFilter(undefined)}>
-						<Radio onChange={() => null} scale="sm" checked={txFilter === undefined} />
-						<Text ml="8px">{t('All')}</Text>
+		<div className="flex col width-100">
+			<Row className="margin-bottom-md">
+				<Row>
+					<RadioGroup onClick={() => handleFilter(undefined)}>
+						<RadioButton onClick={() => null} checked={txFilter === undefined} text={''} value={''} />
+						<span className="text text-base margin-left-xs">{t('All')}</span>
 					</RadioGroup>
 
 					<RadioGroup onClick={() => handleFilter(TransactionType.SWAP)}>
-						<Radio onChange={() => null} scale="sm" checked={txFilter === TransactionType.SWAP} />
-						<Text ml="8px">{t('Swaps')}</Text>
+						<RadioButton
+							onClick={() => null}
+							checked={txFilter === TransactionType.SWAP}
+							text={''}
+							value={''}
+						/>
+						<span className="text text-base margin-left-xs">{t('Swaps')}</span>
 					</RadioGroup>
-				</div>
-
-				<div flexDirection={['column', 'row']}>
 					<RadioGroup onClick={() => handleFilter(TransactionType.MINT)}>
-						<Radio onChange={() => null} scale="sm" checked={txFilter === TransactionType.MINT} />
-						<Text ml="8px">{t('Adds')}</Text>
+						<RadioButton
+							onClick={() => null}
+							checked={txFilter === TransactionType.MINT}
+							text={''}
+							value={''}
+						/>
+						<span className="text text-base margin-left-xs">{t('Adds')}</span>
 					</RadioGroup>
 
 					<RadioGroup onClick={() => handleFilter(TransactionType.BURN)}>
-						<Radio onChange={() => null} scale="sm" checked={txFilter === TransactionType.BURN} />
-						<Text ml="8px">{t('Removes')}</Text>
+						<RadioButton
+							onClick={() => null}
+							checked={txFilter === TransactionType.BURN}
+							text={''}
+							value={''}
+						/>
+						<span className="text text-base margin-left-xs">{t('Removes')}</span>
 					</RadioGroup>
-				</div>
-			</div> */}
+				</Row>
+			</Row>
 			<TableWrapper>
 				<ResponsiveGrid>
 					<span className="text text-xs text-bold text-uppercase secondary-color-normal">{t('Action')}</span>
