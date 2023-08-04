@@ -27,11 +27,17 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
 		return 0
 	}, [router.pathname])
 
+	const onNavItemClick = useCallback(index => {
+		if (index == 1) router.push(`/info/pairs${stableSwapQuery}`)
+		else if (index == 2) router.push(`/info/tokens${stableSwapQuery}`)
+		else router.push(`/info${stableSwapQuery}`)
+	}, [])
+
 	return (
 		<>
 			<NavWrapper>
 				<div>
-					<ButtonMenu activeIndex={activeIndex} size="sm">
+					<ButtonMenu activeIndex={activeIndex} size="sm" onItemClick={onNavItemClick}>
 						<ButtonMenuItem as={NextLinkFromReactRouter} to={`/info${stableSwapQuery}`}>
 							{t('Overview')}
 						</ButtonMenuItem>
