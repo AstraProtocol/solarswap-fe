@@ -2,6 +2,7 @@
 /* eslint-disable no-nested-ternary */
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
 import { formatDistanceToNowStrict } from 'date-fns'
+import { vi, enUS } from 'date-fns/locale'
 import { Fragment, HtmlHTMLAttributes, cloneElement, useCallback, useEffect, useMemo, useState } from 'react'
 // import { useChainNameByQuery } from 'state/info/hooks'
 import { Transaction, TransactionType } from 'state/info/types'
@@ -60,7 +61,7 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => {
 }
 
 const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> = ({ transaction }) => {
-	const { t } = useTranslation()
+	const { t, currentLanguage } = useTranslation()
 	const abs0 = Math.abs(transaction.amountToken0)
 	const abs1 = Math.abs(transaction.amountToken1)
 	// const chainName = useChainNameByQuery()
@@ -100,7 +101,9 @@ const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> =
 			</Typography.Link>
 
 			<span className="text text-base">
-				{formatDistanceToNowStrict(parseInt(transaction.timestamp, 10) * 1000)}
+				{formatDistanceToNowStrict(parseInt(transaction.timestamp, 10) * 1000, {
+					locale: currentLanguage.code === 'vi' ? vi : enUS,
+				})}
 			</span>
 		</ResponsiveGrid>
 	)
@@ -223,7 +226,9 @@ const TransactionTable: React.FC<
 			</Row>
 			<TableWrapper>
 				<ResponsiveGrid>
-					<span className="text text-xs text-bold text-uppercase secondary-color-normal">{t('Action')}</span>
+					<span className="text text-xs text-bold text-uppercase secondary-color-normal">
+						{t('Action')}
+					</span>
 					<ClickableColumnHeader
 						className="text text-bold text-xs secondary-color-normal text-uppercase"
 						onClick={() => handleSort(SORT_FIELD.amountUSD)}
