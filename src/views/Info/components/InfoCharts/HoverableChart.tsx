@@ -50,10 +50,10 @@ const HoverableChart = ({
 	}, [chartData, valueProperty])
 
 	return (
-		<div className="padding-top-md padding-right-md padding-bottom-lg">
-			<span className="text text-base text-bold secondary-color-theme">{title}</span>
+		<div className="col padding-top-md padding-right-md padding-bottom-lg">
+			<span className="text text-base text-bold secondary-color-normal">{title}</span>
 			{hover > -1 ? ( // sometimes data is 0
-				<span className="money money-md">${formatAmount(hover)}</span>
+				<span className="money money-md money-bold">${formatAmount(hover)}</span>
 			) : (
 				<Skeleton width="128px" height="36px" />
 			)}

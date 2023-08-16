@@ -61,7 +61,7 @@ const Overview: React.FC<React.PropsWithChildren> = () => {
 
 	return (
 		<Page>
-			<Heading scale="lg" className="margin-left-md" id="info-overview-title">
+			<Heading scale="xl" className="margin-left-md" id="info-overview-title">
 				{t('Solarswap Info & Analytics')}
 			</Heading>
 			<ChartCardsContainer>
@@ -86,15 +86,15 @@ const Overview: React.FC<React.PropsWithChildren> = () => {
 					/>
 				</Card>
 			</ChartCardsContainer>
-			<Heading scale="lg" className="margin-left-md margin-top-xl">
+			<Heading scale="xl" className="margin-left-md margin-top-xl">
 				{t('Top Tokens')}
 			</Heading>
 			<TokenTable tokenDatas={formattedTokens} />
-			<Heading scale="lg" className="margin-left-md margin-top-xl">
+			<Heading scale="xl" className="margin-left-md margin-top-xl">
 				{t('Top Pairs')}
 			</Heading>
 			<PoolTable poolDatas={poolsData} loading={somePoolsAreLoading} />
-			<Heading scale="lg" className="margin-left-md margin-top-xl">
+			<Heading scale="xl" className="margin-left-md margin-top-xl">
 				{t('Transactions')}
 			</Heading>
 			<TransactionTable transactions={transactions} />

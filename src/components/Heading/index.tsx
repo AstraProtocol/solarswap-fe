@@ -11,7 +11,7 @@ const Heading = ({ children, scale, ...props }: Props) => {
 		<div
 			{...props}
 			className={clsx(
-				'text',
+				'text text-bold',
 				style.heading,
 				{
 					['text-lg']: scale === 'lg',

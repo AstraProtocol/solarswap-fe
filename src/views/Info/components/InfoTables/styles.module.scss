@@ -120,3 +120,52 @@
 	margin-top: 8px;
 	cursor: pointer;
 }
+
+.tokensTableResponsiveGrid {
+	display: grid;
+	grid-gap: 1em;
+	align-items: center;
+
+	padding: 0 24px;
+
+	grid-template-columns: 20px 3fr repeat(4, 1fr);
+
+	@media screen and (max-width: 900px) {
+		grid-template-columns: 20px 2fr repeat(3, 1fr);
+		& :nth-child(4) {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 800px) {
+		grid-template-columns: 20px 2fr repeat(2, 1fr);
+		& :nth-child(6) {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 670px) {
+		grid-template-columns: 1fr 1fr;
+		> *:first-child {
+			display: none;
+		}
+		> *:nth-child(3) {
+			display: none;
+		}
+	}
+}
+
+.linkWrapper {
+	text-decoration: none;
+	:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
+}
+
+.currencyLogo {
+	@media screen and (max-width: 670px) {
+		width: 16px;
+		height: 16px;
+	}
+}
