@@ -13,6 +13,9 @@ import styles from './styles.module.scss'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { CurrencyLogo } from 'components/Logo'
 import { Row } from '@astraprotocol/astra-ui'
+import { isArray } from 'lodash'
+import { Token } from '@solarswap/sdk'
+import { CHAIN_ID } from 'config/constants/networks'
 
 /**
  *  Columns on different layouts
@@ -22,16 +25,20 @@ import { Row } from '@astraprotocol/astra-ui'
  *  2 = |   | Name |       |              | Volume 24H |     |
  *  On smallest screen Name is reduced to just symbol
  */
-const ResponsiveGrid = ({ children }) => (
-	<div>
-		{children.map((child, index) =>
-			cloneElement(child, { key: index, className: styles.tokensTableResponsiveGrid }),
-		)}
-	</div>
-)
+const ResponsiveGrid = ({ children }) => {
+	if (isArray(children))
+		return (
+			<div className={styles.tokensTableResponsiveGrid}>
+				{children.map((child, index) => cloneElement(child, { key: index }))}
+			</div>
+		)
+	return <div className={styles.tokensTableResponsiveGrid}>{children}</div>
+}
 
 const LinkWrapper = ({ children, ...props }) => (
-	<NextLinkFromReactRouter {...props} to={props.to} className={styles.linkWrapper} />
+	<NextLinkFromReactRouter {...props} to={props.to} className={styles.linkWrapper} >
+		{isArray(children) ? children.map((c, index) => cloneElement(c, { key: index })) : children}
+	</NextLinkFromReactRouter>
 )
 
 const ResponsiveLogo = ({ ...props }) => <CurrencyLogo {...props} />
@@ -59,30 +66,29 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => {
 const DataRow: React.FC<React.PropsWithChildren<{ tokenData: TokenData; index: number }>> = ({ tokenData, index }) => {
 	const { isXs, isSm } = useMatchBreakpoints()
 	const stableSwapPath = useStableSwapPath()
+	const token = new Token(parseInt(CHAIN_ID), tokenData.address, 18, '')
 	return (
 		<LinkWrapper to={`/info/tokens/${tokenData.address}${stableSwapPath}`}>
 			<ResponsiveGrid>
-				<div>
-					<span>{index + 1}</span>
-				</div>
-				<Row className="flex-align-center">
-					<ResponsiveLogo size={24} address={tokenData.address} />
-					{(isXs || isSm) && <span className="margin-left-xs text text-xs">{tokenData.symbol}</span>}
+				<span className="text text-base">{index + 1}</span>
+				<Row>
+					<ResponsiveLogo size={24} currency={token} />
+					{(isXs || isSm) && <span className="margin-left-xs text text-base">{tokenData.symbol}</span>}
 					{!isXs && !isSm && (
 						<div className="margin-left-xs">
-							<span>{subgraphTokenName[tokenData.address] ?? tokenData.name}</span>
-							<span className="margin-left-xs text text-xs">
+							<span className='text text-base'>{subgraphTokenName[tokenData.address] ?? tokenData.name}</span>
+							<span className="margin-left-xs text text-base">
 								({subgraphTokenSymbol[tokenData.address] ?? tokenData.symbol})
 							</span>
 						</div>
 					)}
 				</Row>
-				<span className="text text-xs">${formatAmount(tokenData.priceUSD, { notation: 'standard' })}</span>
-				<span className="text text-xs">
-					<Percent value={tokenData.priceUSDChange} className="text text-xs" />
+				<span className="text text-base">${formatAmount(tokenData.priceUSD, { notation: 'standard' })}</span>
+				<span className="text text-base">
+					<Percent value={tokenData.priceUSDChange} className="text text-base" />
 				</span>
-				<span className="text text-xs">${formatAmount(tokenData.volumeUSD)}</span>
-				<span className="text text-xs">${formatAmount(tokenData.liquidityUSD)}</span>
+				<span className="text text-base">${formatAmount(tokenData.volumeUSD)}</span>
+				<span className="text text-base">${formatAmount(tokenData.liquidityUSD)}</span>
 			</ResponsiveGrid>
 		</LinkWrapper>
 	)

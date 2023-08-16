@@ -18,10 +18,10 @@ interface TopTokensResponse {
 const fetchTopTokens = async (timestamp24hAgo: number): Promise<string[]> => {
 	try {
 		const query = gql`
-			query topTokens($blacklist: [String!], $timestamp24hAgo: Int) {
+			query topTokens($blacklist: [String!]) {
 				tokenDayDatas(
-					first: 30
-					where: { dailyTxns_gt: 300, id_not_in: $blacklist, date_gt: $timestamp24hAgo }
+					first: 2
+					where: { dailyTxns_gt: 0, id_not_in: $blacklist }
 					orderBy: dailyVolumeUSD
 					orderDirection: desc
 				) {
@@ -29,7 +29,7 @@ const fetchTopTokens = async (timestamp24hAgo: number): Promise<string[]> => {
 				}
 			}
 		`
-		const data = await infoClient.request<TopTokensResponse>(query, { blacklist: TOKEN_BLACKLIST, timestamp24hAgo })
+		const data = await infoClient.request<TopTokensResponse>(query, { blacklist: TOKEN_BLACKLIST })
 		// tokenDayDatas id has compound id "0xTOKENADDRESS-NUMBERS", extracting token address with .split('-')
 		return data.tokenDayDatas.map(t => t.id.split('-')[0])
 	} catch (error) {
@@ -39,7 +39,7 @@ const fetchTopTokens = async (timestamp24hAgo: number): Promise<string[]> => {
 }
 
 export const fetchTokenAddresses = async () => {
-	const [timestamp24hAgo] = getDeltaTimestamps()
+	const [, , , timestamp24hAgo] = getDeltaTimestamps()
 
 	const addresses = await fetchTopTokens(timestamp24hAgo)
 
@@ -65,7 +65,5 @@ const useTopTokenAddresses = (): string[] => {
 
 	return topTokenAddresses
 }
-
-
 
 export default useTopTokenAddresses

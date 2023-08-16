@@ -28,6 +28,7 @@ import { Token } from '@solarswap/sdk'
 import clsx from 'clsx'
 import Card from 'components/Card'
 import { isArray } from 'lodash'
+// import farmsConfig from 'config/constants/farms'
 
 const ContentLayout = ({ children }) => <div className={style.contentLayout}>{children}</div>
 
@@ -39,10 +40,10 @@ const TokenButton = ({ children }) => (
 
 const LockedTokensContainer = ({ children }) => <div className={style.lockedTokensContainer}>{children}</div>
 
-const getFarmConfig = async (chainId: number) => {
-	const config = await import(`@pancakeswap/farms/constants/${chainId}`)
-	return config
-}
+// const getFarmConfig = async (chainId: number) => {
+// 	const config = farmsConfig
+// 	return config
+// }
 
 const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ address: routeAddress }) => {
 	const { isXs, isSm } = useMatchBreakpoints()
@@ -64,20 +65,20 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 	const infoTypeParam = useStableSwapPath()
 	const isStableSwap = checkIsStableSwap()
 	const stableAPR = 0
-	const { data: farmConfig } = useSWRImmutable(isStableSwap && `info/gerFarmConfig/`, () =>
-		getFarmConfig(parseInt(CHAIN_ID)),
-	)
+	// const { data: farmConfig } = useSWRImmutable(isStableSwap && `info/gerFarmConfig/`, () =>
+	// 	getFarmConfig(parseInt(CHAIN_ID)),
+	// )
 
 	const feeDisplay = useMemo(() => {
-		if (isStableSwap && farmConfig) {
-			const stableLpFee =
-				farmConfig?.default.find(d => d.stableSwapAddress?.toLowerCase() === address)?.stableLpFee ?? 0
-			return new BigNumber(stableLpFee)
-				.times(showWeeklyData ? poolData?.volumeOutUSDWeek : poolData?.volumeOutUSD)
-				.toNumber()
-		}
+		// if (isStableSwap && farmConfig) {
+		// 	const stableLpFee =
+		// 		farmConfig?.find(d => d.stableSwapAddress?.toLowerCase() === address)?.stableLpFee ?? 0
+		// 	return new BigNumber(stableLpFee)
+		// 		.times(showWeeklyData ? poolData?.volumeOutUSDWeek : poolData?.volumeOutUSD)
+		// 		.toNumber()
+		// }
 		return showWeeklyData ? poolData?.lpFees7d : poolData?.lpFees24h
-	}, [poolData, isStableSwap, farmConfig, showWeeklyData, address])
+	}, [poolData, showWeeklyData])
 	const stableTotalFee = useMemo(
 		() => (isStableSwap ? new BigNumber(feeDisplay).times(2).toNumber() : 0),
 		[isStableSwap, feeDisplay],
@@ -88,11 +89,11 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 	}, [poolData])
 
 	const token0 = useMemo(
-		() => new Token(parseInt(CHAIN_ID), poolData?.token0.address, 18, ''),
+		() => poolData?.token0?.address ? new Token(parseInt(CHAIN_ID), poolData?.token0?.address, 18, '') : '' as any,
 		[poolData?.token0.address],
 	)
 	const token1 = useMemo(
-		() => new Token(parseInt(CHAIN_ID), poolData?.token1.address, 18, ''),
+		() => poolData?.token1?.address ? new Token(parseInt(CHAIN_ID), poolData?.token1?.address, 18, '') : '' as any,
 		[poolData?.token1.address],
 	)
 	return (
@@ -103,10 +104,10 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 					<Row className="flex-justify-space-between margin-bottom-md">
 						<Breadcrumbs className="margin-bottom-lg">
 							<NextLinkFromReactRouter to={`/info${infoTypeParam}`}>
-								<span color="primary">{t('Info')}</span>
+								<span className='text text-base'>{t('Info')}</span>
 							</NextLinkFromReactRouter>
 							<NextLinkFromReactRouter to={`/info/pairs${infoTypeParam}`}>
-								<span color="primary">{t('Pairs')}</span>
+								<span className='text text-base'>{t('Pairs')}</span>
 							</NextLinkFromReactRouter>
 							<Row>
 								<span className="margin-right-xs text text-base">{`${poolData.token0.symbol} / ${poolData.token1.symbol}`}</span>
@@ -180,7 +181,7 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 					<ContentLayout>
 						<div>
 							<Card>
-								<div p="24px">
+								<div>
 									<Row className="flex-justify-space-between">
 										<div>
 											<span className="text text-bold secondary-color-theme text-xs text-uppercase">

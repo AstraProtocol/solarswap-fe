@@ -16,14 +16,13 @@ interface TopPoolsResponse {
 const fetchTopPools = async (timestamp24hAgo: number): Promise<string[]> => {
 	try {
 		const query = gql`
-			query topPools($blacklist: [String!], $timestamp24hAgo: Int) {
+			query topPools($blacklist: [String!]) {
 				pairDayDatas(
-					first: 30
+					first: 1
 					where: {
-						dailyTxns_gt: 300
+						dailyTxns_gt: 0
 						token0_not_in: $blacklist
 						token1_not_in: $blacklist
-						date_gt: $timestamp24hAgo
 					}
 					orderBy: dailyVolumeUSD
 					orderDirection: desc
@@ -32,7 +31,7 @@ const fetchTopPools = async (timestamp24hAgo: number): Promise<string[]> => {
 				}
 			}
 		`
-		const data = await infoClient.request<TopPoolsResponse>(query, { blacklist: TOKEN_BLACKLIST, timestamp24hAgo })
+		const data = await infoClient.request<TopPoolsResponse>(query, { blacklist: TOKEN_BLACKLIST })
 		// pairDayDatas id has compound id "0xPOOLADDRESS-NUMBERS", extracting pool address with .split('-')
 		return data.pairDayDatas.map(p => p.id.split('-')[0])
 	} catch (error) {
@@ -62,7 +61,7 @@ const useTopPoolAddresses = (): string[] => {
 }
 
 export const fetchTopPoolAddresses = async () => {
-	const [timestamp24hAgo] = getDeltaTimestamps()
+	const [, , , timestamp24hAgo] = getDeltaTimestamps()
 
 	const addresses = await fetchTopPools(timestamp24hAgo)
 	return addresses

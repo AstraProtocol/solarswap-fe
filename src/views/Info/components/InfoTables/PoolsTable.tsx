@@ -78,7 +78,7 @@ const DataRow = ({ poolData, index }: { poolData: PoolData; index: number }) => 
 				<span className="text text-base">{index + 1}</span>
 				<Row>
 					<DoubleCurrencyLogo currency0={token0} currency1={token1} />
-					<span className="margin-left-xs">
+					<span className="text text-base margin-left-xs">
 						{poolData.token0.symbol}/{poolData.token1.symbol}
 					</span>
 				</Row>
