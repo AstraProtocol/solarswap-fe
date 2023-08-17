@@ -1,6 +1,6 @@
 .separator {
     align-items: center;
-    color: var(--border-color);
+    
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -16,6 +16,11 @@
         padding-left: 16px;
         padding-right: 16px;
     }
+
+    > .span {
+        color: var(--border-color);
+    }
+    
 }
 
 .linkWrapper {

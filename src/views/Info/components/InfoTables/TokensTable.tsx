@@ -12,7 +12,7 @@ import { useTranslation } from 'contexts/Localization'
 import styles from './styles.module.scss'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { CurrencyLogo } from 'components/Logo'
-import { Row } from '@astraprotocol/astra-ui'
+import { Icon, IconEnum, Row } from '@astraprotocol/astra-ui'
 import { isArray } from 'lodash'
 import { Token } from '@solarswap/sdk'
 import { CHAIN_ID } from 'config/constants/networks'
@@ -36,7 +36,7 @@ const ResponsiveGrid = ({ children }) => {
 }
 
 const LinkWrapper = ({ children, ...props }) => (
-	<NextLinkFromReactRouter {...props} to={props.to} className={styles.linkWrapper} >
+	<NextLinkFromReactRouter {...props} to={props.to} className={styles.linkWrapper}>
 		{isArray(children) ? children.map((c, index) => cloneElement(c, { key: index })) : children}
 	</NextLinkFromReactRouter>
 )
@@ -76,7 +76,9 @@ const DataRow: React.FC<React.PropsWithChildren<{ tokenData: TokenData; index: n
 					{(isXs || isSm) && <span className="margin-left-xs text text-base">{tokenData.symbol}</span>}
 					{!isXs && !isSm && (
 						<div className="margin-left-xs">
-							<span className='text text-base'>{subgraphTokenName[tokenData.address] ?? tokenData.name}</span>
+							<span className="text text-base">
+								{subgraphTokenName[tokenData.address] ?? tokenData.name}
+							</span>
 							<span className="margin-left-xs text text-base">
 								({subgraphTokenSymbol[tokenData.address] ?? tokenData.symbol})
 							</span>
@@ -208,21 +210,28 @@ const TokenTable: React.FC<
 						return null
 					})}
 					<PageButtons>
-						<Arrow
-							onClick={() => {
-								setPage(page === 1 ? page : page - 1)
-							}}
-						>
-							{/* <ArrowBackIcon color={page === 1 ? 'textDisabled' : 'primary'} /> */}
-						</Arrow>
-						<span className="text text-sm">{t('Page %page% of %maxPage%', { page, maxPage })}</span>
-						<Arrow
-							onClick={() => {
-								setPage(page === maxPage ? page : page + 1)
-							}}
-						>
-							{/* <ArrowForwardIcon color={page === maxPage ? 'textDisabled' : 'primary'} /> */}
-						</Arrow>
+						{maxPage > 1 && page > 1 && (
+							<Arrow
+								onClick={() => {
+									setPage(page === 1 ? page : page - 1)
+								}}
+							>
+								<Icon icon={IconEnum.ICON_ARROW_LEFT} color={page === 1 ? 'textDisabled' : 'primary'} />
+							</Arrow>
+						)}
+						<span className="text text-base">{t('Page %page% of %maxPage%', { page, maxPage })}</span>
+						{maxPage > 1 && page < maxPage && (
+							<Arrow
+								onClick={() => {
+									setPage(page === maxPage ? page : page + 1)
+								}}
+							>
+								<Icon
+									icon={IconEnum.ICON_ARROW_RIGHT}
+									color={page === 1 ? 'textDisabled' : 'primary'}
+								/>
+							</Arrow>
+						)}
 					</PageButtons>
 				</>
 			) : (

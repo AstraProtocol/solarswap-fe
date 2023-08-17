@@ -50,9 +50,6 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 	const { isXs, isSm } = useMatchBreakpoints()
 	const { t } = useTranslation()
 
-	const { savedTokens, addToken } = useInfoUserSavedTokensAndPools(parseInt(CHAIN_ID))
-
-	// In case somebody pastes checksummed address into url (since GraphQL expects lowercase address)
 	const address = routeAddress.toLowerCase()
 
 	const tokenData = useTokenDataSWR(address)
@@ -83,6 +80,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 	const infoTypeParam = useStableSwapPath()
 
 	const token = new Token(parseInt(CHAIN_ID), address, 18, '')
+
 	return (
 		<Page>
 			<NextSeo title={tokenData?.symbol} />
@@ -104,7 +102,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 				) : (
 					<>
 						{/* Stuff on top */}
-						<Row className="flex-justify-center margin-bottom-lg">
+						<Row className="margin-bottom-lg margin-top-sm ">
 							<Breadcrumbs className="margin-bottom-lg">
 								<NextLinkFromReactRouter to={`/info${infoTypeParam}`}>
 									<span className="text text-base">{t('Info')}</span>
@@ -117,14 +115,13 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 									<span>{`(${truncateHash(address)})`}</span>
 								</Row>
 							</Breadcrumbs>
-							<Row className="margin-top-sm">
+							<div>
 								<Typography.Link target="_blank" href={getAstraExplorerLink(address, 'address')}>
 									({t('View on AstraExplorer')})
 								</Typography.Link>
-								<SaveIcon fill={savedTokens.includes(address)} onClick={() => addToken(address)} />
-							</Row>
+							</div>
 						</Row>
-						<Row className="flex-justify-center">
+						<Row className="flex-justify-space-between">
 							<div className="margin-bottom-sm">
 								<Row className="flex-align-center">
 									<CurrencyLogo size={32} currency={token} />
@@ -148,53 +145,61 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 									<span className="margin-right-md text text-bold text-lg">
 										${formatAmount(tokenData.priceUSD, { notation: 'standard' })}
 									</span>
-									{/* <Percent value={tokenData.priceUSDChange} fontWeight={600} /> */}
+									<Percent value={tokenData.priceUSDChange} className="text text-bold" />
 								</Row>
 							</div>
-							<Row>
+							<div>
 								<NextLinkFromReactRouter to={`/add/${address}`}>
-									<NormalButton className="margin-right-sm">{t('Add Liquidity')}</NormalButton>
+									<NormalButton variant="default" classes={{ other: 'margin-right-sm' }}>
+										<span className="text text-base text-bold">{t('Add Liquidity')}</span>
+									</NormalButton>
 								</NextLinkFromReactRouter>
 								<NextLinkFromReactRouter to={`/swap?outputCurrency=${address}`}>
-									<button>{t('Trade')}</button>
+									<NormalButton>
+										<span className="text text-base text-bold">{t('Trade')}</span>
+									</NormalButton>
 								</NextLinkFromReactRouter>
-							</Row>
+							</div>
 						</Row>
 
 						{/* data on the right side of chart */}
 						<ContentLayout>
-							<Card>
-								<div className="padding-lg">
-									<span className="text text-sm text-bold secondary-color-normal text-uppercase">
-										{t('Liquidity')}
-									</span>
-									<span className="money money-md money-bold">
-										${formatAmount(tokenData.liquidityUSD)}
-									</span>
-									<Percent value={tokenData.liquidityUSDChange} />
+							<Card className="padding-lg">
+								<span className="text text-sm text-bold secondary-color-normal text-uppercase">
+									{t('Liquidity')}
+								</span>
+								<br />
+								<span className="money money-md money-bold">
+									${formatAmount(tokenData.liquidityUSD)}
+								</span>
+								<br />
+								<Percent value={tokenData.liquidityUSDChange} />
 
-									<span className="margin-top-lg text text-xs secondary-color-normal text-uppercase">
-										{t('Volume 24H')}
-									</span>
-									<span className="money money-md money-bold money-uppercase">
-										${formatAmount(tokenData.volumeUSD)}
-									</span>
-									<Percent value={tokenData.volumeUSDChange} />
-
-									<span className="margin-top-lg text text-bold text-xs text-uppercase">
-										{t('Volume 7D')}
-									</span>
-									<span className="money money-md money-bold">
-										${formatAmount(tokenData.volumeUSDWeek)}
-									</span>
-
-									<span className="text text-xs text-bold secondary-color-normal text-uppercase margin-top-lg">
-										{t('Transactions 24H')}
-									</span>
-									<span className="money money-md money-bold">
-										{formatAmount(tokenData.txCount, { isInteger: true })}
-									</span>
+								<div className="margin-top-xs text text-sm text-bold secondary-color-normal text-uppercase">
+									{t('Volume 24H')}
 								</div>
+								{/* <br /> */}
+								<span className="money money-md money-bold money-uppercase">
+									${formatAmount(tokenData.volumeUSD)}
+								</span>
+								<br />
+								<Percent value={tokenData.volumeUSDChange} />
+
+								<div className="margin-top-md text text-bold text-sm text-bold text-uppercase secondary-color-normal">
+									{t('Volume 7D')}
+								</div>
+								{/* <br /> */}
+								<span className="money money-md money-bold">
+									${formatAmount(tokenData.volumeUSDWeek)}
+								</span>
+
+								<div className="margin-top-md text text-sm text-bold secondary-color-normal text-uppercase">
+									{t('Transactions 24H')}
+								</div>
+								{/* <br /> */}
+								<span className="money money-md money-bold">
+									{formatAmount(tokenData.txCount, { isInteger: true })}
+								</span>
 							</Card>
 							{/* charts card */}
 							<ChartCard

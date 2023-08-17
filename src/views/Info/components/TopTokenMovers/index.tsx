@@ -35,13 +35,13 @@ const DataCard = ({ tokenData }: { tokenData: TokenData }) => {
 	return (
 		<CardWrapper to={`/info/tokens/${tokenData.address}`}>
 			<TopMoverCard>
-				<Row>
-					<div style={{ width: 32, height: 32 }}>
+				<Row className="flex-align-center">
+					<div>
 						{/* wrapped in a box because of alignment issues between img and svg */}
 						<CurrencyLogo currency={token} size={32} />
 					</div>
 					<div className="margin-left-md">
-						<span>{tokenData.symbol}</span>
+						<span className="text text-base">{tokenData.symbol}</span>
 						<Row className="flex-align-center">
 							<span className="text text-sm margin-right-xs">${formatAmount(tokenData.priceUSD)}</span>
 							<Percent value={tokenData.priceUSDChange} />
@@ -99,7 +99,7 @@ const TopTokenMovers: React.FC<React.PropsWithChildren> = () => {
 
 	return (
 		<Card>
-			<span className="text text-base margin-left-md margin-top-sm">{t('Top Movers')}</span>
+			<span className="text text-base text-bold margin-left-md margin-top-sm">{t('Top Movers')}</span>
 			<ScrollableRow ref={increaseRef}>
 				{topPriceIncrease.map(entry =>
 					entry.data ? (

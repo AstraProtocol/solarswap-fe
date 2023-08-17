@@ -1,0 +1,13 @@
+.buttonMenu {
+	width: 100% !important;
+
+	& > button {
+		width: 100%;
+	}
+
+	opacity: 1;
+
+	&.disabled {
+		opacity: 0.5;
+	}
+}

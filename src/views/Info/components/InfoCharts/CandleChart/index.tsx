@@ -50,7 +50,7 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 						type: ColorType.Solid,
 						color: 'transparent',
 					},
-					textColor: theme.colors.textSubtle,
+					textColor: 'gray',
 					fontFamily: 'Kanit, sans-serif',
 					fontSize: 12,
 				},
@@ -90,8 +90,8 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 						labelVisible: false,
 						style: 3,
 						width: 1,
-						color: theme.colors.textSubtle,
-						labelBackgroundColor: theme.colors.primary,
+						color: 'gray',
+						labelBackgroundColor: 'red',
 					},
 				},
 			})
@@ -104,19 +104,19 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 	useEffect(() => {
 		if (chartCreated && data) {
 			const series = chartCreated.addCandlestickSeries({
-				upColor: '', // baseColors.success,
-				downColor: '', //baseColors.failure,
-				borderDownColor: '', //baseColors.failure,
-				borderUpColor: '', //baseColors.success,
-				wickDownColor: '', //baseColors.failure,
-				wickUpColor: '', //baseColors.success,
+				upColor: '#66c046',
+				downColor: '#e63333',
+				borderDownColor: '#e63333',
+				borderUpColor: '#66c046',
+				wickDownColor: '#e63333',
+				wickUpColor: '#66c046',
 			})
 
 			series.setData(data)
 
 			chartCreated.applyOptions({
 				layout: {
-					textColor: '', //theme.isDark ? darkColors.textSubtle : lightColors.textSubtle,
+					textColor: 'gray', //theme.isDark ? darkColors.textSubtle : lightColors.textSubtle,
 				},
 			})
 
@@ -156,7 +156,9 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 	return (
 		<>
 			{!chartCreated && <CandleChartLoader />}
-			<div ref={chartRef} id="candle-chart" {...rest} />
+			<div style={{ display: 'flex', flex: 1, height: '100%' }}>
+				<div style={{ flex: 1, maxWidth: '100%' }} ref={chartRef} id="candle-chart" {...rest} />
+			</div>
 		</>
 	)
 }

@@ -200,26 +200,30 @@ const PoolTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ poolData
 					})}
 					{loading && <LoadingRow />}
 					<PageButtons>
-						<Arrow
-							onClick={() => {
-								setPage(page === 1 ? page : page - 1)
-							}}
-						>
-							<Icon icon={IconEnum.ICON_ARROW_LEFT} color={page === 1 ? 'textDisabled' : 'primary'} />
-						</Arrow>
+						{maxPage > 1 && page > 1 && (
+							<Arrow
+								onClick={() => {
+									setPage(page === 1 ? page : page - 1)
+								}}
+							>
+								<Icon icon={IconEnum.ICON_ARROW_LEFT} color={page === 1 ? 'textDisabled' : 'primary'} />
+							</Arrow>
+						)}
 
 						<span className="text text-base">{t('Page %page% of %maxPage%', { page, maxPage })}</span>
 
-						<Arrow
-							onClick={() => {
-								setPage(page === maxPage ? page : page + 1)
-							}}
-						>
-							<Icon
-								icon={IconEnum.ICON_ARROW_RIGHT}
-								color={page === maxPage ? 'textDisabled' : 'primary'}
-							/>
-						</Arrow>
+						{maxPage > 1 && page < maxPage && (
+							<Arrow
+								onClick={() => {
+									setPage(page === maxPage ? page : page + 1)
+								}}
+							>
+								<Icon
+									icon={IconEnum.ICON_ARROW_RIGHT}
+									color={page === maxPage ? 'textDisabled' : 'primary'}
+								/>
+							</Arrow>
+						)}
 					</PageButtons>
 				</>
 			) : (

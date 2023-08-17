@@ -7,6 +7,10 @@ import { fromUnixTime } from 'date-fns'
 import dynamic from 'next/dynamic'
 import Skeleton from 'react-loading-skeleton'
 import { useTranslation } from 'contexts/Localization'
+import Card from 'components/Card'
+import { ButtonMenu, ButtonMenuItem } from '@astraprotocol/astra-ui'
+import clsx from 'clsx'
+import styles from './style.module.scss'
 
 const CandleChart = dynamic(() => import('../CandleChart'), {
 	ssr: false,
@@ -83,41 +87,41 @@ const ChartCard: React.FC<React.PropsWithChildren<ChartCardProps>> = ({
 		)
 	}
 
-	return null
-	// return (
-	// 	<Card>
-	// 		<TabToggleGroup>
-	// 			<TabToggle isActive={view === ChartView.VOLUME} onClick={() => setView(ChartView.VOLUME)}>
-	// 				<Text>{t('Volume')}</Text>
-	// 			</TabToggle>
-	// 			<TabToggle isActive={view === ChartView.LIQUIDITY} onClick={() => setView(ChartView.LIQUIDITY)}>
-	// 				<Text>{t('Liquidity')}</Text>
-	// 			</TabToggle>
-	// 			{variant === 'token' && (
-	// 				<TabToggle isActive={view === ChartView.PRICE} onClick={() => setView(ChartView.PRICE)}>
-	// 					<Text>{t('Price')}</Text>
-	// 				</TabToggle>
-	// 			)}
-	// 		</TabToggleGroup>
+	return (
+		<Card>
+			<ButtonMenu
+				className={clsx(styles.buttonMenu)}
+				activeIndex={view}
+				onItemClick={value => setView(value)}
+				size="sm"
+			>
+				<ButtonMenuItem variant="tertiary">
+					<b>{t('Volume')}</b>
+				</ButtonMenuItem>
+				<ButtonMenuItem variant="tertiary">
+					<b>{t('Liquidity')}</b>
+				</ButtonMenuItem>
+				<ButtonMenuItem variant="tertiary">
+					<b>{t('Price')}</b>
+				</ButtonMenuItem>
+			</ButtonMenu>
+			<div className="padding-top-md">
+				{getLatestValueDisplay()}
+				<br />
+				<span className="text text-sm text-bold secondary-color-normal">{hoverDate || currentDate}</span>
+			</div>
 
-	// 		<Flex flexDirection="column" px="24px" pt="24px">
-	// 			{getLatestValueDisplay()}
-	// 			<Text small color="secondary">
-	// 				{hoverDate || currentDate}
-	// 			</Text>
-	// 		</Flex>
-
-	// 		<Box px="24px" height={variant === 'token' ? '250px' : '335px'}>
-	// 			{view === ChartView.LIQUIDITY ? (
-	// 				<LineChart data={formattedTvlData} setHoverValue={setHoverValue} setHoverDate={setHoverDate} />
-	// 			) : view === ChartView.VOLUME ? (
-	// 				<BarChart data={formattedVolumeData} setHoverValue={setHoverValue} setHoverDate={setHoverDate} />
-	// 			) : view === ChartView.PRICE ? (
-	// 				<CandleChart data={tokenPriceData} setValue={setHoverValue} setLabel={setHoverDate} />
-	// 			) : null}
-	// 		</Box>
-	// 	</Card>
-	// )
+			<div style={{ height: variant === 'token' ? '250px' : '335px' }}>
+				{view === ChartView.LIQUIDITY ? (
+					<LineChart data={formattedTvlData} setHoverValue={setHoverValue} setHoverDate={setHoverDate} />
+				) : view === ChartView.VOLUME ? (
+					<BarChart data={formattedVolumeData} setHoverValue={setHoverValue} setHoverDate={setHoverDate} />
+				) : view === ChartView.PRICE ? (
+					<CandleChart data={tokenPriceData} setValue={setHoverValue} setLabel={setHoverDate} />
+				) : null}
+			</div>
+		</Card>
+	)
 }
 
 export default ChartCard

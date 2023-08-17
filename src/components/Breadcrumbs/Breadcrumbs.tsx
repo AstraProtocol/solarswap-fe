@@ -8,7 +8,7 @@ import clsx from 'clsx'
 const Separator = ({ children }) => <div className={style.separator}>{children}</div>
 
 const StyledBreadcrumbs = ({ children, className }) => (
-	<ul className={clsx(style.styledBreadcrumbs, className)}>{children}</ul>
+	<ul className={clsx(style.styledBreadcrumbs, 'row flex-align-center', className)}>{children}</ul>
 )
 
 const insertSeparators = (items: ReactNode[], separator: BreadcrumbsProps['separator']) =>
@@ -39,7 +39,9 @@ const Breadcrumbs: React.FC<React.PropsWithChildren<BreadcrumbsProps>> = ({
 	return (
 		<StyledBreadcrumbs className={className}>
 			{items.map((item, index) => (
-				<li key={`child-${index}`}>{item}</li>
+				<li key={`child-${index}`} className="text text-base" style={{ display: 'flex', flexDirection: 'row' }}>
+					{item}
+				</li>
 			))}
 		</StyledBreadcrumbs>
 	)

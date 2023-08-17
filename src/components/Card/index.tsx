@@ -14,7 +14,7 @@ const Card = ({ width, padding, border, borderRadius, children, className }: Car
 		style={{
 			width: width ?? '100%',
 			padding: padding ?? '1.25rem',
-			border: border,
+			border: border || '2px solid var(--border-color)',
 			borderRadius: borderRadius ?? '16px',
 			backgroundColor: clsx('secondary-bg-color-lightest'),
 		}}

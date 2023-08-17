@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
 
 export interface PercentProps extends HTMLAttributes<HTMLSpanElement> {
@@ -6,13 +7,20 @@ export interface PercentProps extends HTMLAttributes<HTMLSpanElement> {
 
 const Percent: React.FC<React.PropsWithChildren<PercentProps>> = ({ value, ...rest }) => {
 	if (!value || Number.isNaN(value)) {
-		return <span {...rest}>-</span>
+		return null
 	}
 
 	const isNegative = value < 0
 
 	return (
-		<span {...rest} color={isNegative ? 'failure' : 'success'}>
+		<span
+			className={clsx(
+				'text text-base',
+				rest.className,
+				isNegative ? 'alert-color-error' : 'alert-color-successs',
+			)}
+			{...rest}
+		>
 			{isNegative ? '↓' : '↑'}
 			{Math.abs(value).toFixed(2)}%
 		</span>

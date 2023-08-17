@@ -226,9 +226,7 @@ const TransactionTable: React.FC<
 			</Row>
 			<TableWrapper>
 				<ResponsiveGrid>
-					<span className="text text-xs text-bold text-uppercase secondary-color-normal">
-						{t('Action')}
-					</span>
+					<span className="text text-xs text-bold text-uppercase secondary-color-normal">{t('Action')}</span>
 					<ClickableColumnHeader
 						className="text text-bold text-xs secondary-color-normal text-uppercase"
 						onClick={() => handleSort(SORT_FIELD.amountUSD)}
@@ -282,25 +280,32 @@ const TransactionTable: React.FC<
 							</div>
 						) : undefined}
 						<PageButtons>
-							<Arrow
-								onClick={() => {
-									setPage(page === 1 ? page : page - 1)
-								}}
-							>
-								<Icon icon={IconEnum.ICON_ARROW_LEFT} color={page === 1 ? 'textDisabled' : 'primary'} />
-							</Arrow>
+							{maxPage > 1 && page > 1 && (
+								<Arrow
+									onClick={() => {
+										setPage(page === 1 ? page : page - 1)
+									}}
+								>
+									<Icon
+										icon={IconEnum.ICON_ARROW_LEFT}
+										color={page === 1 ? 'textDisabled' : 'primary'}
+									/>
+								</Arrow>
+							)}
 
 							<span className="text text-base">{t('Page %page% of %maxPage%', { page, maxPage })}</span>
-							<Arrow
-								onClick={() => {
-									setPage(page === maxPage ? page : page + 1)
-								}}
-							>
-								<Icon
-									icon={IconEnum.ICON_ARROW_RIGHT}
-									color={page === maxPage ? 'textDisabled' : 'primary'}
-								/>
-							</Arrow>
+							{maxPage > 1 && page < maxPage && (
+								<Arrow
+									onClick={() => {
+										setPage(page === maxPage ? page : page + 1)
+									}}
+								>
+									<Icon
+										icon={IconEnum.ICON_ARROW_RIGHT}
+										color={page === maxPage ? 'textDisabled' : 'primary'}
+									/>
+								</Arrow>
+							)}
 						</PageButtons>
 					</>
 				) : (
