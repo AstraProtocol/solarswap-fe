@@ -125,10 +125,10 @@ export default function Navbar() {
 				label: t('Info'),
 				link: '/info',
 				submenus: [],
-				hideOnMobile: true,
+				// hideOnMobile: true,
 			},
 			{
-				id: '5',
+				id: '6',
 				type: 'locale',
 				submenus: [
 					{
