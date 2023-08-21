@@ -14,11 +14,7 @@ const Percent: React.FC<React.PropsWithChildren<PercentProps>> = ({ value, ...re
 
 	return (
 		<span
-			className={clsx(
-				'text text-base',
-				rest.className,
-				isNegative ? 'alert-color-error' : 'alert-color-successs',
-			)}
+			className={clsx('text text-base', rest.className, isNegative ? 'alert-color-error' : 'alert-color-success')}
 			{...rest}
 		>
 			{isNegative ? '↓' : '↑'}
