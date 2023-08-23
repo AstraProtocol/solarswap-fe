@@ -45,7 +45,7 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
 							<span className="text text-bold">{t('Pairs')}</span>
 						</ButtonMenuItem>
 						<ButtonMenuItem as={NextLinkFromReactRouter} to={`/info/tokens${stableSwapQuery}`}>
-							<span className="text text-bold">{t('Tokens')}</span>
+							<span className="text text-bold">{t('Token')}</span>
 						</ButtonMenuItem>
 					</ButtonMenu>
 				</div>
