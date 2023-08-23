@@ -13,10 +13,7 @@ const Percent: React.FC<React.PropsWithChildren<PercentProps>> = ({ value, ...re
 	const isNegative = value < 0
 
 	return (
-		<span
-			className={clsx('text text-base', rest.className, isNegative ? 'alert-color-error' : 'alert-color-success')}
-			{...rest}
-		>
+		<span className={clsx('text text-base', isNegative ? 'alert-color-error' : 'alert-color-success')} {...rest}>
 			{isNegative ? '↓' : '↑'}
 			{Math.abs(value).toFixed(2)}%
 		</span>

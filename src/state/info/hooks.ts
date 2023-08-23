@@ -381,9 +381,10 @@ export const useTokenDatasSWR = (addresses?: string[], withSettings = true): Tok
 		return addresses?.map(a => allData?.[a]?.data)?.filter(d => d && d.exists)
 	}, [addresses, allData])
 
-	return useMemo(() => {
-		return isValidating ? [] : tokensWithData ?? undefined
-	}, [isValidating, tokensWithData])
+	return tokensWithData
+	// return useMemo(() => {
+	// 	return isValidating ? [] : tokensWithData ?? undefined
+	// }, [isValidating, tokensWithData])
 }
 
 const graphPerPage = 50

@@ -50,7 +50,7 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 						type: ColorType.Solid,
 						color: 'transparent',
 					},
-					textColor: 'gray',
+					textColor: 'gray', //
 					fontFamily: 'Kanit, sans-serif',
 					fontSize: 12,
 				},
@@ -90,8 +90,8 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 						labelVisible: false,
 						style: 3,
 						width: 1,
-						color: 'gray',
-						labelBackgroundColor: 'red',
+						color: 'gray', // theme.colors.textSubtle,
+						labelBackgroundColor: 'red', //theme.colors.primary,
 					},
 				},
 			})
@@ -116,7 +116,7 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 
 			chartCreated.applyOptions({
 				layout: {
-					textColor: 'gray', //theme.isDark ? darkColors.textSubtle : lightColors.textSubtle,
+					textColor: 'gray', //  theme.isDark ? darkColors.textSubtle : lightColors.textSubtle,
 				},
 			})
 
@@ -156,9 +156,7 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 	return (
 		<>
 			{!chartCreated && <CandleChartLoader />}
-			<div style={{ display: 'flex', flex: 1, height: '100%' }}>
-				<div style={{ flex: 1, maxWidth: '100%' }} ref={chartRef} id="candle-chart" {...rest} />
-			</div>
+			<div ref={chartRef} id="candle-chart" {...rest} />
 		</>
 	)
 }

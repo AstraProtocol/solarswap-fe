@@ -87,7 +87,7 @@ const DataRow: React.FC<React.PropsWithChildren<{ tokenData: TokenData; index: n
 				</Row>
 				<span className="text text-base">${formatAmount(tokenData.priceUSD, { notation: 'standard' })}</span>
 				<span className="text text-base">
-					<Percent value={tokenData.priceUSDChange} className="text text-base" />
+					<Percent value={tokenData.priceUSDChange} />
 				</span>
 				<span className="text text-base">${formatAmount(tokenData.volumeUSD)}</span>
 				<span className="text text-base">${formatAmount(tokenData.liquidityUSD)}</span>

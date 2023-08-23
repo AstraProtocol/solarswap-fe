@@ -35,7 +35,7 @@ const ChartCard: React.FC<React.PropsWithChildren<ChartCardProps>> = ({
 	tokenData,
 	tokenPriceData,
 }) => {
-	const [view, setView] = useState(ChartView.VOLUME)
+	const [view, setView] = useState(ChartView.PRICE)
 	const [hoverValue, setHoverValue] = useState<number | undefined>()
 	const [hoverDate, setHoverDate] = useState<string | undefined>()
 	const {
