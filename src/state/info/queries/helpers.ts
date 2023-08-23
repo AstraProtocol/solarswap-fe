@@ -78,6 +78,13 @@ export const fetchChartData = async (
 	let skip = 0
 	let allFound = false
 
+	if (!address) {
+		return {
+			data: [],
+			error: false,
+		}
+	}
+
 	while (!allFound) {
 		// eslint-disable-next-line no-await-in-loop
 		const { data, error: fetchError } = await getEntityDayDatas(skip, address)

@@ -55,7 +55,7 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 	)
 
 	// In case somebody pastes checksummed address into url (since GraphQL expects lowercase address)
-	const address = routeAddress.toLowerCase()
+	const address = routeAddress ? routeAddress.toLowerCase() : undefined
 
 	const poolData = usePoolDatasSWR(useMemo(() => [address], [address]))[0]
 	const chartData = usePoolChartDataSWR(address)

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUnixTime, startOfHour, Duration, sub } from 'date-fns'
 import useSWRImmutable from 'swr/immutable'
+import useSWR from 'swr'
 import { AppState, AppDispatch } from 'state'
 import { isAddress } from 'utils'
 import { Transaction } from 'state/info/types'
@@ -495,11 +496,18 @@ export const usePoolTransactionsSWR = (address: string): Transaction[] | undefin
 
 export const usePoolChartDataSWR = (address: string): ChartEntry[] | undefined => {
 	const type = checkIsStableSwap() ? 'stableSwap' : 'swap'
-	const { data } = useSWRImmutable(
-		[`info/pool/chartData/${address}/${type}`],
+
+	const { data } = useSWR(
+		address ? `info/pool/chartData/${address}/${type}` : null,
 		() => fetchPoolChartData(address),
-		SWR_SETTINGS_WITHOUT_REFETCH,
+		{
+			...SWR_SETTINGS_WITHOUT_REFETCH,
+			revalidateIfStale: false,
+			revalidateOnFocus: false,
+			revalidateOnReconnect: false,
+		},
 	)
+
 	return data?.data ?? undefined
 }
 
