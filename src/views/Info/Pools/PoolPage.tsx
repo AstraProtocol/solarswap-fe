@@ -2,21 +2,17 @@ import BigNumber from 'bignumber.js'
 import Page from 'components/Layout/Page'
 import { CHAIN_ID } from 'config/constants/networks'
 import { useTranslation } from 'contexts/Localization'
-import useInfoUserSavedTokensAndPools from 'hooks/useInfoUserSavedTokensAndPoolsList'
 import useMatchBreakpoints from 'hooks/useMatchBreakpoints'
 import { useTooltip } from 'hooks/useTooltip'
 import { NextSeo } from 'next-seo'
 import { useMemo, useState } from 'react'
 import { checkIsStableSwap } from 'state/info/constant'
 import { usePoolChartDataSWR, usePoolDatasSWR, usePoolTransactionsSWR, useStableSwapPath } from 'state/info/hooks'
-// import styled from 'sufwmtyled-components'
-import useSWRImmutable from 'swr/immutable'
 import { getAstraExplorerLink } from 'utils'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
 import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
 import Percent from 'views/Info/components/Percent'
-import SaveIcon from 'views/Info/components/SaveIcon'
 import style from './style.module.scss'
 import { Breadcrumbs } from 'components/Breadcrumbs'
 import { NextLinkFromReactRouter } from 'components/NextLink'
@@ -27,23 +23,6 @@ import Spinner from 'components/Loader/Spinner'
 import { Token } from '@solarswap/sdk'
 import clsx from 'clsx'
 import Card from 'components/Card'
-import { isArray } from 'lodash'
-// import farmsConfig from 'config/constants/farms'
-
-// const ContentLayout = ({ children }) => <div className={style.contentLayout}>{children}</div>
-
-// const TokenButton = ({ children }) => (
-// 	<div className={style.tokenButton}>
-// 		{isArray(children) ? children.map((child, index) => <div key={index}>{child}</div>) : children}
-// 	</div>
-// )
-
-// const LockedTokensContainer = ({ children }) => <div className={style.lockedTokensContainer}>{children}</div>
-
-// const getFarmConfig = async (chainId: number) => {
-// 	const config = farmsConfig
-// 	return config
-// }
 
 const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ address: routeAddress }) => {
 	const { isXs, isSm } = useMatchBreakpoints()
@@ -60,7 +39,7 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 	const poolData = usePoolDatasSWR(useMemo(() => [address], [address]))[0]
 	const chartData = usePoolChartDataSWR(address)
 	const transactions = usePoolTransactionsSWR(address)
-	const { savedPools, addPool } = useInfoUserSavedTokensAndPools(parseInt(CHAIN_ID))
+	// const { savedPools, addPool } = useInfoUserSavedTokensAndPools(parseInt(CHAIN_ID))
 
 	const infoTypeParam = useStableSwapPath()
 	const isStableSwap = checkIsStableSwap()
@@ -89,11 +68,13 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 	}, [poolData])
 
 	const token0 = useMemo(
-		() => poolData?.token0?.address ? new Token(parseInt(CHAIN_ID), poolData?.token0?.address, 18, '') : '' as any,
+		() =>
+			poolData?.token0?.address ? new Token(parseInt(CHAIN_ID), poolData?.token0?.address, 18, '') : ('' as any),
 		[poolData?.token0.address],
 	)
 	const token1 = useMemo(
-		() => poolData?.token1?.address ? new Token(parseInt(CHAIN_ID), poolData?.token1?.address, 18, '') : '' as any,
+		() =>
+			poolData?.token1?.address ? new Token(parseInt(CHAIN_ID), poolData?.token1?.address, 18, '') : ('' as any),
 		[poolData?.token1.address],
 	)
 	return (
@@ -168,7 +149,10 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 								<NextLinkFromReactRouter
 									to={`/add/${poolData.token0.address}/${poolData.token1.address}`}
 								>
-									<NormalButton variant='default' classes={{ other: 'margin-right-xs text text-base text-bold' }}>
+									<NormalButton
+										variant="default"
+										classes={{ other: 'margin-right-xs text text-base text-bold' }}
+									>
 										{t('Add Liquidity')}
 									</NormalButton>
 								</NextLinkFromReactRouter>

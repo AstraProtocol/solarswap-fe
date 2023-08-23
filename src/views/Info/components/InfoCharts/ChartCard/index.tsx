@@ -35,7 +35,7 @@ const ChartCard: React.FC<React.PropsWithChildren<ChartCardProps>> = ({
 	tokenData,
 	tokenPriceData,
 }) => {
-	const [view, setView] = useState(ChartView.PRICE)
+	const [view, setView] = useState(variant === 'token' ? ChartView.PRICE : ChartView.VOLUME)
 	const [hoverValue, setHoverValue] = useState<number | undefined>()
 	const [hoverDate, setHoverDate] = useState<string | undefined>()
 	const {
@@ -101,9 +101,13 @@ const ChartCard: React.FC<React.PropsWithChildren<ChartCardProps>> = ({
 				<ButtonMenuItem variant="tertiary">
 					<b>{t('Liquidity')}</b>
 				</ButtonMenuItem>
-				<ButtonMenuItem variant="tertiary">
-					<b>{t('Price')}</b>
-				</ButtonMenuItem>
+				{variant === 'token' ? (
+					<ButtonMenuItem variant="tertiary">
+						<b>{t('Price')}</b>
+					</ButtonMenuItem>
+				) : (
+					<div />
+				)}
 			</ButtonMenu>
 			<div className="padding-top-md">
 				{getLatestValueDisplay()}
