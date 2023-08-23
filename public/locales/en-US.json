@@ -1609,5 +1609,10 @@
 	"Enter valid list location": "Enter valid list location",
 	"Phishing warning: Please make sure you’re visiting": "Phishing warning: Please make sure you’re visiting",
 	"Check the URL carefully": "Check the URL carefully",
-	"No pair has been created with this token yet. Create one": "No pair has been created with this token yet. Create one"
+	"No pair has been created with this token yet. Create one": "No pair has been created with this token yet. Create one",
+	"Solarswap Info & Analytics": "Solarswap Info & Analytics",
+	"Pairs": "Pairs",
+	"Pair": "Pair",
+	"Token": "Token",
+	"Top Pair": "Top Pair"
 }
