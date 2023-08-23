@@ -20,7 +20,7 @@
 
 .lockedTokenContainer {
 	border: 1px solid var(--border-color);
-	// background-color: ${({ theme }) => theme.colors.background};
+	background-color: hsla(0,0%,100%,.1);
 	padding: 16px;
 	
 	gap: 8px;
@@ -28,4 +28,8 @@
 	border-radius: 16px;
 	max-width: 280px;
 	
+}
+
+.buttonMenu {
+	width: 100% !important;
 }

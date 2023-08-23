@@ -14,10 +14,11 @@ const Card = ({ width, padding, border, borderRadius, children, className }: Car
 		style={{
 			width: width ?? '100%',
 			padding: padding ?? '1.25rem',
-			border: border || '2px solid var(--border-color)',
+			border: border || '2px solid #313030',
 			borderRadius: borderRadius ?? '16px',
 			backgroundColor: clsx('secondary-bg-color-lightest'),
 		}}
+		className={className}
 	>
 		{children}
 	</div>

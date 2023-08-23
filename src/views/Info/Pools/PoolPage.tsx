@@ -30,15 +30,15 @@ import Card from 'components/Card'
 import { isArray } from 'lodash'
 // import farmsConfig from 'config/constants/farms'
 
-const ContentLayout = ({ children }) => <div className={style.contentLayout}>{children}</div>
+// const ContentLayout = ({ children }) => <div className={style.contentLayout}>{children}</div>
 
-const TokenButton = ({ children }) => (
-	<div className={style.tokenButton}>
-		{isArray(children) ? children.map((child, index) => <div key={index}>{child}</div>) : children}
-	</div>
-)
+// const TokenButton = ({ children }) => (
+// 	<div className={style.tokenButton}>
+// 		{isArray(children) ? children.map((child, index) => <div key={index}>{child}</div>) : children}
+// 	</div>
+// )
 
-const LockedTokensContainer = ({ children }) => <div className={style.lockedTokensContainer}>{children}</div>
+// const LockedTokensContainer = ({ children }) => <div className={style.lockedTokensContainer}>{children}</div>
 
 // const getFarmConfig = async (chainId: number) => {
 // 	const config = farmsConfig
@@ -104,147 +104,149 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 					<Row className="flex-justify-space-between margin-bottom-md">
 						<Breadcrumbs className="margin-bottom-lg">
 							<NextLinkFromReactRouter to={`/info${infoTypeParam}`}>
-								<span className='text text-base'>{t('Info')}</span>
+								<span className="text text-base">{t('Info')}</span>
 							</NextLinkFromReactRouter>
 							<NextLinkFromReactRouter to={`/info/pairs${infoTypeParam}`}>
-								<span className='text text-base'>{t('Pairs')}</span>
+								<span className="text text-base">{t('Pairs')}</span>
 							</NextLinkFromReactRouter>
 							<Row>
 								<span className="margin-right-xs text text-base">{`${poolData.token0.symbol} / ${poolData.token1.symbol}`}</span>
 							</Row>
 						</Breadcrumbs>
-						<Row>
+						<div>
 							<Typography.Link target="_blank" href={getAstraExplorerLink(address, 'address')}>
 								({t('View on AstraExplorer')})
 							</Typography.Link>
-
-							<SaveIcon fill={savedPools.includes(address)} onClick={() => addPool(address)} />
-						</Row>
+						</div>
 					</Row>
-					<Row className="flex col">
+					<div>
 						<Row className="flex-align-center margin-bottom-xs">
 							<DoubleCurrencyLogo currency0={token0} currency1={token1} size={32} />
 							<span
-								className={clsx('margin-left-xl text text-bold text-2xl', {
+								className={clsx('margin-left-xs text text-bold text-2xl', {
 									['text-lg']: isXs || isSm,
 								})}
 								id="info-pool-pair-title"
 							>{`${poolData.token0.symbol} / ${poolData.token1.symbol}`}</span>
 						</Row>
 						<Row className="flex-justify-space-between">
-							<Row>
-								<NextLinkFromReactRouter to={`/info/tokens/${poolData.token0.address}${infoTypeParam}`}>
-									<TokenButton>
-										<CurrencyLogo currency={token0} size={24} />
-										<span
-											className="text text-base margin-left-2xs"
-											style={{ whiteSpace: 'nowrap' }}
-										>
-											{`1 ${poolData.token0.symbol} =  ${formatAmount(poolData.token1Price, {
-												notation: 'standard',
-												displayThreshold: 0.001,
-												tokenPrecision: hasSmallDifference ? 'enhanced' : 'normal',
-											})} ${poolData.token1.symbol}`}
-										</span>
-									</TokenButton>
+							<div className="flex flex-align-center ">
+								<NextLinkFromReactRouter
+									to={`/info/tokens/${poolData.token0.address}${infoTypeParam}`}
+									style={{ display: 'flex', justifyContent: 'center' }}
+								>
+									<CurrencyLogo currency={token0} size={24} />
+									<span
+										className="text text-base margin-left-2xs margin-right-sm font-600"
+										style={{ whiteSpace: 'nowrap' }}
+									>
+										{`1 ${poolData.token0.symbol} =  ${formatAmount(poolData.token1Price, {
+											notation: 'standard',
+											displayThreshold: 0.001,
+											tokenPrecision: hasSmallDifference ? 'enhanced' : 'normal',
+										})} ${poolData.token1.symbol}`}
+									</span>
 								</NextLinkFromReactRouter>
-								<NextLinkFromReactRouter to={`/info/tokens/${poolData.token1.address}${infoTypeParam}`}>
-									<TokenButton>
-										<CurrencyLogo currency={token1} size={24} />
-										<span
-											className="text text-base margin-left-2xs"
-											style={{ whiteSpace: 'nowrap' }}
-										>
-											{`1 ${poolData.token1.symbol} =  ${formatAmount(poolData.token0Price, {
-												notation: 'standard',
-												displayThreshold: 0.001,
-												tokenPrecision: hasSmallDifference ? 'enhanced' : 'normal',
-											})} ${poolData.token0.symbol}`}
-										</span>
-									</TokenButton>
+								<NextLinkFromReactRouter
+									to={`/info/tokens/${poolData.token1.address}${infoTypeParam}`}
+									style={{ display: 'flex', justifyContent: 'center' }}
+								>
+									<CurrencyLogo currency={token1} size={24} />
+									<span
+										className="text text-base margin-left-2xs font-600"
+										style={{ whiteSpace: 'nowrap' }}
+									>
+										{`1 ${poolData.token1.symbol} =  ${formatAmount(poolData.token0Price, {
+											notation: 'standard',
+											displayThreshold: 0.001,
+											tokenPrecision: hasSmallDifference ? 'enhanced' : 'normal',
+										})} ${poolData.token0.symbol}`}
+									</span>
 								</NextLinkFromReactRouter>
-							</Row>
-							<Row>
+							</div>
+							<div>
 								<NextLinkFromReactRouter
 									to={`/add/${poolData.token0.address}/${poolData.token1.address}`}
 								>
-									<NormalButton className="margin-right-xs">{t('Add Liquidity')}</NormalButton>
+									<NormalButton variant='default' classes={{ other: 'margin-right-xs text text-base text-bold' }}>
+										{t('Add Liquidity')}
+									</NormalButton>
 								</NextLinkFromReactRouter>
 								<NextLinkFromReactRouter
 									to={`/swap?inputCurrency=${poolData.token0.address}&outputCurrency=${poolData.token1.address}`}
 								>
-									<NormalButton>{t('Trade')}</NormalButton>
+									<NormalButton classes={{ other: 'text text-base text-bold' }}>
+										{t('Trade')}
+									</NormalButton>
 								</NextLinkFromReactRouter>
-							</Row>
+							</div>
 						</Row>
-					</Row>
-					<ContentLayout>
+					</div>
+					<div className={style.contentLayout}>
 						<div>
 							<Card>
-								<div>
+								<Row className="flex-justify-space-between">
+									<div>
+										<span className="text text-bold secondary-color-theme text-xs text-uppercase">
+											{t('Liquidity')}
+										</span>
+										<br />
+										<span className="money money-bold money-md">
+											${formatAmount(poolData.liquidityUSD)}
+										</span>
+										<br />
+										<Percent value={poolData.liquidityUSDChange} />
+									</div>
+									<div>
+										<span className="text text-xs text-bold secondary-color-theme text-uppercase">
+											{t('LP reward APR')}
+										</span>
+										<br />
+										<span className="text text-bold text-lg">
+											{formatAmount(isStableSwap ? stableAPR : poolData.lpApr7d)}%
+										</span>
+										<br />
+										<Row className="flex-align-center">
+											<span className="text text-sm margin-right-2xs">{t('7D performance')}</span>
+											<span ref={targetRef}>
+												<Icon icon={IconEnum.ICON_HELP} />
+											</span>
+											{tooltipVisible && tooltip}
+										</Row>
+									</div>
+								</Row>
+								<br />
+								<span className="text text-sm text-bold text-uppercase secondary-color-theme">
+									{t('Total Tokens Locked')}
+								</span>
+								<div className={style.lockedTokenContainer}>
 									<Row className="flex-justify-space-between">
-										<div>
-											<span className="text text-bold secondary-color-theme text-xs text-uppercase">
-												{t('Liquidity')}
+										<Row>
+											<CurrencyLogo currency={token0} size={24} />
+											<span className="margin-left-xs text text-bold text-sm">
+												{poolData.token0.symbol}
 											</span>
-											<span className="money money-bold money-md">
-												${formatAmount(poolData.liquidityUSD)}
-											</span>
-											<Percent value={poolData.liquidityUSDChange} />
-										</div>
-										<div>
-											<span className="text text-xs text-bold secondary-color-theme text-uppercase">
-												{t('LP reward APR')}
-											</span>
-											<span className="text text-bold text-lg">
-												{formatAmount(isStableSwap ? stableAPR : poolData.lpApr7d)}%
-											</span>
-											<Row className="flex-align-center">
-												<span className="text text-sm margin-right-2xs">
-													{t('7D performance')}
-												</span>
-												<span ref={targetRef}>
-													<Icon icon={IconEnum.ICON_HELP} />
-												</span>
-												{tooltipVisible && tooltip}
-											</Row>
-										</div>
+										</Row>
+										<span className="money money-xs">{formatAmount(poolData.liquidityToken0)}</span>
 									</Row>
-									<span className="text text-sm text-bold text-uppercase secondary-color-theme">
-										{t('Total Tokens Locked')}
-									</span>
-									<LockedTokensContainer>
-										<Row className="flex-justify-space-between">
-											<Row>
-												<CurrencyLogo currency={token0} size={24} />
-												<span className="margin-left-xs text text-sm">
-													{poolData.token0.symbol}
-												</span>
-											</Row>
-											<span className="text text-sm">
-												{formatAmount(poolData.liquidityToken0)}
+									<Row className="flex-justify-space-between margin-top-2xs">
+										<Row>
+											<CurrencyLogo currency={token1} size={24} />
+											<span className="margin-left-xs text text-bold text-sm">
+												{poolData.token1.symbol}
 											</span>
 										</Row>
-										<Row className="flex-justify-space-between">
-											<Row>
-												<CurrencyLogo currency={token1} size={24} />
-												<span className="margin-left-xs text text-sm">
-													{poolData.token1.symbol}
-												</span>
-											</Row>
-											<span className="text text-sm">
-												{formatAmount(poolData.liquidityToken1)}
-											</span>
-										</Row>
-									</LockedTokensContainer>
+										<span className="money money-xs">{formatAmount(poolData.liquidityToken1)}</span>
+									</Row>
 								</div>
 							</Card>
-							<Card className="margin-left-md">
-								<Row className="padding-lg">
+							<Card className="margin-top-sm">
+								<div className="padding-lg">
 									<ButtonMenu
 										activeIndex={showWeeklyData}
 										onItemClick={index => setShowWeeklyData(index)}
 										size="sm"
+										className={clsx(style.buttonMenu)}
 									>
 										<ButtonMenuItem width="100%">{t('24H')}</ButtonMenuItem>
 										<ButtonMenuItem width="100%">{t('7D')}</ButtonMenuItem>
@@ -254,12 +256,14 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 											<span className="text text-xs text-bold text-uppercase secondary-color-theme">
 												{showWeeklyData ? t('Volume 7D') : t('Volume 24H')}
 											</span>
+											<br />
 											<span className="money money-md money-bold">
 												$
 												{showWeeklyData
 													? formatAmount(poolData.volumeUSDWeek)
 													: formatAmount(poolData.volumeUSD)}
 											</span>
+											<br />
 											<Percent
 												value={
 													showWeeklyData
@@ -272,9 +276,11 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 											<span className="secondary-color-theme text text-xs text-bold text-uppercase">
 												{showWeeklyData ? t('LP reward fees 7D') : t('LP reward fees 24H')}
 											</span>
+											<br />
 											<span className="money money-md money-bold">
 												${formatAmount(feeDisplay)}
 											</span>
+											<br />
 											<span color="textSubtle" className="text text-xs">
 												{t('out of $%totalFees% total fees', {
 													totalFees: isStableSwap
@@ -286,11 +292,11 @@ const PoolPage: React.FC<React.PropsWithChildren<{ address: string }>> = ({ addr
 											</span>
 										</div>
 									</Row>
-								</Row>
+								</div>
 							</Card>
 						</div>
 						<ChartCard variant="pool" chartData={chartData} />
-					</ContentLayout>
+					</div>
 					<Heading className="margin-bottom-md margin-top-2xl" scale="lg">
 						{t('Transactions')}
 					</Heading>
