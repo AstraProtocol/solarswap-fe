@@ -2,63 +2,53 @@ import LineChartLoaderSVG from './LineChartLoaderSVG'
 import BarChartLoaderSVG from './BarChartLoaderSVG'
 import CandleChartLoaderSVG from './CandleChartLoaderSVG'
 import { useTranslation } from 'contexts/Localization'
+import styles from './style.module.scss'
+import { cloneElement } from 'react'
+import { isArray } from 'lodash'
 
-// const LoadingText = styled(Box)`
-// 	position: absolute;
-// 	margin-left: auto;
-// 	margin-right: auto;
-// 	top: 50%;
-// 	left: 0;
-// 	right: 0;
-// 	text-align: center;
-// `
-
-// const LoadingIndicator = styled(Box)`
-// 	height: 100%;
-// 	position: relative;
-// `
+const LoadingText = props => (
+	<div className={styles.loadingText}>
+		{isArray(props.children) ? props.children.map((c, index) => cloneElement(c, { key: index })) : props.children}
+	</div>
+)
+const LoadingIndicator = props => (
+	<div className={styles.loadingIndicator}>
+		{isArray(props.children) ? props.children.map((c, index) => cloneElement(c, { key: index })) : props.children}
+	</div>
+)
 
 export const BarChartLoader: React.FC<React.PropsWithChildren> = () => {
 	const { t } = useTranslation()
-	return null
-	// return (
-	// 	<LoadingIndicator>
-	// 		<BarChartLoaderSVG />
-	// 		<LoadingText>
-	// 			<Text color="textSubtle" fontSize="20px">
-	// 				{t('Loading chart data...')}
-	// 			</Text>
-	// 		</LoadingText>
-	// 	</LoadingIndicator>
-	// )
+	return (
+		<LoadingIndicator>
+			<BarChartLoaderSVG />
+			<LoadingText>
+				<span className="text text-md text-bold">{t('Loading chart data...')}</span>
+			</LoadingText>
+		</LoadingIndicator>
+	)
 }
 
 export const LineChartLoader: React.FC<React.PropsWithChildren> = () => {
 	const { t } = useTranslation()
-	return null
-	// return (
-	// 	<LoadingIndicator>
-	// 		<LineChartLoaderSVG />
-	// 		<LoadingText>
-	// 			<Text color="textSubtle" fontSize="20px">
-	// 				{t('Loading chart data...')}
-	// 			</Text>
-	// 		</LoadingText>
-	// 	</LoadingIndicator>
-	// )
+	return (
+		<LoadingIndicator>
+			<LineChartLoaderSVG />
+			<LoadingText>
+				<span className="text text-md text-bold">{t('Loading chart data...')}</span>
+			</LoadingText>
+		</LoadingIndicator>
+	)
 }
 
 export const CandleChartLoader: React.FC<React.PropsWithChildren> = () => {
 	const { t } = useTranslation()
-	return null
-	// return (
-	// 	<LoadingIndicator>
-	// 		<CandleChartLoaderSVG />
-	// 		<LoadingText>
-	// 			<Text color="textSubtle" fontSize="20px">
-	// 				{t('Loading chart data...')}
-	// 			</Text>
-	// 		</LoadingText>
-	// 	</LoadingIndicator>
-	// )
+	return (
+		<LoadingIndicator>
+			<CandleChartLoaderSVG />
+			<LoadingText>
+				<span className="text text-md text-bold">{t('Loading chart data...')}</span>
+			</LoadingText>
+		</LoadingIndicator>
+	)
 }

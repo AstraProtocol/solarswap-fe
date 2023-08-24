@@ -24,11 +24,16 @@ const TopMoverCard = ({ children }: { children: React.ReactNode }) => (
 	<div className={style.topMoverCard}>{children}</div>
 )
 
-export const ScrollableRow = ({ children, ref }: { ref: LegacyRef<HTMLDivElement>; children: React.ReactNode }) => (
+interface ScrollableRowProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+// eslint-disable-next-line react/display-name
+const ScrollableRowComponent = (props: ScrollableRowProps, ref) => (
 	<div className={style.scrollableRow} ref={ref}>
-		{children}
+		{props.children}
 	</div>
 )
+
+export const ScrollableRow = forwardRef(ScrollableRowComponent)
 
 const DataCard = ({ tokenData }: { tokenData: TokenData }) => {
 	const token = new Token(parseInt(CHAIN_ID), tokenData.address as EthereumAddress, 18, '')

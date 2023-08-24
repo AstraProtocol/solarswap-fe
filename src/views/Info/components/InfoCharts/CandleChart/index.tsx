@@ -41,7 +41,7 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 
 	// if chart not instantiated in canvas, create it
 	useEffect(() => {
-		if (!chartCreated && data && !!chartRef?.current?.parentElement) {
+		if (!chartCreated && !!chartRef.current.parentElement) {
 			const chart = createChart(chartRef.current, {
 				height: CANDLE_CHART_HEIGHT,
 				width: chartRef.current.parentElement.clientWidth - 32,
@@ -99,7 +99,12 @@ const CandleChart = ({ data, setValue, setLabel, ...rest }: LineChartProps) => {
 			chart.timeScale().fitContent()
 			setChart(chart)
 		}
-	}, [chartCreated, data, setValue, theme])
+
+		const elements = chartRef.current.getElementsByClassName('tv-lightweight-charts')
+		if (elements.length > 1) {
+			elements[0].remove()
+		}
+	}, [chartCreated])
 
 	useEffect(() => {
 		if (chartCreated && data) {
