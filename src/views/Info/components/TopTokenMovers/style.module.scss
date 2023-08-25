@@ -1,0 +1,25 @@
+.scrollableRow {
+    width: 100%;
+	overflow-x: auto;
+	padding: 16px 0;
+	white-space: nowrap;
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.topMoverCard {
+    border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	padding: 16px;
+}
+
+.cardWrapper {
+    display: inline-block;
+	min-width: 190px;
+	margin-left: 16px;
+	:hover {
+		cursor: pointer;
+		opacity: 0.6;
+	}
+}

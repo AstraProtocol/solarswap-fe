@@ -1,10 +1,10 @@
 import { getUnixTime } from 'date-fns'
 import { gql } from 'graphql-request'
-import { getBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
-import { multiQuery } from 'views/Info/utils/infoQueryHelpers'
 import { PriceChartEntry } from 'state/info/types'
 import { INFO_CLIENT } from 'config/constants/endpoints'
 import orderBy from 'lodash/orderBy'
+import { multiQuery } from 'views/Info/utils/infoQueryHelpers'
+import { getBlocksFromTimestamps } from 'utils/getBlocksFromTimestamps'
 
 const getPriceSubqueries = (tokenAddress: string, blocks: any) =>
 	blocks.map(

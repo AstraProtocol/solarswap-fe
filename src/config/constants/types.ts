@@ -232,3 +232,7 @@ export enum FetchStatus {
 	Fetched = 'FETCHED',
 	Failed = 'FAILED',
 }
+
+export type TFetchStatus = (typeof FetchStatus)[keyof typeof FetchStatus]
+
+export type EthereumAddress = `0x${string}`

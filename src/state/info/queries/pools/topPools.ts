@@ -1,8 +1,8 @@
 import { TOKEN_BLACKLIST } from 'config/constants/info'
 import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
+import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import { infoClient } from 'utils/graphql'
-import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
 
 interface TopPoolsResponse {
 	pairDayDatas: {
@@ -16,14 +16,13 @@ interface TopPoolsResponse {
 const fetchTopPools = async (timestamp24hAgo: number): Promise<string[]> => {
 	try {
 		const query = gql`
-			query topPools($blacklist: [String!], $timestamp24hAgo: Int) {
+			query topPools($blacklist: [String!]) {
 				pairDayDatas(
-					first: 30
+					first: 1
 					where: {
-						dailyTxns_gt: 300
+						dailyTxns_gt: 0
 						token0_not_in: $blacklist
 						token1_not_in: $blacklist
-						date_gt: $timestamp24hAgo
 					}
 					orderBy: dailyVolumeUSD
 					orderDirection: desc
@@ -32,7 +31,7 @@ const fetchTopPools = async (timestamp24hAgo: number): Promise<string[]> => {
 				}
 			}
 		`
-		const data = await infoClient.request<TopPoolsResponse>(query, { blacklist: TOKEN_BLACKLIST, timestamp24hAgo })
+		const data = await infoClient.request<TopPoolsResponse>(query, { blacklist: TOKEN_BLACKLIST })
 		// pairDayDatas id has compound id "0xPOOLADDRESS-NUMBERS", extracting pool address with .split('-')
 		return data.pairDayDatas.map(p => p.id.split('-')[0])
 	} catch (error) {
@@ -59,6 +58,13 @@ const useTopPoolAddresses = (): string[] => {
 	}, [topPoolAddresses, timestamp24hAgo])
 
 	return topPoolAddresses
+}
+
+export const fetchTopPoolAddresses = async () => {
+	const [, , , timestamp24hAgo] = getDeltaTimestamps()
+
+	const addresses = await fetchTopPools(timestamp24hAgo)
+	return addresses
 }
 
 export default useTopPoolAddresses

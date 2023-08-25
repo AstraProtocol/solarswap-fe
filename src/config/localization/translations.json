@@ -1608,5 +1608,11 @@
 	"Error importing list": "Lỗi khi nhập danh sách",
 	"Enter valid list location": "Nhập địa chỉ danh sách không hợp lệ",
 	"Phishing warning: Please make sure you’re visiting": "Cảnh báo lừa đảo: Vui lòng đảm bảo bạn đang truy cập",
-	"Check the URL carefully": "Hãy kiểm tra URL cẩn thận"
+	"Check the URL carefully": "Hãy kiểm tra URL cẩn thận",
+	"No pair has been created with this token yet. Create one": "Chưa có cặp nào được tạo với điểm thưởng này. Hãy tạo một cặp",
+	"Solarswap Info & Analytics": "Solarswap Thông tin và Phân tích",
+	"Pairs": "Cặp",
+	"Pair": "Cặp",
+	"Token": "Điểm",
+	"Top Pairs": "Cặp hàng đầu"
 }

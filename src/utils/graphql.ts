@@ -37,3 +37,5 @@ export const bitQueryServerClient = new GraphQLClient(process.env.NEXT_PUBLIC_BI
 	},
 	timeout: 5000,
 })
+
+export const stableSwapClient = new GraphQLClient('')

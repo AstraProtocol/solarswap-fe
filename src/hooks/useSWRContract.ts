@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { FetchStatus } from 'config/constants/types'
+import { FetchStatus, TFetchStatus } from 'config/constants/types'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { Contract } from '@ethersproject/contracts'
 import { FormatTypes } from '@ethersproject/abi'
@@ -11,18 +11,20 @@ import useSWR, {
 	unstable_serialize,
 } from 'swr'
 import { multicallv2, MulticallOptions, Call } from 'utils/multicall'
+import { BlockingData } from 'swr/_internal'
 
 declare module 'swr' {
-	interface SWRResponse<Data = any, Error = any> {
-		data?: Data
-		error?: Error
+	interface SWRResponse<Data = any, Error = any, Config = any> {
+		data: BlockingData<Data, Config> extends true ? Data : Data | undefined
+		error: Error | undefined
 		mutate: KeyedMutator<Data>
 		isValidating: boolean
+		isLoading: BlockingData<Data, Config> extends true ? false : boolean
 		// Add global fetchStatus to SWRResponse
-		status: FetchStatus
+		status: TFetchStatus
 	}
 }
-
+  
 export const fetchStatusMiddleware: Middleware = useSWRNext => {
 	return (key, fetcher, config) => {
 		const swr = useSWRNext(key, fetcher, config)
