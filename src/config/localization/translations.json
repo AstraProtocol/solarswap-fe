@@ -1614,5 +1614,9 @@
 	"Pairs": "Cặp",
 	"Pair": "Cặp",
 	"Token": "Điểm",
-	"Top Pairs": "Cặp hàng đầu"
+	"Top Pairs": "Cặp hàng đầu",
+	"All Pairs": "Toàn bộ cặp",
+	"Before trading any token, please DYOR, and pay attention to the risk scanner.": "Trước khi giao dịch bất kỳ điểm nào, vui lòng DYOR và chú ý đến trình quét rủi ro.",
+	"The markets for some of the newer and low-cap tokens displayed on the v2 info page are highly volatile, and as a result, token information may not be accurate.": "Thị trường của một số điểm mới hơn và có vốn hóa thấp được hiển thị trên trang thông tin v2 rất biến động và do đó, thông tin về điểm có thể không chính xác.",
+	"Search liquidity pairs or tokens": "Tìm kiếm các cặp thanh khoản hoặc điểm"
 }
