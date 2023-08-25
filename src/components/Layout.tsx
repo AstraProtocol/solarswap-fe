@@ -71,11 +71,11 @@ const Layout: React.FC<Props> = props => {
 					<Footer
 						logoTitle={process.env.NEXT_PUBLIC_TITLE}
 						logoType="swap"
-						footerLinks={isMobile ? FooterLinks: undefined}
+						footerLinks={isMobile ? FooterLinks : undefined}
 						i18n={t}
 						isVerifyByCertik={false}
 						className={clsx(styles.footerBg, styles.footerLayout)}
-						auditCenterContent
+						// auditCenterContent
 					/>
 					<div id="modal-root"></div>
 					<ToastWrapper />

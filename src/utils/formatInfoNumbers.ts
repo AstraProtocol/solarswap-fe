@@ -26,7 +26,7 @@ export const formatAmount = (
 	options?: {
 		notation?: formatAmountNotation
 		displayThreshold?: number
-		tokenPrecision?: boolean
+		tokenPrecision?: tokenPrecisionStyle
 		isInteger?: boolean
 	},
 ) => {
