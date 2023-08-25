@@ -27,8 +27,7 @@ jobs:
                   node-version: 16.x
                   registry-url: 'https://npm.pkg.github.com'
                   scope: '@astraprotocol'
-                  token: ${{ secrets.GH_AUTH_TOKEN }}
-                  # token: ${{ secrets.PAT_ASTRAPROTOCOL }}
+                  token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Get yarn cache directory path
               id: yarn-cache-dir-path
@@ -45,8 +44,7 @@ jobs:
                       ${{ runner.os }}-yarn-
 
             - name: Setup npm token
-              run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.GH_AUTH_TOKEN}}"
-              # run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.PAT_ASTRAPROTOCOL}}"
+              run: npm config set '//npm.pkg.github.com/:_authToken' "${{secrets.GITHUB_TOKEN}}"
 
             - name: Install dependencies
               run: yarn install --frozen-lockfile
