@@ -1,13 +1,12 @@
 import { FC } from 'react'
-import { formatAmount, formatAmountNotation } from 'utils/formatInfoNumbers'
+import { formatAmount, formatAmountNotation, tokenPrecisionStyle } from 'utils/formatInfoNumbers'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-
 
 const formatOptions = {
 	notation: 'standard' as formatAmountNotation,
 	displayThreshold: 0.001,
-	tokenPrecision: true,
+	tokenPrecision: 'normal' as tokenPrecisionStyle, // tokenPrecisionStyle
 }
 
 interface TokenDisplayProps {
