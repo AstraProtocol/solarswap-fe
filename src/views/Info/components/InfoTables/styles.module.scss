@@ -1,0 +1,171 @@
+.clickableColumnHeader {
+    cursor: pointer;
+	display: flex;
+	justify-content: flex-start;
+	gap: 5px;
+}
+
+.tableWrapper {
+    width: 100%;
+	padding-top: 16px;
+	flex-direction: column;
+	gap: 16px;
+	// background-color: ${({ theme }) => theme.card.background};
+	// border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+	// border-radius: ${({ theme }) => theme.radii.card};
+	// ${({ theme }) => theme.mediaQueries.md} {
+	// 	border-radius: ${({ theme }) => theme.radii.card};
+	// }
+	overflow: hidden;
+}
+
+.pageButtons {
+    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0.2em;
+	margin-bottom: 1.2em;
+}
+
+.arrow {
+    // color: ${({ theme }) => theme.colors.primary};
+	padding: 0 20px;
+	:hover {
+		cursor: pointer;
+	}
+}
+
+.break {
+    height: 1px;
+	// background-color: ${({ theme }) => theme.colors.cardBorder};
+	width: 100%;
+}
+
+.poolTableResponsiveGrid {
+	display: grid;
+	grid-gap: 1em;
+	align-items: center;
+	grid-template-columns: 20px 3.5fr repeat(5, 1fr);
+
+	padding: 0 24px;
+	@media screen and (max-width: 900px) {
+		grid-template-columns: 20px 1.5fr repeat(3, 1fr);
+		& :nth-child(4),
+		& :nth-child(5) {
+			display: none;
+		}
+	}
+	@media screen and (max-width: 500px) {
+		grid-template-columns: 20px 1.5fr repeat(1, 1fr);
+		& :nth-child(4),
+		& :nth-child(5),
+		& :nth-child(6),
+		& :nth-child(7) {
+			display: none;
+		}
+	}
+	@media screen and (max-width: 480px) {
+		grid-template-columns: 2.5fr repeat(1, 1fr);
+		> *:nth-child(1) {
+			display: none;
+		}
+	}
+}
+
+.transactionsTableResponsiveGrid {
+	display: grid;
+  grid-gap: 1em;
+  align-items: center;
+  grid-template-columns: 2fr 0.8fr repeat(4, 1fr);
+  padding: 0 24px;
+  @media screen and (max-width: 940px) {
+    grid-template-columns: 2fr repeat(4, 1fr);
+    & > *:nth-child(5) {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 2fr repeat(2, 1fr);
+    & > *:nth-child(5) {
+      display: none;
+    }
+    & > *:nth-child(3) {
+      display: none;
+    }
+    & > *:nth-child(4) {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 2fr 1fr;
+    & > *:nth-child(5) {
+      display: none;
+    }
+    & > *:nth-child(3) {
+      display: none;
+    }
+    & > *:nth-child(4) {
+      display: none;
+    }
+    & > *:nth-child(2) {
+      display: none;
+    }
+  }
+}
+
+.transactionsTableRadioGroup {
+	align-items: center;
+	margin-right: 16px;
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+.tokensTableResponsiveGrid {
+	display: grid;
+	grid-gap: 1em;
+	align-items: center;
+
+	padding: 0 24px;
+
+	grid-template-columns: 20px 3fr repeat(4, 1fr);
+
+	@media screen and (max-width: 900px) {
+		grid-template-columns: 20px 2fr repeat(3, 1fr);
+		& :nth-child(4) {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 800px) {
+		grid-template-columns: 20px 2fr repeat(2, 1fr);
+		& :nth-child(6) {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 670px) {
+		grid-template-columns: 1fr 1fr;
+		> *:first-child {
+			display: none;
+		}
+		> *:nth-child(3) {
+			display: none;
+		}
+	}
+}
+
+.linkWrapper {
+	text-decoration: none;
+	:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
+}
+
+.currencyLogo {
+	@media screen and (max-width: 670px) {
+		width: 16px;
+		height: 16px;
+	}
+}

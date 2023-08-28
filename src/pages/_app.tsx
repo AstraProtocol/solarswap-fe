@@ -1,12 +1,13 @@
 import BigNumber from 'bignumber.js'
 import { NextPage } from 'next'
+import { event, GoogleAnalytics } from 'nextjs-google-analytics'
 // import GlobalCheckClaimStatus from "components/GlobalCheckClaimStatus";
 // import FixedSubgraphHealthIndicator from "components/SubgraphHealthIndicator";
 // import useEagerConnect from "hooks/useEagerConnect";
 import { useInactiveListener } from 'hooks/useInactiveListener'
 import useSentryUser from 'hooks/useSentryUser'
 // import useUserAgent from "hooks/useUserAgent";
-import type { AppProps } from 'next/app'
+import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { init, Web3OnboardProvider } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
@@ -41,6 +42,16 @@ BigNumber.config({
 	EXPONENTIAL_AT: 1000,
 	DECIMAL_PLACES: 80,
 })
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+	const { id, name, label, value } = metric
+	event(name, {
+		category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+		value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+		label: id, // id unique to current page load
+		nonInteraction: true, // avoids affecting bounce rate.
+	})
+}
 
 const chainId = parseInt(CHAIN_ID || '11115')
 
@@ -88,7 +99,7 @@ const astraInjected = astraInjectedModule({
 })
 const wallets = [injectedModule(), walletConnect, astraWallet]
 
-if(isAstraApp()) {
+if (isAstraApp()) {
 	wallets.push(astraInjected)
 }
 
@@ -202,6 +213,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 			{/* <Menu> */}
 			<Layout>
 				<ComponentLayout>
+					{process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+						<GoogleAnalytics trackPageViews />
+					)}
 					<Component {...pageProps} />
 				</ComponentLayout>
 			</Layout>

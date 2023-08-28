@@ -1,3 +1,5 @@
+import { Token } from '@solarswap/sdk'
+
 interface PairResponse {
 	token0: {
 		id: string
@@ -51,10 +53,10 @@ export interface TokenDayDatasResponse {
 }
 
 // Footprint is the same, declared just for better readability
-export type SolarDayData = TokenDayData
+export type PancakeDayData = TokenDayData
 
 export interface SolarDayDatasResponse {
-	solarDayDatas: SolarDayData[]
+	pancakeDayDatas: PancakeDayData[]
 }
 
 export interface PairDayData {
@@ -65,4 +67,49 @@ export interface PairDayData {
 
 export interface PairDayDatasResponse {
 	pairDayDatas: PairDayData[]
+}
+
+export interface Block {
+	number: number
+	timestamp: string
+}
+
+export type TokenData = {
+	exists: boolean
+
+	name: string
+	symbol: string
+	address: string
+	decimals: number
+
+	volumeUSD: number
+	volumeUSDChange: number
+	volumeUSDWeek: number
+	txCount: number
+
+	liquidityToken: number
+	liquidityUSD: number
+	liquidityUSDChange: number
+
+	priceUSD: number
+	priceUSDChange: number
+	priceUSDChangeWeek: number
+
+	campaignId?: string
+	pairs?: ComputedFarmConfigV3[]
+}
+
+export type ComputedFarmConfigV3 = {
+	pid: number
+	lpSymbol: string
+	lpAddress: `0x${string}`
+	boosted?: boolean
+
+	token: Token
+	quoteToken: Token
+	feeAmount: any // FeeAmount
+
+	token0: Token
+	token1: Token
+	isCommunity?: boolean
 }

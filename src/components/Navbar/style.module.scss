@@ -162,6 +162,7 @@ $backgroundHover: rgba(var(--contrast-color-theme--raw), 0.05);
 	display: none;
 	width: 22px;
 	margin-left: 22px;
+	position: absolute;
 	> div {
 		width: 22px;
 		height: 16px;

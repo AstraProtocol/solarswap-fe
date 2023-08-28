@@ -13,6 +13,8 @@ import { mapPairDayData, fetchChartData } from '../helpers'
  */
 const getPoolChartData = async (skip: number, address: string): Promise<{ data?: ChartEntry[]; error: boolean }> => {
 	try {
+		if (!address || address === undefined || address === 'undefined') return { error: true, data: [] }
+
 		const query = gql`
 			query pairDayDatas($startTime: Int!, $skip: Int!, $address: Bytes!) {
 				pairDayDatas(
@@ -42,6 +44,8 @@ const getPoolChartData = async (skip: number, address: string): Promise<{ data?:
 }
 
 const fetchPoolChartData = async (address: string): Promise<{ data?: ChartEntry[]; error: boolean }> => {
+	if (!address || address === undefined || address === 'undefined') return { error: true, data: [] }
+
 	return fetchChartData(getPoolChartData, address)
 }
 

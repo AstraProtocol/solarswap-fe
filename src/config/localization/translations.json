@@ -1608,5 +1608,15 @@
 	"Error importing list": "Lỗi khi nhập danh sách",
 	"Enter valid list location": "Nhập địa chỉ danh sách không hợp lệ",
 	"Phishing warning: Please make sure you’re visiting": "Cảnh báo lừa đảo: Vui lòng đảm bảo bạn đang truy cập",
-	"Check the URL carefully": "Hãy kiểm tra URL cẩn thận"
+	"Check the URL carefully": "Hãy kiểm tra URL cẩn thận",
+	"No pair has been created with this token yet. Create one": "Chưa có cặp nào được tạo với điểm thưởng này. Hãy tạo một cặp",
+	"Solarswap Info & Analytics": "Solarswap Thông tin và Phân tích",
+	"Pairs": "Cặp",
+	"Pair": "Cặp",
+	"Token": "Điểm",
+	"Top Pairs": "Cặp hàng đầu",
+	"All Pairs": "Toàn bộ cặp",
+	"Before trading any token, please DYOR, and pay attention to the risk scanner.": "Trước khi giao dịch bất kỳ điểm nào, vui lòng DYOR và chú ý đến trình quét rủi ro.",
+	"The markets for some of the newer and low-cap tokens displayed on the v2 info page are highly volatile, and as a result, token information may not be accurate.": "Thị trường của một số điểm mới hơn và có vốn hóa thấp được hiển thị trên trang thông tin v2 rất biến động và do đó, thông tin về điểm có thể không chính xác.",
+	"Search liquidity pairs or tokens": "Tìm kiếm các cặp thanh khoản hoặc điểm"
 }

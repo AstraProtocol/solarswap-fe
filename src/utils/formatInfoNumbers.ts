@@ -10,6 +10,8 @@ export const getFirstThreeNonZeroDecimals = (value: number) => {
 
 export type formatAmountNotation = 'compact' | 'standard'
 
+export type tokenPrecisionStyle = 'normal' | 'enhanced'
+
 /**
  * This function is used to format token prices, liquidity, amount of tokens in TX, and in general any numbers on info section
  * @param amount - amount to be formatted
@@ -24,7 +26,7 @@ export const formatAmount = (
 	options?: {
 		notation?: formatAmountNotation
 		displayThreshold?: number
-		tokenPrecision?: boolean
+		tokenPrecision?: tokenPrecisionStyle
 		isInteger?: boolean
 	},
 ) => {
@@ -45,7 +47,7 @@ export const formatAmount = (
 
 	let precision = 2
 	if (tokenPrecision) {
-		precision = amount < 1 ? 5 : 2 
+		precision = amount < 1 || tokenPrecision === 'enhanced' ? 5 : 2
 	}
 
 	let format = `0.${'0'.repeat(precision)}a`

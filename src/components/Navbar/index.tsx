@@ -121,6 +121,14 @@ export default function Navbar() {
 			},
 			{
 				id: '5',
+				type: 'static',
+				label: t('Info'),
+				link: '/info',
+				submenus: [],
+				// hideOnMobile: true,
+			},
+			{
+				id: '6',
 				type: 'locale',
 				submenus: [
 					{

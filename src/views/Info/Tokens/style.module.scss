@@ -1,0 +1,25 @@
+.contentLayout {
+    margin-top: 16px;
+	display: grid;
+	grid-template-columns: 260px 1fr;
+	grid-gap: 1em;
+	@media screen and (max-width: 800px) {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
+}
+
+.styledBreadcrumbs {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+
+    // a {
+        // color: ${({ theme }) => theme.colors.primary};
+
+        // &:hover {
+        //     color: ${({ theme }) => theme.colors.primaryBright};
+        // }
+    // }
+}

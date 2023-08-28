@@ -1,0 +1,11 @@
+.navWrapper {
+    // background: ${({ theme }) => theme.colors.gradientCardHeader};
+  justify-content: space-between;
+  padding: 20px 16px;
+  flex-direction: column;
+  gap: 8px;
+  @media only screen and (min-width: 576px) {
+    padding: 20px 40px;
+    flex-direction: row;
+  }
+}

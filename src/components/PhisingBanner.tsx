@@ -1,13 +1,14 @@
 import { useMobileLayout } from '@astraprotocol/astra-ui'
 import { useTranslation } from 'contexts/Localization'
 import Image from 'next/image'
+import { isAstraApp } from 'utils'
 
 const PhisingBanner = () => {
 	const { isMobile } = useMobileLayout('small')
 	const { t } = useTranslation()
 	const URL = process.env.NEXT_PUBLIC_HOST
 
-	if (isMobile) return null
+	if (isAstraApp()) return null
 
 	return (
 		<div
