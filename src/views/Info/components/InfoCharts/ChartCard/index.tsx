@@ -96,10 +96,10 @@ const ChartCard: React.FC<React.PropsWithChildren<ChartCardProps>> = ({
 				size="sm"
 			>
 				<ButtonMenuItem variant="tertiary">
-					<b>{t('Volume')}</b>
+					<b>{t('Liquidity')}</b>
 				</ButtonMenuItem>
 				<ButtonMenuItem variant="tertiary">
-					<b>{t('Liquidity')}</b>
+					<b>{t('Volume')}</b>
 				</ButtonMenuItem>
 				{variant === 'token' ? (
 					<ButtonMenuItem variant="tertiary">
