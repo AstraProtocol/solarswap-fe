@@ -39,7 +39,7 @@ const fetchTopTokens = async (timestamp24hAgo: number): Promise<string[]> => {
 }
 
 export const fetchTokenAddresses = async () => {
-	const [, , , timestamp24hAgo] = getDeltaTimestamps()
+	const [timestamp24hAgo] = getDeltaTimestamps()
 
 	const addresses = await fetchTopTokens(timestamp24hAgo)
 

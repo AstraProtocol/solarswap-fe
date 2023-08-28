@@ -19,11 +19,7 @@ const fetchTopPools = async (timestamp24hAgo: number): Promise<string[]> => {
 			query topPools($blacklist: [String!]) {
 				pairDayDatas(
 					first: 1
-					where: {
-						dailyTxns_gt: 0
-						token0_not_in: $blacklist
-						token1_not_in: $blacklist
-					}
+					where: { dailyTxns_gt: 0, token0_not_in: $blacklist, token1_not_in: $blacklist }
 					orderBy: dailyVolumeUSD
 					orderDirection: desc
 				) {
@@ -61,7 +57,7 @@ const useTopPoolAddresses = (): string[] => {
 }
 
 export const fetchTopPoolAddresses = async () => {
-	const [, , , timestamp24hAgo] = getDeltaTimestamps()
+	const [timestamp24hAgo] = getDeltaTimestamps()
 
 	const addresses = await fetchTopPools(timestamp24hAgo)
 	return addresses
